@@ -1,0 +1,12 @@
+---
+title: "NADA2"
+output: github_document
+---
+
+```{r setup, include=FALSE,echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Nondetects And Data Analysis
+
+For many environmental professionals, the way to deal with "nondetects" is less than obvious. Values below detection or reporting limits result from measuring trace amounts of a variety of organic and inorganic chemicals. This package includes (maximum likelihood and survival analysis) methods for computing summary statistics, hypothesis tests, and regression for data with one or more detection limits. 

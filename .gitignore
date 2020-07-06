@@ -37,3 +37,10 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+
+## Files used to develop pacakge
+/draftFiles/
+/CRAN NADA/
+
+.build

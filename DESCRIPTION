@@ -1,0 +1,22 @@
+Package: NADA2
+Type: Package
+Title: Nondetects And Data Analysis
+Version: 0.1.0
+Date: 2020-07-06
+Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
+            email="pauljulianphd@gmail.com"),
+            person("Dennis", "Helsel",role=c("aut","cph"),
+            email="dhelsel@practicalstats.com"))
+Maintainer: Paul Julian <pauljulianphd@gmail.com>
+URL: https://github.com/SwampThingPaul/NADA2
+BugReports: https://github.com/SwampThingPaul/NADA2/issues
+Description: Contains methods described by Dennis Helsel in 
+             his book "Nondetects And Data Analysis: Statistics 
+             for Censored Environmental Data". Is an expansion 
+             of the NADA Package.
+License: file LICENSE
+Encoding: UTF-8
+VignetteBuilder: knitr
+BuildVignettes: true
+LazyLoad: yes
+LazyData: yes
