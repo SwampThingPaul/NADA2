@@ -2,6 +2,9 @@
 .Rhistory
 .Rapp.history
 
+# Project file
+.Rproj
+
 # Session Data files
 .RData
 
@@ -43,4 +46,4 @@ vignettes/*.pdf
 /draftFiles/
 /CRAN NADA/
 
-.build
+*.build.R
