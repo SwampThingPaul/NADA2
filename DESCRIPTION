@@ -15,8 +15,15 @@ Description: Contains methods described by Dennis Helsel in
              for Censored Environmental Data". Is an expansion 
              of the NADA Package.
 License: file LICENSE
+Depends: R (>= 3.6), 
+          EnvStats,
+          fitdistrplus,
+          Kendall,
+          multcomp,
+          NADA,
+          perm,
+          survminer
 Encoding: UTF-8
 VignetteBuilder: knitr
-BuildVignettes: true
 LazyLoad: yes
-LazyData: yes
+RoxygenNote: 7.0.2
