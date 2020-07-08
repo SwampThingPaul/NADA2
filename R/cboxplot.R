@@ -17,12 +17,16 @@
 #' @param bxcol Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @details Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
+#' @export
 
 #' @importFrom graphics abline layout legend lines mtext par plot text polygon boxplot
 #' @importFrom utils data
 
 
 #' @examples
+#' library(NADA)
+#' data(Golden)
+#' cboxplot(Golden$Liver,Golden$LiverCen,Golden$Group)
 
 
 
