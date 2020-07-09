@@ -18,13 +18,16 @@
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @details Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 #' @export
-
-#' @importFrom graphics abline layout legend lines mtext par plot text polygon boxplot
-#' @importFrom utils data
-
-
+#' @return Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
+#'
+#' @importFrom graphics boxplot
+#' @importFrom graphics lines
+#' @importFrom graphics plot
+#' @import utils
+#'
 #' @examples
-#' library(NADA)
+#'
+#' library(NADA) #For example data
 #' data(Golden)
 #' cboxplot(Golden$Liver,Golden$LiverCen,Golden$Group)
 
@@ -130,17 +133,17 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       if (is.null(Ymax) == FALSE) { Ylim = c(log(ymin.all), log(Ymax))}
       if (is.null(minmax)) {
         # boxplot with separate outliers beyond 1.5*IQR
-        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+         boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
         #  boxplot drawn to max and min
-        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+         boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       multiDL <- ifelse (sd(maxDL) != 0, TRUE, FALSE)
       if (multiDL == FALSE) {     # plot all with same max DL
         # Everything below the max DL is gray, not black
-        polygon(xx, yy, col = bdl.col, border=bdl.col)
-        abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
-        legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
+         polygon(xx, yy, col = bdl.col, border=bdl.col)
+         abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
+         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
       else {  cat("Maximum DL","Group", "\n", sep = "   ")
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group

@@ -24,13 +24,13 @@ cboxplot(
 \arguments{
 \item{y1}{The column of y (response variable) values plus detection limits.}
 
-\item{y2}{The y-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.}
+\item{y2}{The y-variable censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
 
 \item{group}{An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.}
 
-\item{LOG}{`TRUE`/`FALSE` indicator of whether to plot the Y axis data on the original scale (`FALSE`) or log scale (`TRUE`).}
+\item{LOG}{\code{TRUE}/\code{FALSE} indicator of whether to plot the Y axis data on the original scale (\code{FALSE}) or log scale (\code{TRUE}).}
 
-\item{show}{`TRUE`\/`FALSE` indicator of whether to show estimated values for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).}
+\item{show}{\code{TRUE}\/\code{FALSE} indicator of whether to show estimated values for the portion of the box below the maximum DL (\code{TRUE}), or just leave the lower portion blank (\code{FALSE}).}
 
 \item{ordr}{A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the}
 
@@ -40,7 +40,7 @@ cboxplot(
 
 \item{Title}{Text to show as the graph title.  Default is blank.}
 
-\item{dl.loc}{Location indicator of where to plot the `MaxDL=0.02` text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.}
+\item{dl.loc}{Location indicator of where to plot the \code{MaxDL=0.02} text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.}
 
 \item{dl.col}{Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but it recognizes most any color by name that you can think of.}
 
@@ -48,7 +48,10 @@ cboxplot(
 
 \item{Ymax}{Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.}
 
-\item{minmax}{`NULL`/`FALSE` indicator of whether to draw outliers individually. Default is to show outliers. Setting `minmax = FALSE` (or any text) will draw the whiskers out to the max and min of the dataset.}
+\item{minmax}{\code{NULL}/\code{FALSE} indicator of whether to draw outliers individually. Default is to show outliers. Setting \code{minmax = FALSE} (or any text) will draw the whiskers out to the max and min of the dataset.}
+}
+\value{
+Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
 }
 \description{
 Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
@@ -57,7 +60,8 @@ Portions below the maximum detection limit(s) are not shown by default, as their
 Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 }
 \examples{
-library(NADA)
+
+library(NADA) #For example data
 data(Golden)
 cboxplot(Golden$Liver,Golden$LiverCen,Golden$Group)
 }

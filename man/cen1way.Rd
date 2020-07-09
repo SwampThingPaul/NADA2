@@ -9,7 +9,7 @@ cen1way(y1, y2, grp)
 \arguments{
 \item{y1}{The column of data values plus detection limits}
 
-\item{y2}{The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.}
+\item{y2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
 
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 }
@@ -21,8 +21,13 @@ Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  
 }
 \examples{
 
-library(NADA)
+library(NADA) #for example data
 data(Golden)
+
+# Two Groups
+cen1way(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+
+# More than two groups
 cen1way(Golden$Liver,Golden$LiverCen,Golden$Group)
 }
-\keyword{cdf}
+\keyword{difference}

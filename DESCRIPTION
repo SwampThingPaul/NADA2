@@ -27,3 +27,4 @@ Encoding: UTF-8
 VignetteBuilder: knitr
 LazyLoad: yes
 RoxygenNote: 7.0.2
+Roxygen: list(markdown = TRUE)

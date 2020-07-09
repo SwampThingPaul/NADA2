@@ -18,15 +18,15 @@ ATS(
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits}
 
-\item{y.cen}{The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and `0` (or `FALSE`) indicates a detected value in `y.var`.}
+\item{y.cen}{The y-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and \code{0} (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{x.var}{The column of x (explanatory variable) values plus detection limits}
 
-\item{x.cen}{The x-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `x.var` column, and `0` (or `FALSE`) indicates a detected value in `x.var`.}
+\item{x.cen}{The x-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{x.var} column, and \code{0} (or \code{FALSE}) indicates a detected value in \code{x.var}.}
 
-\item{LOG}{Indicator of whether to compute the ATS line in the original y units, or for their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).}
+\item{LOG}{Indicator of whether to compute the ATS line in the original y units, or for their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 
-\item{retrans}{Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when `LOG = FALSE`. `retrans = FALSE` & `LOG = TRUE` draws the plot in logY units. `retrans =  TRUE` & `LOG = TRUE` draws the plot in original Y units.}
+\item{retrans}{Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when \code{LOG = FALSE}. \code{retrans = FALSE} & \code{LOG = TRUE} draws the plot in logY units. \code{retrans =  TRUE} & \code{LOG = TRUE} draws the plot in original Y units.}
 
 \item{xlabel}{Custom label for the x axis of plots.  Default is x variable column name.}
 
@@ -39,6 +39,9 @@ Draws a scatterplot with the fitted line superimposed.
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
 }
 \examples{
+
+library(NADA) #For example data
+
 # Both y and x are censored
 data(Golden)
 with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))

@@ -5,20 +5,25 @@
 #' @param y1 The column of data values plus detection limits
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
-#' @keywords cdf
+#' @keywords difference
 #' @export
 #' @return  1-way test to test differences between groups
 #'
 
 #' @import survminer
 #' @import survival
-#'
 
 #' @examples
 #'
-#' library(NADA)
+#' library(NADA) #for example data
 #' data(Golden)
+#'
+#' # Two Groups
+#' cen1way(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+#'
+#' # More than two groups
 #' cen1way(Golden$Liver,Golden$LiverCen,Golden$Group)
+
 
 cen1way <- function(y1,y2, grp) {
   yname <- deparse(substitute(y1))

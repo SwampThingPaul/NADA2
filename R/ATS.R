@@ -19,6 +19,9 @@
 #' @importFrom utils data
 
 #' @examples
+#'
+#' library(NADA) #For example data
+#'
 #' # Both y and x are censored
 #' data(Golden)
 #' with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
