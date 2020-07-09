@@ -23,7 +23,7 @@ roxygen2::roxygenise()
 ## Convert from Rd to Markdown
 roxygen2md::roxygen2md()
 
-# fix cboxplot
+
 devtools::document()
 
 #devtools::test()
