@@ -16,7 +16,9 @@ cen2means(y1, y2, grp, LOG = TRUE)
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
 }
 \value{
-Censored data analogue of the t-test
+Draw and Q-Q Plot with Shapiro-Francia test for normality W and p-values, Censored data analogue of the t-test
+
+Returns the Maximum Likelihood Estimation (MLE) t-test results including Chi-Squared value, degrees of freedom and \code{p-value} of the test.
 }
 \description{
 Performs a parametric test of differences in means between two groups of censored data, either in original or in log units (the latter becomes a test for difference in geometric means).
@@ -29,5 +31,10 @@ Note that because this is an MLE procedure, when a normal distribution model is 
 library(NADA) #for example data
 data(Golden)
 cen2means(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+}
+\references{
+Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+
+Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }
 \keyword{t-test}

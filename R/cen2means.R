@@ -8,12 +8,20 @@
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = `TRUE`).  To compute in original units, specify the option LOG = `FALSE` (or LOG = 0).
 #' @keywords t-test
 #' @export
-#' @return  Censored data analogue of the t-test
+#' @return
+#' Draw and Q-Q Plot with Shapiro-Francia test for normality W and p-values, Censored data analogue of the t-test
+#'
+#' Returns the Maximum Likelihood Estimation (MLE) t-test results including Chi-Squared value, degrees of freedom and `p-value` of the test.
+#'
 #' @details Note that because this is an MLE procedure, when a normal distribution model is used (LOG=FALSE) values may be modeled as below zero.  When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
-
-#' @import survminer
-#' @import survival
-
+#'
+#' @references
+#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#'
+#' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
+#'
+#' @importFrom survival survreg Surv
+#'
 #' @examples
 #'
 #' library(NADA) #for example data

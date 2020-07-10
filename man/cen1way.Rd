@@ -14,7 +14,18 @@ cen1way(y1, y2, grp)
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 }
 \value{
-1-way test to test differences between groups
+A list of summary statistics for each group evaluated containing the following components:
+\itemize{
+\item \code{N} Number of samples
+\item \code{PctND} Percentage of non-detects
+\item \code{KMmean} Kaplan-Meier estimate of the mean
+\item \code{KMsd} Kaplan-Meier estimate of standard deviation
+\item \code{KMmedian} Kaplan-Meier estmate of the median
+}
+
+Peto-Peto test results including Chi-Squared value, degrees of freedom and \code{p-value} of the test.
+
+If more than two groups, \code{p-values} of the pairwise multiple is reported.
 }
 \description{
 Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.
@@ -29,5 +40,10 @@ cen1way(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
 
 # More than two groups
 cen1way(Golden$Liver,Golden$LiverCen,Golden$Group)
+}
+\references{
+Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+
+Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. https://doi.org/10.2307/2344317
 }
 \keyword{difference}

@@ -7,12 +7,26 @@
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @keywords difference
 #' @export
-#' @return  1-way test to test differences between groups
+#' @return  A list of summary statistics for each group evaluated containing the following components:
+#' \itemize{
+#' \item `N` Number of samples
+#' \item `PctND` Percentage of non-detects
+#' \item `KMmean` Kaplan-Meier estimate of the mean
+#' \item `KMsd` Kaplan-Meier estimate of standard deviation
+#' \item `KMmedian` Kaplan-Meier estmate of the median
+#' }
 #'
-
-#' @import survminer
-#' @import survival
-
+#' Peto-Peto test results including Chi-Squared value, degrees of freedom and `p-value` of the test.
+#'
+#' If more than two groups, `p-values` of the pairwise multiple is reported.
+#'
+#' @references
+#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#'
+#' Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. https://doi.org/10.2307/2344317
+#'
+#' @importFrom survival survdiff Surv
+#'
 #' @examples
 #'
 #' library(NADA) #for example data

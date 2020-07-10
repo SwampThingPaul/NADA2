@@ -12,12 +12,17 @@
 #' @param ylabel Custom label for the y axis of plots.  Default is y variable column name.
 #' @keywords trend censored
 #' @export
-#' @return  Draws a scatterplot with the fitted line superimposed.
-
-
+#' @return  Draws a scatterplot with the fitted trend-line superimposed, the equation for the Akritas-Theil-Sen line, `Kendall's tau` and `p-value` of the test. .
+#'
 #' @importFrom graphics abline layout legend lines mtext par plot text
 #' @importFrom utils data
-
+#' @importFrom NADA cenken
+#'
+#' @references
+#' Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
+#'
+#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#'
 #' @examples
 #'
 #' library(NADA) #For example data

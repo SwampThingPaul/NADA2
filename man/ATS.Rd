@@ -33,7 +33,7 @@ ATS(
 \item{ylabel}{Custom label for the y axis of plots.  Default is y variable column name.}
 }
 \value{
-Draws a scatterplot with the fitted line superimposed.
+Draws a scatterplot with the fitted trend-line superimposed, the equation for the Akritas-Theil-Sen line, \verb{Kendall's tau} and \code{p-value} of the test. .
 }
 \description{
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
@@ -49,6 +49,11 @@ with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
 # x is not censored
 data(TCEReg)
 with(TCEReg, ATS(TCEConc, TCECen, PctIndLU))
+}
+\references{
+Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
+
+Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 }
 \keyword{censored}
 \keyword{trend}
