@@ -26,6 +26,7 @@
 #' # With Yname specified
 #' cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 
+
 cenCompareCdfs <- function(y.var, cen.var, dist3="normal", Yname = yname)  {
   #added to stop if dist3 is not from the list
   if(!(dist3%in%c("normal","lnorm","gamma","weibull"))){stop(paste0(dist3," distribution is not supported with this function, try again."))}
