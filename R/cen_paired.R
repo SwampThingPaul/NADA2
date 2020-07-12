@@ -18,7 +18,9 @@
 #' \item `Mean difference` the mean difference between `xd` and `yd`
 #' }
 #' @details You may also test for whether the x data exceed a standard by entering the single number for the standard as `yd`.  In that case no `yc` is required.
-
+#' @references
+#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#'
 #' @import survminer
 #' @import survival
 #' @import fitdistrplus

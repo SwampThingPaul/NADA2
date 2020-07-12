@@ -30,5 +30,12 @@ data(Atra)
 
 cen_signtest(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
 }
+\references{
+Fong, D.Y.T., Kwan, C.W., Lam, K.F., Lam, K.S.L., 2003. Use of the Sign Test for the Median in the Presence of Ties. The American Statistician 57, 237–240.
+
+Fong, Y., Huang, Y., 2019. Modified Wilcoxon-Mann-Whitney Test and Power against Strong Null. Am Stat 73, 43–49. \url{https://doi.org/10.1080/00031305.2017.1328375}
+
+Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+}
 \keyword{difference}
 \keyword{median}
