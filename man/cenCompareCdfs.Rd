@@ -2,7 +2,7 @@
 % Please edit documentation in R/cenCompareCdfs.R
 \name{cenCompareCdfs}
 \alias{cenCompareCdfs}
-\title{Comparison of empirical cdf}
+\title{Comparison of empirical cdf of censored data}
 \usage{
 cenCompareCdfs(y.var, cen.var, dist3 = "normal", Yname = yname)
 }
@@ -37,4 +37,4 @@ cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,dist3="beta")
 # With Yname specified
 cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 }
-\keyword{ANOVA}
+\keyword{CDF}

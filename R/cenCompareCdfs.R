@@ -1,11 +1,11 @@
-#' Comparison of empirical cdf
+#' Comparison of empirical cdf of censored data
 #'
 #' @description Plots the empirical cdf and cdfs of three theoretical distributions, fit by maximum likelihood estimation (MLE).
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param dist3 Name of the third distribution to be plotted, default is `normal` distrubtion. Other distributions include `lnorm`(for log-normal), `gamma` and `weibull`(for Weibull).
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
-#' @keywords ANOVA
+#' @keywords CDF
 #' @export
 #' @return prints a plot of the empirial CDFs with BIC value for each distribution.
 #' @importFrom fitdistrplus cdfcompcens fitdistcens

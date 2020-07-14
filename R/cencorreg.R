@@ -1,0 +1,141 @@
+#' Correlation and Regression with censored data
+#'
+#' @description Computes three parametric correlation coefficients for one X variable and the corresponding R\u00B2 for multiple X variables, and a regression equation for censored data.
+#' @param y.var The column of y (response variable) values plus detection limits.
+#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
+#' @param x.vars One or more uncensored explanatory variable(s). See Details
+#' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
+#' @keywords correlation regression
+#' @export
+#' @return
+#' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) is printed.
+#'
+#' When `x.vars` is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (`R`\u00B2) is printed
+#'
+#' In addition to goodness-of-fit coefficients, model AIC and BIC values are provided.
+#'
+#' Parametric Survival Model output is also provided including regression model.
+#'
+#' @importFrom survival survreg Surv
+#' @importFrom EnvStats gofTestCensored qqPlotCensored
+#'
+#' @details
+#'
+#' `x.vars`: If 1 x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time).
+#'
+#' AIC and BIC are printed to help evaluate the ‘best’ regression model.
+#'
+#' The default is that the Y variable will be log transformed.
+#'
+#' @seealso \code{\link{[survival]{survreg}}}
+#'
+#' @references
+#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
+#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#'
+#' @examples
+#' library(NADA) #For example data
+#'
+#' data(TCEReg)
+#'
+#' # One variable
+#' cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg$LandUse)
+#'
+#' # More than one variable for demostration purposes
+#'cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg[,c("LandUse","PopDensity")])
+
+
+cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
+  yname <- deparse(substitute(y.var))
+  nonas <- na.omit(cbind(y.var, cen.var, x.vars))
+  xnona <- nonas[,-(1:2)]
+
+  if (LOG == TRUE)  {lnvar <- log(nonas[,1])    # Y in log units (default)
+  flip.log <- max(lnvar) +1 - lnvar
+  #  print(max(lnvar)+1)
+  surv.log <- Surv(flip.log, as.logical(1-nonas[,2]) )
+
+  if (is.data.frame(x.vars))  {             # multiple x variables
+    reg.out <- survreg(surv.log ~ ., data = xnona, dist = "gaussian")
+    cn <- names(reg.out$coefficients[-1])
+    xvars.txt <- cn[1]
+    for (i in 1:length(cn))  {j <-(i+1)
+    if (i != length(cn)) xvars.txt <- paste(xvars.txt, cn[j], sep = "+")
+    }
+    reg.out$call[3] <- xvars.txt
+  }
+
+  else { xname <- deparse(substitute(x.vars))          # 1 x variable
+  x.df <- as.data.frame(xnona)
+  names(x.df) <- xname
+  reg.out <- survreg(surv.log~., data = x.df, dist = "gaussian")
+  cn <- names(reg.out$coefficients[-1])
+  reg.out$call[3] <- cn
+  }
+
+  ylog.pred <- max(lnvar) +1 - reg.out$linear.predictors
+  reg.out$call[2] <- paste("log(", yname, ")", sep = "")
+  reg.out$coefficients <- reg.out$coefficients * (-1)
+  reg.out$coefficients[1] <- max(lnvar)+1 + reg.out$coefficients[1]   # coeffs in cenreg lognormal
+  ylog.resi <- lnvar - ylog.pred
+  reg.out$linear.predictors <- ylog.pred
+  reg.out$resids <- ylog.resi
+  vtext<- paste("Quantiles of", yname, "residuals (log units)")
+  testnorm <- gofTestCensored(ylog.resi,nonas[,2])
+  ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
+  qqPlotCensored(ylog.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Lognormal Q-Q Plot of residuals")
+  mtext(ptext)
+  }
+
+  else                                          #  Y in original units, normal Q-Q plot
+  { y.low <- nonas[,1]*(1-nonas[,2])                  #  0 for low end of all NDs
+  surv.norm <- Surv(y.low, nonas[,1], type="interval2")
+  if (is.data.frame(x.vars))  {       # multiple x variables
+    reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
+    cn <- names(reg.out$coefficients[-1])
+    xvars.txt <- cn[1]
+    for (i in 1:length(cn))  {j <-(i+1)
+    if (i != length(cn)) xvars.txt <- paste(xvars.txt, cn[j], sep = "+")
+    }
+    reg.out$call[3] <- xvars.txt
+  }
+
+  else { xname <- deparse(substitute(x.vars))          # 1 x variable
+  x.df <- as.data.frame(xnona)
+  names(x.df) <- xname
+  reg.out <- survreg(surv.norm~., data = x.df, dist = "gaussian")
+  cn <- names(reg.out$coefficients[-1])
+  reg.out$call[3] <- cn
+  }
+
+  reg.out$call[2] <- yname
+  ynorm.pred <- reg.out$linear.predictors
+  ynorm.resi <- y.low - ynorm.pred
+  reg.out$linear.predictors <- ynorm.pred
+  reg.out$resids <- ynorm.resi
+  vtext<- paste("Quantiles of", yname, "residuals")
+  testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
+  ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
+  qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
+  mtext(ptext)
+  }
+
+  if (is.data.frame(x.vars))  {             # multiple x variables.  Print r-squared.
+    LRr2 <- signif(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y)),4)
+    McFr2 <- signif((1-reg.out$loglik[2]/reg.out$loglik[1]),4)
+    Nag.r2 <- signif((1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))) /(1-exp(2*reg.out$loglik[1]/length(reg.out$y))),4)
+    AIC <- -2*reg.out$loglik[2] + (2*reg.out$df +1)
+    BIC <- -2*reg.out$loglik[2] + log(reg.out$df+reg.out$df.residual+1)*reg.out$df
+    cat(" Likelihood R2 =", LRr2, "                   ", "AIC =", AIC,"\n", "Rescaled Likelihood R2 =", Nag.r2, "          ", "BIC =", BIC, "\n", "McFaddens R2 =", McFr2, "\n","\n")
+  }
+  else {                                    # 1 x variable.  Print correlation coefficients
+    LRcorr <- signif(sign(reg.out$coefficients[2])*sqrt(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))),4)
+    McFcorr <- signif(sign(reg.out$coefficients[2])*sqrt(1-reg.out$loglik[2]/reg.out$loglik[1]),4)
+    Nag.cor <- signif(sign(reg.out$coefficients[2])*sqrt((1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))) /(1-exp(2*reg.out$loglik[1]/length(reg.out$y)))),4)
+    AIC <- -2*reg.out$loglik[2] + (2*reg.out$df +1)
+    BIC <- -2*reg.out$loglik[2] + log(reg.out$df+reg.out$df.residual+1)*reg.out$df
+    cat(" Likelihood R =", LRcorr, "                   ", "AIC =", AIC,"\n", "Rescaled Likelihood R =", Nag.cor, "          ", "BIC =", BIC, "\n", "McFaddens R =", McFcorr, "\n","\n")
+  }
+  return(reg.out)                   # returns reg.out object if function assigned to object
+}

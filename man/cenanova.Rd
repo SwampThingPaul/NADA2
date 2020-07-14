@@ -13,7 +13,7 @@ cenanova(y1, y2, grp, LOG = TRUE)
 
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
-\item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
+\item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 }
 \value{
 Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes lognormal(\code{LOG=TRUE}) or nomal(\code{LOG=FALSE}) distribution

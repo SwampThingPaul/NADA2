@@ -4,7 +4,7 @@
 #' @param y1 The column of data values plus detection limits
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
-#' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = `TRUE`).  To compute in original units, specify the option LOG = `FALSE` (or LOG = 0).
+#' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @keywords ANOVA
 #' @export
 #' @return
