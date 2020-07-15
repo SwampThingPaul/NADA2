@@ -22,6 +22,8 @@
 #' @details When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
 #' @importFrom survival survreg Surv
 #' @importFrom multcomp glht
+#' @seealso \code{\link{[survival]{survreg}}}
+#'
 #' @examples
 #'
 #' library(NADA) #for example data

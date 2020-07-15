@@ -22,7 +22,9 @@ Depends: R (>= 3.6),
           multcomp,
           NADA,
           perm,
-          survminer
+          survminer,
+          mgcv,
+          cenGAM
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyLoad: yes

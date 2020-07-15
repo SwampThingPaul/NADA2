@@ -6,6 +6,8 @@ library(multcomp)
 library(NADA)
 library(perm)
 library(survminer)
+library(mgcv)
+library(cenGAM)
 
 
 ## Double check setMethod and class
