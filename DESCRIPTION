@@ -24,7 +24,8 @@ Depends: R (>= 3.6),
           perm,
           survminer,
           mgcv,
-          cenGAM
+          cenGAM,
+          vegan
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyLoad: yes

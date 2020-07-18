@@ -8,6 +8,7 @@ library(perm)
 library(survminer)
 library(mgcv)
 library(cenGAM)
+library(vegan)
 
 
 ## Double check setMethod and class

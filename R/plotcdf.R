@@ -12,7 +12,7 @@
 #' @importFrom NADA cenfit
 #'
 #' @examples
-#' #' library(NADA) #For example data
+#' library(NADA) #For example data
 #' data(Golden)
 #'
 #' # with groups
