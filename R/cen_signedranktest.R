@@ -18,9 +18,9 @@
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#' Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. \url{https://doi.org/10.2307/2282965}
+#' Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. <https://doi.org/10.2307/2282965>
 #'
-#' Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. \url{https://doi.org/10.2307/2282543}
+#' Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. <https://doi.org/10.2307/2282543>
 #'
 #' @import coin
 #'

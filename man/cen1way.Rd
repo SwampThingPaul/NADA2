@@ -42,8 +42,8 @@ cen1way(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
 cen1way(Golden$Liver,Golden$LiverCen,Golden$Group)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 
-Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. https://doi.org/10.2307/2344317
+Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. \url{https://doi.org/10.2307/2344317}
 }
 \keyword{difference}

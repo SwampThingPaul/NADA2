@@ -85,4 +85,4 @@ kenplot <- function(y1,ycen,x1,xcen,retrans = FALSE, xnam=NULL, ynam=NULL)  {
       }
     }
   }
-}
+

@@ -20,7 +20,7 @@
 #'
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#' @example
+#' @examples
 #'
 #' library(NADA) #for example data
 #' data(Golden)

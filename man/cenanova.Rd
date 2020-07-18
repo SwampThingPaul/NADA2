@@ -39,4 +39,7 @@ cenanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup,LOG=FALSE)
 
 
 }
+\seealso{
+\code{\link{[survival]{survreg}}}
+}
 \keyword{ANOVA}

@@ -45,5 +45,8 @@ cen_paired(Atra$June,Atra$JuneCen,0.01)
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 }
+\seealso{
+\code{\link{[survival]{survreg}}}
+}
 \keyword{paired}
 \keyword{t-test}
