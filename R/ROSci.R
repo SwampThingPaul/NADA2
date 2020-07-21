@@ -20,8 +20,7 @@
 #'
 #' Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. <https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2>
 #'
-#' @seealso
-#' @seealso \code{\link{[NADA]{ros}}}
+#' @seealso [NADA::ros]
 #'
 #' @examples
 #' library(NADA) #For example data

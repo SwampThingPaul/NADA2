@@ -6,7 +6,7 @@
 #' @return prints a histogram of permutation tests
 #' @export
 #' @importFrom vegan anosim
-#'
+#' @seealso [vegan::anosim]
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
