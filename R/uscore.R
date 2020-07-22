@@ -1,4 +1,4 @@
-#' U-score
+#' U-score (individual value)
 #'
 #' @description Computes the uscore of data (required 2-columns) with one ore more detection limits.
 #' @param y The column of data values plus detection limits
