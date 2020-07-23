@@ -47,7 +47,5 @@ Lee, L., Helsel, D., 2005. Statistical analysis of water-quality data containing
 Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. <https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2>
 }
 \seealso{
-
-
-\code{\link{[NADA]{ros}}}
+\link[NADA:ros]{NADA::ros}
 }

@@ -48,7 +48,7 @@ Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
 \seealso{
-\code{\link{[mgcv]{GAM}}}
+\link[mgcv:GAM]{mgcv::GAM}
 }
 \keyword{GAM}
 \keyword{analysis}

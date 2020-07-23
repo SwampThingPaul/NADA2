@@ -40,7 +40,7 @@ data(TCEReg)
 with(TCEReg, kenplot(TCEConc, TCECen, PctIndLU,rep(0, times=length(PctIndLU))))
 }
 \seealso{
-\code{\link{[NADA]{cenken}}}
+\link[NADA:cenken]{NADA::cenken}
 }
 \keyword{kendall}
 \keyword{trend}

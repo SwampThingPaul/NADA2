@@ -30,7 +30,7 @@
 #'
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#'@seealso \code{\link{[mgcv]{GAM}}}
+#'@seealso [mgcv::GAM]
 #'
 #' @examples
 #'

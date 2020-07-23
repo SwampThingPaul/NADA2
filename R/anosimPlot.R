@@ -10,7 +10,7 @@
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#' Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.\url{https://cran.r-project.org/web/packages/vegan/index.html}
+#' Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.<https://cran.r-project.org/web/packages/vegan/index.html>
 #'
 #' @examples
 #' library(NADA) #For example data
