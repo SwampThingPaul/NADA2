@@ -2,6 +2,7 @@
 
 export(ATS)
 export(ATSmini)
+export(NADA2.survmean)
 export(ROSci)
 export(Usc)
 export(anosimPlot)

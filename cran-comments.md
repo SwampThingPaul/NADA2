@@ -5,36 +5,78 @@
 ## R CMD check results (2020-07-23)
 
 ### devtools::check() locally:
-1 errors | 3 warnings | 1 notes
+1 errors | 0 warnings | 1 notes
 
 ```
 
-> checking whether package 'NADA2' can be installed ... WARNING
-  See below...
-
-> checking dependencies in R code ... WARNING
-  Package in Depends field not imported from: 'knitr'
-    These packages need to be imported from (in the NAMESPACE file)
-    for when this namespace is loaded but not attached.
-  Unexported object imported by a ':::' call: 'survival:::survmean'
-    See the note in ?`:::` about the use of this operator.
-    Including base/recommended package(s):
-    'survival'
-
-> checking Rd \usage sections ... WARNING
-  Undocumented arguments in documentation object 'equivalent_n'
-    'y.cen'
-  Documented arguments not in \usage in documentation object 'equivalent_n':
-    'cen.var'
+> checking examples ... ERROR
+  Running examples in 'NADA2-Ex.R' failed
+  The error most likely occurred in:
   
-  Functions with \usage entries need to have the appropriate \alias
-  entries, and all their arguments documented.
-  The \usage entries must correspond to syntactically valid R code.
-  See chapter 'Writing R documentation files' in the 'Writing R
-  Extensions' manual.
+  > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+  > ### Name: binaryMDS
+  > ### Title: Plot Nonmetric Multidimensional Scaling of censored data
+  > ### Aliases: binaryMDS
+  > 
+  > ### ** Examples
+  > 
+  > library(NADA) #For example data
+  Warning: package 'NADA' was built under R version 3.6.3
+  Loading required package: survival
+  Warning: package 'survival' was built under R version 3.6.2
+  
+  Attaching package: 'NADA'
+  
+  The following object is masked from 'package:stats':
+  
+      cor
+  
+  > data(Golden)
+  > 
+  > # without group specified
+  > binaryMDS(Golden[,4:15])
+  Run 0 stress 9.969016e-05 
+  Run 1 stress 7.055086e-05 
+  ... New best solution
+  ... Procrustes: rmse 0.1002823  max resid 0.240009 
+  Run 2 stress 8.26136e-05 
+  ... Procrustes: rmse 0.06052965  max resid 0.1754196 
+  Run 3 stress 0 
+  ... New best solution
+  ... Procrustes: rmse 0.04647656  max resid 0.1273565 
+  Run 4 stress 7.145941e-05 
+  ... Procrustes: rmse 0.1191691  max resid 0.3438194 
+  Run 5 stress 0.0006572667 
+  Run 6 stress 0 
+  ... Procrustes: rmse 0.1319002  max resid 0.3643102 
+  Run 7 stress 4.878085e-06 
+  ... Procrustes: rmse 0.1223374  max resid 0.3510204 
+  Run 8 stress 9.784276e-05 
+  ... Procrustes: rmse 0.1162553  max resid 0.3477434 
+  Run 9 stress 9.913202e-05 
+  ... Procrustes: rmse 0.1128221  max resid 0.1837219 
+  Run 10 stress 0.0579766 
+  Run 11 stress 9.074527e-05 
+  ... Procrustes: rmse 0.1359424  max resid 0.3639362 
+  Run 12 stress 0.0002766434 
+  ... Procrustes: rmse 0.07981133  max resid 0.1574113 
+  Run 13 stress 9.626594e-05 
+  ... Procrustes: rmse 0.1168768  max resid 0.3486435 
+  Run 14 stress 0.002717952 
+  Run 15 stress 5.69538e-05 
+  ... Procrustes: rmse 0.1340435  max resid 0.3538703 
+  Run 16 stress 0.05797344 
+  Run 17 stress 7.44569e-05 
+  ... Procrustes: rmse 0.131565  max resid 0.3692676 
+  Run 18 stress 0.001999098 
+  Run 19 stress 5.414727e-05 
+  ... Procrustes: rmse 0.1152273  max resid 0.3485584 
+  Run 20 stress 6.77439e-05 
+  ... Procrustes: rmse 0.05314647  max resid 0.1178893 
 
 > checking R code for possible problems ... NOTE
   ATS: no visible global function definition for 'na.omit'
+  NADA2.survmean: no visible global function definition for 'median'
   ROSci: no visible global function definition for 'qt'
   ROSci: no visible global function definition for 'sd'
   Usc: no visible global function definition for 'na.omit'
@@ -106,4 +148,5 @@
                "pnorm", "predict", "qt", "quantile", "rect.hclust",
                "residuals", "sd")
   to your NAMESPACE file.
+
 ```

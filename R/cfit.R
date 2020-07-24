@@ -29,16 +29,6 @@
 #' cfit(Cadmium$Cd,Cadmium$CdCen)
 #'
 
-# Troubleshooting :::
-# y1=Cadmium$Cd
-# y2=Cadmium$CdCen
-#
-# conf=0.95
-# qtls = c(0.10, 0.25, 0.50, 0.75, 0.90)
-# Cdf = TRUE
-# printstats = TRUE
-# Ylab = NULL
-
 cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf = TRUE, printstats = TRUE, Ylab = NULL) {
   N <- length(y2)
   if (is.null(Ylab)) Ylab <- deparse(substitute(y1))
@@ -58,17 +48,17 @@ cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf 
   ylo.flip <- flip.const - yzero
   y.surv <- Surv(yhi.flip, ylo.flip, type = "interval2")
   y.out<- survfit(y.surv ~ 1, conf.int = conf, conf.type = "plain")
-  Rmean.flip <- NADA2_survmean(y.out, rmean=flip.const) [[1]]["*rmean"]
+  Rmean.flip <- NADA2.survmean(y.out, rmean=flip.const) [[1]]["*rmean"]
   KMmean <- signif(flip.const - Rmean.flip, 4)
-  std.err <- NADA2_survmean(y.out,  rmean=flip.const) [[1]]["*se(rmean)"]
+  std.err <- NADA2.survmean(y.out,  rmean=flip.const) [[1]]["*se(rmean)"]
   KMsd <- signif(std.err*sqrt(N), 4)
   qt.ci <- qt(c((1-conf)/2, 1-(1-conf)/2), N-1)
   LCLmean <- signif(KMmean + qt.ci[1]*std.err, 4)
   UCLmean <- signif(KMmean + qt.ci[2]*std.err, 4)
 
-  LCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
-  UCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
-  KMmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["median"], 4)
+  LCLmedian <- signif(flip.const - NADA2.survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
+  UCLmedian <- signif(flip.const - NADA2.survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
+  KMmedian <- signif(flip.const - NADA2.survmean(y.out,  rmean=flip.const) [[1]]["median"], 4)
 
   KMmedian <- ifelse(KMmedian<overall.min, paste("<",overall.min, sep=""), KMmedian)
   flip.out <- y.out
@@ -105,10 +95,17 @@ cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf 
   }
 }
 
-NADA2_survmean=function(x, scale = 1, rmean)
+
+#' Summary statistics of survival curve (from `survival:::survmean`)
+#' @param x the result of a call to the survfit function.
+#' @param scale a numeric value to rescale the survival time, e.g., if the input data to survfit were in days, scale=365 would scale the printout to years.
+#' @param rmean restricited mean
+#' @keywords internal
+#'
+#' @export
+NADA2.survmean=function(x, scale = 1, rmean)
 {
   # Extracted from survival::survmean
-  # look at https://stackoverflow.com/questions/43173044/how-to-compute-the-mean-survival-time
   if (!is.null(x$start.time))
     start.time <- x$start.time
   else start.time <- min(0, x$time)
