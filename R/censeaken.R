@@ -1,5 +1,3 @@
-
-
 #' Seasonal Kendall permutation test on censored data
 #'
 #' @param time Column of the time variable, either a sequence of days or decimal times, etc.  Will be the scale used for time in the trend analysis.

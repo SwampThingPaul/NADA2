@@ -23,6 +23,8 @@ cenPredInt(
 \item{conf}{Confidence coefficient of the interval, 0.95 (default).}
 
 \item{newobs}{The number of new observations to be contained in the interval.}
+
+\item{method}{character string specifying the method of estimation. Default is \code{mle} (maximum likelihood).}
 }
 \value{
 A table of prediction limits based on user provided confidence coefficient (\code{conf}) and prediction invterval type (\code{pi.type})
@@ -52,6 +54,9 @@ cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="upper")
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+}
+\seealso{
+\link[EnvStats:enormCensored]{EnvStats::enormCensored}
 }
 \keyword{interval}
 \keyword{prediction}

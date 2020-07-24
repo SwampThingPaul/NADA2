@@ -47,8 +47,8 @@ data(Golden)
 with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
 
 # x is not censored
-data(TCEReg)
-with(TCEReg, ATS(TCEConc, TCECen, PctIndLU))
+data(HgFish)
+with(HgFish, ATS(Hg, HgCen, PctWetland))
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

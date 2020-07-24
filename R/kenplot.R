@@ -26,8 +26,8 @@
 #' with(Golden, kenplot(Blood, BloodCen, Kidney, KidneyCen))
 #'
 #' # x is not censored
-#' data(TCEReg)
-#' with(TCEReg, kenplot(TCEConc, TCECen, PctIndLU,rep(0, times=length(PctIndLU))))
+#' data(HgFish)
+#' with(HgFish, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 
 kenplot <- function(y1,ycen,x1,xcen,retrans = FALSE, xnam=NULL, ynam=NULL)  {
   alldat <- data.frame(y1, ycen, x1, xcen)

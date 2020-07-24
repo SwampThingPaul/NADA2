@@ -23,13 +23,13 @@
 #' @examples
 #' library(NADA) #For example data
 #'
-#' data(TCEReg)
+#' data(HgFish)
 #'
 #' # One variable
-#' cenregQQ(TCEReg$TCEConc,TCEReg$TCECen,TCEReg$LandUse)
+#' cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish$PctWetland)
 #'
 #' # More than one variable for demostration purposes
-#'cenregQQ(TCEReg$TCEConc,TCEReg$TCECen,TCEReg[,c("LandUse","PopDensity")])
+#'cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish[,c("PctWetland","SedLOI","Weight")])
 
 cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL) {
   yname <- deparse(substitute(y.var))

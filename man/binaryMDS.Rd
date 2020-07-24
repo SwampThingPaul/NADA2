@@ -26,10 +26,12 @@ library(NADA) #For example data
 data(Golden)
 
 # without group specified
-binaryMDS(Golden[,4:15])
+rslt1 <- binaryMDS(Golden[,4:15])
+\dontrun{rslt1}
 
-#' # With Group argument
-binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
+# With Group argument
+rslt2 <- binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
+\dontrun{rslt2}
 }
 \seealso{
 \link[vegan:metaMDS]{vegan::metaMDS}

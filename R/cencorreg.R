@@ -1,6 +1,6 @@
 #' Correlation and Regression with censored data
 #'
-#' @description Computes three parametric correlation coefficients for one X variable and the corresponding R\u00B2 for multiple X variables, and a regression equation for censored data.
+#' @description Computes three parametric correlation coefficients for one X variable and the corresponding R2 for multiple X variables, and a regression equation for censored data.
 #' @param y.var The column of y (response variable) values plus detection limits.
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
 #' @param x.vars One or more uncensored explanatory variable(s). See Details
@@ -10,14 +10,14 @@
 #' @return
 #' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) is printed.
 #'
-#' When `x.vars` is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (`R`\u00B2) is printed
+#' When `x.vars` is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (`R2`) is printed
 #'
 #' In addition to goodness-of-fit coefficients, model AIC and BIC values are provided.
 #'
 #' Parametric Survival Model output is also provided including regression model.
 #'
-#' @importFrom survival survreg Surv
-#' @importFrom EnvStats gofTestCensored qqPlotCensored
+# @importFrom survival survreg Surv
+# @importFrom EnvStats gofTestCensored qqPlotCensored
 #'
 #' @details
 #'
@@ -27,7 +27,7 @@
 #'
 #' The default is that the Y variable will be log transformed.
 #'
-#' @seealso \code{\link{[survival]{survreg}}}
+#' @seealso [survival::survreg]
 #'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -37,13 +37,13 @@
 #' @examples
 #' library(NADA) #For example data
 #'
-#' data(TCEReg)
+#' data(HgFish)
 #'
 #' # One variable
-#' cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg$LandUse)
+#' cencorreg(HgFish$Hg,HgFish$HgCen,HgFish$SedMeHg)
 #'
 #' # More than one variable for demostration purposes
-#'cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg[,c("LandUse","PopDensity")])
+#'cencorreg(HgFish$Hg,HgFish$HgCen,HgFish[,c("SedMeHg","PctWetland")])
 
 
 cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {

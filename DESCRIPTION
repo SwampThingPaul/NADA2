@@ -15,17 +15,26 @@ Description: Contains methods described by Dennis Helsel in
              for Censored Environmental Data". Is an expansion 
              of the NADA Package.
 License: file LICENSE
-Depends: R (>= 3.6), 
-          EnvStats,
-          fitdistrplus,
-          Kendall,
-          multcomp,
-          NADA,
-          perm,
-          survminer,
-          mgcv,
-          cenGAM,
-          vegan
+Depends: R (>= 3.6)
+Imports:grDevices,
+        graphics,
+        stats,
+        utils,
+        EnvStats,
+        fitdistrplus,
+        Kendall,
+        multcomp,
+        NADA,
+        perm,
+        survminer,
+        mgcv,
+        cenGAM,
+        vegan,
+        coin,
+        survival
+Suggests: knitr,
+          rmarkdown
+recommended: survival
 Encoding: UTF-8
 VignetteBuilder: knitr
 LazyLoad: yes

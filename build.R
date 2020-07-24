@@ -35,8 +35,6 @@ devtools::check()
 
 devtools::check_rhub()
 
-
-
 ## Builds package down webpage
 pkgdown::build_site()
 

@@ -21,11 +21,11 @@
 #'
 #' library(NADA) #For example data
 #'
-#' data(TCEReg)
-#' cenQQ(TCEReg$TCEConc, TCEReg$TCECen)
+#' data(HgFish)
+#' cenQQ(HgFish$Hg,HgFish$HgCen)
 #'
 #' # User defined distribution
-#' cenQQ(TCEReg$TCEConc, TCEReg$TCECen,dist="gamma")
+#' cenQQ(HgFish$Hg,HgFish$HgCen,dist="gamma")
 
 cenQQ <- function(y.var, cen.var, dist = "lnorm", Yname = yname)  {
   yname <- deparse(substitute(y.var))

@@ -32,8 +32,8 @@
 #' with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
 #'
 #' # x is not censored
-#' data(TCEReg)
-#' with(TCEReg, ATS(TCEConc, TCECen, PctIndLU))
+#' data(HgFish)
+#' with(HgFish, ATS(Hg, HgCen, PctWetland))
 
 
 ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL) {

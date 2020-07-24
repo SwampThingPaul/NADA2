@@ -1,11 +1,11 @@
 #' Wilcoxcon Signed-Rank test for censored data
 #'
-#'@description Performs a nonparametric Wilcoxon signed-rank test of whether the median difference between two columns of paired censored data equals 0.  Uses the Pratt adjustment for pairs of equal values.
-#'@param xd The first column of data values plus detection limits
-#'@param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
-#'@param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
-#'@param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
-#'@param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @description Performs a nonparametric Wilcoxon signed-rank test of whether the median difference between two columns of paired censored data equals 0.  Uses the Pratt adjustment for pairs of equal values.
+#' @param xd The first column of data values plus detection limits
+#' @param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
+#' @param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
+#' @param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
+#' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
 #'
 #' @keywords Wilcoxon
 #' @export
@@ -22,7 +22,6 @@
 #'
 #' Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. <https://doi.org/10.2307/2282543>
 #'
-#' @import coin
 #'
 #' @examples
 #'

@@ -15,12 +15,14 @@
 #'
 #' O’Brien, P.C., Fleming, T.R., 1987. A Paired Prentice-Wilcoxon Test for Censored Paired Data. Biometrics 43, 169–180. https://doi.org/10.2307/2531957
 #'
-#' @seealso [smwrQW::ppw.test] [survival::survfit] [survival::Surv]
+#' @seealso [survival::survfit] [survival::Surv]
 #'
 #' @examples
 #' library(NADA) #for example data
 #' data(Golden)
 #' ppw.test(Golden$Liver,Golden$LiverCen,Golden$Bone,Golden$BoneCen)
+#'
+
 ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
 {
   xname <- deparse(substitute(xd))

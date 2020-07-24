@@ -10,6 +10,7 @@
 #' @return Print NMDS plot of censored data groupings.
 #'
 #' @seealso [vegan::metaMDS]
+#'
 #' @examples
 #' library(NADA) #For example data
 #' data(Golden)
@@ -17,8 +18,9 @@
 #' # without group specified
 #' binaryMDS(Golden[,4:15])
 #'
-#' #' # With Group argument
+#' # With Group argument
 #' binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
+#'
 
 
 binaryMDS <- function(dat.frame, group = NULL, title=NULL, legend.pos = "bottomleft") {

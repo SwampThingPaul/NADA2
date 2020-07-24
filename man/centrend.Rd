@@ -41,6 +41,7 @@ data(HgFish)
 HgFish$time=1:nrow(HgFish)
 
 with(HgFish,centrend(Hg,HgCen,SedTotHg,time.var=time))
+###
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -48,7 +49,7 @@ Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
 \seealso{
-\link[mgcv:GAM]{mgcv::GAM}
+\link[mgcv:gam]{mgcv::gam}
 }
 \keyword{GAM}
 \keyword{analysis}

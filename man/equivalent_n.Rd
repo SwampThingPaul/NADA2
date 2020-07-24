@@ -9,9 +9,9 @@ equivalent_n(y.var, y.cen, data)
 \arguments{
 \item{y.var}{The column of data values plus detection limits.}
 
-\item{data}{an optional data frame, list or environment (or object coercible by \code{as.data.frame} to a data frame) containing the variables of interest.}
+\item{y.cen}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{data}{an optional data frame, list or environment (or object coercible by \code{as.data.frame} to a data frame) containing the variables of interest.}
 }
 \value{
 Prints summary statistics including
@@ -54,7 +54,7 @@ equivalent_n(Summer,SummerCen,data=DFe)
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
 \seealso{
-\code{\link{[NADA]{censummary}}}
+\link[NADA:censummary]{NADA::censummary}
 }
 \keyword{Sample}
 \keyword{Size}

@@ -8,7 +8,7 @@
 #' @export
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
-#' @importFrom EnvStats distChooseCensored qqPlotCensored
+# @importFrom EnvStats distChooseCensored qqPlotCensored
 #'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -21,11 +21,8 @@
 #'
 #' library(NADA) #For example data
 #'
-#' data(TCEReg)
-#' cenCompareQQ(TCEReg$TCEConc, TCEReg$TCECen)
-
-y.var=TCEReg$TCEConc
-cen.var=TCEReg$TCECen
+#' data(HgFish)
+#' cenCompareQQ(HgFish$Hg,HgFish$HgCen)
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))

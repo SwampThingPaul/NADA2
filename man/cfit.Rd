@@ -43,6 +43,7 @@ library(NADA) #For example data
 data(Cadmium)
 
 cfit(Cadmium$Cd,Cadmium$CdCen)
+
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.

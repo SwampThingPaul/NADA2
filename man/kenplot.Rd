@@ -36,8 +36,8 @@ data(Golden)
 with(Golden, kenplot(Blood, BloodCen, Kidney, KidneyCen))
 
 # x is not censored
-data(TCEReg)
-with(TCEReg, kenplot(TCEConc, TCECen, PctIndLU,rep(0, times=length(PctIndLU))))
+data(HgFish)
+with(HgFish, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 }
 \seealso{
 \link[NADA:cenken]{NADA::cenken}

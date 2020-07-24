@@ -21,9 +21,9 @@
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 #'
-#' @importFrom survival survreg Surv
+# @importFrom survival survreg Surv
 #'
-#' @seealso \code{\link{[survival]{survreg}}}
+#' @seealso [survival::survreg]
 #'
 #' @examples
 #'

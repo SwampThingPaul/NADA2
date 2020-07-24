@@ -28,13 +28,13 @@ Plots a quantile-quantile (Q-Q) plot of censored regression residuals for simple
 \examples{
 library(NADA) #For example data
 
-data(TCEReg)
+data(HgFish)
 
 # One variable
-cenregQQ(TCEReg$TCEConc,TCEReg$TCECen,TCEReg$LandUse)
+cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish$PctWetland)
 
 # More than one variable for demostration purposes
-cenregQQ(TCEReg$TCEConc,TCEReg$TCECen,TCEReg[,c("LandUse","PopDensity")])
+cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish[,c("PctWetland","SedLOI","Weight")])
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

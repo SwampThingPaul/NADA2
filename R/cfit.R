@@ -9,7 +9,8 @@
 #' @param printstats Logical `TRUE`/`FALSE` Option of whether to print the resulting statisics in the console window, or not
 #' @param Ylab Optional – input text in quotes to be used as the variable name on the cdf plot.  The default is the name of the `y1` input variable.
 #'
-#' @importFrom survival Surv survfit
+# @importFrom survival Surv survfit
+#' @import survival
 #' @return
 #'
 #' If `printstats=TRUE` Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples. Additionally specified quartile values are returned.
@@ -26,6 +27,18 @@
 #' data(Cadmium)
 #'
 #' cfit(Cadmium$Cd,Cadmium$CdCen)
+#'
+
+# Troubleshooting :::
+# y1=Cadmium$Cd
+# y2=Cadmium$CdCen
+#
+# conf=0.95
+# qtls = c(0.10, 0.25, 0.50, 0.75, 0.90)
+# Cdf = TRUE
+# printstats = TRUE
+# Ylab = NULL
+
 cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf = TRUE, printstats = TRUE, Ylab = NULL) {
   N <- length(y2)
   if (is.null(Ylab)) Ylab <- deparse(substitute(y1))
@@ -45,17 +58,17 @@ cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf 
   ylo.flip <- flip.const - yzero
   y.surv <- Surv(yhi.flip, ylo.flip, type = "interval2")
   y.out<- survfit(y.surv ~ 1, conf.int = conf, conf.type = "plain")
-  Rmean.flip <- survival:::survmean(y.out, rmean=flip.const) [[1]]["*rmean"]
+  Rmean.flip <- NADA2_survmean(y.out, rmean=flip.const) [[1]]["*rmean"]
   KMmean <- signif(flip.const - Rmean.flip, 4)
-  std.err <- survival:::survmean(y.out,  rmean=flip.const) [[1]]["*se(rmean)"]
+  std.err <- NADA2_survmean(y.out,  rmean=flip.const) [[1]]["*se(rmean)"]
   KMsd <- signif(std.err*sqrt(N), 4)
   qt.ci <- qt(c((1-conf)/2, 1-(1-conf)/2), N-1)
   LCLmean <- signif(KMmean + qt.ci[1]*std.err, 4)
   UCLmean <- signif(KMmean + qt.ci[2]*std.err, 4)
 
-  LCLmedian <- signif(flip.const - survival:::survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
-  UCLmedian <- signif(flip.const - survival:::survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
-  KMmedian <- signif(flip.const - survival:::survmean(y.out,  rmean=flip.const) [[1]]["median"], 4)
+  LCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
+  UCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
+  KMmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["median"], 4)
 
   KMmedian <- ifelse(KMmedian<overall.min, paste("<",overall.min, sep=""), KMmedian)
   flip.out <- y.out
@@ -92,3 +105,153 @@ cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf 
   }
 }
 
+NADA2_survmean=function(x, scale = 1, rmean)
+{
+  # Extracted from survival::survmean
+  # look at https://stackoverflow.com/questions/43173044/how-to-compute-the-mean-survival-time
+  if (!is.null(x$start.time))
+    start.time <- x$start.time
+  else start.time <- min(0, x$time)
+  pfun <- function(nused, time, surv, n.risk, n.event, lower,
+                   upper, start.time, end.time) {
+    minmin <- function(y, x) {
+      tolerance <- .Machine$double.eps^0.5
+      keep <- (!is.na(y) & y < (0.5 + tolerance))
+      if (!any(keep))
+        NA
+      else {
+        x <- x[keep]
+        y <- y[keep]
+        if (abs(y[1] - 0.5) < tolerance && any(y < y[1]))
+          (x[1] + x[min(which(y < y[1]))])/2
+        else x[1]
+      }
+    }
+    if (!is.na(end.time)) {
+      hh <- ifelse((n.risk - n.event) == 0, 0, n.event/(n.risk *
+                                                          (n.risk - n.event)))
+      keep <- which(time <= end.time)
+      if (length(keep) == 0) {
+        temptime <- end.time
+        tempsurv <- 1
+        hh <- 0
+      }
+      else {
+        temptime <- c(time[keep], end.time)
+        tempsurv <- c(surv[keep], surv[max(keep)])
+        hh <- c(hh[keep], 0)
+      }
+      n <- length(temptime)
+      delta <- diff(c(start.time, temptime))
+      rectangles <- delta * c(1, tempsurv[-n])
+      varmean <- sum(cumsum(rev(rectangles[-1]))^2 * rev(hh)[-1])
+      mean <- sum(rectangles) + start.time
+    }
+    else {
+      mean <- 0
+      varmean <- 0
+    }
+    med <- minmin(surv, time)
+    if (!is.null(upper)) {
+      upper <- minmin(upper, time)
+      lower <- minmin(lower, time)
+      c(nused, max(n.risk), n.risk[1], sum(n.event), sum(mean),
+        sqrt(varmean), med, lower, upper)
+    }
+    else c(nused, max(n.risk), n.risk[1], sum(n.event),
+           sum(mean), sqrt(varmean), med, 0, 0)
+  }
+  stime <- x$time/scale
+  if (is.numeric(rmean))
+    rmean <- rmean/scale
+  surv <- x$surv
+  plab <- c("records", "n.max", "n.start", "events", "*rmean",
+            "*se(rmean)", "median", paste(x$conf.int, c("LCL", "UCL"),
+                                          sep = ""))
+  ncols <- 9
+  if (is.matrix(surv) && !is.matrix(x$n.event))
+    x$n.event <- matrix(rep(x$n.event, ncol(surv)), ncol = ncol(surv))
+  if (is.null(x$strata)) {
+    if (rmean == "none")
+      end.time <- NA
+    else if (is.numeric(rmean))
+      end.time <- rmean
+    else end.time <- max(stime)
+    if (is.matrix(surv)) {
+      out <- matrix(0, ncol(surv), ncols)
+      for (i in 1:ncol(surv)) {
+        if (is.null(x$conf.int))
+          out[i, ] <- pfun(x$n, stime, surv[, i], x$n.risk,
+                           x$n.event[, i], NULL, NULL, start.time,
+                           end.time)
+        else out[i, ] <- pfun(x$n, stime, surv[, i],
+                              x$n.risk, x$n.event[, i], x$lower[, i], x$upper[,
+                                                                              i], start.time, end.time)
+      }
+      dimnames(out) <- list(dimnames(surv)[[2]], plab)
+    }
+    else {
+      out <- matrix(pfun(x$n, stime, surv, x$n.risk, x$n.event,
+                         x$lower, x$upper, start.time, end.time), nrow = 1)
+      dimnames(out) <- list(NULL, plab)
+    }
+  }
+  else {
+    nstrat <- length(x$strata)
+    stemp <- rep(1:nstrat, x$strata)
+    last.time <- (rev(stime))[match(1:nstrat, rev(stemp))]
+    if (rmean == "none")
+      end.time <- rep(NA, nstrat)
+    else if (is.numeric(rmean))
+      end.time <- rep(rmean, nstrat)
+    else if (rmean == "common")
+      end.time <- rep(median(last.time), nstrat)
+    else end.time <- last.time
+    if (is.matrix(surv)) {
+      ns <- ncol(surv)
+      out <- matrix(0, nstrat * ns, ncols)
+      if (is.null(dimnames(surv)[[2]]))
+        dimnames(out) <- list(rep(names(x$strata), ns),
+                              plab)
+      else {
+        cname <- outer(names(x$strata), dimnames(surv)[[2]],
+                       paste, sep = ", ")
+        dimnames(out) <- list(c(cname), plab)
+      }
+      k <- 0
+      for (j in 1:ns) {
+        for (i in 1:nstrat) {
+          who <- (stemp == i)
+          k <- k + 1
+          if (is.null(x$lower))
+            out[k, ] <- pfun(x$n[i], stime[who], surv[who,
+                                                      j], x$n.risk[who], x$n.event[who, j],
+                             NULL, NULL, start.time, end.time[i])
+          else out[k, ] <- pfun(x$n[i], stime[who],
+                                surv[who, j], x$n.risk[who], x$n.event[who,
+                                                                       j], x$lower[who, j], x$upper[who, j],
+                                start.time, end.time[i])
+        }
+      }
+    }
+    else {
+      out <- matrix(0, nstrat, ncols)
+      dimnames(out) <- list(names(x$strata), plab)
+      for (i in 1:nstrat) {
+        who <- (stemp == i)
+        if (is.null(x$lower))
+          out[i, ] <- pfun(x$n[i], stime[who], surv[who],
+                           x$n.risk[who], x$n.event[who], NULL, NULL,
+                           start.time, end.time[i])
+        else out[i, ] <- pfun(x$n[i], stime[who], surv[who],
+                              x$n.risk[who], x$n.event[who], x$lower[who],
+                              x$upper[who], start.time, end.time[i])
+      }
+    }
+  }
+  if (is.null(x$lower))
+    out <- out[, 1:7, drop = F]
+  if (rmean == "none")
+    out <- out[, -(5:6), drop = F]
+  list(matrix = out[, , drop = T], end.time = end.time)
+}

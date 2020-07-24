@@ -27,11 +27,10 @@ For implementation of \code{ROSci(...)} see the examples below.
 \examples{
 library(NADA) #For example data
 
-data(TCEReg)
-myros <- NADA::ros(TCEReg$TCEConc,TCEReg$TCECen)
+data(HgFish)
+myros <- NADA::ros(HgFish$Hg,HgFish$HgCen)
 
 summary(myros)
-plot(myros)
 
 # ROS Mean
 mean(myros)

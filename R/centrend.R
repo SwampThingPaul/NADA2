@@ -30,7 +30,7 @@
 #'
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#'@seealso [mgcv::GAM]
+#'@seealso [mgcv::gam]
 #'
 #' @examples
 #'
@@ -41,6 +41,8 @@
 #' HgFish$time=1:nrow(HgFish)
 #'
 #' with(HgFish,centrend(Hg,HgCen,SedTotHg,time.var=time))
+#' ###
+
 centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs") {
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))

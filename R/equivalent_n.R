@@ -2,7 +2,7 @@
 #'
 #' @description Computes the equivalent sample size of censored data.  Observations at lower detection limits have more information than observations at higher detection limits.
 #' @param y.var The column of data values plus detection limits.
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param y.cen The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param data an optional data frame, list or environment (or object coercible by `as.data.frame` to a data frame) containing the variables of interest.
 #' @keywords Sample Size censored
 #' @export
@@ -36,7 +36,7 @@
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
-#' @seealso \code{\link{[NADA]{censummary}}}
+#' @seealso [NADA::censummary]
 #'
 #' @examples
 #' library(NADA) #For example data

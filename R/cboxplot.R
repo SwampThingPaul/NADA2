@@ -35,6 +35,9 @@
 
 cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = NULL) {
 
+  oldpar<- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
+
   box.fill <- adjustcolor( "white", alpha.f = 0.6)
   if (show==TRUE) {bdl.col <- box.fill}
   else {bdl.col <- "white"}

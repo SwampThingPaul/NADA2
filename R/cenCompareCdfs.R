@@ -14,17 +14,17 @@
 #'
 #' library(NADA) #For example data
 #'
-#' data(TCEReg)
-#' cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen)
+#' data(HgFish)
+#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen)
 #'
 #' # With log-normal distribution
-#' cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,dist3="lnorm")
+#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="lnorm")
 #'
 #' # Using an distribution not supported by this function (yet)
-#' cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,dist3="beta")
+#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")
 #'
 #' # With Yname specified
-#' cenCompareCdfs(TCEReg$TCEConc, TCEReg$TCECen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
+#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 
 
 cenCompareCdfs <- function(y.var, cen.var, dist3="normal", Yname = yname)  {

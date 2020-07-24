@@ -23,9 +23,9 @@ Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  
 library(NADA) #For example data
 
 # x is not censored
-data(TCEReg)
+data(HgFish)
 
-with(TCEReg, ATSmini(TCEConc, TCECen, PctIndLU))
+with(HgFish, ATSmini(Hg, HgCen, SedLOI))
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

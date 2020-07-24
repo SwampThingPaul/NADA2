@@ -25,11 +25,11 @@ Plots quantile-quantile (Q-Q) plot of censored data fitted a data distribution
 
 library(NADA) #For example data
 
-data(TCEReg)
-cenQQ(TCEReg$TCEConc, TCEReg$TCECen)
+data(HgFish)
+cenQQ(HgFish$Hg,HgFish$HgCen)
 
 # User defined distribution
-cenQQ(TCEReg$TCEConc, TCEReg$TCECen,dist="gamma")
+cenQQ(HgFish$Hg,HgFish$HgCen,dist="gamma")
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

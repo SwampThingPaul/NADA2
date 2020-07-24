@@ -27,6 +27,7 @@ Performs a nonparametric Paired Prentice-Wilcoxon test of whether the median dif
 library(NADA) #for example data
 data(Golden)
 ppw.test(Golden$Liver,Golden$LiverCen,Golden$Bone,Golden$BoneCen)
+
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -34,5 +35,5 @@ Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and
 O’Brien, P.C., Fleming, T.R., 1987. A Paired Prentice-Wilcoxon Test for Censored Paired Data. Biometrics 43, 169–180. https://doi.org/10.2307/2531957
 }
 \seealso{
-\link[smwrQW:ppw.test]{smwrQW::ppw.test} \link[survival:survfit]{survival::survfit} \link[survival:Surv]{survival::Surv}
+\link[survival:survfit]{survival::survfit} \link[survival:Surv]{survival::Surv}
 }

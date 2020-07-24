@@ -16,9 +16,9 @@
 #' library(NADA) #For example data
 #'
 #' # x is not censored
-#' data(TCEReg)
+#' data(HgFish)
 #'
-#' with(TCEReg, ATSmini(TCEConc, TCECen, PctIndLU))
+#' with(HgFish, ATSmini(Hg, HgCen, SedLOI))
 
 ATSmini <- function(y.var, y.cen, x.var) {
   y.cen <- as.logical(y.cen)

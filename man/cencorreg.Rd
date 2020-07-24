@@ -18,14 +18,14 @@ cencorreg(y.var, cen.var, x.vars, LOG = TRUE)
 \value{
 When \code{x.vars} is more than one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (\code{R}) is printed.
 
-When \code{x.vars} is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (\code{R}\u00B2) is printed
+When \code{x.vars} is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (\code{R2}) is printed
 
 In addition to goodness-of-fit coefficients, model AIC and BIC values are provided.
 
 Parametric Survival Model output is also provided including regression model.
 }
 \description{
-Computes three parametric correlation coefficients for one X variable and the corresponding R\u00B2 for multiple X variables, and a regression equation for censored data.
+Computes three parametric correlation coefficients for one X variable and the corresponding R2 for multiple X variables, and a regression equation for censored data.
 }
 \details{
 \code{x.vars}: If 1 x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time).
@@ -37,13 +37,13 @@ The default is that the Y variable will be log transformed.
 \examples{
 library(NADA) #For example data
 
-data(TCEReg)
+data(HgFish)
 
 # One variable
-cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg$LandUse)
+cencorreg(HgFish$Hg,HgFish$HgCen,HgFish$SedMeHg)
 
 # More than one variable for demostration purposes
-cencorreg(TCEReg$TCEConc,TCEReg$TCECen,TCEReg[,c("LandUse","PopDensity")])
+cencorreg(HgFish$Hg,HgFish$HgCen,HgFish[,c("SedMeHg","PctWetland")])
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -51,7 +51,7 @@ Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
 \seealso{
-\code{\link{[survival]{survreg}}}
+\link[survival:survreg]{survival::survreg}
 }
 \keyword{correlation}
 \keyword{regression}

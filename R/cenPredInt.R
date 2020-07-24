@@ -6,6 +6,7 @@
 #' @param pi.type Designation of either a `“two-sided”` interval (default) or a 1-sided `“upper”` or 1-sided `“lower”` interval.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param newobs The number of new observations to be contained in the interval.
+#' @param method character string specifying the method of estimation. Default is `mle` (maximum likelihood).
 #' @keywords prediction interval
 #' @export
 #' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm
@@ -14,6 +15,9 @@
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#'
+#' @seealso [EnvStats::enormCensored]
+#'
 #' @examples
 #'
 #' library(NADA) #for example data
