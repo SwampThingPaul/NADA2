@@ -8,10 +8,11 @@
 #' @export
 #' @importFrom vegan metaMDS
 #' @return Print NMDS plot of censored data groupings.
-#'
+#' @details Prior to runnning this analysis it is suggested to consult best analysis practise when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
 #' @seealso [vegan::metaMDS]
 #'
 #' @examples
+#' \dontrun{
 #' library(NADA) #For example data
 #' data(Golden)
 #'
@@ -20,7 +21,8 @@
 #'
 #' # With Group argument
 #' binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
-#'
+#' }
+
 
 
 binaryMDS <- function(dat.frame, group = NULL, title=NULL, legend.pos = "bottomleft") {
@@ -45,4 +47,5 @@ binaryMDS <- function(dat.frame, group = NULL, title=NULL, legend.pos = "bottoml
     #    legend(legend.pos, legend=levels(gp.factor), bty="n",col = gp.nlevels, pch = gp.symb)
     legend(legend.pos, legend=levels(gp.factor), bty="n",col = gp.nlevels, pch = 19)
   }
+
 }

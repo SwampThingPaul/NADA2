@@ -4,14 +4,14 @@
 \alias{cenCompareCdfs}
 \title{Comparison of empirical cdf of censored data}
 \usage{
-cenCompareCdfs(y.var, cen.var, dist3 = "normal", Yname = yname)
+cenCompareCdfs(y.var, cen.var, dist3 = "norm", Yname = yname)
 }
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits}
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{dist3}{Name of the third distribution to be plotted, default is \code{normal} distrubtion. Other distributions include \code{lnorm}(for log-normal), \code{gamma} and \code{weibull}(for Weibull).}
+\item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distrubtion). Other distributions include \code{lnorm}(for log-normal), \code{gamma} and \code{weibull}(for Weibull).}
 
 \item{Yname}{Optional – input text in quotes to be used as the variable name.  The default is the name of the \code{y.var} input variable.}
 }
@@ -32,7 +32,8 @@ cenCompareCdfs(HgFish$Hg,HgFish$HgCen)
 cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="lnorm")
 
 # Using an distribution not supported by this function (yet)
-cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")
+# you will get an error message
+\dontrun{cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")}
 
 # With Yname specified
 cenCompareCdfs(HgFish$Hg,HgFish$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")

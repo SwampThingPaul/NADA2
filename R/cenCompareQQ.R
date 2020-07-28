@@ -4,11 +4,11 @@
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param Yname Optional – input text in quotes to be used as the variable name on all plots.  The default is the name of the `y.var` input variable.
-#' @keywords Q-Q Plot
+#' @importFrom EnvStats distChooseCensored qqPlotCensored gofTestCensored
 #' @export
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
-# @importFrom EnvStats distChooseCensored qqPlotCensored
+#'
 #'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -22,7 +22,7 @@
 #' library(NADA) #For example data
 #'
 #' data(HgFish)
-#' cenCompareQQ(HgFish$Hg,HgFish$HgCen)
+#' \dontrun{cenCompareQQ(HgFish$Hg,HgFish$HgCen)}
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))

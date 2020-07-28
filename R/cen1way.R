@@ -5,7 +5,7 @@
 #' @param y1 The column of data values plus detection limits
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
-#' @keywords difference
+#' @importFrom survminer pairwise_survdiff
 #' @export
 #' @return  A list of summary statistics for each group evaluated containing the following components:
 #' \itemize{

@@ -33,6 +33,7 @@ devtools::document()
 
 devtools::check()
 
+##
 devtools::check_rhub()
 
 ## Builds package down webpage

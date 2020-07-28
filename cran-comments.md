@@ -76,7 +76,7 @@
 
 > checking R code for possible problems ... NOTE
   ATS: no visible global function definition for 'na.omit'
-  NADA2.survmean: no visible global function definition for 'median'
+  XX NADA2.survmean: no visible global function definition for 'median'
   ROSci: no visible global function definition for 'qt'
   ROSci: no visible global function definition for 'sd'
   Usc: no visible global function definition for 'na.omit'

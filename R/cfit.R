@@ -100,6 +100,7 @@ cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf 
 #' @param x the result of a call to the survfit function.
 #' @param scale a numeric value to rescale the survival time, e.g., if the input data to survfit were in days, scale=365 would scale the printout to years.
 #' @param rmean restricited mean
+#' @importFrom stats median
 #' @keywords internal
 #'
 #' @export

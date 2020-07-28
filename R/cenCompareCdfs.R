@@ -3,7 +3,7 @@
 #' @description Plots the empirical cdf and cdfs of three theoretical distributions, fit by maximum likelihood estimation (MLE).
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param dist3 Name of the third distribution to be plotted, default is `normal` distrubtion. Other distributions include `lnorm`(for log-normal), `gamma` and `weibull`(for Weibull).
+#' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distrubtion). Other distributions include `lnorm`(for log-normal), `gamma` and `weibull`(for Weibull).
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
 #' @keywords CDF
 #' @export
@@ -21,17 +21,18 @@
 #' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="lnorm")
 #'
 #' # Using an distribution not supported by this function (yet)
-#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")
+#' # you will get an error message
+#' \dontrun{cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")}
 #'
 #' # With Yname specified
 #' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 
 
-cenCompareCdfs <- function(y.var, cen.var, dist3="normal", Yname = yname)  {
+cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   #added to stop if dist3 is not from the list
-  if(!(dist3%in%c("normal","lnorm","gamma","weibull"))){stop(paste0(dist3," distribution is not supported with this function, try again."))}
+  if(!(dist3%in%c("norm","lnorm","gamma","weibull"))){stop(paste0(dist3," distribution is not supported with this function, try again."))}
 
-  dist.vals <- c("normal","lnorm","gamma","weibull")
+  dist.vals <- c("norm","lnorm","gamma","weibull")
   dist.vals.text <- c("Normal","Lognormal","Gamma","Weibull")
 
   yname <- deparse(substitute(y.var))

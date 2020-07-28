@@ -21,7 +21,11 @@ Print NMDS plot of censored data groupings.
 \description{
 Plots an NMDS of a matrix of 0s and 1s, the censoring indicator columns for multiple variables.  Use the highest censoring limit within each column.  May have different censoring levels in different columns.
 }
+\details{
+Prior to runnning this analysis it is suggested to consult best analysis practise when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
+}
 \examples{
+\dontrun{
 library(NADA) #For example data
 data(Golden)
 
@@ -30,7 +34,7 @@ binaryMDS(Golden[,4:15])
 
 # With Group argument
 binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
-
+}
 }
 \seealso{
 \link[vegan:metaMDS]{vegan::metaMDS}

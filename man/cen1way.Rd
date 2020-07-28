@@ -46,4 +46,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 
 Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. \url{https://doi.org/10.2307/2344317}
 }
-\keyword{difference}

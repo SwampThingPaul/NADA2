@@ -27,7 +27,7 @@ Produces three Q-Q plots and reports which has the highest Shapiro-Francia test 
 library(NADA) #For example data
 
 data(HgFish)
-cenCompareQQ(HgFish$Hg,HgFish$HgCen)
+\dontrun{cenCompareQQ(HgFish$Hg,HgFish$HgCen)}
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -36,5 +36,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }
-\keyword{Plot}
-\keyword{Q-Q}
