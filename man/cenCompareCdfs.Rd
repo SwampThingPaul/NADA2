@@ -25,17 +25,16 @@ Plots the empirical cdf and cdfs of three theoretical distributions, fit by maxi
 
 library(NADA) #For example data
 
-data(HgFish)
-cenCompareCdfs(HgFish$Hg,HgFish$HgCen)
+data(Brumbaugh)
+cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 # With log-normal distribution
-cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="lnorm")
+cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="lnorm")
 
 # Using an distribution not supported by this function (yet)
 # you will get an error message
-\dontrun{cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")}
+\dontrun{cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="beta")}
 
 # With Yname specified
-cenCompareCdfs(HgFish$Hg,HgFish$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
+cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 }
-\keyword{CDF}

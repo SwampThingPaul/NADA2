@@ -23,13 +23,11 @@ Plots quantile-quantile (Q-Q) plot of censored data fitted a data distribution
 }
 \examples{
 
-library(NADA) #For example data
-
-data(HgFish)
-cenQQ(HgFish$Hg,HgFish$HgCen)
+data(Brumbaugh)
+cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 # User defined distribution
-cenQQ(HgFish$Hg,HgFish$HgCen,dist="gamma")
+cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen,dist="gamma")
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
@@ -38,5 +36,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }
-\keyword{Plot}
-\keyword{QQ}

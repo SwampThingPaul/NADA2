@@ -5,11 +5,11 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param dist One of three distributional shapes to fit to your data:  lognormal (`lnorm`), normal (`norm`) or gamma (`gamma`).
 #' @param Yname Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the name of the `y.var` input variable.
-#' @keywords QQ Plot
+#' @importFrom EnvStats distChooseCensored qqPlotCensored
 #' @export
 #'
-#' @importFrom EnvStats distChooseCensored qqPlotCensored
 #' @return A single Q-Q plot of data fitted to normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
+#'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -19,15 +19,16 @@
 #'
 #' @examples
 #'
-#' library(NADA) #For example data
-#'
-#' data(HgFish)
-#' cenQQ(HgFish$Hg,HgFish$HgCen)
+#' data(Brumbaugh)
+#' cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 #' # User defined distribution
-#' cenQQ(HgFish$Hg,HgFish$HgCen,dist="gamma")
+#' cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen,dist="gamma")
 
 cenQQ <- function(y.var, cen.var, dist = "lnorm", Yname = yname)  {
+  #added to stop if dist is not from the list
+  if(!(dist%in%c("norm","lnorm","gamma"))){stop(paste0(dist," distribution is not supported with this function, try again."))}
+
   yname <- deparse(substitute(y.var))
   cen.logical <- as.logical(cen.var)
   var.choose <- distChooseCensored(y.var, cen.logical)

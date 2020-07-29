@@ -30,7 +30,8 @@
 #' cenPredInt(Golden$Liver,Golden$LiverCen, conf=0.5)
 #'
 #' # User defined confidence coefficient outside of acceptable range
-#' cenPredInt(Golden$Liver,Golden$LiverCen, conf=1.1)
+#' # the procedure will stop and give an error.
+#' \dontrun{cenPredInt(Golden$Liver,Golden$LiverCen, conf=1.1)}
 #'
 #' # User defined prediction interval type
 #' cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="lower")

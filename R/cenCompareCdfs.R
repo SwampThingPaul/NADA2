@@ -5,7 +5,6 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distrubtion). Other distributions include `lnorm`(for log-normal), `gamma` and `weibull`(for Weibull).
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
-#' @keywords CDF
 #' @export
 #' @return prints a plot of the empirial CDFs with BIC value for each distribution.
 #' @importFrom fitdistrplus cdfcompcens fitdistcens
@@ -14,18 +13,18 @@
 #'
 #' library(NADA) #For example data
 #'
-#' data(HgFish)
-#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen)
+#' data(Brumbaugh)
+#' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 #' # With log-normal distribution
-#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="lnorm")
+#' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="lnorm")
 #'
 #' # Using an distribution not supported by this function (yet)
 #' # you will get an error message
-#' \dontrun{cenCompareCdfs(HgFish$Hg,HgFish$HgCen,dist3="beta")}
+#' \dontrun{cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="beta")}
 #'
 #' # With Yname specified
-#' cenCompareCdfs(HgFish$Hg,HgFish$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
+#' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,Yname="TCE Conc (ug/L)\nLong Island, NY USA")
 
 
 cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {

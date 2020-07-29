@@ -23,11 +23,8 @@ Produces three quantile-quantile (Q-Q) plot, also called a probability plot base
 Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
 }
 \examples{
-
-library(NADA) #For example data
-
-data(HgFish)
-\dontrun{cenCompareQQ(HgFish$Hg,HgFish$HgCen)}
+data(Brumbaugh)
+cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

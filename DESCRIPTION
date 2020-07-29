@@ -1,6 +1,6 @@
 Package: NADA2
 Type: Package
-Title: Nondetects And Data Analysis
+Title: Data Analysis for Censored Environmental Data
 Version: 0.1.0
 Date: 2020-07-06
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
@@ -12,8 +12,9 @@ URL: https://github.com/SwampThingPaul/NADA2
 BugReports: https://github.com/SwampThingPaul/NADA2/issues
 Description: Contains methods described by Dennis Helsel in 
              his book "Nondetects And Data Analysis: Statistics 
-             for Censored Environmental Data". Is an expansion 
-             of the NADA Package.
+             for Censored Environmental Data" and courses specific 
+             to dealing with censored environmental data. This package
+             is an expansion of the NADA Package.
 License: file LICENSE
 Depends: R (>= 3.6)
 Imports:grDevices,
