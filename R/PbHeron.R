@@ -1,9 +1,7 @@
 #' PbHeron
 #'
-#' Data
-#'
 #' @description
-#'From the `NADA` R-Package.
+#' From the `NADA` R-Package.
 #'
 #' Lead concentrations in the blood and several organs of herons in Virginia.
 #'
@@ -17,3 +15,5 @@
 #' @source Golden et al., 2003, Environmental Toxicology and Chemistry 22, pp. 1517-1524.
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+
+"PbHeron"

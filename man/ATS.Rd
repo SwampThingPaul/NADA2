@@ -39,16 +39,13 @@ Draws a scatterplot with the fitted trend-line superimposed, the equation for th
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
 }
 \examples{
-
-library(NADA) #For example data
-
 # Both y and x are censored
-data(Golden)
-with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
+data(PbHeron)
+with(PbHeron, ATS(Blood, BloodCen, Kidney, KidneyCen))
 
 # x is not censored
-data(HgFish)
-with(HgFish, ATS(Hg, HgCen, PctWetland))
+data(Brumbaugh)
+with(Brumbaugh, ATS(Hg, HgCen, PctWetland))
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

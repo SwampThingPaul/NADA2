@@ -24,27 +24,26 @@ prints a histogram of permutation tests
 Permutation analysis of similarities between groups
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
 # ROS model for each group
-golden.high <- with(subset(Golden,DosageGroup=="High"),NADA::ros(Blood,BloodCen))
-golden.high <- data.frame(golden.high)
-golden.high$DosageGroup <- "High"
+PbHeron.high <- with(subset(PbHeron,DosageGroup=="High"),NADA::ros(Blood,BloodCen))
+PbHeron.high <- data.frame(PbHeron.high)
+PbHeron.high$DosageGroup <- "High"
 
-golden.low <- with(subset(Golden,DosageGroup=="Low"),NADA::ros(Blood,BloodCen))
-golden.low <- data.frame(golden.low)
-golden.low$DosageGroup <- "Low"
+PbHeron.low <- with(subset(PbHeron,DosageGroup=="Low"),NADA::ros(Blood,BloodCen))
+PbHeron.low <- data.frame(PbHeron.low)
+PbHeron.low$DosageGroup <- "Low"
 
-golden.ros=rbind(golden.high,golden.low)
+PbHeron.ros=rbind(PbHeron.high,PbHeron.low)
 
 # ANOSIM analysis
 library(vegan)
-golden.anosim <- with(golden.ros,anosim(modeled,DosageGroup))
-summary(golden.anosim)
+PbHeron.anosim <- with(PbHeron.ros,anosim(modeled,DosageGroup))
+summary(PbHeron.anosim)
 
 # Plot
-anosimPlot(golden.anosim)
+anosimPlot(PbHeron.anosim)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.

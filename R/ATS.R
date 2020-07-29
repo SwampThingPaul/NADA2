@@ -17,6 +17,7 @@
 #' @importFrom graphics abline layout legend lines mtext par plot text
 #' @importFrom utils data
 #' @importFrom NADA cenken
+#' @importFrom stats na.omit
 #'
 #' @references
 #' Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
@@ -24,16 +25,13 @@
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 #'
 #' @examples
-#'
-#' library(NADA) #For example data
-#'
 #' # Both y and x are censored
-#' data(Golden)
-#' with(Golden, ATS(Blood, BloodCen, Kidney, KidneyCen))
+#' data(PbHeron)
+#' with(PbHeron, ATS(Blood, BloodCen, Kidney, KidneyCen))
 #'
 #' # x is not censored
-#' data(HgFish)
-#' with(HgFish, ATS(Hg, HgCen, PctWetland))
+#' data(Brumbaugh)
+#' with(Brumbaugh, ATS(Hg, HgCen, PctWetland))
 
 
 ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL) {
