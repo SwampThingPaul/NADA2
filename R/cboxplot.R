@@ -18,18 +18,16 @@
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @details Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 #' @export
-#' @return Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
-#'
-#' @importFrom graphics boxplot
-#' @importFrom graphics lines
-#' @importFrom graphics plot
+#' @importFrom graphics boxplot lines plot polygon
+#' @importFrom grDevices adjustcolor
+#' @importFrom NADA ros
 #' @import utils
 #'
-#' @examples
+#' @return Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
 #'
-#' library(NADA) #For example data
-#' data(Golden)
-#' cboxplot(Golden$Liver,Golden$LiverCen,Golden$Group)
+#' @examples
+#' data(PbHeron)
+#' cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
 
 

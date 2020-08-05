@@ -27,27 +27,24 @@ Computes a one-sided upper tolerance interval for censored data assuming lognorm
 }
 \examples{
 
-library(NADA) #for example data
-data(Golden)
+data(PbHeron)
 
 # Default
-cenTolInt(Golden$Liver,Golden$LiverCen)
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen)
 
 # User defined conficence interval
-cenTolInt(Golden$Liver,Golden$LiverCen,conf=0.75)
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=0.75)
 
 # User defined percentile
-cenTolInt(Golden$Liver,Golden$LiverCen,cover=0.5)
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 
 # inputs outside acceptable ranges
-cenTolInt(Golden$Liver,Golden$LiverCen,cover=1.25)
-cenTolInt(Golden$Liver,Golden$LiverCen,conf=1.1)
-cenTolInt(Golden$Liver,Golden$LiverCen,method.fit="ROS")
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
+cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
-\keyword{interval}
-\keyword{tolerance}

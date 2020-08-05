@@ -31,8 +31,7 @@
 #'
 #' # x is not censored
 #' data(Brumbaugh)
-#' with(Brumbaugh, ATS(Hg, HgCen, PctWetland))
-
+#' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
 ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL) {
   yname <- deparse(substitute(y.var))

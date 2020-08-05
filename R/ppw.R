@@ -7,6 +7,7 @@
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
 #'
 #' @importFrom survival survfit Surv
+#' @importFrom stats na.exclude pnorm
 #' @return Pair Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference
 #' @export
 #'
@@ -18,9 +19,8 @@
 #' @seealso [survival::survfit] [survival::Surv]
 #'
 #' @examples
-#' library(NADA) #for example data
-#' data(Golden)
-#' ppw.test(Golden$Liver,Golden$LiverCen,Golden$Bone,Golden$BoneCen)
+#' data(PbHeron)
+#' ppw.test(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Bone,PbHeron$BoneCen)
 #'
 
 ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")

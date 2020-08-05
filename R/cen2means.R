@@ -6,7 +6,7 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = `TRUE`).  To compute in original units, specify the option LOG = `FALSE` (or LOG = 0).
-#' @keywords t-test
+#' @importFrom stats pchisq predict
 #' @export
 #' @return
 #' Draw and Q-Q Plot with Shapiro-Francia test for normality W and p-values, Censored data analogue of the t-test
@@ -24,9 +24,8 @@
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Golden)
-#' cen2means(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+#' data(PbHeron)
+#' cen2means(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 
 cen2means <- function(y1, y2, grp, LOG=TRUE) {

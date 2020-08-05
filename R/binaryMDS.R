@@ -5,22 +5,22 @@
 #' @param group Optional grouping variable. Sites will be represented by different colored symbols for each group.
 #' @param title Optional title for the NMDS graph.
 #' @param legend.pos For when group is specified, the location of the legend on the graph showing the colors representing each group’s data.  Default is “bottomleft”.  Alternatives are “topright” and “centerleft”, etc.
+#' @importFrom vegan metaMDS ordiplot
+#' @importFrom graphics points
 #' @export
-#' @importFrom vegan metaMDS
 #' @return Print NMDS plot of censored data groupings.
 #' @details Prior to runnning this analysis it is suggested to consult best analysis practise when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
 #' @seealso [vegan::metaMDS]
 #'
 #' @examples
 #' \dontrun{
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
 #' # without group specified
-#' binaryMDS(Golden[,4:15])
+#' binaryMDS(PbHeron[,4:15])
 #'
 #' # With Group argument
-#' binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
+#' binaryMDS(PbHeron[,4:15],group=PbHeron$DosageGroup)
 #' }
 
 

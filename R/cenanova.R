@@ -5,7 +5,9 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
-#' @keywords ANOVA
+#' @importFrom survival survreg Surv
+#' @importFrom multcomp glht mcp
+#' @importFrom stats residuals
 #' @export
 #' @return
 #' Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and `p-value` of the test. Test assumes lognormal(`LOG=TRUE`) or nomal(`LOG=FALSE`) distribution
@@ -20,19 +22,15 @@
 #' }
 #'
 #' @details When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
-#' @importFrom survival survreg Surv
-#' @importFrom multcomp glht
 #' @seealso [survival::survreg]
 #'
 #' @examples
+#' data(PbHeron)
+#' cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 #'
-#' library(NADA) #for example data
-#' data(Golden)
-#' cenanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+#' cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,LOG=FALSE)
 #'
-#' cenanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup,LOG=FALSE)
-#'
-#'
+
 cenanova <- function(y1, y2, grp, LOG=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))

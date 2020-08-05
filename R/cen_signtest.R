@@ -7,7 +7,7 @@
 #' @param yc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the `yd` column, and 0 (or `FALSE`) indicates a detected value in `yd`.
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
 #'
-#' @keywords median difference
+#' @importFrom stats dbinom pbinom binom.test
 #' @export
 #' @return  Returns the number of `xd` and `yd` value greater than, less than and tied. Corrected and uncorrected `p-value` for ties also displayed.
 #' @references
@@ -20,10 +20,9 @@
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Atra)
+#' data(atrazine)
 #'
-#' cen_signtest(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+#' cen_signtest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
 
 cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
@@ -70,7 +69,7 @@ cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
   ties <- length(nonas[,1]) - x.gt.y - x.lt.y
   #  result.counts <- data.frame(x.gt.y, x.lt.y, ties)
   #  print(result.counts)
-  s.binom <- binom.test(x.gt.y, length(nonas[,1])-ties, p=0.5, alternative = alternative)
+  s.binom <- binom.test(x.gt.y, length(nonas[,1])-ties, prob=0.5, alternative = alternative)
 
   # LSA version in the coin package.  Not currently used.
   #  s.out <- sign_test(x~y, alternative = alternative)
@@ -80,15 +79,15 @@ cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
   # Fong's Modified Sign Test correction for ties
   dir <- dir*sign(x.gt.y - x.lt.y)  #dir=1: alt in same direction as data
 
-  num.Fong <- 1-pbinom(max(x.gt.y, x.lt.y)-1,  N, p=0.5)
-  denom.Fong <- 1-pbinom(floor((N-ties+1)/2)-1, N, p=0.5)
+  num.Fong <- 1-pbinom(max(x.gt.y, x.lt.y)-1,  N, prob=0.5)
+  denom.Fong <- 1-pbinom(floor((N-ties+1)/2)-1, N, prob=0.5)
   p.Fong <- num.Fong/denom.Fong
-  if (dir== 1) {num.Fong <- 1-pbinom((max(x.gt.y, x.lt.y)-1), N, p=0.5)
-  denom.Fong <- 2*(1-pbinom(floor((N-ties+1)/2)-1, N, p=0.5))
+  if (dir== 1) {num.Fong <- 1-pbinom((max(x.gt.y, x.lt.y)-1), N, prob=0.5)
+  denom.Fong <- 2*(1-pbinom(floor((N-ties+1)/2)-1, N, prob=0.5))
   p.Fong <- num.Fong/denom.Fong}
-  if (dir== -1) p.Fong <- 1-p.Fong/2+dbinom(min(x.gt.y, x.lt.y), N-ties, p=0.5)
-  #{num.Fong <- pbinom((max(x.gt.y, x.lt.y)), N, p=0.5)
-  # denom.Fong <- 2*(1-pbinom(floor((N-ties+1)/2)-1, N, p=0.5))
+  if (dir== -1) p.Fong <- 1-p.Fong/2+dbinom(min(x.gt.y, x.lt.y), N-ties, prob=0.5)
+  #{num.Fong <- pbinom((max(x.gt.y, x.lt.y)), N, prob=0.5)
+  # denom.Fong <- 2*(1-pbinom(floor((N-ties+1)/2)-1, N, prob=0.5))
   # p.Fong <- num.Fong/denom.Fong}
 
 

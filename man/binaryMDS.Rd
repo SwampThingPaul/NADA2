@@ -26,14 +26,13 @@ Prior to runnning this analysis it is suggested to consult best analysis practis
 }
 \examples{
 \dontrun{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
 # without group specified
-binaryMDS(Golden[,4:15])
+binaryMDS(PbHeron[,4:15])
 
 # With Group argument
-binaryMDS(Golden[,4:15],group=Golden$DosageGroup)
+binaryMDS(PbHeron[,4:15],group=PbHeron$DosageGroup)
 }
 }
 \seealso{

@@ -7,7 +7,7 @@
 #' @param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
 #'
-#' @keywords Wilcoxon
+#' @importFrom coin wilcoxsign_test statistic pvalue
 #' @export
 #' @return  A list of Wilcoxon Signed-Rank test with Pratt correction for ites statistics containing the following components:
 #' \itemize{
@@ -25,10 +25,9 @@
 #'
 #' @examples
 #'
-#' library(NADA) #For example data
-#' data(Atra)
+#' data(atrazine)
 #'
-#' cen_signedranktest(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+#' cen_signedranktest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
 cen_signedranktest <- function(xd, xc, yd, yc, alternative="two.sided") {
   xname <- deparse(substitute(xd))

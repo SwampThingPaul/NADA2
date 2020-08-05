@@ -6,10 +6,9 @@
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param cover Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.
 #' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).
-#' @keywords tolerance interval
-#' @export
-#' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm
+#' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm eqlnormCensored eqnormCensored
 #' @importFrom fitdistrplus fitdistcens
+#' @export
 #'
 #' @return
 #' Plot of Empirical and theoretical CDFs with BIC values provided
@@ -22,22 +21,21 @@
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Golden)
+#' data(PbHeron)
 #'
 #' # Default
-#' cenTolInt(Golden$Liver,Golden$LiverCen)
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen)
 #'
 #' # User defined conficence interval
-#' cenTolInt(Golden$Liver,Golden$LiverCen,conf=0.75)
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=0.75)
 #'
 #' # User defined percentile
-#' cenTolInt(Golden$Liver,Golden$LiverCen,cover=0.5)
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 #'
 #' # inputs outside acceptable ranges
-#' cenTolInt(Golden$Liver,Golden$LiverCen,cover=1.25)
-#' cenTolInt(Golden$Liver,Golden$LiverCen,conf=1.1)
-#' cenTolInt(Golden$Liver,Golden$LiverCen,method.fit="ROS")
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
+#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
 
 cenTolInt <- function(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 {

@@ -38,11 +38,10 @@ If \code{Cdf=TRUE} eCDF plot of censored data is printed.
 Computes an estimate of an empirical cumulative distribution function (ECDF) for censored data
 }
 \examples{
-library(NADA) #For example data
 
-data(Cadmium)
+data(Brumbaugh)
 
-cfit(Cadmium$Cd,Cadmium$CdCen)
+cfit(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 }
 \references{

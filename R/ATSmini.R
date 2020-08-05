@@ -13,12 +13,10 @@
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 #' @seealso [NADA::cenken]
 #' @examples
-#' library(NADA) #For example data
-#'
 #' # x is not censored
-#' data(HgFish)
+#' data(Brumbaugh)
 #'
-#' with(HgFish, ATSmini(Hg, HgCen, SedLOI))
+#' with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))
 
 ATSmini <- function(y.var, y.cen, x.var) {
   y.cen <- as.logical(y.cen)

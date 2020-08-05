@@ -30,10 +30,9 @@ Performs a nonparametric Wilcoxon signed-rank test of whether the median differe
 }
 \examples{
 
-library(NADA) #For example data
-data(Atra)
+data(atrazine)
 
-cen_signedranktest(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+cen_signedranktest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
@@ -42,4 +41,3 @@ Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Tes
 
 Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. \url{https://doi.org/10.2307/2282543}
 }
-\keyword{Wilcoxon}

@@ -20,12 +20,10 @@ Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-v
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
 }
 \examples{
-library(NADA) #For example data
-
 # x is not censored
-data(HgFish)
+data(Brumbaugh)
 
-with(HgFish, ATSmini(Hg, HgCen, SedLOI))
+with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

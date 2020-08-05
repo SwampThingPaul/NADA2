@@ -45,7 +45,7 @@ with(PbHeron, ATS(Blood, BloodCen, Kidney, KidneyCen))
 
 # x is not censored
 data(Brumbaugh)
-with(Brumbaugh, ATS(Hg, HgCen, PctWetland))
+with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

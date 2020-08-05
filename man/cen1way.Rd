@@ -31,15 +31,13 @@ If more than two groups, \code{p-values} of the pairwise multiple is reported.
 Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.
 }
 \examples{
-
-library(NADA) #for example data
-data(Golden)
+data(PbHeron)
 
 # Two Groups
-cen1way(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 # More than two groups
-cen1way(Golden$Liver,Golden$LiverCen,Golden$Group)
+cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.

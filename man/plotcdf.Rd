@@ -24,13 +24,12 @@ Plots an empirical cumulative distribution function , if \code{group=NULL} then 
 Plots cdfs of one or more groups of censored data.  Illustrates the differences between groups for group tests such as those done using cen1way or cenanova.
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
 # with groups
-with(Golden,plotcdf(Liver,LiverCen,DosageGroup))
+with(PbHeron,plotcdf(Liver,LiverCen,DosageGroup))
 
 # all data
-with(Golden,plotcdf(Liver,LiverCen))
+with(PbHeron,plotcdf(Liver,LiverCen))
 }
 \keyword{CDF}

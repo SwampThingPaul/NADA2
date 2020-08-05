@@ -60,8 +60,6 @@ Portions below the maximum detection limit(s) are not shown by default, as their
 Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 }
 \examples{
-
-library(NADA) #For example data
-data(Golden)
-cboxplot(Golden$Liver,Golden$LiverCen,Golden$Group)
+data(PbHeron)
+cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 }

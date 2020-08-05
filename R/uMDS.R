@@ -7,18 +7,18 @@
 #' @param title Optional title for the NMDS graph.
 #' @param legend.pos For when group is specified, the location of the legend on the graph showing the colors representing each group’s data.  Default is “bottomleft”.  Alternatives are “topright” and “centerleft”, etc.
 #' @importFrom vegan metaMDS
+#' @importFrom stats dist
 #' @return Print NMDS plot of censored data groupings based on U-scores
 #' @export
 #'
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
-#' golden.u <- uscores(Golden[,4:15])
-#' uMDS(golden.u)
+#' PbHeron.u <- uscores(PbHeron[,4:15])
+#' uMDS(PbHeron.u)
 #'
 #' # With group specific
-#' uMDS(golden.u,group=Golden$DosageGroup)
+#' uMDS(PbHeron.u,group=PbHeron$DosageGroup)
 
 uMDS <- function(uscor, group = NULL, title=NULL, legend.pos = "bottomleft") {
   uname <- deparse(substitute(uscor))

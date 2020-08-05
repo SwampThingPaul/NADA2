@@ -10,7 +10,7 @@
 #' For more detail on ROS modeling see the `ros` help file (`?NADA::ros`).
 #'
 #' For implementation of `ROSci(...)` see the examples below.
-#'
+#' @importFrom stats qt sd
 #' @export
 #'
 #' @references
@@ -23,10 +23,8 @@
 #' @seealso [NADA::ros]
 #'
 #' @examples
-#' library(NADA) #For example data
-#'
-#' data(HgFish)
-#' myros <- NADA::ros(HgFish$Hg,HgFish$HgCen)
+#' data(Brumbaugh)
+#' myros <- NADA::ros(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 #' summary(myros)
 #'

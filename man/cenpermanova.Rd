@@ -26,14 +26,11 @@ Because this is a permutation test it avoids the problem with MLE tests (cenanov
 }
 \examples{
 
-library(NADA) #for example data
-data(Golden)
-cenpermanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+data(PbHeron)
+cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 }
 \references{
 Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \url{https://doi.org/10.1007/978-1-4757-3235-1}
 
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
-\keyword{MANOVA}
-\keyword{permutation}

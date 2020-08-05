@@ -30,16 +30,12 @@ Performs a parametric test of differences in means between groups of censored da
 When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
 }
 \examples{
+data(PbHeron)
+cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
-library(NADA) #for example data
-data(Golden)
-cenanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
-
-cenanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup,LOG=FALSE)
-
+cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,LOG=FALSE)
 
 }
 \seealso{
 \link[survival:survreg]{survival::survreg}
 }
-\keyword{ANOVA}

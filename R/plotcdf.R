@@ -10,20 +10,22 @@
 #' @return Plots an empirical cumulative distribution function , if `group=NULL` then a ECDF with 95% confidence interval is produced. If `group` is identified then ECDFs are produced for each group.
 #' @export
 #' @importFrom NADA cenfit
-#'
+#' @importFrom graphics axis box
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
 #' # with groups
-#' with(Golden,plotcdf(Liver,LiverCen,DosageGroup))
+#' with(PbHeron,plotcdf(Liver,LiverCen,DosageGroup))
 #'
 #' # all data
-#' with(Golden,plotcdf(Liver,LiverCen))
+#' with(PbHeron,plotcdf(Liver,LiverCen))
 
 plotcdf <- function(y.var, cen.var, group=NULL, logscale=FALSE, Ylab=varname) {
   varname <- deparse(substitute(y.var))
   log = ""
+  oldpar<- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
+
   if (logscale == TRUE) {log="x"}
   if ( is.null(group) ) {
 

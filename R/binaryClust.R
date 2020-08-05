@@ -5,18 +5,18 @@
 #' @param method Method of forming clusters.  The default is `"ward.D2"`, which is appropriate for a variety of types of data.  Another appropriate option is `“average”` – average distances between cluster centers.
 #' @param group Optional grouping variable. Sites being cluster will be represented by their group name, rather than by the row number.
 #' @param ncluster Optional number of clusters to be differentiated on the graph. Clusters are fenced off with rectagles.
+#' @importFrom stats hclust cutree rect.hclust
 #' @export
 #' @return Prints a cluster dendrogram based on clustering method
 #'
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
 #' # without group specified
-#' binaryClust(Golden[,4:15])
+#' binaryClust(PbHeron[,4:15])
 #'
 #' # With Group argument
-#' binaryClust(Golden[,4:15],group=Golden$DosageGroup)
+#' binaryClust(PbHeron[,4:15],group=PbHeron$DosageGroup)
 
 binaryClust <- function(dat.frame, method = "ward.D2", group = NULL, ncluster = NULL) {
 

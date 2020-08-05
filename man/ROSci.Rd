@@ -25,10 +25,8 @@ For more detail on ROS modeling see the \code{ros} help file (\code{?NADA::ros})
 For implementation of \code{ROSci(...)} see the examples below.
 }
 \examples{
-library(NADA) #For example data
-
-data(HgFish)
-myros <- NADA::ros(HgFish$Hg,HgFish$HgCen)
+data(Brumbaugh)
+myros <- NADA::ros(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 summary(myros)
 

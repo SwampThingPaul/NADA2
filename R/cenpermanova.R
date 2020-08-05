@@ -6,7 +6,7 @@
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param R The number of permutations used. Default is 9999
 #'
-#' @keywords permutation MANOVA
+#' @importFrom NADA ros cenros
 #' @export
 #' @return Permutation test results with the number of permutations, range in test statistics and `p-value` values through the various permutations. Group means are also listed.
 #' @details Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and `p-values` are trustworthy.
@@ -18,9 +18,8 @@
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Golden)
-#' cenpermanova(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+#' data(PbHeron)
+#' cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 cenpermanova <- function(y1, y2, grp, R = 9999) {
   yname <- deparse(substitute(y1))

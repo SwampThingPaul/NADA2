@@ -22,12 +22,11 @@ Prints a cluster dendrogram based on clustering method
 Performs clustering of a matrix of 0s and 1s, ie. the censoring indicator columns for multiple variables.
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
 # without group specified
-binaryClust(Golden[,4:15])
+binaryClust(PbHeron[,4:15])
 
 # With Group argument
-binaryClust(Golden[,4:15],group=Golden$DosageGroup)
+binaryClust(PbHeron[,4:15],group=PbHeron$DosageGroup)
 }

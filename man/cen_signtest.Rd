@@ -25,10 +25,9 @@ Performs a nonparametric sign test of whether the median difference between two 
 }
 \examples{
 
-library(NADA) #for example data
-data(Atra)
+data(atrazine)
 
-cen_signtest(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+cen_signtest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 }
 \references{
 Fong, D.Y.T., Kwan, C.W., Lam, K.F., Lam, K.S.L., 2003. Use of the Sign Test for the Median in the Presence of Ties. The American Statistician 57, 237–240.
@@ -37,5 +36,3 @@ Fong, Y., Huang, Y., 2019. Modified Wilcoxon-Mann-Whitney Test and Power against
 
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 }
-\keyword{difference}
-\keyword{median}

@@ -34,13 +34,12 @@ You may also test for whether the x data exceed a standard by entering the singl
 }
 \examples{
 
-library(NADA) #for example data
-data(Atra)
+data(atrazine)
 
-cen_paired(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+cen_paired(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
 # Comparing standard/guieline value
-cen_paired(Atra$June,Atra$JuneCen,0.01)
+cen_paired(atrazine$June,atrazine$JuneCen,0.01)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
@@ -48,5 +47,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 \seealso{
 \link[survival:survreg]{survival::survreg}
 }
-\keyword{paired}
-\keyword{t-test}

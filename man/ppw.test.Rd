@@ -24,9 +24,8 @@ Pair Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-va
 Performs a nonparametric Paired Prentice-Wilcoxon test of whether the median difference between two columns of paired censored data equals 0 (O'Brien and Fleming, 1987)
 }
 \examples{
-library(NADA) #for example data
-data(Golden)
-ppw.test(Golden$Liver,Golden$LiverCen,Golden$Bone,Golden$BoneCen)
+data(PbHeron)
+ppw.test(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Bone,PbHeron$BoneCen)
 
 }
 \references{

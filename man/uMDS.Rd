@@ -22,12 +22,11 @@ Print NMDS plot of censored data groupings based on U-scores
 Plots an NMDS of uscores output from the \code{uscores} or \code{uscoresi} functions.
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
-golden.u <- uscores(Golden[,4:15])
-uMDS(golden.u)
+PbHeron.u <- uscores(PbHeron[,4:15])
+uMDS(PbHeron.u)
 
 # With group specific
-uMDS(golden.u,group=Golden$DosageGroup)
+uMDS(PbHeron.u,group=PbHeron$DosageGroup)
 }

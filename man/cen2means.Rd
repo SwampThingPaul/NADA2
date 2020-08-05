@@ -28,13 +28,11 @@ Note that because this is an MLE procedure, when a normal distribution model is 
 }
 \examples{
 
-library(NADA) #for example data
-data(Golden)
-cen2means(Golden$Liver,Golden$LiverCen,Golden$DosageGroup)
+data(PbHeron)
+cen2means(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }
-\keyword{t-test}

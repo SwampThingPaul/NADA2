@@ -9,8 +9,8 @@
 #' @param printstats Logical `TRUE`/`FALSE` Option of whether to print the resulting statisics in the console window, or not
 #' @param Ylab Optional – input text in quotes to be used as the variable name on the cdf plot.  The default is the name of the `y1` input variable.
 #'
-# @importFrom survival Surv survfit
-#' @import survival
+#' @importFrom survival Surv survfit
+#' @importFrom stats quantile
 #' @return
 #'
 #' If `printstats=TRUE` Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples. Additionally specified quartile values are returned.
@@ -22,11 +22,10 @@
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #' @seealso [survival::survfit] [NADA::cenfit] [NADA::cendiff]
 #' @examples
-#' library(NADA) #For example data
 #'
-#' data(Cadmium)
+#' data(Brumbaugh)
 #'
-#' cfit(Cadmium$Cd,Cadmium$CdCen)
+#' cfit(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 
 cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), Cdf = TRUE, printstats = TRUE, Ylab = NULL) {

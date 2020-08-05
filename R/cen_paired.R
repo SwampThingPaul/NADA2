@@ -2,13 +2,14 @@
 #'
 #' @description
 #'Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0.
-#'@param xd The first column of data values plus detection limits
-#'@param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
-#'@param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
-#'@param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
-#'@param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @param xd The first column of data values plus detection limits
+#' @param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
+#' @param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
+#' @param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
+#' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
 #'
-#' @keywords paired t-test
+#' @importFrom fitdistrplus plotdistcens
+#' @importFrom survival survreg Surv
 #' @export
 #' @return  A list of statistics containing the following components:
 #' \itemize{
@@ -21,19 +22,17 @@
 #' @references
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
 #'
-# @importFrom survival survreg Surv
 #'
 #' @seealso [survival::survreg]
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Atra)
+#' data(atrazine)
 #'
-#' cen_paired(Atra$June,Atra$JuneCen,Atra$Sept,Atra$SeptCen)
+#' cen_paired(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 #'
 #' # Comparing standard/guieline value
-#' cen_paired(Atra$June,Atra$JuneCen,0.01)
+#' cen_paired(atrazine$June,atrazine$JuneCen,0.01)
 
 cen_paired <- function(xd, xc, yd, yc, alternative="two.sided") {
   xname <- deparse(substitute(xd))
