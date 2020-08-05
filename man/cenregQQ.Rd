@@ -43,5 +43,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }
-\keyword{Plot}
-\keyword{QQ}

@@ -5,7 +5,7 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param dist One of three distributional shapes to fit to your data:  lognormal (`lnorm`), normal (`norm`) or gamma (`gamma`).
 #' @param Yname Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the name of the `y.var` input variable.
-#' @importFrom EnvStats distChooseCensored qqPlotCensored
+#' @importFrom EnvStats gofTestCensored distChooseCensored qqPlotCensored
 #' @export
 #'
 #' @return A single Q-Q plot of data fitted to normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.

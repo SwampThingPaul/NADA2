@@ -69,7 +69,7 @@ cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
   ties <- length(nonas[,1]) - x.gt.y - x.lt.y
   #  result.counts <- data.frame(x.gt.y, x.lt.y, ties)
   #  print(result.counts)
-  s.binom <- binom.test(x.gt.y, length(nonas[,1])-ties, prob=0.5, alternative = alternative)
+  s.binom <- binom.test(x.gt.y, length(nonas[,1])-ties, p=0.5, alternative = alternative)
 
   # LSA version in the coin package.  Not currently used.
   #  s.out <- sign_test(x~y, alternative = alternative)

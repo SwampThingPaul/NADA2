@@ -24,6 +24,7 @@ Produces three Q-Q plots and reports which has the highest Shapiro-Francia test 
 }
 \examples{
 data(Brumbaugh)
+
 cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 }
 \references{

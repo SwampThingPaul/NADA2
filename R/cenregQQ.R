@@ -7,7 +7,6 @@
 #' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @param intcens a logical value indicating the data is interval-censored
 #' @param main overal ltitle for the plot
-#' @keywords QQ Plot
 #' @export
 #' @return Q-Q Plot of model residuals and Shapiro-Francia test results.
 #'
