@@ -29,18 +29,16 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
 }
 \examples{
-library(NADA) #For example data
-
+\dontrun{
 # Both y and x are censored
-data(Golden)
-with(Golden, kenplot(Blood, BloodCen, Kidney, KidneyCen))
+data(PbHeron)
+with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))
 
 # x is not censored
-data(HgFish)
-with(HgFish, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
+data(Brumbaugh)
+with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
+}
 }
 \seealso{
 \link[NADA:cenken]{NADA::cenken}
 }
-\keyword{kendall}
-\keyword{trend}

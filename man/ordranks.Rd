@@ -19,8 +19,8 @@ Computes ranks of data (within columns) with one or more DLs, re-censoring at th
 }
 \examples{
 library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
-ordranks(Golden[,4:15])
+ordranks(PbHeron[,4:15])
 
 }

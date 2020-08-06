@@ -4,14 +4,12 @@
 \alias{equivalent_n}
 \title{Censored data sample size}
 \usage{
-equivalent_n(y.var, y.cen, data)
+equivalent_n(y.var, y.cen)
 }
 \arguments{
 \item{y.var}{The column of data values plus detection limits.}
 
 \item{y.cen}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
-
-\item{data}{an optional data frame, list or environment (or object coercible by \code{as.data.frame} to a data frame) containing the variables of interest.}
 }
 \value{
 Prints summary statistics including
@@ -44,11 +42,9 @@ Differs in the method for computing the percentile probability for the detection
 Computes the equivalent n, the number of observations including censored values, as a measure of information content for data with nondetects.
 }
 \examples{
-library(NADA) #For example data
+data(Brumbaugh)
 
-data(DFe)
-
-equivalent_n(Summer,SummerCen,data=DFe)
+equivalent_n(Brumbaugh$Hg,Brumbaugh$HgCen)
 }
 \references{
 Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.

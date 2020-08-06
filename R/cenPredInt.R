@@ -20,22 +20,21 @@
 #'
 #' @examples
 #'
-#' library(NADA) #for example data
-#' data(Golden)
+#' data(PbHeron)
 #'
 #' # Default
-#' cenPredInt(Golden$Liver,Golden$LiverCen)
+#' cenPredInt(PbHeron$Liver,PbHeron$LiverCen)
 #'
 #' # User defined confidence coefficient
-#' cenPredInt(Golden$Liver,Golden$LiverCen, conf=0.5)
+#' cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=0.5)
 #'
 #' # User defined confidence coefficient outside of acceptable range
 #' # the procedure will stop and give an error.
-#' \dontrun{cenPredInt(Golden$Liver,Golden$LiverCen, conf=1.1)}
+#' \dontrun{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
 #'
 #' # User defined prediction interval type
-#' cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="lower")
-#' cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="upper")
+#' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")
+#' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
 
 
 cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle")  {

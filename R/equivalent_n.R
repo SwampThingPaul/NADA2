@@ -3,7 +3,6 @@
 #' @description Computes the equivalent sample size of censored data.  Observations at lower detection limits have more information than observations at higher detection limits.
 #' @param y.var The column of data values plus detection limits.
 #' @param y.cen The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param data an optional data frame, list or environment (or object coercible by `as.data.frame` to a data frame) containing the variables of interest.
 #' @keywords Sample Size censored
 #' @export
 #' @importFrom NADA censummary
@@ -39,18 +38,11 @@
 #' @seealso [NADA::censummary]
 #'
 #' @examples
-#' library(NADA) #For example data
+#' data(Brumbaugh)
 #'
-#' data(DFe)
-#'
-#' equivalent_n(Summer,SummerCen,data=DFe)
+#' equivalent_n(Brumbaugh$Hg,Brumbaugh$HgCen)
 
-equivalent_n <- function(y.var, y.cen,data){
-
-  if(!missing(data)){
-    y.var <- data[,deparse(substitute(y.var))]
-    y.cen <- data[,deparse(substitute(y.cen))]
-  }
+equivalent_n <- function(y.var, y.cen){
 
   ycen <- as.logical(y.cen)
   yname <- deparse(substitute(y.var))

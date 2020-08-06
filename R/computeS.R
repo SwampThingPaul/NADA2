@@ -11,16 +11,14 @@
 #' @export
 #' @seealso [Kendall::Kendall]
 #' @examples
-#' library(NADA) #For example data
-#'
-#' data(HgFish)
+#' data(Brumbaugh)
 #'
 #' #Artifical time and season variables for demonstration purposes
-#' HgFish$time=1:nrow(HgFish)
-#' HgFish$sea=as.factor(round(runif(nrow(HgFish),1,4),0))
+#' Brumbaugh$time=1:nrow(Brumbaugh)
+#' Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 #'
 #'
-#' with(HgFish,computeS(time,Hg,HgCen,sea,R=100))
+#' with(Brumbaugh,computeS(time,Hg,HgCen,sea,R=100))
 #'
 computeS<- function(x, y, ycen, seas = NULL, R=R) {
   #  called by censeaken.  Returns permutations of S for a single season

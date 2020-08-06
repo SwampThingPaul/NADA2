@@ -9,7 +9,7 @@
 #' @keywords CDF
 #' @return Plots an empirical cumulative distribution function , if `group=NULL` then a ECDF with 95% confidence interval is produced. If `group` is identified then ECDFs are produced for each group.
 #' @export
-#' @importFrom NADA cenfit
+#' @importFrom NADA cenfit flip Cen
 #' @importFrom graphics axis box
 #' @examples
 #' data(PbHeron)

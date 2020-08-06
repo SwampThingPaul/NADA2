@@ -34,15 +34,14 @@
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
 #' @examples
-#' library(NADA) #For example data
 #'
-#' data(HgFish)
+#' data(Brumbaugh)
 #'
 #' # One variable
-#' cencorreg(HgFish$Hg,HgFish$HgCen,HgFish$SedMeHg)
+#' cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg)
 #'
 #' # More than one variable for demostration purposes
-#'cencorreg(HgFish$Hg,HgFish$HgCen,HgFish[,c("SedMeHg","PctWetland")])
+#'cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
 
 cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {

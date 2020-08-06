@@ -16,10 +16,9 @@ Returns a binary dissimilarity matrix.
 Computes a simple matching dissimilarity coefficient
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
-binaryDiss(Golden$LiverCen)
+binaryDiss(PbHeron$LiverCen)
 }
 \seealso{
 \link[vegan:designdist]{vegan::designdist}

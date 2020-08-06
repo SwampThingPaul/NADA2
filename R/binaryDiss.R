@@ -7,10 +7,9 @@
 #' @return Returns a binary dissimilarity matrix.
 #' @seealso [vegan::designdist]
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
-#' binaryDiss(Golden$LiverCen)
+#' binaryDiss(PbHeron$LiverCen)
 
 binaryDiss <- function(dat.frame) {
   dat.diss <- designdist(dat.frame, method = "1 - (a+d)/(a+b+c+d)", abcd = TRUE, terms = "binary", name = "simplematch")

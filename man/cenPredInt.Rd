@@ -34,22 +34,21 @@ Computes prediction intervals for censored data assuming lognormal, gamma and no
 }
 \examples{
 
-library(NADA) #for example data
-data(Golden)
+data(PbHeron)
 
 # Default
-cenPredInt(Golden$Liver,Golden$LiverCen)
+cenPredInt(PbHeron$Liver,PbHeron$LiverCen)
 
 # User defined confidence coefficient
-cenPredInt(Golden$Liver,Golden$LiverCen, conf=0.5)
+cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=0.5)
 
 # User defined confidence coefficient outside of acceptable range
 # the procedure will stop and give an error.
-\dontrun{cenPredInt(Golden$Liver,Golden$LiverCen, conf=1.1)}
+\dontrun{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
 
 # User defined prediction interval type
-cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="lower")
-cenPredInt(Golden$Liver,Golden$LiverCen,pi.type="upper")
+cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")
+cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

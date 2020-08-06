@@ -35,15 +35,14 @@ AIC and BIC are printed to help evaluate the ‘best’ regression model.
 The default is that the Y variable will be log transformed.
 }
 \examples{
-library(NADA) #For example data
 
-data(HgFish)
+data(Brumbaugh)
 
 # One variable
-cencorreg(HgFish$Hg,HgFish$HgCen,HgFish$SedMeHg)
+cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg)
 
 # More than one variable for demostration purposes
-cencorreg(HgFish$Hg,HgFish$HgCen,HgFish[,c("SedMeHg","PctWetland")])
+cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

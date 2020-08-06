@@ -19,10 +19,8 @@
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'
 #' @examples
-#'
-#' library(NADA) #for example data
-#' data(Golden)
-#' cenperm2(Golden$Liver,Golden$LiverCen,Golden$DosageGroup,alternative="t")
+#' data(PbHeron)
+#' cenperm2(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,alternative="t")
 
 cenperm2 <- function(y1, y2, grp, R = 9999, alternative = "two.sided") {
   yname <- deparse(substitute(y1))

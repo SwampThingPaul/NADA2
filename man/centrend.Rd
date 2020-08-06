@@ -34,14 +34,11 @@ Default \code{Smooth} is \code{"cs"} for shrinkage cubic regression splines. See
 }
 \examples{
 
-library(NADA) #For example data
+data(Brumbaugh)
 
-data(HgFish)
+Brumbaugh$time=1:nrow(Brumbaugh)
 
-HgFish$time=1:nrow(HgFish)
-
-with(HgFish,centrend(Hg,HgCen,SedTotHg,time.var=time))
-###
+with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

@@ -9,7 +9,6 @@
 #' @param retrans Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when `LOG = FALSE`. `retrans = FALSE` & `LOG = TRUE` draws the plot in logY units. `retrans =  TRUE` & `LOG = TRUE` draws the plot in original Y units.
 #' @param xnam Custom label for the x axis of plots.  Default is x variable column name.
 #' @param ynam Custom label for the y axis of plots.  Default is y variable column name.
-#' @keywords trend kendall
 #' @importFrom NADA cenken
 #' @return
 #'
@@ -19,15 +18,15 @@
 #' @seealso [NADA::cenken]
 #'
 #' @examples
-#' library(NADA) #For example data
-#'
+#' \dontrun{
 #' # Both y and x are censored
-#' data(Golden)
-#' with(Golden, kenplot(Blood, BloodCen, Kidney, KidneyCen))
+#' data(PbHeron)
+#' with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))
 #'
 #' # x is not censored
-#' data(HgFish)
-#' with(HgFish, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
+#' data(Brumbaugh)
+#' with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
+#' }
 
 kenplot <- function(y1,ycen,x1,xcen,retrans = FALSE, xnam=NULL, ynam=NULL)  {
   alldat <- data.frame(y1, ycen, x1, xcen)
@@ -59,6 +58,9 @@ kenplot <- function(y1,ycen,x1,xcen,retrans = FALSE, xnam=NULL, ynam=NULL)  {
   nyc <- length(as.integer(ynd$ycen))    # number of censored y values
   xnd <- alldat[as.integer(xcen) ==1 ,]  # set of censored x values
   nxc <- length(as.integer(xnd$xcen))    # number of censored x values
+
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(par(oldpar))
 
   plot(detected$x1, detected$y1, ylim = c(ymin, ymax), xlim = c(xmin, xmax), ylab = ynam, xlab = xnam, pch=19, cex=0.7, main="Akritas - Theil - Sen line", xaxs="r", yaxs="r")
   if (retrans == FALSE) {

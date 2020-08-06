@@ -24,16 +24,14 @@ S-value for each permutation
 A permutation test to compute Kendall rank correlation S-values on censored data.
 }
 \examples{
-library(NADA) #For example data
-
-data(HgFish)
+data(Brumbaugh)
 
 #Artifical time and season variables for demonstration purposes
-HgFish$time=1:nrow(HgFish)
-HgFish$sea=as.factor(round(runif(nrow(HgFish),1,4),0))
+Brumbaugh$time=1:nrow(Brumbaugh)
+Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 
 
-with(HgFish,computeS(time,Hg,HgCen,sea,R=100))
+with(Brumbaugh,computeS(time,Hg,HgCen,sea,R=100))
 
 }
 \seealso{

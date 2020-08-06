@@ -34,14 +34,12 @@
 #'
 #' @examples
 #'
-#' library(NADA) #For example data
+#' data(Brumbaugh)
 #'
-#' data(HgFish)
+#' Brumbaugh$time=1:nrow(Brumbaugh)
 #'
-#' HgFish$time=1:nrow(HgFish)
-#'
-#' with(HgFish,centrend(Hg,HgCen,SedTotHg,time.var=time))
-#' ###
+#' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
+
 
 centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs") {
   yname <- deparse(substitute(y.var))

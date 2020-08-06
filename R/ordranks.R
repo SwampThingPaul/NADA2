@@ -8,9 +8,9 @@
 #'
 #' @examples
 #' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
-#' ordranks(Golden[,4:15])
+#' ordranks(PbHeron[,4:15])
 #'
 
 ordranks <- function(dat.frame, paired = TRUE) {

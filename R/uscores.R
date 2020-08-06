@@ -9,10 +9,9 @@
 #' @export
 #'
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
-#' uscores(Golden[,4:15])
+#' uscores(PbHeron[,4:15])
 
 uscores <- function(dat.frame, paired = TRUE, rnk=TRUE) {
   cols <- ncol(dat.frame)

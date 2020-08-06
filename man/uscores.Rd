@@ -20,8 +20,7 @@ U-score for each chemical parameter
 Computes uscores of data (requires 2 columns) with one or more DLs
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
-uscores(Golden[,4:15])
+uscores(PbHeron[,4:15])
 }

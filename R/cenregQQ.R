@@ -20,15 +20,13 @@
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'
 #' @examples
-#' library(NADA) #For example data
-#'
-#' data(HgFish)
+#' data(Brumbaugh)
 #'
 #' # One variable
-#' cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish$PctWetland)
+#' cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$PctWetland)
 #'
 #' # More than one variable for demostration purposes
-#'cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish[,c("PctWetland","SedLOI","Weight")])
+#'cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("PctWetland","SedLOI","Weight")])
 
 cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL) {
   yname <- deparse(substitute(y.var))

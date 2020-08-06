@@ -20,9 +20,6 @@ prints uscore number of observations known to be lower - number of observations 
 Computes the uscore of data (required 2-columns) with one ore more detection limits.
 }
 \examples{
-library(NADA) #For example data
-
-data(HgFish)
-uscore(HgFish$Hg,HgFish$HgCen)
-
+data(Bumbaugh)
+uscore(Bumbaugh$Hg,Bumbaugh$HgCen)
 }

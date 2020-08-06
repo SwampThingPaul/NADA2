@@ -26,15 +26,13 @@ Q-Q Plot of model residuals and Shapiro-Francia test results.
 Plots a quantile-quantile (Q-Q) plot of censored regression residuals for simple or for multiple regression.
 }
 \examples{
-library(NADA) #For example data
-
-data(HgFish)
+data(Brumbaugh)
 
 # One variable
-cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish$PctWetland)
+cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$PctWetland)
 
 # More than one variable for demostration purposes
-cenregQQ(HgFish$Hg,HgFish$HgCen,HgFish[,c("PctWetland","SedLOI","Weight")])
+cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("PctWetland","SedLOI","Weight")])
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
