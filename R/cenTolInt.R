@@ -33,9 +33,11 @@
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 #'
 #' # inputs outside acceptable ranges
+#' \dontrun{
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
+#' }
 
 cenTolInt <- function(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 {
@@ -81,7 +83,7 @@ dist.best = floor(bic.best/bic.3)
 pct.best = max(pct.best*dist.best)
 ti.best = max(ti.best*dist.best)
 
-cenCompareCdfs (y.var, cen.var, Yname = nameofy, dist3 = "normal")
+cenCompareCdfs (y.var, cen.var, Yname = nameofy, dist3 = "norm")
 abline (h=cover, lty = "dotted", col = "black")
 return (results)
 }

@@ -4,7 +4,9 @@
 \name{atrazine}
 \alias{atrazine}
 \title{Atrazine concentrations in Nebraska ground water}
-\format{An object of class \code{data.frame} with 24 rows and 4 columns.}
+\format{
+An object of class \code{data.frame} with 24 rows and 4 columns.
+}
 \source{
 Junk et al., 1980. Areal, vertical, and temporal differences in ground water chemistry: II. Journal of Environmental Quality. 9(3) 479 - 483.
 }

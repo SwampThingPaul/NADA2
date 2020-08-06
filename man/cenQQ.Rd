@@ -22,12 +22,13 @@ A single Q-Q plot of data fitted to normal, lognormal or gamma distributions wit
 Plots quantile-quantile (Q-Q) plot of censored data fitted a data distribution
 }
 \examples{
-
+\dontrun{
 data(Brumbaugh)
 cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 # User defined distribution
 cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen,dist="gamma")
+}
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

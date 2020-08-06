@@ -4,11 +4,11 @@
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param Yname Optional – input text in quotes to be used as the variable name on all plots.  The default is the name of the `y.var` input variable.
-#' @importFrom EnvStats gofTestCensored distChooseCensored qqPlotCensored
 #' @export
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
 #'
+#' @importFrom EnvStats distChooseCensored qqPlotCensored
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -19,12 +19,12 @@
 #' @examples
 #' data(Brumbaugh)
 #'
-#' cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
+#' \dontrun{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))
   cen.logical <- as.logical(cen.var)
-  var.choose <- distChooseCensored(y.var, cen.logical)
+  var.choose <- distChooseCensored(x=y.var, censored=cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )

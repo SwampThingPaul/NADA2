@@ -4,7 +4,9 @@
 \name{PbHeron}
 \alias{PbHeron}
 \title{PbHeron}
-\format{An object of class \code{data.frame} with 27 rows and 15 columns.}
+\format{
+An object of class \code{data.frame} with 27 rows and 15 columns.
+}
 \source{
 Golden et al., 2003, Environmental Toxicology and Chemistry 22, pp. 1517-1524.
 }

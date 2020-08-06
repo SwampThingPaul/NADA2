@@ -24,16 +24,14 @@
 #' @seealso [NADA::cenken]
 #'
 #' @examples
-#' library(NADA) #For example data
 #'
-#' data(HgFish)
+#' data(Brumbaugh)
 #'
 #' #Artifical time and season variables for demonstration purposes
-#' HgFish$time=1:nrow(HgFish)
-#' HgFish$sea=as.factor(round(runif(nrow(HgFish),1,4),0))
+#' Brumbaugh$time=1:nrow(Brumbaugh)
+#' Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 #'
-#'
-#' with(HgFish,censeaken(time,Hg,HgCen,sea,seaplots = T))
+#' with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
 
 
 censeaken <- function(time, y, y.cen, group, LOG = FALSE,

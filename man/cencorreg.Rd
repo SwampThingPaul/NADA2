@@ -53,5 +53,3 @@ Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Enviro
 \seealso{
 \link[survival:survreg]{survival::survreg}
 }
-\keyword{correlation}
-\keyword{regression}

@@ -4,7 +4,9 @@
 \name{Brumbaugh}
 \alias{Brumbaugh}
 \title{Brumbaugh}
-\format{An object of class \code{data.frame} with 133 rows and 14 columns.}
+\format{
+An object of class \code{data.frame} with 133 rows and 14 columns.
+}
 \source{
 Brumbaugh et al., 2001, USGS Biological Science Report BSR-2001-0009.
 }

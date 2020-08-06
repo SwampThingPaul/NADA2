@@ -11,7 +11,7 @@
 #' @return Q-Q Plot of model residuals and Shapiro-Francia test results.
 #'
 #' @importFrom survival survreg Surv
-#' @importFrom EnvStats gofTestCensored qqPlotCensored
+#' @importFrom EnvStats qqPlotCensored gofTestCensored
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'

@@ -29,7 +29,7 @@ roxygen2md::roxygen2md()
 
 devtools::document()
 
-#devtools::test()
+#devtools::test(); # makes testthat directory and runs tests
 
 devtools::check()
 
@@ -42,3 +42,9 @@ pkgdown::build_site()
 
 ## Builds package
 # devtools::build()
+
+
+
+data(Brumbaugh)
+y.var=Brumbaugh$Hg
+cen.var=Brumbaugh$HgCen

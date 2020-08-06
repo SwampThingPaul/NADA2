@@ -8,24 +8,38 @@
 1 error x | 0 warnings √ | 0 note √
 
 ```
-
 > checking examples ... ERROR
   Running examples in 'NADA2-Ex.R' failed
   The error most likely occurred in:
   
   > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
-  > ### Name: cenCompareQQ
-  > ### Title: Censored Q-Q Plot comparison
-  > ### Aliases: cenCompareQQ
+  > ### Name: kenplot
+  > ### Title: Plot sensored trend for censored data
+  > ### Aliases: kenplot
+  > ### Keywords: kendall trend
   > 
   > ### ** Examples
   > 
-  > data(Brumbaugh)
+  > library(NADA) #For example data
+  Warning: package 'NADA' was built under R version 3.6.3
+  Loading required package: survival
+  Warning: package 'survival' was built under R version 3.6.2
+  
+  Attaching package: 'NADA'
+  
+  The following object is masked from 'package:stats':
+  
+      cor
+  
   > 
-  > cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
-  Error in as.environment(where) : 
-    no item called "package:EnvStats" on the search list
-  Calls: cenCompareQQ ... envstatsDistChooseCensored -> gofTestCensored -> exists
+  > # Both y and x are censored
+  > data(Golden)
+  > with(Golden, kenplot(Blood, BloodCen, Kidney, KidneyCen))
+  Error in kenplot(Blood, BloodCen, Kidney, KidneyCen) : 
+    could not find function "kenplot"
+  Calls: with -> with.default -> eval -> eval
   Execution halted
 
 ```
+
+### devtools::check_rhub() locally:

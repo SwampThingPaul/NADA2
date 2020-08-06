@@ -43,16 +43,14 @@ If \code{seaplots=FALSE} the entire dataset will be plotted with Thiel-Sen line 
 Seasonal Kendall permutation test on censored data
 }
 \examples{
-library(NADA) #For example data
 
-data(HgFish)
+data(Brumbaugh)
 
 #Artifical time and season variables for demonstration purposes
-HgFish$time=1:nrow(HgFish)
-HgFish$sea=as.factor(round(runif(nrow(HgFish),1,4),0))
+Brumbaugh$time=1:nrow(Brumbaugh)
+Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 
-
-with(HgFish,censeaken(time,Hg,HgCen,sea,seaplots = T))
+with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

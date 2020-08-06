@@ -25,7 +25,7 @@ Produces three Q-Q plots and reports which has the highest Shapiro-Francia test 
 \examples{
 data(Brumbaugh)
 
-cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
+\dontrun{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

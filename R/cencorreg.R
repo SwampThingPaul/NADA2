@@ -5,7 +5,6 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
 #' @param x.vars One or more uncensored explanatory variable(s). See Details
 #' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
-#' @keywords correlation regression
 #' @export
 #' @return
 #' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) is printed.
@@ -16,8 +15,8 @@
 #'
 #' Parametric Survival Model output is also provided including regression model.
 #'
-# @importFrom survival survreg Surv
-# @importFrom EnvStats gofTestCensored qqPlotCensored
+#' @importFrom survival survreg Surv
+#' @importFrom EnvStats gofTestCensored qqPlotCensored
 #'
 #' @details
 #'
