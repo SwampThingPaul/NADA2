@@ -2,7 +2,7 @@ Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
 Version: 0.1.0
-Date: 2020-07-06
+Date: 2020-08-06
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
@@ -15,7 +15,7 @@ Description: Contains methods described by Dennis Helsel in
              for Censored Environmental Data" and courses specific 
              to dealing with censored environmental data. This package
              is an expansion of the NADA Package.
-License: file LICENSE
+License: MIT + file LICENSE
 Depends: R (>= 3.6)
 Imports: grDevices,
         graphics,
