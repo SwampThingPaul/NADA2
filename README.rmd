@@ -1,5 +1,5 @@
 ---
-title: "NADA2"
+title: "NADA2 <img src='./hex/NADA2_hex.png' align='right' height = '240'/>"
 output: github_document
 ---
 

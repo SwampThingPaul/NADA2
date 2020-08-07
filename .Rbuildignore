@@ -21,3 +21,4 @@
 ^CRAN NADA$
 ^draftFiles$
 ^data-raw\.*$
+^hex$

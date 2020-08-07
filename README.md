@@ -1,4 +1,4 @@
-NADA2
+NADA2 <img src='./hex/NADA2_hex.png' align='right' height = '240'/>
 ================
 
 ## Table of Contents
