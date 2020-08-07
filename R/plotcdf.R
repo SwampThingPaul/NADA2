@@ -32,8 +32,7 @@ plotcdf <- function(y.var, cen.var, group=NULL, logscale=FALSE, Ylab=varname) {
     cenind <- as.logical(cen.var)
     cenfit.out <- cenfit(y.var, cenind)
 
-    stripaxes <- function(..., axes) plot(...)
-    stripaxes(cenfit.out, log=log, xlab=Ylab, lwd = 2, axes=F, main = "Cumulative Distribution Function")
+    plot(cenfit.out@survfit, log=log, xlab=Ylab, lwd = 2, axes=F, main = "Cumulative Distribution Function")
     abline(h=1, lwd=3, col = "white")
     box(bty = "o")
     axis(side = 1)
@@ -48,16 +47,14 @@ plotcdf <- function(y.var, cen.var, group=NULL, logscale=FALSE, Ylab=varname) {
     clrs <- c (1:i)
 
     if (logscale == TRUE)  {
-        stripaxes <- function(..., axes) plot(...)
-        P1=stripaxes(cenfit.out, log=log, xlab=Ylab, lwd = 2, col=clrs, axes=F, main = "Cumulative Distribution Function")
+        plot(cenfit.out@survfit, log=log, xlab=Ylab, lwd = 2, col=clrs, axes=F, main = "Cumulative Distribution Function")
         abline(h=1, lwd=3, col = "white")
         box(bty = "o")
         axis(side = 1)
         axis(side = 2)
     }
     else {    # logscale is false
-        stripaxes <- function(..., axes) plot(...)
-        P1=stripaxes(cenfit.out, log=log, xlab=Ylab, lwd = 2, col=clrs, axes=F, main = "Cumulative Distribution Function")
+        plot(cenfit.out@survfit, log=log, xlab=Ylab, lwd = 2, col=clrs, axes=F, main = "Cumulative Distribution Function")
         abline(h=1, lwd=3, col = "white")
         box(bty = "o")
         axis(side = 1)

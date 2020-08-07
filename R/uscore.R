@@ -8,8 +8,8 @@
 #' @return prints uscore number of observations known to be lower - number of observations known to be higher
 #'
 #' @examples
-#' data(Bumbaugh)
-#' uscore(Bumbaugh$Hg,Bumbaugh$HgCen)
+#' data(Brumbaugh)
+#' uscore(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 uscore <- function(y, ind, rnk=TRUE){
   x <- na.omit(data.frame (y, ind))
