@@ -23,7 +23,7 @@ This package is a series of new procedures and improvements on current ones in t
 
 ## Citing package <a name="cite"></a>
 
-```{r,eval=F}
+```{r}
 citation('NADA2')
 ```
 

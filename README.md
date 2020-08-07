@@ -30,6 +30,23 @@ updates to Helsel (2004).
 citation('NADA2')
 ```
 
+    ## 
+    ## To cite package 'NADA2' in publications use:
+    ## 
+    ##   Paul Julian and Dennis Helsel (2020). NADA2: Data Analysis for
+    ##   Censored Environmental Data. R package version 0.1.0.
+    ##   https://github.com/SwampThingPaul/NADA2
+    ## 
+    ## A BibTeX entry for LaTeX users is
+    ## 
+    ##   @Manual{,
+    ##     title = {NADA2: Data Analysis for Censored Environmental Data},
+    ##     author = {Paul Julian and Dennis Helsel},
+    ##     year = {2020},
+    ##     note = {R package version 0.1.0},
+    ##     url = {https://github.com/SwampThingPaul/NADA2},
+    ##   }
+
 ## Installation <a name="install"></a>
 
 ``` r
