@@ -40,6 +40,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   if (show==TRUE) {bdl.col <- box.fill}
   else {bdl.col <- "white"}
   yname <- deparse(substitute(y1))
+  if (is.null(Ylab))  Ylab <- yname
   y1 <- as.numeric(y1)
   y2 <- as.integer(y2)
   xmin = 0
@@ -47,6 +48,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   grp.all = "1"
   gname = NULL
 
+  if (sum(y2) > 0)    # not all data are detects {
   dlmax <- max(y1[y2 == 1])
   dltxt <- paste("Max DL=", signif(dlmax, 5), sep="")
   nonas <- na.omit(data.frame(y1, y2))         # omits NAs for the sake of the ros function
@@ -256,5 +258,19 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         }
       }
     }
+  }
+ }   # end of when there are nondetects
+  
+  else   # when there are no nondetects
+  { LOG <- ifelse (LOG, "y", "")
+    if (is.null(group) == TRUE)    # no group
+    {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)}
+    else        # with groups
+    {gname <- deparse(substitute(group))
+        if (is.null(ordr) == FALSE)  {
+          group = factor(group, levels(group)[ordr]) }
+        glabs <- levels(group)
+        boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
+        }
   }
 }

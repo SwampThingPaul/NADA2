@@ -23,8 +23,10 @@
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))
-  cen.logical <- as.logical(cen.var)
-  var.choose <- distChooseCensored(x=y.var, censored=cen.logical)
+  if (sum(as.integer(cen.var)) > 0)    # not all data are detects
+    
+  { cen.logical <- as.logical(cen.var)
+  var.choose <- distChooseCensored(y.var, cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
@@ -32,29 +34,58 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   all.W <- all.W/ max(all.W)
   best.text <- c("normal", "lognormal", "gamma")
   max.distrib <- best.text[all.W==1.0]
-
+  
   if (var.choose$decision != "Nonparametric") {
     best.dist <- paste (var.choose$decision, "is a good fit")}
   else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
   }
   cat(best.dist, "\n")
-  oldpar<- par(no.readonly = TRUE)
-  on.exit(par(oldpar))
-
   par(mfrow=c(2,2))
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
   mtext(norm.text)
   #  legend("bottomright", legend = norm.text)
-
+  
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
   mtext(lnorm.text)
   #  legend("bottomright", legend = lnorm.text)
-
+  
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
   mtext(gamma.text)
   #   legend("bottomright", legend = gamma.text)
-
+  
   plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')
   text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sans", font=1, adj=1)
+  par(mfrow=c(1,1))
+  }
+  
+else  # all data are detects
+{ cen.logical <- as.logical(cen.var)
+var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
+norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
+lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
+gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
+all.W <- c(var.choose$test.results$norm$statistic, var.choose$test.results$lnorm$statistic, var.choose$test.results$gamma$statistic)
+all.W <- all.W/ max(all.W)
+best.text <- c("normal", "lognormal", "gamma")
+max.distrib <- best.text[all.W==1.0]
 
+if (var.choose$decision != "Nonparametric") {
+  best.dist <- paste (var.choose$decision, "is a good fit")}
+else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
+}
+cat(best.dist, "\n")
+par(mfrow=c(2,2))
+EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
+mtext(norm.text)
+
+EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
+mtext(lnorm.text)
+
+EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
+mtext(gamma.text)
+
+plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')
+text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sans", font=1, adj=1)
+par(mfrow=c(1,1))
+  }
 }

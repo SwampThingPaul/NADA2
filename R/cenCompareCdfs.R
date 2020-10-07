@@ -3,7 +3,7 @@
 #' @description Plots the empirical cdf and cdfs of three theoretical distributions, fit by maximum likelihood estimation (MLE).
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distrubtion). Other distributions include `lnorm`(for log-normal), `gamma` and `weibull`(for Weibull).
+#' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distrubtion). Alternate distribution is `weibull`(for Weibull).
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
 #' @export
 #' @return prints a plot of the empirial CDFs with BIC value for each distribution.
@@ -16,8 +16,8 @@
 #' data(Brumbaugh)
 #' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
-#' # With log-normal distribution
-#' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="lnorm")
+#' # With Weibull distribution
+#' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="weibull")
 #'
 #' # Using an distribution not supported by this function (yet)
 #' # you will get an error message
@@ -35,7 +35,9 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   dist.vals.text <- c("Normal","Lognormal","Gamma","Weibull")
 
   yname <- deparse(substitute(y.var))
-  left <- y.var*(1-as.integer(cen.var))
+  if (sum(as.integer(cen.var)) > 0)    # not all data are detects
+    
+  {left <- y.var*(1-as.integer(cen.var))
   right <- y.var
   var.frame <- data.frame(left, right)
 
@@ -48,6 +50,20 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
 
   cdfcompcens(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
+
+}
+    else            # all data are detects   
+  {
+  y.dist1 <- fitdist(var.frame, "lnorm", "mle")
+  y.dist2  <- fitdist(var.frame, "gamma", "mle")
+  y.dist3  <- fitdist(var.frame, dist3, "mle")
+
+  bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
+  bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
+  bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
+  
+    cdfcomp(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), do.points = FALSE, verticals = TRUE, xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
+  }
 
   # prior version edited by PJ
   # y.lnorm <- fitdistcens(var.frame, "lnorm")
