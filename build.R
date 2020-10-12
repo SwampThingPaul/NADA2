@@ -26,10 +26,9 @@ roxygen2::roxygenise()
 ## Convert from Rd to Markdown
 roxygen2md::roxygen2md()
 
-
 devtools::document()
 
-#devtools::test(); # makes testthat directory and runs tests
+# devtools::test(); # makes testthat directory and runs tests
 
 devtools::check()
 

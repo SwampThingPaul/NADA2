@@ -11,7 +11,7 @@ cenCompareCdfs(y.var, cen.var, dist3 = "norm", Yname = yname)
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distrubtion). Other distributions include \code{lnorm}(for log-normal), \code{gamma} and \code{weibull}(for Weibull).}
+\item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distrubtion). Alternate distribution is \code{weibull}(for Weibull).}
 
 \item{Yname}{Optional – input text in quotes to be used as the variable name.  The default is the name of the \code{y.var} input variable.}
 }
@@ -28,8 +28,8 @@ library(NADA) #For example data
 data(Brumbaugh)
 cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)
 
-# With log-normal distribution
-cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="lnorm")
+# With Weibull distribution
+cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen,dist3="weibull")
 
 # Using an distribution not supported by this function (yet)
 # you will get an error message
