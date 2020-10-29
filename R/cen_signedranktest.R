@@ -9,14 +9,14 @@
 #'
 #' @importFrom coin wilcoxsign_test statistic pvalue
 #' @export
-#' @return  A list of Wilcoxon Signed-Rank test with Pratt correction for ites statistics containing the following components:
+#' @return  Prints a list of Wilcoxon Signed-Rank test with Pratt correction for ties statistics containing the following components:
 #' \itemize{
 #' \item `n` Number of samples
 #' \item `Z` The value of the test statistic
 #' \item `p.value` the p-value of the test
 #' }
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. <https://doi.org/10.2307/2282965>
 #'

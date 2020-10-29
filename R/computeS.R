@@ -1,15 +1,17 @@
-#' Computes Kendall rank correlation S-value (score) for censored data
+#' Kendall's S-statistic for permutations of censored data
 #'
-#' @description A permutation test to compute Kendall rank correlation S-values on censored data.
-#' @param x Column of the time variable, either a sequence of days or decimal times, etc.  Will be the scale used for time in the trend analysis.
-#' @param y The column of y (response variable) values plus detection limits
+#' @description Computes a Kendall rank correlation S-statistic for permutations of censored data. Collectively these represent the variation in S expected when the null hypothesis is true.  Called by censeaken. computeS is not expected to be of much use to users on its own.
+#' @param x Column of the time variable, either a sequence of days or decimal times, etc.  Time data for one season.
+#' @param y The column of y (response variable) values plus detection limits for one season.
 #' @param ycen The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y` column, and 0 (or `FALSE`) indicates a detected value in `y`.
-#' @param seas Column of the season classifications. A factor in R, so usually though not necessarily a text variable.  If numeric, define as a factor before running the script.
-#' @param R The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 repetitions).
+#' @param seas Name of a single season classification. Usually though not necessarily a text variable.
+#' @param R The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 realizations).
 #'
-#' @return S-value for each permutation
-#' @export
+#' @return An Rx1 matrix containing an S-value for each of the R data permutations. 
 #' @seealso [Kendall::Kendall]
+#' @references
+#' Helsel, D.R., Hirsch, R.M., Ryberg, K.R., Archfield, S.A., Gilroy, E.J., 2020. Statistical Methods in Water Resources. U.S. Geological Survey Techniques and Methods, book 4, chapter A3, 458p., https://doi.org/10.3133/tm4a3.
+
 #' @examples
 #' data(Brumbaugh)
 #'

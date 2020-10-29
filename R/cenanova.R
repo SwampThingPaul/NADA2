@@ -10,21 +10,24 @@
 #' @importFrom stats residuals
 #' @export
 #' @return
-#' Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and `p-value` of the test. Test assumes lognormal(`LOG=TRUE`) or nomal(`LOG=FALSE`) distribution
+#' Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and `p-value` of the test. Test assumes lognormal(`LOG=TRUE`) or nomal(`LOG=FALSE`) distribution of residuals from group means.
 #'
-#' In addition to comparison of censored data between groups, multiple comparisons of means are also printed based on the parametric survival model (`CensData~Factor`).
+#' Tukey's multiple comparison p-values of pairwise differenes in group means are also printed.
 #' \itemize{
-#' \item Group Names of groups (NOTE: `==` indicates `"two.sided"` comparisons`)
-#' \item `Estimate` Slope of the parametric survival model
-#' \item `Std. Error` Standard error of estimate
-#' \item `z value` z value test statistic
-#' \time `Pr(>|z|)` P-values of test
+#' \item Group Names of groups (NOTE: `== 0` indicates null hypothesis of "equals zero").
+#' \item `Estimate` Estimated difference between group means.
+#' \item `Std. Error` Standard error of estimate.
+#' \item `z value` Test statistic.
+#' \time `Pr(>|z|)` P-values for test that difference in means equals zero.
 #' }
 #'
-#' @details When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
+#' @details Test is computed using Maximum Likelihood Estimation. When a gaussian	distribution model is	used (LOG=FALSE) modeled values may fall below zero, producing unreal p-values (often lower than they should be).  Because of this, testing in log units is preferable and is the default.
 #' @seealso [survival::survreg]
 #'
-#' @examples
+#' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
+#'#' @examples
 #' data(PbHeron)
 #' cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 #'

@@ -5,19 +5,20 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detectionlimit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param cover Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.
-#' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).
+#' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).  See Details.
 #' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm eqlnormCensored eqnormCensored
 #' @importFrom fitdistrplus fitdistcens
 #' @export
 #'
-#' @return
-#' Plot of Empirical and theoretical CDFs with BIC values provided
+#' @return  Prints and returns the percentile (`cover`), upper tolerance limit (`conf`) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values as legend.
+#' @details Computes upper one-sided tolerance intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle); robust ROS is available as an alternate method for all three distributions. The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). For more info on the relative merits of robust ROS versus mle, see Helsel (2011) and Millard (2013).
 #'
-#' Prints the percentile (`cover`) and upper tolerance limit (`conf`) for lognormal, normal and approximated gamma distributions.
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
+#'
+#' Krishnamoorthy, K., Mathew, T., Mukherjee, S., 2008. Normal-Based Methods for a Gamma Distribution, Technometrics, 50, 69-78.
 #'
 #' @examples
 #'
@@ -75,8 +76,8 @@ ti.best = c(ti.lnorm, ti.gamma, ti.norm)
 pct.best = c(pct.lnorm, pct.gamma, pct.norm)
 
 Distribution <- c("Lognormal", "Gamma", "Normal")
-results <- data.frame(Distribution, pct.best, ti.best, bic.3)
-names(results) <- c("Distribution", pct.text, ti.text, "BIC")
+results <- data.frame(Distribution, pct.best, ti.best, bic.3, method.fit)
+names(results) <- c("Distribution", pct.text, ti.text, "BIC", "Method")
 
 bic.best = min(bic.3)
 dist.best = floor(bic.best/bic.3)

@@ -1,15 +1,13 @@
 #' Censored data sample size
 #'
-#' @description Computes the equivalent sample size of censored data.  Observations at lower detection limits have more information than observations at higher detection limits.
+#' @description Computes the equivalent sample size of censored data.  Observations at lower detection limits have a greater percent of the equivalent information of a detected value than observations at higher detection limits.
 #' @param y.var The column of data values plus detection limits.
 #' @param y.cen The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @keywords Sample Size censored
 #' @export
 #' @importFrom NADA censummary
 #' @details
-#' Based on "Method 2" of Dr. Brenda Gillespie's talk at ASA National Meeting 2019.
-#'
-#' Differs in the method for computing the percentile probability for the detection limits.
+#' Based on "Method 2" of Dr. Brenda Gillespie's talk at ASA National Meeting 2019.  This method differs from hers in how the percentile probabilities for the detection limits are computed.  Probabilities here are computed using Regression on Order Statistics (ROS).
 #'
 #' Computes the equivalent n, the number of observations including censored values, as a measure of information content for data with nondetects.
 #'
@@ -17,7 +15,7 @@
 #' \itemize{
 #' \item `n` sample size
 #' \item `n.cen` number of censored data
-#' \item `pct.cen` precent censored data
+#' \item `pct.cen` percent of data censored
 #' \item `min` minimum reported value
 #' \item `max` maximum reported value
 #' }
@@ -26,14 +24,19 @@
 #' \itemize{
 #' \item `limit` detection limit
 #' \item `n` number of censored values per limit
-#' \item `uncen` number of uncensored values
-#' \item `pexceed` proportion that exceeds the limit
+#' \item `uncen` number of detected values at or above the limit
+#' \item `pexceed` proportion of data that exceeds the limit
 #' }
 #'
 #' Summary of the equivalent sample size for detected and censored values.
-#'
+#' \item `n.equiv` the equivalent number of observations
+#' \item `n.cen.equiv` equivalent number of detected obs in the censored data
+#' \item `n.detected` number of uncensored values
+#'}
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
+#' Gillespie, B.W., Dominguez, A., Li, Y., 2019. Quantifying the information in values below the detection limit (left-censored data).  Presented at the 2019 Joint Statistical Meetings of the Amer. Stat. Assoc., Denver, CO., July 31, 2019.
 #'
 #' @seealso [NADA::censummary]
 #'

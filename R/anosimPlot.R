@@ -1,15 +1,16 @@
-#' Permutation analysis of similarities between groups
+#' Permutation Analysis of Similarity (anosim) for Censored Data
 #'
+#' @description Plots the permutation histogram and test statistic produced by an anosim (nonparametric multivariate) test of differences between groups.
 #' @param ano.out an `anosim` object. See details and example
 #' @param hcol color of histogram
 #' @param title title of histogram
-#' @return prints a histogram of permutation tests
+#' @return Plots a histogram of the permutation test statistics representing the null hypothesis along with the observed test statistic from the data.  The p-value is the proportion of test statistics equal to or more extreme than the observed test statistic.
 #' @export
 #' @importFrom vegan anosim
 #' @importFrom graphics hist
 #' @seealso [vegan::anosim]
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.<https://cran.r-project.org/web/packages/vegan/index.html>
 #'

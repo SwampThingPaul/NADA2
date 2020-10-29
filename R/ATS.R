@@ -1,18 +1,18 @@
-#' Akritas-Theil-Sen line for censored data.
+#' Akritas-Theil-Sen line for censored data
 #'
 #' @description
-#' Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
+#' Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data, along with the test that the slope (and Kendall's tau) equal zero.  For one x variable regression.
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param y.cen The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and `0` (or `FALSE`) indicates a detected value in `y.var`.
 #' @param x.var The column of x (explanatory variable) values plus detection limits
 #' @param x.cen The x-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `x.var` column, and `0` (or `FALSE`) indicates a detected value in `x.var`.
 #' @param LOG Indicator of whether to compute the ATS line in the original y units, or for their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
-#' @param retrans Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when `LOG = FALSE`. `retrans = FALSE` & `LOG = TRUE` draws the plot in logY units. `retrans =  TRUE` & `LOG = TRUE` draws the plot in original Y units.
+#' @param retrans Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when `LOG = FALSE`. When `retrans = FALSE` & `LOG = TRUE` the plot is drawn with logY units (default). When `retrans =  TRUE` & `LOG = TRUE` the plot is drawn with original Y units.
 #' @param xlabel Custom label for the x axis of plots.  Default is x variable column name.
 #' @param ylabel Custom label for the y axis of plots.  Default is y variable column name.
 #' @keywords trend censored
 #' @export
-#' @return  Draws a scatterplot with the fitted trend-line superimposed, the equation for the Akritas-Theil-Sen line, `Kendall's tau` and `p-value` of the test. .
+#' @return  Coefficients (intercept and slope) for the ATS line are printed, along with Kendall's tau correlation coefficient, test statistic S, and the (single) p-value for the test that tau and slope both equal zero. A scatterplot with the fitted trend-line superimposed is also drawn.
 #'
 #' @importFrom graphics abline layout legend lines mtext par plot text
 #' @importFrom utils data
@@ -22,7 +22,7 @@
 #' @references
 #' Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
 #' # Both y and x are censored
@@ -33,7 +33,8 @@
 #' data(Brumbaugh)
 #' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
-ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL) {
+ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL, Title = NULL) 
+  {
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   y.cen <- as.logical(y.cen)
@@ -47,14 +48,15 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
   if (LOG == TRUE)  {
     if (min(alldat[,1]) < 0) stop('Cannot take logs of negative values.  Use LOG=FALSE')
     y.log <- log(alldat[,1])
-    NoShift <- cenken(y.log, alldat[,2], alldat[,3], alldat[,4])
+    NoShift <- cenken(y.log, alldat[,2], alldat[,3], alldat[,4] )
     slope <- NoShift$slope
     intercept <- NoShift$intercept
     pval <- NoShift$p
     tau <- NoShift$tau
     S <- tau*nobs*(nobs-1)*0.5
-    # if y.log goes negative
-    if (min(y.log) < 0) {
+    
+    # if y.log goes negative, intercept = NA
+    if (min(y.log) < 0) { 
       shift.amt <- abs(min(y.log)) + 0.0001
       y.shift <- y.log + shift.amt
       Shifted<-cenken(y.shift, alldat[,2], alldat[,3], alldat[,4])
@@ -64,29 +66,32 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
     cat ("Akritas-Theil-Sen line for censored data", "\n", "\n")
     if (slope >= 0) {cat (ylogname, "=", round(intercept,4), "+", round(slope,4), "*", xname, "\n")
       subtitle <- paste (ylogname, "=", round(intercept,4), "+", round(slope,4), "*", xname)
+      short.t <- paste(round(intercept,4), "+", round(slope,4), "*", xname)
     }
     else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xname, "\n")  # neg slope
-      subtitle <- paste(ylogname, "=", round(intercept,4), round(slope,4), "*", xname)}
-
+      subtitle <- paste(ylogname, "=", round(intercept,4), round(slope,4), "*", xname)
+      short.t <- paste(round(intercept,4), round(slope,4), "*", xname)
+    }
     cat("Kendall's tau =", round(tau,4), "  p-value =", round(pval, 5), "\n", "\n")
     # draw a scatterplot
     x <- c(min(alldat[,3]), max(alldat[,3]))
-    y=x*slope+intercept
-    z=data.frame(x,y)
-    kenplot(log(alldat[,1]), alldat[,2], alldat[,3], alldat[,4], xnam=xname, ynam=ylogname)
-    lines(z, col = "purple")
+    y <- x*slope+intercept
+    z <- data.frame(x,y)
+#    print(z)
+    kenplot(log(alldat[,1]), alldat[,2], alldat[,3], alldat[,4], atsline = TRUE, xnam=xname, ynam=ylogname)
+ #   lines(z, col = "purple")
     mtext(subtitle)
     #
     if (retrans == TRUE)
     { # draw a 2nd scatterplot in original units
-      subtitle <- paste (yname, " = ", round(exp(intercept),4), " * ", "e^(", round(slope,4), " * ", xname,")", sep="" )
+      subtitle <- paste (yname, " = e^(", round(intercept,4), ")",  " * ", "e^(", round(slope,4), " * ", xname,")", sep="" )
       delta <- seq(1:100)
       diff<-max(alldat[,3]) - min(alldat[,3])
-      xo = delta *diff/100
-      yo = exp(xo*slope+intercept)
-      z=data.frame(xo,yo)
-      kenplot(alldat[,1], alldat[,2], alldat[,3], alldat[,4], retrans, xnam=xname, ynam=yname)
-      lines(z, col = "purple")
+      xo = delta *diff/100 + min(alldat[,3])
+      yo = exp(xo*slope)*exp(intercept)
+      z <- data.frame(xo,yo)
+      kenplot(alldat[,1], alldat[,2], alldat[,3], alldat[,4], atsline = FALSE, xnam=xname, ynam=yname)
+      lines(xo, yo, col = "purple")
       mtext(subtitle)
       #
     }

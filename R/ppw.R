@@ -8,11 +8,11 @@
 #'
 #' @importFrom survival survfit Surv
 #' @importFrom stats na.exclude pnorm
-#' @return Pair Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference
+#' @return Paired Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference
 #' @export
 #'
 #' @references
-#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' O’Brien, P.C., Fleming, T.R., 1987. A Paired Prentice-Wilcoxon Test for Censored Paired Data. Biometrics 43, 169–180. https://doi.org/10.2307/2531957
 #'
@@ -127,12 +127,16 @@ ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
   param <- length(group)/2L
   names(param) <- "n"
   ## add finishing touches
-  if(alternative == 1L)
-    pvalue <- (1. - pnorm(abs(stat))) * 2.
-  else if(alternative == 2L)
-    pvalue <- 1. - pnorm(stat)
+  if(alternative == 1L)   # alternative is two-sided
+  {  pvalue <- (1. - pnorm(abs(stat))) * 2.
+     altern <- paste(xname, "not equal to", yname, sep = " ") }
+  else if(alternative == 2L)  # alternative is greater than
+  {  pvalue <- 1. - pnorm(stat)
+     altern <- paste(xname, ">", yname, sep = " ") }
   else # alternaitve is less than
-    pvalue <- pnorm(stat)
+  {  pvalue <- pnorm(stat)
+     altern <- paste(xname, "<", yname, sep = " ") }
+  names(pvalue) <- "p value"
   mu <- 0
   names(mu) <- "difference"
   Scoremat <- cbind(ret1$Scores, ret1$Diffs)
@@ -151,7 +155,7 @@ ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
   y.count <- vector(length=length(yd))
   for (i in 7:1) {y.count[yd == signif(yd, i)] <- i}
   # computing median difference
-  median.diff <- paste ("Median difference is", signif(med.diff, max(y.count)))
+  median.diff <- paste ("Median difference equals", signif(med.diff, max(y.count)))
 
   retval <- list(statistic = stat, parameters = param,
                  p.value = pvalue, null.value = mu,
@@ -160,7 +164,11 @@ ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
                  PPWmat=Scoremat)
   #oldClass(retval) <- c("htest", "ppw")
 
-  print(retval)
-  cat(median.diff, "\n")
+#  print(retval)
+  txt <- paste("Paired Prentice Wilcoxon test for (x:", xname, " - ", "y:", yname, ") equals 0", "\n", "    alternative: ", altern, "\n", sep = "")
+  txt2 <- paste("n =", param, "  Z =", signif(stat, 4), "  p-value =", signif(pvalue, 4))
+  
+  cat(txt, "\n", txt2, "\n")
+  cat(" ", median.diff, "\n")
   return(invisible(retval))
 }

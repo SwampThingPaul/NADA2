@@ -7,11 +7,14 @@
 #' @param logscale Indicator of whether to plot the data in original y units, or on a log scale.  The default is to use the original units, which usually makes more sense for a cdf plot.
 #' @param Ylab Optional – input text in quotes to be used as the variable name on the cdf plot.  The default is the name of the `y.var` input variable.
 #' @keywords CDF
-#' @return Plots an empirical cumulative distribution function , if `group=NULL` then a ECDF with 95% confidence interval is produced. If `group` is identified then ECDFs are produced for each group.
+#' @return Plots an empirical cumulative distribution function. If `group=NULL` then a ECDF with 95% confidence interval is produced. If `group` is identified then ECDFs are produced for each group.
 #' @export
 #' @importFrom NADA cenfit flip Cen
 #' @importFrom graphics axis box
-#' @examples
+#' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#' 
+#'@examples
 #' data(PbHeron)
 #'
 #' # with groups

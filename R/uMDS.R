@@ -8,7 +8,10 @@
 #' @param legend.pos For when group is specified, the location of the legend on the graph showing the colors representing each group’s data.  Default is “bottomleft”.  Alternatives are “topright” and “centerleft”, etc.
 #' @importFrom vegan metaMDS
 #' @importFrom stats dist
-#' @return Print NMDS plot of censored data groupings based on U-scores
+#' @return Prints an NMDS plot of censored data groupings based on U-scores
+#' #' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
 #' @export
 #'
 #' @examples

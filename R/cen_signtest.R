@@ -1,6 +1,6 @@
 #' Sign test for censored data
 #'
-#' @description Performs a nonparametric sign test of whether the median difference between two columns of paired censored data equals 0. Uses the Pratt adjustment for pairs of equal values.
+#' @description Performs a nonparametric sign test of whether the median difference between two columns of paired censored data equals 0. Uses the Fong adjustment for pairs of equal values.
 #' @param xd The first column of data values plus detection limits
 #' @param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
 #' @param yd The second column of data values plus detection limits.
@@ -9,15 +9,12 @@
 #'
 #' @importFrom stats dbinom pbinom binom.test
 #' @export
-#' @return  Returns the number of `xd` and `yd` value greater than, less than and tied. Corrected and uncorrected `p-value` for ties also displayed.
+#' @return  Returns the number of `xd` and `yd` values greater than, less than and tied. Corrected and uncorrected `p-value` for ties also displayed.
 #' @references
 #' Fong, D.Y.T., Kwan, C.W., Lam, K.F., Lam, K.S.L., 2003. Use of the Sign Test for the Median in the Presence of Ties. The American Statistician 57, 237–240.
 #'
-#' Fong, Y., Huang, Y., 2019. Modified Wilcoxon-Mann-Whitney Test and Power against Strong Null. Am Stat 73, 43–49. <https://doi.org/10.1080/00031305.2017.1328375>
-#'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
-#'
-#'
+#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'#'
 #' @examples
 #'
 #' data(atrazine)
