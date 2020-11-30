@@ -1,20 +1,20 @@
-#' Censored data permutation MANOVA test
+#' Censored data one-factor permutation test
 #'
 #' @description Performs a permutation test of differences in means between groups of censored data.
-#' @param y1 The column of data values plus detection limits
+#' @param y1 The column of data values plus detection limits.
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
-#' @param R The number of permutations used. Default is 9999
+#' @param R The number of permutations used. Default is 9999.
 #'
 #' @importFrom NADA ros cenros
 #' @export
 #' @return Permutation test results with the number of permutations, range in test statistics and `p-value` values through the various permutations. Group means are also listed.
-#' @details Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and `p-values` are trustworthy.
+#' @details Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and group means and `p-values` are trustworthy.
 #'
 #' @references
 #' Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. <https://doi.org/10.1007/978-1-4757-3235-1>
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
 #'

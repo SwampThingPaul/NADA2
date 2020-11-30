@@ -1,4 +1,4 @@
-#' Censored data t-test
+#' Censored data two-group test for difference in means
 #'
 #' @description
 #' Performs a parametric test of differences in means between two groups of censored data, either in original or in log units (the latter becomes a test for difference in geometric means).
@@ -9,14 +9,13 @@
 #' @importFrom stats pchisq predict
 #' @export
 #' @return
-#' Draw and Q-Q Plot with Shapiro-Francia test for normality W and p-values, Censored data analogue of the t-test
+#' Q-Q Plot with Shapiro-Francia test for normality W and p-values.
+#' Returns the Maximum Likelihood Estimation (MLE) test results including Chi-Squared value, degrees of freedom and `p-value` of the test.
 #'
-#' Returns the Maximum Likelihood Estimation (MLE) t-test results including Chi-Squared value, degrees of freedom and `p-value` of the test.
-#'
-#' @details Note that because this is an MLE procedure, when a normal distribution model is used (LOG=FALSE) values may be modeled as below zero.  When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
+#' @details Because this is an MLE procedure, when a normal distribution model is used (LOG=FALSE) values may be modeled as below zero.  When this happens the means may be too low and the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and is the default.
 #'
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'
@@ -38,6 +37,8 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
   detect <- as.logical(1 - as.integer(y2))  # reverses TRUE/FALSE to fit survival functions
   Factor <- as.factor(grp)
   df <- length(levels(Factor))-1
+  grpname <- as.character(levels(Factor))
+  
   # ln units for LOG = 1
   if (LOG == TRUE)  {
     lnvar <- log(y1)
@@ -50,14 +51,18 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
     # print(reg.out$coefficients)   # before unflipping
     reg.out$coefficients <- (-1)* reg.out$coefficients
     reg.out$coefficients[1] <- fconst + reg.out$coefficients[1]  #reversing the flip
-    # print(reg.out$coefficients)
+  #  print(reg.out$coefficients)
     dist.test <- "Assuming lognormal distribution of residuals around group geometric means"
     pval = pchisq(reg.chisq, df, lower.tail = FALSE)
+    mean1 <- exp(reg.out$coefficients[1])
+    mean2 <- exp(reg.out$coefficients[1] + reg.out$coefficients[2])
     dist <- "Lognormal Dist";  statistic <- reg.chisq
     result <- data.frame(dist, statistic, df, pval)
 
     #  write results
-    cat('\n',"     MLE 't-test' of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "    ",dist.test,'\n', "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
+    cat("     MLE 't-test' of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "   ",dist.test,'\n')
+    cat("     geometric mean of", grpname[1], "=", signif(mean1, 4), "    geometric mean of", grpname[2], "=", signif(mean2,4), "\n")
+    cat( "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', "\n")
     # Q-Q plot of residuals
     reg.predict <- predict(reg.out)
     two.group <- exp(reg.predict - flip.log)
@@ -73,7 +78,6 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
   mean1 <- reg.out$coefficients[1]
   mean2 <- mean1 + reg.out$coefficients[2]
 
-  grpname <- as.character(levels(Factor))
   dist.test <- "Assuming normal distribution of residuals around group means"
   pval = pchisq(reg.chisq, df, lower.tail = FALSE)
   dist <- "Normal Dist";  statistic <- reg.chisq

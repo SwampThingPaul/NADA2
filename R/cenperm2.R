@@ -1,4 +1,4 @@
-#' Censored data permutation test
+#' Censored two-group permutation test
 #'
 #' @description Performs a permutation test of differences in means between two groups of censored data.
 #' @param y1 The column of data values plus detection limits
@@ -8,13 +8,13 @@
 #' @param alternative indicates the alternative hypothesis and must be one of "`two.sided`", "`greater`" or "`less`". You can specify just the initial letter. Default is "`two.sided`".
 #' @keywords permutation difference test
 #' @export
-#' @return Permutation test results with the number of permutations, range in group mean and, difference and `p-value`
-#' @details Because this is a permutation test it avoids the problem with MLE tests (`cen2means`) that assume a normal distribution.  No values are modeled as below zero and `p-values` are trustworthy.
+#' @return Permutation test results with the number of permutations, range in group means and their difference, and range in `p-value`.
+#' @details Because this is a permutation test it avoids the problem with MLE tests (`cen2means`) that assume a normal distribution.  No values are modeled as below zero and `p-values` are trustworthy. Ranges in means and p-values are due to interval-censoring of censored data means.
 #'
-#'  @references
+#' @references
 #' Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. <https://doi.org/10.1007/978-1-4757-3235-1>
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'

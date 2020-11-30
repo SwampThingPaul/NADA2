@@ -1,10 +1,12 @@
-#' Computes ranks of data with one or more detection limits
+#' Computes ranks of data with one or multiple detection limits
 #'
-#' @description Computes ranks of data (within columns) with one or more DLs, re-censoring at the highest DL if multiple DLs in column are present.
-#' @param dat.frame A data frame. Default format is paired = `TRUE`, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its corresponding indicator column.
+#' @description Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection detection limit.
+#' @param dat.frame A data frame. Default format is paired = `TRUE`, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its censoring indicator column.
 #' @param paired An option to specify paired = `FALSE`, where the input format would be C1 C2 C3 I1 I2 I3 where the C columns contain concentrations or a detection limit, and the I columns are their associated indicators, in the same order as the concentration columns.
 #' @export
-#' @return Returns a rank for each chemical parameter.
+#' @return Returns columns of ranks of censored data in the same order as the paired columns of input data.  For 3 chemical parameters, the data frame returned will be R1 R2 R3 where R represents the ranks of the C1 C2 C3 input data accounting for the censoring indicated by columns I1 I2 I3.
+#' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
 #' library(NADA) #For example data

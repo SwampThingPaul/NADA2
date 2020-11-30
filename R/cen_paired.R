@@ -1,7 +1,7 @@
 #' Censored data paired t-test
 #'
 #' @description
-#'Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0.
+#'Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0. Assumes that the paired differences follow a gaussian (normal) distribution.
 #' @param xd The first column of data values plus detection limits
 #' @param xc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the xd column, and 0 (or `FALSE`) indicates a detected value in xd.
 #' @param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
@@ -20,8 +20,7 @@
 #' }
 #' @details You may also test for whether the x data exceed a standard by entering the single number for the standard as `yd`.  In that case no `yc` is required.
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
-#'
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @seealso [survival::survreg]
 #'
@@ -32,7 +31,7 @@
 #' cen_paired(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 #'
 #' # Comparing standard/guieline value
-#' cen_paired(atrazine$June,atrazine$JuneCen,0.01)
+#' cen_paired(atrazine$June, atrazine$JuneCen, 0.01, alternative = "greater")
 
 cen_paired <- function(xd, xc, yd, yc, alternative="two.sided") {
   xname <- deparse(substitute(xd))

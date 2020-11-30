@@ -9,9 +9,9 @@
 #'
 #' @return A single Q-Q plot of data fitted to normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
 #'
-#' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored
+#' @importFrom EnvStats gofTestCensored qqPlotCensored distChooseCensored
 #' @references
-#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
@@ -34,50 +34,50 @@ cenQQ <- function(y.var, cen.var, dist = "lnorm", Yname = yname)  {
 
   yname <- deparse(substitute(y.var))
   cen.logical <- as.logical(cen.var)
-
+  
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
   {var.choose <- distChooseCensored(y.var, cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
-
+  
   if (dist == "norm") {
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
     mtext(norm.text)
     #  legend("bottomright", legend = norm.text)
   }
-
+  
   if (dist == "lnorm")  {
     ylabel <- paste ("ln (", Yname, ")", sep = "")
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
     mtext(lnorm.text)
     #  legend("bottomright", legend = lnorm.text)
   }
-
+  
   if (dist == "gamma")  {
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
     mtext(gamma.text)
     #   legend("bottomright", legend = gamma.text)
   }
-  }
-
+  }      
+  
   else    # all data are detects
   {var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
-
+  
   if (dist == "norm") {
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
     mtext(norm.text)
   }
-
+  
   if (dist == "lnorm")  {
     ylabel <- paste ("ln (", Yname, ")", sep = "")
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
     mtext(lnorm.text)
   }
-
+  
   if (dist == "gamma")  {
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
     mtext(gamma.text)

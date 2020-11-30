@@ -1,26 +1,29 @@
-#' Compute an ECDF for Censored Data
+#' Compute an ECDF and Distribution Parameters for Censored Data
 #'
-#' @description Computes an estimate of an empirical cumulative distribution function (ECDF) for censored data
-#' @param y1 lowest possible concentration (interval-censored) or concs+DLs for indicator format
-#' @param y2 highest possible concentration (interval-censored) or censoring indicator (logical. 1 or `TRUE` = censored, 0 or FALSE = detected) for indicator format.
-#' @param conf the confidence coefficient for confidence intervals around the Kaplan-Meier mean and median.
-#' @param qtls Probabilities for the quantiles to be estimated.  The defaults are listed above.  You may add and/or substitute probabilities.
-#' @param Cdf Logical `TRUE`/`FALSE` Indicator of whether to plot the data a cumulative distribution function (cdf) using Kaplan-Meier quantiles.
-#' @param printstats Logical `TRUE`/`FALSE` Option of whether to print the resulting statisics in the console window, or not
-#' @param Ylab Optional – input text in quotes to be used as the variable name on the cdf plot.  The default is the name of the `y1` input variable.
+#' @description Computes the empirical cumulative distribution function (ECDF) for censored data. Estimates parameters of the distribution, including the mean and quantiles.
+#' @param y1 Either the lowest possible concentrations (interval-censored format) or conccentrations plus detection limits for indicator formated data.
+#' @param y2 Either the highest possible concentrations (interval-censored format) or censoring indicators (logical. 1 or `TRUE` = censored, 0 or FALSE = detected) for indicator formatted data.
+#' @param conf The confidence coefficient for confidence intervals around the Kaplan-Meier mean and median. Default = 0.95.
+#' @param qtls Probabilities for the quantiles to be estimated.  Defaults are (0.10, 0.25, 0.50, 0.75, 0.90).  You may add and/or substitute probabilities -- all must be between and not including 0 to 1..
+#' @param Cdf Logical `TRUE`/`FALSE` indicator of whether to plot the empirical cumulative distribution function (cdf) using Kaplan-Meier quantiles.
+#' @param printstats Logical `TRUE`/`FALSE` option of whether to print the resulting statisics in the console window, or not.  Default is TRUE.
+#' @param Ylab Optional input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the `y1` input variable.
 #'
 #' @importFrom survival Surv survfit
 #' @importFrom stats quantile
 #' @return
+#' If `printstats=TRUE`: Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples are returned. The specified quantile values are also printed and returned.
 #'
-#' If `printstats=TRUE` Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples. Additionally specified quartile values are returned.
-#'
-#' If `Cdf=TRUE` eCDF plot of censored data is printed.
+#' If `Cdf=TRUE`: The ecdf of censored data is plotted.
+#' @details Quantiles and parameters are estimated using the survfit function. The mean computed is the "restricted mean" (see help for the survfit function of the survival package).  Internally uses interval-censoring to avoid a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al. for more discussion.
 #'
 #' @export
 #' @references
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
-#' @seealso [survival::survfit] [NADA::cenfit] [NADA::cendiff]
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#' 
+#' Gillespie, B.W., et al., 2010.  Estimating Population Distributions When Some Data Are Below a Limit of Detection by Using a Reverse Kaplan-Meier Estimator. Epidemiology 21, 564-570.
+#' 
+#' @seealso [survival::survfit] [NADA::cenfit]
 #' @examples
 #'
 #' data(Brumbaugh)

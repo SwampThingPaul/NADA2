@@ -7,13 +7,12 @@
 #' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @export
 #' @return
-#' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) is printed.
+#' When `x.vars` is one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) are printed.
+#' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens coefficent of determination (`R2`) are printed.
 #'
-#' When `x.vars` is one variable likelihood, rescaled likelihood and McFaddens coefficent of determination (`R2`) is printed
+#' Model coefficients (intercept and slopes), Chi-Squared statistic and p-value for test that all slope coefficients equal zero (overall test), and model AIC and BIC are provided.
 #'
-#' In addition to goodness-of-fit coefficients, model AIC and BIC values are provided.
-#'
-#' Parametric Survival Model output is also provided including regression model.
+#' Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value are plotted for evaluation of model distributional assumptions.
 #'
 #' @importFrom survival survreg Surv
 #' @importFrom EnvStats gofTestCensored qqPlotCensored

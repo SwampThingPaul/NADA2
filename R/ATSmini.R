@@ -1,19 +1,19 @@
 #' Kendall's tau and ATS line for censored data
 #'
-#' @description Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
+#' @description Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  Is called by censeaken because it is much faster than the ATS function.  It is not expected to be of much use to users on its own. The x variable (time) may not be censored.
 #' @param y.var The column of y (response variable) values plus detection limits.
 #' @param y.cen The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param x.var The column of x (explanatory variable) values plus detection limits.
+#' @param x.var The column of x (time for a trend test) values.
 #' @importFrom NADA cenken
-#' @return Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-value (test statistic)
+#' @return Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-value (test statistic).
 #' @export
 #' @references
 #' Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #' @seealso [NADA::cenken]
 #' @examples
-#' # x is not censored
+#' # x may not be censored.  Use the ATS function when x is censored.
 #' data(Brumbaugh)
 #'
 #' with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))

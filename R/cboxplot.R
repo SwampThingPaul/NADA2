@@ -6,17 +6,17 @@
 #' @param y2 The y-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param group An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.
 #' @param LOG `TRUE`/`FALSE` indicator of whether to plot the Y axis data on the original scale (`FALSE`) or log scale (`TRUE`).
-#' @param show `TRUE`\/`FALSE` indicator of whether to show estimated values for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).
+#' @param show `TRUE`\/`FALSE` indicator of whether to show estimated values computed using ROS for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).
 #' @param minmax `NULL`/`FALSE` indicator of whether to draw outliers individually. Default is to show outliers. Setting `minmax = FALSE` (or any text) will draw the whiskers out to the max and min of the dataset.
-#' @param ordr A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the
+#' @param ordr A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the reverse type ordr = c(4, 3, 2, 1).  Example 2: To change the order to A, C, D, B, type ordr = c(1, 3, 4, 2)
 #' @param Ylab Y axis label text, if something is wanted other than the Y variable name in the dataset.
 #' @param Xlab X axis label text, if something is wanted other than the group variable name in the dataset.
 #' @param Title Text to show as the graph title.  Default is blank.
-#' @param dl.loc Location indicator of where to plot the `MaxDL=0.02` text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.
-#' @param dl.col Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but it recognizes most any color by name that you can think of.
+#' @param dl.loc Location indicator of where to plot the "MaxDL=" text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.
+#' @param dl.col Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but all standard R colors may be used.
 #' @param bxcol Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
-#' @details Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
+#' @details If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 #' @export
 #' @importFrom graphics boxplot lines plot polygon
 #' @importFrom grDevices adjustcolor
@@ -24,6 +24,9 @@
 #' @import utils
 #'
 #' @return Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
+#'
+#' @references
+#' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
 #' data(PbHeron)
@@ -48,8 +51,8 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   grp.all = "1"
   gname = NULL
 
-  if (sum(y2) > 0){    # not all data are detects {
-  dlmax <- max(y1[y2 == 1])
+  if (sum(y2) > 0)    # not all data are detects
+  { dlmax <- max(y1[y2 == 1])
   dltxt <- paste("Max DL=", signif(dlmax, 5), sep="")
   nonas <- na.omit(data.frame(y1, y2))         # omits NAs for the sake of the ros function
   y.nona <- nonas[,1]
@@ -260,7 +263,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
     }
   }
  }   # end of when there are nondetects
-
+  
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
     if (is.null(group) == TRUE)    # no group

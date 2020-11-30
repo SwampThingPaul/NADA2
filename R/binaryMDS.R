@@ -1,15 +1,18 @@
-#' Plot Nonmetric Multidimensional Scaling of censored data
+#' Plot Nonmetric Multidimensional Scaling of binary censored data
 #'
-#' @description Plots an NMDS of a matrix of 0s and 1s, the censoring indicator columns for multiple variables.  Use the highest censoring limit within each column.  May have different censoring levels in different columns.
-#' @param dat.frame A data frame containing only the 0/1 columns.
+#' @description Plots an NMDS of a matrix of 0s and 1s, the censoring indicator columns for multiple variables, to discern the pattern of data below vs. above the detection limit.  With multiple detection limits within a column, re-censoring to the highest limit in the column must be done prior to running this function.  May have different censoring levels in different columns.
+#' @param dat.frame A data frame containing only the columns of 0/1 values.
 #' @param group Optional grouping variable. Sites will be represented by different colored symbols for each group.
 #' @param title Optional title for the NMDS graph.
-#' @param legend.pos For when group is specified, the location of the legend on the graph showing the colors representing each group’s data.  Default is “bottomleft”.  Alternatives are “topright” and “centerleft”, etc.
+#' @param legend.pos When group is specified, determines the location of the legend on the graph showing the colors representing each group’s data.  Default is “bottomleft”.  Alternatives are “topright” and “centerleft”, etc.
 #' @importFrom vegan metaMDS ordiplot
 #' @importFrom graphics points
 #' @export
-#' @return Print NMDS plot of censored data groupings.
-#' @details Prior to runnning this analysis it is suggested to consult best analysis practise when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
+#' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
+#' @return Plots an NMDS of censored data represented as the binary Above vs Below a detection limit for each parameter.
+#' @details Binary data may not provide sufficient information to discern differences in location on the plot if sample size is small.  Prior to runnning this analysis it is suggested to consult best analysis practise when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
 #' @seealso [vegan::metaMDS]
 #'
 #' @examples

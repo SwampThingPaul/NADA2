@@ -1,9 +1,12 @@
-#' Binary similarity coefficient
+#' Binary similarity coefficient matrix
 #'
 #' @description Computes a simple matching similarity coefficient
 #' @param dat.frame A data frame containing only the 0/1 columns.
 #' @export
 #' @importFrom vegan designdist
+#' @references
+#' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
 #' @return Returns a binary similarity matrix.
 #' @seealso [vegan::designdist]
 #' @examples

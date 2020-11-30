@@ -1,28 +1,31 @@
-#' Interval-censored U-Score
+#' U-scores for (non-interval, sinle-column) Censored Data
 #'
-#' @description Interval-censored computation of uscores and their ranks for 1 parameter.
-#' @param ylo the lower end of the concentration interval
-#' @param yhi the upper end of the concentration interval
-#' @param rnk A `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
-#'
+#' @description Computes the column of uscores from 2 columns of data in the indicator value format. Multiple detection limits allowed.  Called by the uscores function, uscore (this function) is not expected to be of much use to users on its own.
+#' @param y The column of data values plus detection limits
+#' @param ind The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y` column, and 0 (or `FALSE`) indicates a detected value in `y`.
+#' @param rnk  A `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
 #' @export
+#' @return Returns a single column of uscores or the ranks of uscores for a single pair of (concentration, indicator) censored data columns.
+#'
+#' @examples
+#' data(Brumbaugh)
+#' uscore(Brumbaugh$Hg,Brumbaugh$HgCen)
 
-
-Usc <- function(ylo, yhi, rnk=T){
-  x <- na.omit(data.frame (ylo, yhi))
-  n = length(x$ylo)
-  yadj=x$yhi-(sign(x$yhi-x$ylo)*0.001*x$yhi) #sets a <1 to be <1
-  overlap=x$yhi  # sets correct dimensions
-  Score=overlap  # sets correct dimensions
+Usc <- function(y, ind, rnk=TRUE){
+  x <- na.omit(data.frame (y, ind))
+  n=length(x$y)
+  ylo=(1-as.integer(x$ind))*x$y
+  # yadj=y
+  yadj=x$y-(sign(x$y-ylo)*0.001*x$y)
+  overlap=x$y
+  Score=overlap
   for (j in 1:n) {
     for (i in 1:n ){
-      overlap[i]=sign(sign(yadj[i]-x$ylo[j])+sign(x$ylo[i]-yadj[j]))
+      overlap[i]=sign(sign(yadj[i]-ylo[j])+sign(ylo[i]-yadj[j]))
     }
     Score[j] = -1*sum(overlap) # -1 so that low values = low scores
   }
 
-  if (rnk) {Uscore=rank(Score)} else {Uscore = Score}
-  # print(Score)
-  # print(Uscore)
-  return(Uscore)
+  if (rnk) {uscore=rank(Score)} else {uscore = Score}
+  return(uscore)
 }
