@@ -26,18 +26,17 @@ censeaken(
 
 \item{LOG}{Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
 
-\item{R}{The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 repetitions). By default R=4999. Increasing R simply results in lower variation in the pvalues produced between runs.}
+\item{R}{The number of repetitions in the permutation process.  R is often between 999 and 9999 (+1 for the observed test statistic produces 1000 to 10000 repetitions). By default R=4999. Increasing R simply results in lower variation in the pvalues produced between runs.}
 
 \item{nmin}{The minimum number of observations needed for the entire time period to be tested, per season.  For example, with 1 sample per year per season over an 8-year period, you have 8 observations for each season.  You can increase this number if you want a higher minimum.  Don’t decrease it below 4.  If there are fewer than nmin values that season is skipped and not included in the overall test & a note will be printed.}
 
-\item{seaplots}{In addition to the plot of the overall Seasonal Kendall line, plots for the individual seasons can be drawn.}
+\item{seaplots}{In addition to the plot of the overall Seasonal Kendall trend line, plots of the trend in individual seasons can also be drawn.}
 }
 \value{
-Prints Kendall Trend test results for each season (individually) and a Seasonal Kendall test and Theil-Sen line results.
+Prints the Kendall trend test results for each season individually. The overall Seasonal Kendall test and Theil-Sen line results are both printed and returned.
 
-If \code{seaplots=TRUE} each season's trend line will be plotted along with overall Seasonal Kendall and Theil-Sen line.
-
-If \code{seaplots=FALSE} the entire dataset will be plotted with Thiel-Sen line overlayed.
+If \code{seaplots=TRUE} each season's trend line will be plotted along with the overall Seasonal Kendall (Akritas-Theil-Sen) line.
+If \code{seaplots=FALSE} only the overall Seasonal Kendall (Akritas-Theil-Sen) line will be plotted on a data scatterplot.
 }
 \description{
 Seasonal Kendall permutation test on censored data
@@ -55,7 +54,7 @@ with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Hirsch, R.M., Slack, J.R., Smith, R.A., 1982. Techniques of Trend Analysis for Monthly Water Quality Data, Water Res. Reseach 18, 107-121.
 }
 \seealso{
 \link[NADA:cenken]{NADA::cenken}

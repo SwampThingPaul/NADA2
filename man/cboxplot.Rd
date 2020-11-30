@@ -30,9 +30,9 @@ cboxplot(
 
 \item{LOG}{\code{TRUE}/\code{FALSE} indicator of whether to plot the Y axis data on the original scale (\code{FALSE}) or log scale (\code{TRUE}).}
 
-\item{show}{\code{TRUE}\/\code{FALSE} indicator of whether to show estimated values for the portion of the box below the maximum DL (\code{TRUE}), or just leave the lower portion blank (\code{FALSE}).}
+\item{show}{\code{TRUE}\/\code{FALSE} indicator of whether to show estimated values computed using ROS for the portion of the box below the maximum DL (\code{TRUE}), or just leave the lower portion blank (\code{FALSE}).}
 
-\item{ordr}{A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the}
+\item{ordr}{A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the reverse type ordr = c(4, 3, 2, 1).  Example 2: To change the order to A, C, D, B, type ordr = c(1, 3, 4, 2)}
 
 \item{Ylab}{Y axis label text, if something is wanted other than the Y variable name in the dataset.}
 
@@ -40,9 +40,9 @@ cboxplot(
 
 \item{Title}{Text to show as the graph title.  Default is blank.}
 
-\item{dl.loc}{Location indicator of where to plot the \code{MaxDL=0.02} text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.}
+\item{dl.loc}{Location indicator of where to plot the "MaxDL=" text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.}
 
-\item{dl.col}{Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but it recognizes most any color by name that you can think of.}
+\item{dl.col}{Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but all standard R colors may be used.}
 
 \item{bxcol}{Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.}
 
@@ -57,9 +57,12 @@ Prints a boxplot with detection limit identified and a concatenated list of the 
 Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
 }
 \details{
-Note:  if one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
+If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 }
 \examples{
 data(PbHeron)
 cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
+}
+\references{
+Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }

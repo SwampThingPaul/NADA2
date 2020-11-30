@@ -2,7 +2,7 @@
 % Please edit documentation in R/cen2means.R
 \name{cen2means}
 \alias{cen2means}
-\title{Censored data t-test}
+\title{Censored data two-group test for difference in means}
 \usage{
 cen2means(y1, y2, grp, LOG = TRUE)
 }
@@ -16,15 +16,14 @@ cen2means(y1, y2, grp, LOG = TRUE)
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
 }
 \value{
-Draw and Q-Q Plot with Shapiro-Francia test for normality W and p-values, Censored data analogue of the t-test
-
-Returns the Maximum Likelihood Estimation (MLE) t-test results including Chi-Squared value, degrees of freedom and \code{p-value} of the test.
+Q-Q Plot with Shapiro-Francia test for normality W and p-values.
+Returns the Maximum Likelihood Estimation (MLE) test results including Chi-Squared value, degrees of freedom and \code{p-value} of the test.
 }
 \description{
 Performs a parametric test of differences in means between two groups of censored data, either in original or in log units (the latter becomes a test for difference in geometric means).
 }
 \details{
-Note that because this is an MLE procedure, when a normal distribution model is used (LOG=FALSE) values may be modeled as below zero.  When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
+Because this is an MLE procedure, when a normal distribution model is used (LOG=FALSE) values may be modeled as below zero.  When this happens the means may be too low and the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and is the default.
 }
 \examples{
 
@@ -32,7 +31,7 @@ data(PbHeron)
 cen2means(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }

@@ -2,20 +2,20 @@
 % Please edit documentation in R/ordranks.R
 \name{ordranks}
 \alias{ordranks}
-\title{Computes ranks of data with one or more detection limits}
+\title{Computes ranks of data with one or multiple detection limits}
 \usage{
 ordranks(dat.frame, paired = TRUE)
 }
 \arguments{
-\item{dat.frame}{A data frame. Default format is paired = \code{TRUE}, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its corresponding indicator column.}
+\item{dat.frame}{A data frame. Default format is paired = \code{TRUE}, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its censoring indicator column.}
 
 \item{paired}{An option to specify paired = \code{FALSE}, where the input format would be C1 C2 C3 I1 I2 I3 where the C columns contain concentrations or a detection limit, and the I columns are their associated indicators, in the same order as the concentration columns.}
 }
 \value{
-Returns a rank for each chemical parameter.
+Returns columns of ranks of censored data in the same order as the paired columns of input data.  For 3 chemical parameters, the data frame returned will be R1 R2 R3 where R represents the ranks of the C1 C2 C3 input data accounting for the censoring indicated by columns I1 I2 I3.
 }
 \description{
-Computes ranks of data (within columns) with one or more DLs, re-censoring at the highest DL if multiple DLs in column are present.
+Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection detection limit.
 }
 \examples{
 library(NADA) #For example data
@@ -23,4 +23,7 @@ data(PbHeron)
 
 ordranks(PbHeron[,4:15])
 
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }

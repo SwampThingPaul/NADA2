@@ -10,10 +10,9 @@
 #' @return Returns a binary similarity matrix.
 #' @seealso [vegan::designdist]
 #' @examples
-#' library(NADA) #For example data
-#' data(Golden)
+#' data(PbHeron)
 #'
-#' binarySim(Golden$LiverCen)
+#' binarySim(PbHeron$LiverCen)
 #'
 
 binarySim <- function(dat.frame) {

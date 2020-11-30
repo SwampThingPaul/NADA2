@@ -2,7 +2,7 @@
 % Please edit documentation in R/anosimPlot.R
 \name{anosimPlot}
 \alias{anosimPlot}
-\title{Permutation analysis of similarities between groups}
+\title{Permutation Analysis of Similarity (anosim) for Censored Data}
 \usage{
 anosimPlot(
   ano.out,
@@ -18,10 +18,10 @@ anosimPlot(
 \item{title}{title of histogram}
 }
 \value{
-prints a histogram of permutation tests
+Plots a histogram of the permutation test statistics representing the null hypothesis along with the observed test statistic from the data.  The p-value is the proportion of test statistics equal to or more extreme than the observed test statistic.
 }
 \description{
-Permutation analysis of similarities between groups
+Plots the permutation histogram and test statistic produced by an anosim (nonparametric multivariate) test of differences between groups.
 }
 \examples{
 data(PbHeron)
@@ -46,9 +46,9 @@ summary(PbHeron.anosim)
 anosimPlot(PbHeron.anosim)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.\url{https://cran.r-project.org/web/packages/vegan/index.html}
+Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.\url{https://cran.r-project.org/package=vegan}
 }
 \seealso{
 \link[vegan:anosim]{vegan::anosim}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/binaryDiss.R
 \name{binaryDiss}
 \alias{binaryDiss}
-\title{Binary dissimilarity coefficient}
+\title{Binary dissimilarity coefficient matrix}
 \usage{
 binaryDiss(dat.frame)
 }
@@ -19,6 +19,9 @@ Computes a simple matching dissimilarity coefficient
 data(PbHeron)
 
 binaryDiss(PbHeron$LiverCen)
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \seealso{
 \link[vegan:designdist]{vegan::designdist}

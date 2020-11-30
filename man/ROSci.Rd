@@ -9,17 +9,16 @@ ROSci(cenros.out, conf = 0.95)
 \arguments{
 \item{cenros.out}{an ROS model output object (see details)}
 
-\item{conf}{Confidence coefficient of the interval (Default is 95\%)}
+\item{conf}{Confidence coefficient of the interval (Default is 0.95)}
 }
 \value{
 Prints a lower (LCL) and upper (UCL) confidence interval based on the \code{conf} provided (Default is 95\%)
 }
 \description{
-Regression on Ordered Statistics (ROS) is designed to evaluate censored analytical chemistry data. This function evaluates ROS results and computes the confidence interval around the mean.
+Uses ROS model output from the NADA package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
 }
 \details{
-This function uses an ROS model output based on the \code{ros} funtion in the \code{NADA} package.
-
+This function uses an ROS model output based on the \code{ros} funtion in the \code{NADA} package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional.
 For more detail on ROS modeling see the \code{ros} help file (\code{?NADA::ros}).
 
 For implementation of \code{ROSci(...)} see the examples below.
@@ -37,7 +36,7 @@ mean(myros)
 ROSci(myros)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Lee, L., Helsel, D., 2005. Statistical analysis of water-quality data containing multiple detection limits: S-language software for regression on order statistics. Computers & Geosciences 31, 1241–1248. \url{https://doi.org/10.1016/j.cageo.2005.03.012}
 

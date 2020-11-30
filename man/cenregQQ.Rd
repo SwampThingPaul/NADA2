@@ -7,15 +7,15 @@
 cenregQQ(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL)
 }
 \arguments{
-\item{y.var}{The column of \code{y} (response variable) values plus detection limits}
+\item{y.var}{The column of \code{y} (response variable) values plus detection limits. Alternative, with interval-censord data, the column of the lower end of the interval.}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.  Alternatively, with interval-censored data the column of the high end of the interval.}
 
 \item{x.vars}{One or more uncensored explanatory variable(s). See Details}
 
 \item{LOG}{Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 
-\item{intcens}{a logical value indicating the data is interval-censored}
+\item{intcens}{a logical value indicating the input data is interval-censored instead of a column of values plus a column of indicators.}
 
 \item{main}{overal ltitle for the plot}
 }
@@ -23,7 +23,7 @@ cenregQQ(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL)
 Q-Q Plot of model residuals and Shapiro-Francia test results.
 }
 \description{
-Plots a quantile-quantile (Q-Q) plot of censored regression residuals for simple or for multiple regression.
+Plots a quantile-quantile (Q-Q) plot of censored regression residuals for simple or multiple regression.
 }
 \examples{
 data(Brumbaugh)
@@ -37,7 +37,7 @@ cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("PctWetland","SedLOI","Weight
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }

@@ -2,18 +2,18 @@
 % Please edit documentation in R/cenpermanova.R
 \name{cenpermanova}
 \alias{cenpermanova}
-\title{Censored data permutation MANOVA test}
+\title{Censored data one-factor permutation test}
 \usage{
 cenpermanova(y1, y2, grp, R = 9999)
 }
 \arguments{
-\item{y1}{The column of data values plus detection limits}
+\item{y1}{The column of data values plus detection limits.}
 
 \item{y2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y1} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y1}.}
 
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
-\item{R}{The number of permutations used. Default is 9999}
+\item{R}{The number of permutations used. Default is 9999.}
 }
 \value{
 Permutation test results with the number of permutations, range in test statistics and \code{p-value} values through the various permutations. Group means are also listed.
@@ -22,7 +22,7 @@ Permutation test results with the number of permutations, range in test statisti
 Performs a permutation test of differences in means between groups of censored data.
 }
 \details{
-Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and \code{p-values} are trustworthy.
+Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and group means and \code{p-values} are trustworthy.
 }
 \examples{
 
@@ -32,5 +32,5 @@ cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 \references{
 Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \url{https://doi.org/10.1007/978-1-4757-3235-1}
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }

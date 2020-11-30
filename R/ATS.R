@@ -33,8 +33,7 @@
 #' data(Brumbaugh)
 #' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
-ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL, Title = NULL) 
-  {
+ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL){
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   y.cen <- as.logical(y.cen)
@@ -54,9 +53,9 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
     pval <- NoShift$p
     tau <- NoShift$tau
     S <- tau*nobs*(nobs-1)*0.5
-    
+
     # if y.log goes negative, intercept = NA
-    if (min(y.log) < 0) { 
+    if (min(y.log) < 0) {
       shift.amt <- abs(min(y.log)) + 0.0001
       y.shift <- y.log + shift.amt
       Shifted<-cenken(y.shift, alldat[,2], alldat[,3], alldat[,4])

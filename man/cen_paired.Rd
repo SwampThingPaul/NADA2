@@ -27,7 +27,7 @@ A list of statistics containing the following components:
 }
 }
 \description{
-Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0.
+Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0. Assumes that the paired differences follow a gaussian (normal) distribution.
 }
 \details{
 You may also test for whether the x data exceed a standard by entering the single number for the standard as \code{yd}.  In that case no \code{yc} is required.
@@ -39,10 +39,10 @@ data(atrazine)
 cen_paired(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
 # Comparing standard/guieline value
-cen_paired(atrazine$June,atrazine$JuneCen,0.01)
+cen_paired(atrazine$June, atrazine$JuneCen, 0.01, alternative = "greater")
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \seealso{
 \link[survival:survreg]{survival::survreg}

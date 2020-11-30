@@ -29,6 +29,7 @@
 #' }
 #'
 #' Summary of the equivalent sample size for detected and censored values.
+#' \itemize{
 #' \item `n.equiv` the equivalent number of observations
 #' \item `n.cen.equiv` equivalent number of detected obs in the censored data
 #' \item `n.detected` number of uncensored values

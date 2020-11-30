@@ -14,9 +14,9 @@ cenPredInt(
 )
 }
 \arguments{
-\item{y.var}{The column of y (response variable) values plus detection limits}
+\item{y.var}{The column of y (response variable) detected values plus detection limits}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detectionlimit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{pi.type}{Designation of either a \verb{“two-sided”} interval (default) or a 1-sided \verb{“upper”} or 1-sided \verb{“lower”} interval.}
 
@@ -24,13 +24,16 @@ cenPredInt(
 
 \item{newobs}{The number of new observations to be contained in the interval.}
 
-\item{method}{character string specifying the method of estimation. Default is \code{mle} (maximum likelihood).}
+\item{method}{Character string specifying the method of estimation. Default is \code{mle} (maximum likelihood). See details.}
 }
 \value{
 A table of prediction limits based on user provided confidence coefficient (\code{conf}) and prediction invterval type (\code{pi.type})
 }
 \description{
 Computes prediction intervals for censored data assuming lognormal, gamma and normal distributions.
+}
+\details{
+Computes prediction intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle). The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). Other methods are available in EnvStats, but few methods are available for all three distributions. For info on other methods, see help for elnormCensored and enormCensored commands in EnvStats.
 }
 \examples{
 
@@ -53,7 +56,9 @@ cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
+
+Krishnamoorthy, K., Mathew, T., Mukherjee, S., 2008. Normal-Based Methods for a Gamma Distribution, Technometrics, 50, 69-78.
 }
 \seealso{
 \link[EnvStats:enormCensored]{EnvStats::enormCensored}

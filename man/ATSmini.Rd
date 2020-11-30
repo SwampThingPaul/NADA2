@@ -11,16 +11,16 @@ ATSmini(y.var, y.cen, x.var)
 
 \item{y.cen}{The y-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{x.var}{The column of x (explanatory variable) values plus detection limits.}
+\item{x.var}{The column of x (time for a trend test) values.}
 }
 \value{
-Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-value (test statistic)
+Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-value (test statistic).
 }
 \description{
-Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
+Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  Is called by censeaken because it is much faster than the ATS function.  It is not expected to be of much use to users on its own. The x variable (time) may not be censored.
 }
 \examples{
-# x is not censored
+# x may not be censored.  Use the ATS function when x is censored.
 data(Brumbaugh)
 
 with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))
@@ -28,7 +28,7 @@ with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \seealso{
 \link[NADA:cenken]{NADA::cenken}

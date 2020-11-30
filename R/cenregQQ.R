@@ -26,7 +26,7 @@
 #' cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$PctWetland)
 #'
 #' # More than one variable for demostration purposes
-#'cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("PctWetland","SedLOI","Weight")])
+#' cenregQQ(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("PctWetland","SedLOI","Weight")])
 
 cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL) {
   yname <- deparse(substitute(y.var))
@@ -37,7 +37,7 @@ cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main =
     reg.out <- survreg(surv.log ~ ., data = x.vars, dist = "gaussian")
 
   }
-  else {reg.out <- survreg(surv.log~x.vars, dist = "gaussian") }    # 1 x variable
+  else{reg.out <- survreg(surv.log~x.vars, dist = "gaussian") }    # 1 x variable
   newcoeffs <- reg.out$coefficients * (-1)
   newcoeffs[1] <- max(lnvar)+1 + newcoeffs[1]
   ylog.pred <- max(lnvar) +1 - reg.out$linear.predictors
@@ -49,8 +49,7 @@ cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main =
   qqPlotCensored(ylog.resi, cen.var, add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = main)
   mtext(ptext)
   }
-  else
-  {
+  else{
     if (intcens == TRUE) {y.low <- y.var*(1-cen.var)
     surv.norm <- Surv(y.low, y.var, type="interval2")}
     else {flip.norm <- max(y.var) +1 - y.var
@@ -60,10 +59,10 @@ cenregQQ <- function(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main =
       reg.out <- survreg(surv.norm ~ ., data = x.vars, dist = "gaussian")
     }
 
-    else {reg.out <- survreg(surv.norm~x.vars, dist = "gaussian") }
+    else{reg.out <- survreg(surv.norm~x.vars, dist = "gaussian") }
     if (intcens == TRUE) {ynorm.pred <- reg.out$linear.predictors
     ynorm.resi <- y.low - ynorm.pred}
-    else {ynorm.pred <- max(y.var) +1 - reg.out$linear.predictors
+    else{ynorm.pred <- max(y.var) +1 - reg.out$linear.predictors
     ynorm.resi <- y.var - ynorm.pred}
     vtext<- paste("Quantiles of", yname, "residuals")
     testnorm <- gofTestCensored(ynorm.resi,cen.var)

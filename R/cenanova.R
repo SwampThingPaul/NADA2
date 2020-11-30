@@ -18,7 +18,7 @@
 #' \item `Estimate` Estimated difference between group means.
 #' \item `Std. Error` Standard error of estimate.
 #' \item `z value` Test statistic.
-#' \time `Pr(>|z|)` P-values for test that difference in means equals zero.
+#' \item `Pr(>|z|)` P-values for test that difference in means equals zero.
 #' }
 #'
 #' @details Test is computed using Maximum Likelihood Estimation. When a gaussian	distribution model is	used (LOG=FALSE) modeled values may fall below zero, producing unreal p-values (often lower than they should be).  Because of this, testing in log units is preferable and is the default.

@@ -16,7 +16,7 @@ Prints summary statistics including
 \itemize{
 \item \code{n} sample size
 \item \code{n.cen} number of censored data
-\item \code{pct.cen} precent censored data
+\item \code{pct.cen} percent of data censored
 \item \code{min} minimum reported value
 \item \code{max} maximum reported value
 }
@@ -25,19 +25,22 @@ Summary of censored data including
 \itemize{
 \item \code{limit} detection limit
 \item \code{n} number of censored values per limit
-\item \code{uncen} number of uncensored values
-\item \code{pexceed} proportion that exceeds the limit
+\item \code{uncen} number of detected values at or above the limit
+\item \code{pexceed} proportion of data that exceeds the limit
 }
 
 Summary of the equivalent sample size for detected and censored values.
+\itemize{
+\item \code{n.equiv} the equivalent number of observations
+\item \code{n.cen.equiv} equivalent number of detected obs in the censored data
+\item \code{n.detected} number of uncensored values
+}
 }
 \description{
-Computes the equivalent sample size of censored data.  Observations at lower detection limits have more information than observations at higher detection limits.
+Computes the equivalent sample size of censored data.  Observations at lower detection limits have a greater percent of the equivalent information of a detected value than observations at higher detection limits.
 }
 \details{
-Based on "Method 2" of Dr. Brenda Gillespie's talk at ASA National Meeting 2019.
-
-Differs in the method for computing the percentile probability for the detection limits.
+Based on "Method 2" of Dr. Brenda Gillespie's talk at ASA National Meeting 2019.  This method differs from hers in how the percentile probabilities for the detection limits are computed.  Probabilities here are computed using Regression on Order Statistics (ROS).
 
 Computes the equivalent n, the number of observations including censored values, as a measure of information content for data with nondetects.
 }
@@ -47,7 +50,9 @@ data(Brumbaugh)
 equivalent_n(Brumbaugh$Hg,Brumbaugh$HgCen)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+
+Gillespie, B.W., Dominguez, A., Li, Y., 2019. Quantifying the information in values below the detection limit (left-censored data).  Presented at the 2019 Joint Statistical Meetings of the Amer. Stat. Assoc., Denver, CO., July 31, 2019.
 }
 \seealso{
 \link[NADA:censummary]{NADA::censummary}

@@ -18,7 +18,7 @@ cen_signedranktest(xd, xc, yd, yc, alternative = "two.sided")
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
 }
 \value{
-A list of Wilcoxon Signed-Rank test with Pratt correction for ites statistics containing the following components:
+Prints a list of Wilcoxon Signed-Rank test with Pratt correction for ties statistics containing the following components:
 \itemize{
 \item \code{n} Number of samples
 \item \code{Z} The value of the test statistic
@@ -35,7 +35,7 @@ data(atrazine)
 cen_signedranktest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. \url{https://doi.org/10.2307/2282965}
 

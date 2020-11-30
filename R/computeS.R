@@ -7,7 +7,8 @@
 #' @param seas Name of a single season classification. Usually though not necessarily a text variable.
 #' @param R The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 realizations).
 #'
-#' @return An Rx1 matrix containing an S-value for each of the R data permutations. 
+#' @return An Rx1 matrix containing an S-value for each of the R data permutations.
+#' @export
 #' @seealso [Kendall::Kendall]
 #' @references
 #' Helsel, D.R., Hirsch, R.M., Ryberg, K.R., Archfield, S.A., Gilroy, E.J., 2020. Statistical Methods in Water Resources. U.S. Geological Survey Techniques and Methods, book 4, chapter A3, 458p., https://doi.org/10.3133/tm4a3.
@@ -22,6 +23,7 @@
 #'
 #' with(Brumbaugh,computeS(time,Hg,HgCen,sea,R=100))
 #'
+
 computeS<- function(x, y, ycen, seas = NULL, R=R) {
   #  called by censeaken.  Returns permutations of S for a single season
   nx = length(x); nj <- nx-1

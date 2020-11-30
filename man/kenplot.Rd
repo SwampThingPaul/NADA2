@@ -2,9 +2,18 @@
 % Please edit documentation in R/kenplot.R
 \name{kenplot}
 \alias{kenplot}
-\title{Plot sensored trend for censored data}
+\title{Plot robust median ATS line for censored data}
 \usage{
-kenplot(y1, ycen, x1, xcen, retrans = FALSE, xnam = NULL, ynam = NULL)
+kenplot(
+  y1,
+  ycen,
+  x1,
+  xcen,
+  atsline = FALSE,
+  xnam = NULL,
+  ynam = NULL,
+  Title = "Akritas - Theil - Sen line"
+)
 }
 \arguments{
 \item{y1}{The column of y (response variable) values plus detection limits}
@@ -15,18 +24,19 @@ kenplot(y1, ycen, x1, xcen, retrans = FALSE, xnam = NULL, ynam = NULL)
 
 \item{xcen}{The x-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{x.var} column, and \code{0} (or \code{FALSE}) indicates a detected value in \code{x.var}.}
 
-\item{retrans}{Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when \code{LOG = FALSE}. \code{retrans = FALSE} & \code{LOG = TRUE} draws the plot in logY units. \code{retrans =  TRUE} & \code{LOG = TRUE} draws the plot in original Y units.}
+\item{atsline}{Indicator of whether to draw the ATS line or not. Default is FALSE.}
 
 \item{xnam}{Custom label for the x axis of plots.  Default is x variable column name.}
 
 \item{ynam}{Custom label for the y axis of plots.  Default is y variable column name.}
+
+\item{Title}{Custom title for plots.  Default is "Akritas - Theil - Sen line".}
 }
 \value{
-#' @references
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
 }
 \description{
-Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
+Function used by other functions to plot Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression. Both Y and X variables may be censored.
 }
 \examples{
 \dontrun{
@@ -38,6 +48,9 @@ with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))
 data(Brumbaugh)
 with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 }
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \seealso{
 \link[NADA:cenken]{NADA::cenken}

@@ -18,7 +18,7 @@ plotcdf(y.var, cen.var, group = NULL, logscale = FALSE, Ylab = varname)
 \item{Ylab}{Optional – input text in quotes to be used as the variable name on the cdf plot.  The default is the name of the \code{y.var} input variable.}
 }
 \value{
-Plots an empirical cumulative distribution function , if \code{group=NULL} then a ECDF with 95\% confidence interval is produced. If \code{group} is identified then ECDFs are produced for each group.
+Plots an empirical cumulative distribution function. If \code{group=NULL} then a ECDF with 95\% confidence interval is produced. If \code{group} is identified then ECDFs are produced for each group.
 }
 \description{
 Plots cdfs of one or more groups of censored data.  Illustrates the differences between groups for group tests such as those done using cen1way or cenanova.
@@ -31,5 +31,8 @@ with(PbHeron,plotcdf(Liver,LiverCen,DosageGroup))
 
 # all data
 with(PbHeron,plotcdf(Liver,LiverCen))
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \keyword{CDF}

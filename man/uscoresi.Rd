@@ -2,22 +2,25 @@
 % Please edit documentation in R/uscoresi.R
 \name{uscoresi}
 \alias{uscoresi}
-\title{Interval censored U-score (multiple values)}
+\title{U-scores for interval-censored data (multiple columns)}
 \usage{
 uscoresi(dat.frame, paired = TRUE, rnk = TRUE, Cnames = 1)
 }
 \arguments{
-\item{dat.frame}{A data frame. Default format is: paired = \code{TRUE}, the input format is ylo1 yhi1 ylo2 yhi2 ylo3 yhi3, etc., a pair of columns for each concentration parameter.  This is likely to be the most common arrangement, and so is the default.}
+\item{dat.frame}{A data frame. Default format is: paired = \code{TRUE}, the default input format is ylo1 yhi1 ylo2 yhi2 ylo3 yhi3, where ylo is the low end of the interval of possible values, and yhi is the high end. There is a pair of columns for each censored parameter.}
 
-\item{paired}{An option to specify paired = \code{FALSE}, where the format would be ylo1 ylo2 ylo3 yhi1 yhi2 yhi3, low concentrations for each parameter followed by the high concentrations in the same order.}
+\item{paired}{An option to specify paired = \code{FALSE}, where the format would be ylo1 ylo2 ylo3 yhi1 yhi2 yhi3, low values for each parameter followed by the high values in the same order.}
 
 \item{rnk}{rnk=\code{TRUE} returns the ranks of uscores.  rnk = \code{FALSE} returns the uscores themselves. Default is rnk = \code{TRUE} to return the ranks.}
 
-\item{Cnames}{Cnames =\code{1} uses the "lo" column names to name the uscores columns.  Cnames = \code{2} uses the "hi" column names.}
+\item{Cnames}{Cnames =\code{1} uses the "lo" column names to name the uscores columns (the default).  Cnames = \code{2} uses the "hi" column names.}
 }
 \description{
-Computes uscores within columns of interval-censored data (the "i") having one or more detection limits.
+Computes uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
 }
 \details{
-Input is a data.frame of paired low and high possible range of concentrations, in an interval-censored format. ylo = the lower end of the concentration interval is the first (left) column in the pair.  yhi is the upper end of the concentration interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore = #obs known to be lower - #obs known to be higher. Ties, such as <1 vs <3 or 4 vs 4 or <3 vs 2, are 0s in the uscore computation.
+Input is a data.frame of paired low and high possible range of values, in an interval-censored format. ylo = the lower end of the interval is the first (left) column in the pair.  yhi is the upper end of the interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore is the number of observations known to be lower minus the number of observations known to be higher. Ties, including those such as <1 vs <3 or 4 vs 4 or <3 vs 2, are given a 0 value in the uscore computation.
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }

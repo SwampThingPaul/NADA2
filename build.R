@@ -1,4 +1,10 @@
 
+## https://www.tidyverse.org/articles/2017/12/workflow-vs-script/
+## Clears Everything...start fresh.
+## rm(list=ls(all=T));cat("\014");dev.off()
+
+
+# Packages used in package ------------------------------------------------
 library(EnvStats)
 library(fitdistrplus)
 library(Kendall)
@@ -9,11 +15,9 @@ library(survminer)
 library(mgcv)
 library(cenGAM)
 library(vegan)
+library(coin)
 
-
-## Double check setMethod and class
-# http://r-pkgs.had.co.nz/man.html#man-classes
-
+# -------------------------------------------------------------------------
 
 ## To build the package
 library(roxygen2)
@@ -45,6 +49,6 @@ pkgdown::build_site()
 
 
 
-data(Brumbaugh)
-y.var=Brumbaugh$Hg
-cen.var=Brumbaugh$HgCen
+# data(Brumbaugh)
+# y.var=Brumbaugh$Hg
+# cen.var=Brumbaugh$HgCen

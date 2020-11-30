@@ -18,7 +18,7 @@ ppw.test(xd, xc, yd, yc, alternative = "two.sided")
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
 }
 \value{
-Pair Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference
+Paired Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference
 }
 \description{
 Performs a nonparametric Paired Prentice-Wilcoxon test of whether the median difference between two columns of paired censored data equals 0 (O'Brien and Fleming, 1987)
@@ -29,7 +29,7 @@ ppw.test(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Bone,PbHeron$BoneCen)
 
 }
 \references{
-Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 O’Brien, P.C., Fleming, T.R., 1987. A Paired Prentice-Wilcoxon Test for Censored Paired Data. Biometrics 43, 169–180. https://doi.org/10.2307/2531957
 }

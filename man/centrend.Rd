@@ -2,7 +2,7 @@
 % Please edit documentation in R/centrend.R
 \name{centrend}
 \alias{centrend}
-\title{Trend analysis of residuals of censored data}
+\title{Trend analysis of censored data with a covariate}
 \usage{
 centrend(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs")
 }
@@ -15,22 +15,22 @@ centrend(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs")
 
 \item{time.var}{Column of the time variable, either a sequence of days or decimal times, etc.  Will be the scale used for time in ATS trend analysis.}
 
-\item{link}{Default = \verb{“identity”} which means the original data.}
+\item{link}{Default = \verb{“identity”} which means it uses data in the original units. See details.}
 
-\item{Smooth}{Type of smoother used in the GAM.Default is \verb{“cs”}, shrinkage cubic regression splines.See details}
+\item{Smooth}{Type of smoother used in the GAM. Default is \verb{“cs”}, shrinkage cubic regression splines. See details for other options.}
 }
 \value{
-Prints three plots (Data with GAM Smooth, Residuals from GAM Smooth and ATS trend.)
+Prints three plots: Y data vs time with GAM Smooth, Residuals from GAM Smooth vs time, and ATS trend line of residuals vs time.
 
-Returns GAM residuals, and ATS results
+Returns GAM residuals and ATS results on trend test of residuals (intercept, slope, Kendall's tau, p-value for trend)
 }
 \description{
-Trend analysis of residuals of censored data
+Trend analysis after adjustment of censored data for a covariate.
 }
 \details{
-Default \code{link} is identity, other options are available see \code{cenGAM::tobit1} for more options.
+Default \code{link} = identity. Other options are available see \code{cenGAM::tobit1} for more options.
 
-Default \code{Smooth} is \code{"cs"} for shrinkage cubic regression splines. See \code{mgcv::smooth.terms} for other smoothing terms.
+Default \code{Smooth} is \code{"cs"} for shrinkage cubic regression splines. See \code{mgcv::smooth.terms} for other types of smoothing algorithms.  '"ts"' is a thin-plate regression spline and is also commonly used.
 }
 \examples{
 

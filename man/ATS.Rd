@@ -2,7 +2,7 @@
 % Please edit documentation in R/ATS.R
 \name{ATS}
 \alias{ATS}
-\title{Akritas-Theil-Sen line for censored data.}
+\title{Akritas-Theil-Sen line for censored data}
 \usage{
 ATS(
   y.var,
@@ -26,17 +26,17 @@ ATS(
 
 \item{LOG}{Indicator of whether to compute the ATS line in the original y units, or for their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 
-\item{retrans}{Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when \code{LOG = FALSE}. \code{retrans = FALSE} & \code{LOG = TRUE} draws the plot in logY units. \code{retrans =  TRUE} & \code{LOG = TRUE} draws the plot in original Y units.}
+\item{retrans}{Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when \code{LOG = FALSE}. When \code{retrans = FALSE} & \code{LOG = TRUE} the plot is drawn with logY units (default). When \code{retrans =  TRUE} & \code{LOG = TRUE} the plot is drawn with original Y units.}
 
 \item{xlabel}{Custom label for the x axis of plots.  Default is x variable column name.}
 
 \item{ylabel}{Custom label for the y axis of plots.  Default is y variable column name.}
 }
 \value{
-Draws a scatterplot with the fitted trend-line superimposed, the equation for the Akritas-Theil-Sen line, \verb{Kendall's tau} and \code{p-value} of the test. .
+Coefficients (intercept and slope) for the ATS line are printed, along with Kendall's tau correlation coefficient, test statistic S, and the (single) p-value for the test that tau and slope both equal zero. A scatterplot with the fitted trend-line superimposed is also drawn.
 }
 \description{
-Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression.
+Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data, along with the test that the slope (and Kendall's tau) equal zero.  For one x variable regression.
 }
 \examples{
 # Both y and x are censored
@@ -50,7 +50,7 @@ with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \keyword{censored}
 \keyword{trend}

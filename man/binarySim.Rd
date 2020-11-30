@@ -2,7 +2,7 @@
 % Please edit documentation in R/binarySim.R
 \name{binarySim}
 \alias{binarySim}
-\title{Binary similarity coefficient}
+\title{Binary similarity coefficient matrix}
 \usage{
 binarySim(dat.frame)
 }
@@ -16,11 +16,13 @@ Returns a binary similarity matrix.
 Computes a simple matching similarity coefficient
 }
 \examples{
-library(NADA) #For example data
-data(Golden)
+data(PbHeron)
 
-binarySim(Golden$LiverCen)
+binarySim(PbHeron$LiverCen)
 
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \seealso{
 \link[vegan:designdist]{vegan::designdist}

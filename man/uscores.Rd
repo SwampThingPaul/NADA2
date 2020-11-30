@@ -2,7 +2,7 @@
 % Please edit documentation in R/uscores.R
 \name{uscores}
 \alias{uscores}
-\title{U-score (multiple values)}
+\title{Uscores for multiple columns of censored data}
 \usage{
 uscores(dat.frame, paired = TRUE, rnk = TRUE)
 }
@@ -14,10 +14,10 @@ uscores(dat.frame, paired = TRUE, rnk = TRUE)
 \item{rnk}{A logical \code{TRUE}/\code{FALSE} variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=\code{TRUE}, use the ranks. rnk = \code{FALSE} returns the uscores.}
 }
 \value{
-U-score for each chemical parameter
+A matrix of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores is returned.
 }
 \description{
-Computes uscores of data (requires 2 columns) with one or more DLs
+Computes uscores of censored data in the indicator format. Multiple DLs allowed.
 }
 \examples{
 data(PbHeron)

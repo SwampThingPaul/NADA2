@@ -2,26 +2,26 @@
 % Please edit documentation in R/computeS.R
 \name{computeS}
 \alias{computeS}
-\title{Computes Kendall rank correlation S-value (score) for censored data}
+\title{Kendall's S-statistic for permutations of censored data}
 \usage{
 computeS(x, y, ycen, seas = NULL, R = R)
 }
 \arguments{
-\item{x}{Column of the time variable, either a sequence of days or decimal times, etc.  Will be the scale used for time in the trend analysis.}
+\item{x}{Column of the time variable, either a sequence of days or decimal times, etc.  Time data for one season.}
 
-\item{y}{The column of y (response variable) values plus detection limits}
+\item{y}{The column of y (response variable) values plus detection limits for one season.}
 
 \item{ycen}{The y-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y}.}
 
-\item{seas}{Column of the season classifications. A factor in R, so usually though not necessarily a text variable.  If numeric, define as a factor before running the script.}
+\item{seas}{Name of a single season classification. Usually though not necessarily a text variable.}
 
-\item{R}{The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 repetitions).}
+\item{R}{The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 realizations).}
 }
 \value{
-S-value for each permutation
+An Rx1 matrix containing an S-value for each of the R data permutations.
 }
 \description{
-A permutation test to compute Kendall rank correlation S-values on censored data.
+Computes a Kendall rank correlation S-statistic for permutations of censored data. Collectively these represent the variation in S expected when the null hypothesis is true.  Called by censeaken. computeS is not expected to be of much use to users on its own.
 }
 \examples{
 data(Brumbaugh)
@@ -33,6 +33,9 @@ Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 
 with(Brumbaugh,computeS(time,Hg,HgCen,sea,R=100))
 
+}
+\references{
+Helsel, D.R., Hirsch, R.M., Ryberg, K.R., Archfield, S.A., Gilroy, E.J., 2020. Statistical Methods in Water Resources. U.S. Geological Survey Techniques and Methods, book 4, chapter A3, 458p., https://doi.org/10.3133/tm4a3.
 }
 \seealso{
 \link[Kendall:Kendall]{Kendall::Kendall}

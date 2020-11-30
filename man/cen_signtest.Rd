@@ -18,10 +18,10 @@ cen_signtest(xd, xc, yd, yc, alternative = "two.sided")
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
 }
 \value{
-Returns the number of \code{xd} and \code{yd} value greater than, less than and tied. Corrected and uncorrected \code{p-value} for ties also displayed.
+Returns the number of \code{xd} and \code{yd} values greater than, less than and tied. Corrected and uncorrected \code{p-value} for ties also displayed.
 }
 \description{
-Performs a nonparametric sign test of whether the median difference between two columns of paired censored data equals 0. Uses the Pratt adjustment for pairs of equal values.
+Performs a nonparametric sign test of whether the median difference between two columns of paired censored data equals 0. Uses the Fong adjustment for pairs of equal values.
 }
 \examples{
 
@@ -32,7 +32,6 @@ cen_signtest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 \references{
 Fong, D.Y.T., Kwan, C.W., Lam, K.F., Lam, K.S.L., 2003. Use of the Sign Test for the Median in the Presence of Ties. The American Statistician 57, 237–240.
 
-Fong, Y., Huang, Y., 2019. Modified Wilcoxon-Mann-Whitney Test and Power against Strong Null. Am Stat 73, 43–49. \url{https://doi.org/10.1080/00031305.2017.1328375}
-
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1 edition. ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+#'
 }

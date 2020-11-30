@@ -2,7 +2,7 @@ Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
 Version: 0.2.0
-Date: 2020-11-02
+Date: 2020-11-30
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
@@ -13,7 +13,7 @@ BugReports: https://github.com/SwampThingPaul/NADA2/issues
 Description: Contains methods described by Dennis Helsel in 
              his book "Statistics for Censored Environmental Data
              using Minitab and R" (2011) and courses and videos at 
-             https://practicalstats.com . This package
+             https://practicalstats.com. This package
              is an expansion of the NADA Package.
 License: MIT + file LICENSE
 Depends: R (>= 3.6)

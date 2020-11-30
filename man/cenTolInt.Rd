@@ -15,15 +15,16 @@ cenTolInt(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 
 \item{cover}{Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.}
 
-\item{method.fit}{The method used to compute the parameters of the distribution.  The default is maximum likelihood (\verb{“mle”}). The alternative is robust ROS (\verb{“rROS”}).}
+\item{method.fit}{The method used to compute the parameters of the distribution.  The default is maximum likelihood (\verb{“mle”}). The alternative is robust ROS (\verb{“rROS”}).  See Details.}
 }
 \value{
-Plot of Empirical and theoretical CDFs with BIC values provided
-
-Prints the percentile (\code{cover}) and upper tolerance limit (\code{conf}) for lognormal, normal and approximated gamma distributions.
+Prints and returns the percentile (\code{cover}), upper tolerance limit (\code{conf}) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values as legend.
 }
 \description{
 Computes a one-sided upper tolerance interval for censored data assuming lognormal, gamma and normal distributions.
+}
+\details{
+Computes upper one-sided tolerance intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle); robust ROS is available as an alternate method for all three distributions. The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). For more info on the relative merits of robust ROS versus mle, see Helsel (2011) and Millard (2013).
 }
 \examples{
 
@@ -48,5 +49,7 @@ cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
+
+Krishnamoorthy, K., Mathew, T., Mukherjee, S., 2008. Normal-Based Methods for a Gamma Distribution, Technometrics, 50, 69-78.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cen1way.R
 \name{cen1way}
 \alias{cen1way}
-\title{Peto-Peto nonparametric test}
+\title{Peto-Peto one-factor test}
 \usage{
 cen1way(y1, y2, grp)
 }
@@ -25,7 +25,7 @@ A list of summary statistics for each group evaluated containing the following c
 
 Peto-Peto test results including Chi-Squared value, degrees of freedom and \code{p-value} of the test.
 
-If more than two groups, \code{p-values} of the pairwise multiple is reported.
+If more than two groups, \code{p-values} of the pairwise multiple comparisons, adjusted using the BH false-discovery rate, are reported.
 }
 \description{
 Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.
@@ -40,7 +40,9 @@ cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. \url{https://doi.org/10.2307/2344317}
+
+Benjamini, Y., Hochberg, Y., 1995. Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.  Journal of the Royal Statistical Society. Series B (Methodological), 57, 289-300.
 }

@@ -17,7 +17,7 @@ cenCompareQQ(y.var, cen.var, Yname = yname)
 Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 }
 \description{
-Produces three quantile-quantile (Q-Q) plot, also called a probability plot based on three distribution (normal, lognormal and gamma distributions).
+Produces three quantile-quantile (Q-Q) plots, also called probability plots, based on three distributions (normal, lognormal and gamma distributions).
 }
 \details{
 Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
@@ -30,7 +30,7 @@ data(Brumbaugh)
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }

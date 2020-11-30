@@ -7,12 +7,12 @@
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
 #' @export
 #' @return prints a plot of the empirial CDFs with BIC value for each distribution.
-#' @importFrom fitdistrplus cdfcompcens fitdistcens
+#' @importFrom fitdistrplus fitdist cdfcomp cdfcompcens fitdistcens
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-#' 
+#'
 #' Delignette-Muller, M., Dutang, C., 2015. fitdistrplus : An R Package for Fitting Distributions. Journal of Statistical Software, 64, 1-34. http://www.jstatsoft.org/v64/i04/.
-#' 
+#'
 #' @examples
 #'
 #' library(NADA) #For example data
@@ -40,7 +40,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
 
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
-    
+
   {left <- y.var*(1-as.integer(cen.var))
   right <- y.var
   var.frame <- data.frame(left, right)
@@ -56,7 +56,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   cdfcompcens(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
 
 }
-    else            # all data are detects   
+    else            # all data are detects
   {
   y.dist1 <- fitdist(var.frame, "lnorm", "mle")
   y.dist2  <- fitdist(var.frame, "gamma", "mle")
@@ -65,7 +65,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
   bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
   bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
-  
+
     cdfcomp(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), do.points = FALSE, verticals = TRUE, xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
   }
 

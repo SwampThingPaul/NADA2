@@ -8,7 +8,7 @@
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
 #'
-#' @importFrom EnvStats distChooseCensored qqPlotCensored
+#' @importFrom EnvStats distChoose distChooseCensored qqPlotCensored
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -24,7 +24,7 @@
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
-    
+
   { cen.logical <- as.logical(cen.var)
   var.choose <- distChooseCensored(y.var, cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
@@ -34,7 +34,7 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   all.W <- all.W/ max(all.W)
   best.text <- c("normal", "lognormal", "gamma")
   max.distrib <- best.text[all.W==1.0]
-  
+
   if (var.choose$decision != "Nonparametric") {
     best.dist <- paste (var.choose$decision, "is a good fit")}
   else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
@@ -44,20 +44,20 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
   mtext(norm.text)
   #  legend("bottomright", legend = norm.text)
-  
+
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
   mtext(lnorm.text)
   #  legend("bottomright", legend = lnorm.text)
-  
+
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
   mtext(gamma.text)
   #   legend("bottomright", legend = gamma.text)
-  
+
   plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')
   text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sans", font=1, adj=1)
   par(mfrow=c(1,1))
   }
-  
+
 else  # all data are detects
 { cen.logical <- as.logical(cen.var)
 var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))

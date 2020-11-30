@@ -16,25 +16,31 @@ cenanova(y1, y2, grp, LOG = TRUE)
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 }
 \value{
-Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes lognormal(\code{LOG=TRUE}) or nomal(\code{LOG=FALSE}) distribution
+Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes lognormal(\code{LOG=TRUE}) or nomal(\code{LOG=FALSE}) distribution of residuals from group means.
 
-In addition to comparison of censored data between groups, multiple comparisons of means are also printed based on the parametric survival model (\code{CensData~Factor}).
+Tukey's multiple comparison p-values of pairwise differenes in group means are also printed.
 \itemize{
-\item Group Names of groups (NOTE: \code{==} indicates \code{"two.sided"} comparisons\verb{) \\item }Estimate\verb{Slope of the parametric survival model \\item}Std. Error\verb{Standard error of estimate \\item}z value\verb{z value test statistic \\time}Pr(>|z|)` P-values of test
+\item Group Names of groups (NOTE: \verb{== 0} indicates null hypothesis of "equals zero").
+\item \code{Estimate} Estimated difference between group means.
+\item \verb{Std. Error} Standard error of estimate.
+\item \verb{z value} Test statistic.
+\item \verb{Pr(>|z|)} P-values for test that difference in means equals zero.
 }
 }
 \description{
 Performs a parametric test of differences in means between groups of censored data, followed by a parametric Tukey's multiple comparison test.
 }
 \details{
-When this happens the p-values may be unreal (often lower than they should be).  Because of this, testing in log units is preferable and the default.
+Test is computed using Maximum Likelihood Estimation. When a gaussian	distribution model is	used (LOG=FALSE) modeled values may fall below zero, producing unreal p-values (often lower than they should be).  Because of this, testing in log units is preferable and is the default.
 }
-\examples{
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
+
+#' @examples
 data(PbHeron)
 cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,LOG=FALSE)
-
 }
 \seealso{
 \link[survival:survreg]{survival::survreg}

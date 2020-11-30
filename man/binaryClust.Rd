@@ -2,24 +2,24 @@
 % Please edit documentation in R/binaryClust.R
 \name{binaryClust}
 \alias{binaryClust}
-\title{Binary Cluster Matrix}
+\title{Cluster Matrix of Binary Censored Data}
 \usage{
 binaryClust(dat.frame, method = "ward.D2", group = NULL, ncluster = NULL)
 }
 \arguments{
-\item{dat.frame}{A data frame containing only the 0/1 columns.}
+\item{dat.frame}{A data frame containing only the 0/1 columns, one column per chemical parameter.}
 
-\item{method}{Method of forming clusters.  The default is \code{"ward.D2"}, which is appropriate for a variety of types of data.  Another appropriate option is \verb{“average”} – average distances between cluster centers.}
+\item{method}{Method of forming clusters.  The default is \code{"ward.D2"}, which is appropriate for a variety of types of data.  Another appropriate option is \verb{“average”} – average distances between cluster centers.  See the vegan package for other possible clustering methods.}
 
-\item{group}{Optional grouping variable. Sites being cluster will be represented by their group name, rather than by the row number.}
+\item{group}{Optional grouping variable. If used, sites being clustered will be represented by their group name, rather than by the row number.}
 
-\item{ncluster}{Optional number of clusters to be differentiated on the graph. Clusters are fenced off with rectagles.}
+\item{ncluster}{Optional number of clusters to be differentiated on the graph. Clusters are fenced off with rectangles.}
 }
 \value{
 Prints a cluster dendrogram based on clustering method
 }
 \description{
-Performs clustering of a matrix of 0s and 1s, ie. the censoring indicator columns for multiple variables.
+Performs clustering of a matrix of 0s and 1s, ie. the censoring indicator columns for multiple variables. If there are multiple detection limits within a column first convert the 0/1 designated to be Below vs Above the highest detection limit in the column.  Detection limits may differ among columns.
 }
 \examples{
 data(PbHeron)
@@ -29,4 +29,7 @@ binaryClust(PbHeron[,4:15])
 
 # With Group argument
 binaryClust(PbHeron[,4:15],group=PbHeron$DosageGroup)
+}
+\references{
+Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
