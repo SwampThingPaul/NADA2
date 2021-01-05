@@ -104,7 +104,7 @@ anosimPlot <- function(ano.out, hcol = "light blue", title = "Histogram of anosi
 #' data(Brumbaugh)
 #' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
-ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL, Title = NULL) 
+ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL, Title = NULL)
   {
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
@@ -125,9 +125,9 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
     pval <- NoShift$p
     tau <- NoShift$tau
     S <- tau*nobs*(nobs-1)*0.5
-    
+
     # if y.log goes negative, intercept = NA
-    if (min(y.log) < 0) { 
+    if (min(y.log) < 0) {
       shift.amt <- abs(min(y.log)) + 0.0001
       y.shift <- y.log + shift.amt
       Shifted<-cenken(y.shift, alldat[,2], alldat[,3], alldat[,4])
@@ -255,7 +255,7 @@ ATSmini <- function(y.var, y.cen, x.var) {
 #' @param group Optional grouping variable. If used, sites being clustered will be represented by their group name, rather than by the row number.
 #' @param ncluster Optional number of clusters to be differentiated on the graph. Clusters are fenced off with rectangles.
 #' @importFrom stats hclust cutree rect.hclust
-#' 
+#'
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
@@ -673,7 +673,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
     }
   }
  }   # end of when there are nondetects
-  
+
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
     if (is.null(group) == TRUE)    # no group
@@ -1087,7 +1087,7 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
   Factor <- as.factor(grp)
   df <- length(levels(Factor))-1
   grpname <- as.character(levels(Factor))
-  
+
   # ln units for LOG = 1
   if (LOG == TRUE)  {
     lnvar <- log(y1)
@@ -1269,9 +1269,9 @@ cenanova <- function(y1, y2, grp, LOG=TRUE) {
 #' @importFrom fitdistrplus cdfcompcens fitdistcens
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-#' 
+#'
 #' Delignette-Muller, M., Dutang, C., 2015. fitdistrplus : An R Package for Fitting Distributions. Journal of Statistical Software, 64, 1-34. http://www.jstatsoft.org/v64/i04/.
-#' 
+#'
 #' @examples
 #'
 #' library(NADA) #For example data
@@ -1299,7 +1299,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
 
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
-    
+
   {left <- y.var*(1-as.integer(cen.var))
   right <- y.var
   var.frame <- data.frame(left, right)
@@ -1315,7 +1315,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   cdfcompcens(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
 
 }
-    else            # all data are detects   
+    else            # all data are detects
   {
   y.dist1 <- fitdist(var.frame, "lnorm", "mle")
   y.dist2  <- fitdist(var.frame, "gamma", "mle")
@@ -1324,7 +1324,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
   bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
   bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
-  
+
     cdfcomp(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), do.points = FALSE, verticals = TRUE, xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
   }
 
@@ -1371,7 +1371,7 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
 cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
-    
+
   { cen.logical <- as.logical(cen.var)
   var.choose <- distChooseCensored(y.var, cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
@@ -1381,7 +1381,7 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   all.W <- all.W/ max(all.W)
   best.text <- c("normal", "lognormal", "gamma")
   max.distrib <- best.text[all.W==1.0]
-  
+
   if (var.choose$decision != "Nonparametric") {
     best.dist <- paste (var.choose$decision, "is a good fit")}
   else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
@@ -1391,20 +1391,20 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
   mtext(norm.text)
   #  legend("bottomright", legend = norm.text)
-  
+
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
   mtext(lnorm.text)
   #  legend("bottomright", legend = lnorm.text)
-  
+
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
   mtext(gamma.text)
   #   legend("bottomright", legend = gamma.text)
-  
+
   plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')
   text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sans", font=1, adj=1)
   par(mfrow=c(1,1))
   }
-  
+
 else  # all data are detects
 { cen.logical <- as.logical(cen.var)
 var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
@@ -1518,7 +1518,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
   reg.out$linear.predictors <- ylog.pred
   reg.out$resids <- ylog.resi
   vtext<- paste("Quantiles of", yname, "residuals (log units)")
-  
+
   if (verbose == TRUE) {
   testnorm <- gofTestCensored(ylog.resi,nonas[,2])
   ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
@@ -1527,7 +1527,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
   } }  # end of taking logs of Y
 
   else                                          #  Y in original units, normal Q-Q plot
-  { if(min(nonas[,1] >= 0)) { y.low <- nonas[,1]*(1-nonas[,2])   #  0 for low end of all NDs
+  { if(min(nonas[,1] >= 0)) { y.low <- nonas[,1]*(1-nonas[,2])}   #  0 for low end of all NDs
   surv.norm <- Surv(y.low, nonas[,1], type="interval2")
   if (is.data.frame(x.vars))  {       # multiple x variables
     reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
@@ -1553,18 +1553,18 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
   reg.out$linear.predictors <- ynorm.pred
   reg.out$resids <- ynorm.resi
   vtext<- paste("Quantiles of", yname, "residuals")
-  
+
   if (verbose == TRUE) {
   testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
   ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
   qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
   mtext(ptext)
   } }  # end of low censored = 0
-  
+
  #  negative y values.  Use flip variable to set -Inf as low end for censored values
  else{ flip.norm <- max(nonas[,1]) +1 - nonas[,1]
  surv.norm <- Surv(flip.norm, as.logical(1-nonas[,2]) )
- 
+
  if (is.data.frame(x.vars))  {       # multiple x variables
    reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
    cn <- names(reg.out$coefficients[-1])
@@ -1574,7 +1574,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
    }
    reg.out$call[3] <- xvars.txt
  }
- 
+
  else { xname <- deparse(substitute(x.vars))          # 1 x variable
  x.df <- as.data.frame(xnona)
  names(x.df) <- xname
@@ -1582,7 +1582,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
  cn <- names(reg.out$coefficients[-1])
  reg.out$call[3] <- cn
  }
- 
+
  reg.out$call[2] <- yname
  ynorm.pred <- max(nonas[,1]) +1 - reg.out$linear.predictors
  reg.out$coefficients <- reg.out$coefficients * (-1)
@@ -1590,18 +1590,18 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = TRUE) {
  ynorm.resi <- nonas[,1] - ynorm.pred
  reg.out$linear.predictors <- ynorm.pred
  reg.out$resids <- ynorm.resi
- 
+
  vtext<- paste("Quantiles of", yname, "residuals")
- 
+
  if (verbose == TRUE) {
    testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
    ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
    qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
    mtext(ptext)
- } 
+ }
    }   # end of flipping
      } # end of Y in original units
-  
+
   if (is.data.frame(x.vars))  {             # multiple x variables.  Print r-squared.
     LRr2 <- signif(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y)),4)
     McFr2 <- signif((1-reg.out$loglik[2]/reg.out$loglik[1]),4)
@@ -1806,7 +1806,7 @@ cenpermanova <- function(y1, y2, grp, R = 9999) {
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
-#' 
+#'
 #' Krishnamoorthy, K., Mathew, T., Mukherjee, S., 2008. Normal-Based Methods for a Gamma Distribution, Technometrics, 50, 69-78.
 #'
 #' @seealso [EnvStats::enormCensored]
@@ -1911,50 +1911,50 @@ cenQQ <- function(y.var, cen.var, dist = "lnorm", Yname = yname)  {
 
   yname <- deparse(substitute(y.var))
   cen.logical <- as.logical(cen.var)
-  
+
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
   {var.choose <- distChooseCensored(y.var, cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
-  
+
   if (dist == "norm") {
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
     mtext(norm.text)
     #  legend("bottomright", legend = norm.text)
   }
-  
+
   if (dist == "lnorm")  {
     ylabel <- paste ("ln (", Yname, ")", sep = "")
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
     mtext(lnorm.text)
     #  legend("bottomright", legend = lnorm.text)
   }
-  
+
   if (dist == "gamma")  {
     qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
     mtext(gamma.text)
     #   legend("bottomright", legend = gamma.text)
   }
-  }      
-  
+  }
+
   else    # all data are detects
   {var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
-  
+
   if (dist == "norm") {
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
     mtext(norm.text)
   }
-  
+
   if (dist == "lnorm")  {
     ylabel <- paste ("ln (", Yname, ")", sep = "")
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
     mtext(lnorm.text)
   }
-  
+
   if (dist == "gamma")  {
     EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
     mtext(gamma.text)
@@ -2188,7 +2188,7 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   kenplot(yyy, ccc, xxx, xcen = rep(0, times=nall), xnam=xname, ynam=yname, Title = "Seasonal Kendall Test")
   abline(intall, medslope, lwd=2, col = "blue")
   mtext ("Overall Trend Line", col = "blue")
-  
+
   return (invisible(RESULTS))
 }
 
@@ -2346,18 +2346,18 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
   par(mfrow=c(3,1))
- 
+
    # plot 1.  Y data vs covariate, with smooth
   x.cens = rep(0, times=length(dat.nonas[,3]) )
   cenxyplot(dat.nonas[,2], as.logical(x.cens), dat.nonas[,1], as.logical(dat.nonas[,5]), main = "1. Data and GAM Smooth", ylab = yname, xlab = xname, pch = 19, cex = 0.7)
   # draw the smooth
   lines (dat.nonas[o,2], gam.y$fitted.values[o], col = 'red')
-  
+
   # plot 2. Y residuals from smooth vs. covariate
   plot(gam.y$residuals ~ dat.nonas[,2], main = "2. Residuals from GAM Smooth", xlab = xname, ylab = y.txt)
   abline (h=0, col = "blue")
   cat("Trend analysis of", yname, "adjusted for", xname, "\n")
-  
+
   # plot 3.  Y residuals vs time with ATS line
   ats.out <- ATS(gam.y$residuals, dat.nonas[,5], dat.nonas[,3], x.cens, LOG = FALSE, xlabel = tname, ylabel = y.txt)
   dat.out <- data.frame(gam.y$residuals, dat.nonas[,2])
@@ -2388,9 +2388,9 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
 #' @export
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-#' 
+#'
 #' Gillespie, B.W., et al., 2010.  Estimating Population Distributions When Some Data Are Below a Limit of Detection by Using a Reverse Kaplan-Meier Estimator. Epidemiology 21, 564-570.
-#' 
+#'
 #' @seealso [survival::survfit] [NADA::cenfit]
 #' @examples
 #'
@@ -2633,7 +2633,7 @@ NADA2.survmean=function(x, scale = 1, rmean)
 #' @param seas Name of a single season classification. Usually though not necessarily a text variable.
 #' @param R The number of repetitions in the permutation process.  R is often between 999 and 9999 (+ the 1 observed test statistic produces 1000 to 10000 realizations).
 #'
-#' @return An Rx1 matrix containing an S-value for each of the R data permutations. 
+#' @return An Rx1 matrix containing an S-value for each of the R data permutations.
 #' @seealso [Kendall::Kendall]
 #' @references
 #' Helsel, D.R., Hirsch, R.M., Ryberg, K.R., Archfield, S.A., Gilroy, E.J., 2020. Statistical Methods in Water Resources. U.S. Geological Survey Techniques and Methods, book 4, chapter A3, 458p., https://doi.org/10.3133/tm4a3.
@@ -2759,7 +2759,7 @@ return (invisible (aa))
 #' @importFrom NADA cenken
 #' @return
 #' Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
-#' 
+#'
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -2813,7 +2813,7 @@ kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, T
   plot(detected$x1, detected$y1, ylim = c(ymin, ymax), xlim = c(xmin, xmax), ylab = ynam, xlab = xnam, pch=19, cex=0.7, main=Title, xaxs="r", yaxs="r")
   if (atsline == TRUE) {
     abline(int, slp, col = "purple")}
-  
+
   # vertial dashed lines for y censored
   if (nyc != 0) {
       for (i in 1:nyc ){
@@ -2909,13 +2909,13 @@ ordranks <- function(dat.frame, paired = TRUE) {
 #'
 #' @details
 #' Partial plots for uncensored data often are drawn with superimposed smooths. At times looking only at the data values without a smooth can better enable the human eye to determine whether the overall pattern is linear or not.  If this is the best method for you, use the smooth.method = "none" option to not draw a smooth.  The most common smooth used for uncensored data is loess, which does not recognize censored data and so uses the detection limit (DL) value itself.  This results in biased-high smooths that incorrectly treat values at the DLs equal to uncensored (detected) data. The partplots function in NADA2 was written to provide a better alternative, smoothing the partial residual pattern with a censored generalized additive model (gam).  The censored gam recognizes the nondetects as left-censored data with a maximum at the DL when computing the smooth. DLs may vary with each observation -- multiple DLs in a dataset are not a problem in routines of the NADA2 package.
-#' 
+#'
 #' 'y.var': The default is that the Y variable will be log transformed.
 #'
 #' `x.vars`: Enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time).
 #'
 #' Gray open circles represent censored data and are the residual between the detection limit and the predicted value from the censored regression.  As predictions recognize that the detection limit is an upper limit, predicted values on the regression line are most often below the detection limit, leading to positive residuals.  Note that the true residual could be anywhere below that value.  That fact is recognized by the censored regression but is difficult to represent on a plot.
-#' 
+#'
 #' AIC for regression models with untransformed X, log and cube-root transforms of X are printed to evaluate which of the three transformationss results in the ‘best’ model.
 #'
 
@@ -2943,13 +2943,13 @@ oldpar<- par(no.readonly=T)
 on.exit(par(oldpar))
 if (multiplot == TRUE) {par(mfrow = c(3,2))}
 
-# function to put data into format used by the gam function tobit1 model 
+# function to put data into format used by the gam function tobit1 model
 dat4cengam <- function(y.orig, cen.orig) {
   y.gam <- y.orig*(1-cen.orig)     # low end of possible values. <DL data = 0.
   y.gam [y.gam == 0] <- -Inf       # <DL data = -Inf
   dl.gam <- y.orig*cen.orig         # 0 for detects.  DL for nondetects.
   dat.gam <- invisible(data.frame(y.gam, dl.gam))
-  return(dat.gam) 
+  return(dat.gam)
 }
 
 if (LOG == TRUE)  {
@@ -2958,7 +2958,7 @@ if (LOG == TRUE)  {
   yname.log = paste("ln(", yname, ")", sep = "")
   flip.log <- max(lnvar) - lnvar
   surv.log <- Surv(flip.log, as.logical(1-nonas[,2]) )
-  
+
   if (is.data.frame(x.vars))  {             # multiple x variables
     yname.part <- paste(yname.log, ".partial", sep="")
     for (i in 1:ncol(xnona))  {temp.x <- data.frame(xnona[, -i])
@@ -2971,34 +2971,34 @@ if (LOG == TRUE)  {
     ylog.pred <- max(lnvar) - y.part$linear.predictors
     # y coefficients in original units
     y.coefficients <- y.part$coefficients * (-1)
-    y.coefficients[1] <- max(lnvar) + y.part$coefficients[1] 
-    
+    y.coefficients[1] <- max(lnvar) + y.part$coefficients[1]
+
     #  plot y resids vs x resids with smooth
-    
+
     # option 1:  no smooth
-    plot(x.part$residuals, ylog.resi, xlab = xname.part, ylab = yname.part, pch = pch.symb, col = col.symb) 
-    
+    plot(x.part$residuals, ylog.resi, xlab = xname.part, ylab = yname.part, pch = pch.symb, col = col.symb)
+
     # option 2:  censored GAM
-    if (smooth.method == "gam") 
+    if (smooth.method == "gam")
     { data.gam <- dat4cengam(ylog.resi, nonas[,2])
     ylog.gam <- gam(data.gam[,1] ~s(x.part$residuals), bs = gam.method, family = tobit1(link = "identity", left.threshold = data.gam[,2]))
     o <- order(x.part$residuals , ylog.resi)
     lines (x.part$residuals[o], ylog.gam$fitted.values[o], col = 'red')}
-    
+
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
-    
+
     # compute and print r2 and AIC for original and possible x transforms
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
     notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = FALSE)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
-    
+
     cat("cube root", "\n")
-    x.sign <- sign(xnona[i]) 
+    x.sign <- sign(xnona[i])
     x.cube <- abs(xnona[i])**(1/3) * x.sign
     cube.xnona <- cbind(x.cube, temp.x)
     cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = FALSE)
     AIC.cube <- -2*cube.trans$loglik[2] + (2*cube.trans$df +1)
-    
+
     cat("log transform", "\n")
     if (min(xnona[i]) > 0) {
       x.log <- log(xnona[i])
@@ -3010,17 +3010,17 @@ if (LOG == TRUE)  {
     AIC.diff <- AIC.none - min(AIC.log, AIC.cube)
     cat("Decrease in AIC from transformation of", colnames(xnona[i]), "=", max(0,AIC.diff), "\n", "\n")
     }  # end of cycle thru x variables
-    
+
   }  # end of multiple x vars
   else (stop("For only one x variable partial plots not needed."))
-}    # end of logs. 
+}    # end of logs.
 
 #  In original Y units
 else {
   flip.y <- max(nonas[,1]) - nonas[,1]
   surv.y <- Surv(flip.y, as.logical(1-nonas[,2]) )
-  
-  if (is.data.frame(x.vars))  { 
+
+  if (is.data.frame(x.vars))  {
     yname.part <- paste(yname, ".partial", sep="")
     # multiple x variables
     for (i in 1:ncol(xnona))  {temp.x <- data.frame(xnona[, -i])
@@ -3033,33 +3033,33 @@ else {
     y.pred <- max(nonas[,1]) - y.part$linear.predictors
     # y coefficients in original units
     y.coefficients <- y.part$coefficients * (-1)
-    y.coefficients[1] <- max(nonas[,1]) + y.part$coefficients[1] 
-    
+    y.coefficients[1] <- max(nonas[,1]) + y.part$coefficients[1]
+
     # option 1: no smooth
-    plot(x.part$residuals, y.resi, xlab = xname.part, ylab = yname.part, pch = pch.symb, col = col.symb) 
-    
+    plot(x.part$residuals, y.resi, xlab = xname.part, ylab = yname.part, pch = pch.symb, col = col.symb)
+
     # option 2:  censored GAM
-    if (smooth.method == "gam") 
+    if (smooth.method == "gam")
     { data.gam <- dat4cengam(y.resi, nonas[,2])
     y.gam <- gam(data.gam[,1] ~s(x.part$residuals), bs = gam.method, family = tobit1(link = "identity", left.threshold = data.gam[,2]))
-    
+
     o <- order(x.part$residuals , y.resi)
     lines (x.part$residuals[o], y.gam$fitted.values[o], col = 'red')}
-    
+
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
-    
+
     # compute and print r2 and AIC for original and possible x transforms
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
     notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = FALSE)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
-    
+
     cat("cube root", "\n")
-    x.sign <- sign(xnona[i]) 
+    x.sign <- sign(xnona[i])
     x.cube <- abs(xnona[i])**(1/3) * x.sign
     cube.xnona <- cbind(x.cube, temp.x)
     cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = FALSE)
     AIC.cube <- -2*cube.trans$loglik[2] + (2*cube.trans$df +1)
-    
+
     cat("log transform", "\n")
     if (min(xnona[i]) > 0) {
       x.log <- log(xnona[i])
@@ -3070,7 +3070,7 @@ else {
     cat("Cannot take logs of zero or negative values.", "\n")}
     AIC.diff <- AIC.none - min(AIC.log, AIC.cube)
     cat("Decrease in AIC from transformation of", colnames(xnona[i]), "=", max(0,AIC.diff), "\n", "\n")
-    
+
     }  # end of cycle thru multiple x variables
   }  # end of multiple variables
   else {stop("For only one x variable partial plots not needed.")}
@@ -3113,7 +3113,7 @@ par(oldpar)
 #' @importFrom graphics axis box
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-#' 
+#'
 #'@examples
 #' data(PbHeron)
 #'
@@ -3336,7 +3336,7 @@ ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
 #  print(retval)
   txt <- paste("Paired Prentice Wilcoxon test for (x:", xname, " - ", "y:", yname, ") equals 0", "\n", "    alternative: ", altern, "\n", sep = "")
   txt2 <- paste("n =", param, "  Z =", signif(stat, 4), "  p-value =", signif(pvalue, 4))
-  
+
   cat(txt, "\n", txt2, "\n")
   cat(" ", median.diff, "\n")
   return(invisible(retval))
@@ -3493,7 +3493,7 @@ Usc <- function(y, ind, rnk=TRUE){
 #' @param yhi The upper end of the concentration interval
 #' @param rnk A `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
 #' @return Returns a single column of uscores or the ranks of uscores for a single pair of (low, high) interval-censored data columns.
-#' 
+#'
 #' @export
 
 
@@ -3557,7 +3557,7 @@ uscores <- function(dat.frame, paired = TRUE, rnk=TRUE) {
   }
   # check for deletion of NAs
   if (length(dat.nonas[,1]) < length(dat.frame[,1])) {warning(NAtext)}
-  
+
   colnames(u.out) <- nvec
   return(u.out)
   }
@@ -3580,7 +3580,7 @@ uscores <- function(dat.frame, paired = TRUE, rnk=TRUE) {
     if (rnk) {uscore=rank(Score)} else {uscore = Score}
     # check for deletion of NAs
     if (length(x[,1]) < length(dat.frame[,1])) {warning(NAtext)}
-    
+
     return(uscore)
   }
 }
@@ -3606,7 +3606,7 @@ uscoresi <- function(dat.frame, paired = TRUE, rnk=TRUE, Cnames = 1) {
   NAtext <- "Rows were deleted due to NAs. Will need to delete same rows in grouping variable before running NMDS or anosim."
   cols <- ncol(dat.frame)
   # for multiple pairs of columns
-  if (cols > 2) {half <- cols/2        
+  if (cols > 2) {half <- cols/2
   dat.nonas <- as.matrix(na.omit (dat.frame))
   j=0; data.0 <- dat.nonas
   if (paired) { for (i in seq(1, to=(cols-1), by=2)) {j = j+1
@@ -3653,7 +3653,7 @@ uscoresi <- function(dat.frame, paired = TRUE, rnk=TRUE, Cnames = 1) {
     if (rnk) {Uscore=rank(Score)} else {Uscore = Score}
     # check for deletion of NAs
     if (length(x[,1]) < length(dat.frame[,1])) {warning(NAtext)}
-    
+
     return(Uscore)
   }
 }
