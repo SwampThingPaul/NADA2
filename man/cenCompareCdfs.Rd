@@ -23,7 +23,6 @@ Plots the empirical cdf and cdfs of three theoretical distributions, fit by maxi
 }
 \examples{
 
-library(NADA) #For example data
 
 data(Brumbaugh)
 cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)

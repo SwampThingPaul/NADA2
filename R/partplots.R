@@ -15,6 +15,9 @@
 #'
 #'
 #' @importFrom survival survreg Surv
+#' @importFrom mgcv gam
+#' @importFrom stats lm
+#' @importFrom graphics title
 #'
 #' @details
 #' Partial plots for uncensored data often are drawn with superimposed smooths. At times looking only at the data values without a smooth can better enable the human eye to determine whether the overall pattern is linear or not.  If this is the best method for you, use the smooth.method = "none" option to not draw a smooth.  The most common smooth used for uncensored data is loess, which does not recognize censored data and so uses the detection limit (DL) value itself.  This results in biased-high smooths that incorrectly treat values at the DLs equal to uncensored (detected) data. The partplots function in NADA2 was written to provide a better alternative, smoothing the partial residual pattern with a censored generalized additive model (gam).  The censored gam recognizes the nondetects as left-censored data with a maximum at the DL when computing the smooth. DLs may vary with each observation -- multiple DLs in a dataset are not a problem in routines of the NADA2 package.
@@ -39,7 +42,8 @@
 #'
 #' data(Brumbaugh)
 #'
-#' partplots(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
+#' # For demostration purposes
+#' partplots (Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
 partplots <- function (y.var, cen.var, x.vars, LOG = TRUE, smooth.method = "gam", gam.method = "tp", multiplot = TRUE)
 {  yname <- deparse(substitute(y.var))
@@ -95,23 +99,23 @@ if (LOG == TRUE)  {
 
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
 
-    # compute and print r2 and AIC for original and possible x transforms
+    # compute and print one line (verbose = 1) of r2 and AIC for original and possible x transforms
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
-    notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = FALSE)
+    notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = 1)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
 
     cat("cube root", "\n")
     x.sign <- sign(xnona[i])
     x.cube <- abs(xnona[i])**(1/3) * x.sign
     cube.xnona <- cbind(x.cube, temp.x)
-    cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = FALSE)
+    cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = 1)
     AIC.cube <- -2*cube.trans$loglik[2] + (2*cube.trans$df +1)
 
     cat("log transform", "\n")
     if (min(xnona[i]) > 0) {
       x.log <- log(xnona[i])
       log.xnona <- cbind(x.log, temp.x)
-      log.trans <- cencorreg(nonas[,1], nonas[,2], log.xnona, verbose = FALSE)
+      log.trans <- cencorreg(nonas[,1], nonas[,2], log.xnona, verbose = 1)
       AIC.log <- -2*log.trans$loglik[2] + (2*log.trans$df +1) }
     else {AIC.log = AIC.cube
     cat("Cannot take logs of zero or negative values.", "\n")}
@@ -156,23 +160,23 @@ else {
 
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
 
-    # compute and print r2 and AIC for original and possible x transforms
+    # compute and print one line (verbose = 1) of r2 and AIC for original and possible x transforms
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
-    notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = FALSE)
+    notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = 1)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
 
     cat("cube root", "\n")
     x.sign <- sign(xnona[i])
     x.cube <- abs(xnona[i])**(1/3) * x.sign
     cube.xnona <- cbind(x.cube, temp.x)
-    cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = FALSE)
+    cube.trans <- cencorreg(nonas[,1], nonas[,2], cube.xnona, verbose = 1)
     AIC.cube <- -2*cube.trans$loglik[2] + (2*cube.trans$df +1)
 
     cat("log transform", "\n")
     if (min(xnona[i]) > 0) {
       x.log <- log(xnona[i])
       log.xnona <- cbind(x.log, temp.x)
-      log.trans <- cencorreg(nonas[,1], nonas[,2], log.xnona, verbose = FALSE)
+      log.trans <- cencorreg(nonas[,1], nonas[,2], log.xnona, verbose = 1)
       AIC.log <- -2*log.trans$loglik[2] + (2*log.trans$df +1) }
     else {AIC.log = AIC.cube
     cat("Cannot take logs of zero or negative values.", "\n")}

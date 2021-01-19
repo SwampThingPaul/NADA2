@@ -4,7 +4,7 @@
 \alias{cencorreg}
 \title{Correlation and Regression with censored data}
 \usage{
-cencorreg(y.var, cen.var, x.vars, LOG = TRUE)
+cencorreg(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
 }
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits.}
@@ -14,6 +14,8 @@ cencorreg(y.var, cen.var, x.vars, LOG = TRUE)
 \item{x.vars}{One or more uncensored explanatory variable(s). See Details}
 
 \item{LOG}{Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
+
+\item{verbose}{default \code{verbose=2}, see details.}
 }
 \value{
 When \code{x.vars} is one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (\code{R}) are printed.
@@ -32,6 +34,8 @@ Computes three parametric correlation coefficients for one X variable and the co
 AIC and BIC are printed to help evaluate the ‘best’ regression model.
 
 The default is that the Y variable will be log transformed.
+
+\code{verbose} option. Default is 2 which provides full output including qqplots, a value of 1 just provides results in the console, and a value of 0 provides no output.
 }
 \examples{
 

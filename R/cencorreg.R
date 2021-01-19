@@ -5,6 +5,7 @@
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
 #' @param x.vars One or more uncensored explanatory variable(s). See Details
 #' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
+#' @param verbose default `verbose=2`, see details.
 #' @export
 #' @return
 #' When `x.vars` is one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) are printed.
@@ -25,6 +26,8 @@
 #'
 #' The default is that the Y variable will be log transformed.
 #'
+#' `verbose` option. Default is 2 which provides full output including qqplots, a value of 1 just provides results in the console, and a value of 0 provides no output.
+#'
 #' @seealso [survival::survreg]
 #'
 #' @references
@@ -43,12 +46,15 @@
 #'cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
 
-cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
+cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2) {
   yname <- deparse(substitute(y.var))
   nonas <- na.omit(cbind(y.var, cen.var, x.vars))
   xnona <- nonas[,-(1:2)]
+  # default verbose = 2 prints detailed output and QQ plots.
+  #         verbose = 1 prints only one line of output.  No plots.
+  #         verbose = 0 prints no output or plots.
 
-  if (LOG == TRUE)  {lnvar <- log(nonas[,1])    # Y in log units (default)
+  if (LOG == TRUE)  {lnvar <- log(nonas[,1])    # take logs of Y (default)
   flip.log <- max(lnvar) +1 - lnvar
   #  print(max(lnvar)+1)
   surv.log <- Surv(flip.log, as.logical(1-nonas[,2]) )
@@ -79,14 +85,16 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
   reg.out$linear.predictors <- ylog.pred
   reg.out$resids <- ylog.resi
   vtext<- paste("Quantiles of", yname, "residuals (log units)")
-  testnorm <- gofTestCensored(ylog.resi,nonas[,2])
-  ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
-  qqPlotCensored(ylog.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Lognormal Q-Q Plot of residuals")
-  mtext(ptext)
-  }
+
+  if (verbose == 2) {
+    testnorm <- gofTestCensored(ylog.resi,nonas[,2])
+    ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
+    qqPlotCensored(ylog.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Lognormal Q-Q Plot of residuals")
+    mtext(ptext)
+  } }  # end of taking logs of Y
 
   else                                          #  Y in original units, normal Q-Q plot
-  { y.low <- nonas[,1]*(1-nonas[,2])                  #  0 for low end of all NDs
+  { if(min(nonas[,1] >= 0)) { y.low <- nonas[,1]*(1-nonas[,2])   #  0 for low end of all NDs
   surv.norm <- Surv(y.low, nonas[,1], type="interval2")
   if (is.data.frame(x.vars))  {       # multiple x variables
     reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
@@ -112,11 +120,54 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
   reg.out$linear.predictors <- ynorm.pred
   reg.out$resids <- ynorm.resi
   vtext<- paste("Quantiles of", yname, "residuals")
-  testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
-  ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
-  qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
-  mtext(ptext)
-  }
+
+  if (verbose == 2) {
+    testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
+    ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
+    qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
+    mtext(ptext)
+  } }  # end of low censored = 0
+
+    #  negative y values.  Use flip variable to set -Inf as low end for censored values
+    else{ flip.norm <- max(nonas[,1]) +1 - nonas[,1]
+    surv.norm <- Surv(flip.norm, as.logical(1-nonas[,2]) )
+
+    if (is.data.frame(x.vars))  {       # multiple x variables
+      reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
+      cn <- names(reg.out$coefficients[-1])
+      xvars.txt <- cn[1]
+      for (i in 1:length(cn))  {j <-(i+1)
+      if (i != length(cn)) xvars.txt <- paste(xvars.txt, cn[j], sep = "+")
+      }
+      reg.out$call[3] <- xvars.txt
+    }
+
+    else { xname <- deparse(substitute(x.vars))          # 1 x variable
+    x.df <- as.data.frame(xnona)
+    names(x.df) <- xname
+    reg.out <- survreg(surv.norm~., data = x.df, dist = "gaussian")
+    cn <- names(reg.out$coefficients[-1])
+    reg.out$call[3] <- cn
+    }
+
+    reg.out$call[2] <- yname
+    ynorm.pred <- max(nonas[,1]) +1 - reg.out$linear.predictors
+    reg.out$coefficients <- reg.out$coefficients * (-1)
+    reg.out$coefficients[1] <- max(nonas[,1]) +1 + reg.out$coefficients[1]   # coeffs in orig scale
+    ynorm.resi <- nonas[,1] - ynorm.pred
+    reg.out$linear.predictors <- ynorm.pred
+    reg.out$resids <- ynorm.resi
+
+    vtext<- paste("Quantiles of", yname, "residuals")
+
+    if (verbose == 2) {
+      testnorm <- gofTestCensored(ynorm.resi,nonas[,2])
+      ptext <- paste("Shapiro-Francia W =", round(testnorm$statistic,5), "  p =", round(testnorm$p.value,6))
+      qqPlotCensored(ynorm.resi, nonas[,2], add.line = T, prob.method = "modified kaplan-meier", ylab = vtext, main = "Normal Q-Q Plot of residuals")
+      mtext(ptext)
+    }
+    }   # end of flipping
+  } # end of Y in original units
 
   if (is.data.frame(x.vars))  {             # multiple x variables.  Print r-squared.
     LRr2 <- signif(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y)),4)
@@ -124,7 +175,8 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
     Nag.r2 <- signif((1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))) /(1-exp(2*reg.out$loglik[1]/length(reg.out$y))),4)
     AIC <- -2*reg.out$loglik[2] + (2*reg.out$df +1)
     BIC <- -2*reg.out$loglik[2] + log(reg.out$df+reg.out$df.residual+1)*reg.out$df
-    cat(" Likelihood R2 =", LRr2, "                   ", "AIC =", AIC,"\n", "Rescaled Likelihood R2 =", Nag.r2, "          ", "BIC =", BIC, "\n", "McFaddens R2 =", McFr2, "\n","\n")
+    if (verbose > 0) cat(" Likelihood R2 =", LRr2, "                   ", "AIC =", AIC,"\n")
+    if (verbose == 2) cat(" Rescaled Likelihood R2 =", Nag.r2, "          ", "BIC =", BIC, "\n", "McFaddens R2 =", McFr2, "\n","\n")
   }
   else {                                    # 1 x variable.  Print correlation coefficients
     LRcorr <- signif(sign(reg.out$coefficients[2])*sqrt(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))),4)
@@ -132,7 +184,8 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE) {
     Nag.cor <- signif(sign(reg.out$coefficients[2])*sqrt((1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))) /(1-exp(2*reg.out$loglik[1]/length(reg.out$y)))),4)
     AIC <- -2*reg.out$loglik[2] + (2*reg.out$df +1)
     BIC <- -2*reg.out$loglik[2] + log(reg.out$df+reg.out$df.residual+1)*reg.out$df
-    cat(" Likelihood R =", LRcorr, "                   ", "AIC =", AIC,"\n", "Rescaled Likelihood R =", Nag.cor, "          ", "BIC =", BIC, "\n", "McFaddens R =", McFcorr, "\n","\n")
+    if (verbose > 0)  cat(" Likelihood R =", LRcorr, "                   ", "AIC =", AIC,"\n")
+    if (verbose == 2) cat("Rescaled Likelihood R =", Nag.cor, "          ", "BIC =", BIC, "\n", "McFaddens R =", McFcorr, "\n","\n")
   }
   return(reg.out)                   # returns reg.out object if function assigned to object
 }
