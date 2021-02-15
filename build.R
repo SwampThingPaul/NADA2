@@ -36,6 +36,8 @@ devtools::document()
 #devtools::test(); # makes testthat directory and runs tests
 
 devtools::check()
+devtools::check(manual =TRUE)
+devtools::check(cleanup = FALSE,args = c('--no-examples'),manual = TRUE,path = getwd())
 
 ##
 devtools::check_rhub()

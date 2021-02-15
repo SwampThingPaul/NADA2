@@ -6,7 +6,9 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @importFrom survminer pairwise_survdiff
+#' @importFrom survival survdiff Surv
 #' @importFrom stats pchisq
+#' @importFrom EnvStats enparCensored
 #' @export
 #' @return  A list of summary statistics for each group evaluated containing the following components:
 #' \itemize{
@@ -28,7 +30,7 @@
 #'
 #'Benjamini, Y., Hochberg, Y., 1995. Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.  Journal of the Royal Statistical Society. Series B (Methodological), 57, 289-300.
 #'
-#' @importFrom survival survdiff Surv
+
 #'
 #' @examples
 #' data(PbHeron)
@@ -38,7 +40,6 @@
 #'
 #' # More than two groups
 #' cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
-
 
 cen1way <- function(y1,y2, grp) {
   yname <- deparse(substitute(y1))
@@ -64,12 +65,17 @@ cen1way <- function(y1,y2, grp) {
     Cstats <- Cstats[c(1:6)]
     Cstats <- Cstats[-3]
     Cstats <- data.frame(Cstats)
+    Cstats$grp <-  groupnames[i] # added to include group in summary data frame.
+    rownames(Cstats) <-NULL # added to clean up row names.
     if (i ==1) {Cen.stats <- Cstats
-    cnames <- colnames(Cstats)}
-    else {Cen.stats <- rbind(Cen.stats, Cstats)}
+    cnames <- colnames(Cstats)}else {Cen.stats <- suppressWarnings(rbind(Cen.stats, Cstats))}
+    # added for custom warning.
+    if(sum(as.logical(y2gp))==0){warning("One or more group(s) do not have censored data.",call.=F)}
   }
-  rownames(Cen.stats) <-  groupnames
-  colnames(Cen.stats) <- cnames
+
+  # rownames(Cen.stats) <-  groupnames
+  Cen.stats <- Cen.stats[,c(6,1:5)] # reordered the data frame
+  colnames(Cen.stats) <- cnames[c(6,1:5)] # reordered the data frame
   print.data.frame(Cen.stats, print.gap = 3)
   cat('\n',"     Oneway Peto-Peto test of CensData:", yname, "  by Factor:", gname, '\n', "     Chisq =", signif(y.out$chisq, 4), "  on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
   if (df >1) {mcomp <- pairwise_survdiff(Surv(flip, detect) ~ Factor, data=CensData, rho=rho)

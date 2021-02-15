@@ -45,5 +45,7 @@ vignettes/*.pdf
 ## Files used to develop pacakge
 /draftFiles/
 /CRAN NADA/
+/DRAFT BUILD/
 
 *.build.R
+*NADA2_*.pdf

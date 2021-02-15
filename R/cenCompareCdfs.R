@@ -15,7 +15,6 @@
 #'
 #' @examples
 #'
-#'
 #' data(Brumbaugh)
 #' cenCompareCdfs(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
@@ -52,20 +51,20 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic, 3) )
   bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
 
-  cdfcompcens(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), xlab = Yname, fitlty = c(1, 5, 3))
+  cdfcompcens(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), xlab = Yname, fitlty = c(1, 5, 3), fitlwd = c(1, 1, 2))
 
-}
-    else            # all data are detects
+  }
+  else            # all data are detects
   {
-  y.dist1 <- fitdist(var.frame, "lnorm", "mle")
-  y.dist2  <- fitdist(var.frame, "gamma", "mle")
-  y.dist3  <- fitdist(var.frame, dist3, "mle")
+    y.dist1 <- fitdist(var.frame, "lnorm", "mle")
+    y.dist2  <- fitdist(var.frame, "gamma", "mle")
+    y.dist3  <- fitdist(var.frame, dist3, "mle")
 
-  bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
-  bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
-  bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
+    bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
+    bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
+    bic.dist3 <- paste(dist.vals.text[match(dist3,dist.vals)],"BIC =", signif(y.dist3$bic, 3) )
 
-    cdfcomp(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), do.points = FALSE, verticals = TRUE, xlab = Yname, fitlty = c(1, 5, 3))
+    cdfcomp(list(y.dist1, y.dist2, y.dist3), legendtext=c(bic.dist1, bic.dist2, bic.dist3), do.points = FALSE, verticals = TRUE, xlab = Yname, fitlty = c(1, 5, 3), fitlwd = c(1, 1, 2))
   }
 
   # prior version edited by PJ
@@ -83,4 +82,4 @@ cenCompareCdfs <- function(y.var, cen.var, dist3="norm", Yname = yname)  {
   #   bic.weib <- paste("Weibull BIC =",signif(y.weib$bic, 3) )
   #   cdfcompcens(list(y.lnorm, y.gamma, y.weib), legendtext=c(bic.lnorm, bic.gamma, bic.weib), xlab = Yname, fitlty = c(1, 5, 3), lwd = c(1, 1, 2))
   # }
-  }
+}
