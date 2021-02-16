@@ -1,5 +1,5 @@
-NADA2 <img src='./hex/NADA2_hex.png' align='right' height = '240'/>
-================
+
+# NADA2 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 ## Table of Contents
 

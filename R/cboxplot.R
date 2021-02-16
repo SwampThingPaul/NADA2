@@ -1,13 +1,13 @@
 #' Draws censored boxplots
 #'
 #' @description
-#' Draws boxplots  for lleft-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
+#' Draws boxplots for left-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
 #' @param y1 The column of y (response variable) values plus detection limits.
 #' @param y2 The y-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param group An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.
 #' @param LOG `TRUE`/`FALSE` indicator of whether to plot the Y axis data on the original scale (`FALSE`) or log scale (`TRUE`).
 #' @param show `TRUE`\/`FALSE` indicator of whether to show estimated values computed using ROS for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).
-#' @param minmax `NULL`/`FALSE` indicator of whether to draw outliers (`minmax=NULL`) individually. Default is to show outliers. Setting `minmax = TRUE` (or any text) will draw the whiskers out to the max and min of the dataset.
+#' @param minmax `TRUE`/`FALSE` indicator of whether to draw outliers individually. Default is to show outliers. Setting `minmax = TRUE` will draw the whiskers out to the max and min of the dataset.
 #' @param ordr A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the reverse type ordr = c(4, 3, 2, 1).  Example 2: To change the order to A, C, D, B, type ordr = c(1, 3, 4, 2)
 #' @param Ylab Y axis label text, if something is wanted other than the Y variable name in the dataset.
 #' @param Xlab X axis label text, if something is wanted other than the group variable name in the dataset.
@@ -34,7 +34,7 @@
 
 
 
-cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = NULL) {
+cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE) {
 
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
@@ -70,11 +70,11 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       yy = c( y.min, y.min, log(dlmax), log(dlmax))
       Ylab = c(Ylab, "(natural logs)" )
       if (is.null(Ymax) == FALSE) { Ylim = c(y.min, log(Ymax))}
-      if (is.null(minmax)) {
+      if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
         boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
-        #  boxplot drawn to max and min
+        #  boxplot drawn to max and min.  minmax = TRUE
         boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       polygon (xx, yy, col = bdl.col, border=bdl.col)
@@ -137,19 +137,19 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       yy = c(log(ymin.all), log(ymin.all), log(dlmax), log(dlmax))
       Ylab = c(Ylab, "(natural logs)" )
       if (is.null(Ymax) == FALSE) { Ylim = c(log(ymin.all), log(Ymax))}
-      if (is.null(minmax)) {
+      if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-         boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
-        #  boxplot drawn to max and min
-         boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        #  boxplot drawn to max and min. minmax = TRUE
+        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       multiDL <- ifelse (sd(maxDL) != 0, TRUE, FALSE)
       if (multiDL == FALSE) {     # plot all with same max DL
         # Everything below the max DL is gray, not black
-         polygon(xx, yy, col = bdl.col, border=bdl.col)
-         abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
-         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
+        polygon(xx, yy, col = bdl.col, border=bdl.col)
+        abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
+        legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
       else {  cat("Maximum DL","Group", "\n", sep = "   ")
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
@@ -170,11 +170,11 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       y.min <- min(y.ros$modeled)
       yy = c(y.min, y.min, dlmax, dlmax)
       if (is.null(Ymax) == FALSE) { Ylim = c(y.min, Ymax)}
-      if (is.null(minmax)) {
+      if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
         boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
-        #  boxplot drawn to max and min
+        #  boxplot drawn to max and min.  minmax = TRUE
         boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       # Everything below the max DL is gray, not black
@@ -236,11 +236,11 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       else {levels(grp.all) <- glevels}
 
       if (is.null(Ymax) == FALSE) { Ylim = c(ymin.all, Ymax)}
-      if (is.null(minmax)) {
+      if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
         boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
-        #  boxplot drawn to max and min
+        #  boxplot drawn to max and min. minmax = TRUE
         boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       multiDL <- ifelse (sd(maxDL) != 0, TRUE, FALSE)
@@ -262,18 +262,18 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       }
     }
   }
- }   # end of when there are nondetects
+  }   # end of when there are nondetects
 
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
-    if (is.null(group) == TRUE)    # no group
-    {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)}
-    else        # with groups
-    {gname <- deparse(substitute(group))
-        if (is.null(ordr) == FALSE)  {
-          group = factor(group, levels(group)[ordr]) }
-        glabs <- levels(group)
-        boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
-        }
+  if (is.null(group) == TRUE)    # no group
+  {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)}
+  else        # with groups
+  {gname <- deparse(substitute(group))
+  if (is.null(ordr) == FALSE)  {
+    group = factor(group, levels(group)[ordr]) }
+  glabs <- levels(group)
+  boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
+  }
   }
 }

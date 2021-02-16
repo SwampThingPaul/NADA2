@@ -18,7 +18,7 @@ cboxplot(
   dl.col = "red",
   bxcol = "white",
   Ymax = NULL,
-  minmax = NULL
+  minmax = FALSE
 )
 }
 \arguments{
@@ -48,13 +48,13 @@ cboxplot(
 
 \item{Ymax}{Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.}
 
-\item{minmax}{\code{NULL}/\code{FALSE} indicator of whether to draw outliers (\code{minmax=NULL}) individually. Default is to show outliers. Setting \code{minmax = TRUE} (or any text) will draw the whiskers out to the max and min of the dataset.}
+\item{minmax}{\code{TRUE}/\code{FALSE} indicator of whether to draw outliers individually. Default is to show outliers. Setting \code{minmax = TRUE} will draw the whiskers out to the max and min of the dataset.}
 }
 \value{
 Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
 }
 \description{
-Draws boxplots  for lleft-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
+Draws boxplots for left-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
 }
 \details{
 If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.

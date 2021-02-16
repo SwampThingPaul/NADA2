@@ -1,11 +1,12 @@
 ---
-title: "NADA2 <img src='./hex/NADA2_hex.png' align='right' height = '240'/>"
 output: github_document
 ---
 
 ```{r setup, include=FALSE,echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# NADA2 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 ## Table of Contents
 
