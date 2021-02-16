@@ -25,10 +25,10 @@ Prints three plots: Y data vs time with GAM Smooth, Residuals from GAM Smooth vs
 Returns GAM residuals and ATS results on trend test of residuals (intercept, slope, Kendall's tau, p-value for trend)
 }
 \description{
-Trend analysis after adjustment of censored data for a covariate.
+Computes the ATS (Mann-Kendall trend test for censored data) after adjustment of censored data for a covariate.
 }
 \details{
-Default \code{link} = identity. Other options are available see \code{cenGAM::tobit1} for more options.
+Default \code{link} = identity. The y variables are then used in their original units. Other options are available see \code{cenGAM::tobit1} for more options.
 
 Default \code{Smooth} is \code{"cs"} for shrinkage cubic regression splines. See \code{mgcv::smooth.terms} for other types of smoothing algorithms.  '"ts"' is a thin-plate regression spline and is also commonly used.
 }
@@ -42,8 +42,6 @@ with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 }
 \seealso{
 \link[mgcv:gam]{mgcv::gam}

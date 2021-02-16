@@ -14,10 +14,10 @@ uscores(dat.frame, paired = TRUE, rnk = TRUE)
 \item{rnk}{A logical \code{TRUE}/\code{FALSE} variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=\code{TRUE}, use the ranks. rnk = \code{FALSE} returns the uscores.}
 }
 \value{
-A matrix of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores is returned.
+A matrix of uscores or ranks of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores or ranks of uscores is returned.
 }
 \description{
-Computes uscores of censored data in the indicator format. Multiple DLs allowed.
+Computes uscores or the ranks of uscores of censored data in the indicator format. Multiple DLs allowed.
 }
 \examples{
 data(PbHeron)

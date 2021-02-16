@@ -16,10 +16,10 @@ uscoresi(dat.frame, paired = TRUE, rnk = TRUE, Cnames = 1)
 \item{Cnames}{Cnames =\code{1} uses the "lo" column names to name the uscores columns (the default).  Cnames = \code{2} uses the "hi" column names.}
 }
 \description{
-Computes uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
+Computes uscores or the ranks off uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
 }
 \details{
-Input is a data.frame of paired low and high possible range of values, in an interval-censored format. ylo = the lower end of the interval is the first (left) column in the pair.  yhi is the upper end of the interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore is the number of observations known to be lower minus the number of observations known to be higher. Ties, including those such as <1 vs <3 or 4 vs 4 or <3 vs 2, are given a 0 value in the uscore computation.
+Input is a data.frame of paired low and high possible range of values, in an interval-censored format. ylo = the lower end of the interval is the first (left) column in the pair.  yhi is the upper end of the interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore is the number of observations known to be lower minus the number of observations known to be higher. Ties, including those such as <1 vs <3 or 4 vs 4 or <3 vs 2, are given a 0 value in the uscore computation. The ranks of uscores provides a scale that is often more manageable than the uscores themselves.
 }
 \references{
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

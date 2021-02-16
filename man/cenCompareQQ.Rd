@@ -11,7 +11,7 @@ cenCompareQQ(y.var, cen.var, Yname = yname)
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{Yname}{Optional – input text in quotes to be used as the variable name on all plots.  The default is the name of the \code{y.var} input variable.}
+\item{Yname}{Optional – input text in quotes to be used as the variable name on all plots.  The default \code{Yname} is the name of the \code{y.var} input variable.}
 }
 \value{
 Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
@@ -20,7 +20,7 @@ Plots three Q-Q plots based on normal, lognormal and gamma distributions and pri
 Produces three quantile-quantile (Q-Q) plots, also called probability plots, based on three distributions (normal, lognormal and gamma distributions).
 }
 \details{
-Produces three Q-Q plots and reports which has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
+Produces three Q-Q plots and reports which one has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
 }
 \examples{
 data(Brumbaugh)

@@ -3,10 +3,10 @@
 #' @description Plots the empirical cdf and cdfs of three theoretical distributions, fit by maximum likelihood estimation (MLE).
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distrubtion). Alternate third distribution is `weibull`(for Weibull).  Lognormal and gamma distributions are always used.
+#' @param dist3 Name of the third distribution to be plotted, default is `norm` (normal distribution). Alternate third distribution is `weibull`(for Weibull distribution).  Log-normal and gamma distributions are always used.
 #' @param Yname Optional – input text in quotes to be used as the variable name.  The default is the name of the `y.var` input variable.
 #' @export
-#' @return prints a plot of the empirial CDFs with BIC value for each distribution.
+#' @return prints a plot of the empirical CDFs with BIC value for each distribution.
 #' @importFrom fitdistrplus fitdist cdfcomp cdfcompcens fitdistcens
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

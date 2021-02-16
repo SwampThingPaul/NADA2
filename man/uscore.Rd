@@ -14,10 +14,10 @@ uscore(y, ind, rnk = TRUE)
 \item{rnk}{A \code{TRUE}/\code{FALSE} variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=\code{TRUE}, use the ranks. rnk = \code{FALSE} returns the uscores.}
 }
 \value{
-prints uscore number of observations known to be lower - number of observations known to be higher
+prints the uscore number of observations known to be lower - number of observations known to be higher, for each observation.
 }
 \description{
-Computes the uscore of data (required 2-columns) with one ore more detection limits.
+Computes the uscore of data (required 2-columns) with one or more detection limits.
 }
 \examples{
 data(Brumbaugh)

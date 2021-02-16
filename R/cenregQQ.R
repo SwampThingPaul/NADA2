@@ -1,12 +1,12 @@
 #' Q-Q plot of censored regression residuals
 #'
 #' @description Plots a quantile-quantile (Q-Q) plot of censored regression residuals for simple or multiple regression.
-#' @param y.var The column of `y` (response variable) values plus detection limits. Alternative, with interval-censord data, the column of the lower end of the interval.
+#' @param y.var The column of `y` (response variable) values plus detection limits. Alternatively, with interval-censord data, the column of the lower end of the interval.
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.  Alternatively, with interval-censored data the column of the high end of the interval.
 #' @param x.vars One or more uncensored explanatory variable(s). See Details
 #' @param LOG Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @param intcens a logical value indicating the input data is interval-censored instead of a column of values plus a column of indicators.
-#' @param main overal ltitle for the plot
+#' @param main overall title for the plot. A default titel will be used if none is specified.
 #' @export
 #' @return Q-Q Plot of model residuals and Shapiro-Francia test results.
 #'

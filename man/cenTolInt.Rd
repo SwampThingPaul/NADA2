@@ -9,7 +9,7 @@ cenTolInt(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detectionlimit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{conf}{Confidence coefficient of the interval, 0.95 (default).}
 
@@ -18,10 +18,10 @@ cenTolInt(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 \item{method.fit}{The method used to compute the parameters of the distribution.  The default is maximum likelihood (\verb{“mle”}). The alternative is robust ROS (\verb{“rROS”}).  See Details.}
 }
 \value{
-Prints and returns the percentile (\code{cover}), upper tolerance limit (\code{conf}) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values as legend.
+Prints and returns the percentile (\code{cover}), upper tolerance limit (\code{conf}) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values in the legend.
 }
 \description{
-Computes a one-sided upper tolerance interval for censored data assuming lognormal, gamma and normal distributions.
+Computes a one-sided upper tolerance interval for censored data assuming log-normal, gamma and normal distributions.
 }
 \details{
 Computes upper one-sided tolerance intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle); robust ROS is available as an alternate method for all three distributions. The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). For more info on the relative merits of robust ROS versus mle, see Helsel (2011) and Millard (2013).

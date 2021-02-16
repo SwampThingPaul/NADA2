@@ -48,7 +48,7 @@ anosimPlot(PbHeron.anosim)
 \references{
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project.\url{https://cran.r-project.org/package=vegan}
+Oksanen, J., Guillaume, F., 2018. Vegan: ecological diversity. CRAN R-Project. \url{https://cran.r-project.org/package=vegan}
 }
 \seealso{
 \link[vegan:anosim]{vegan::anosim}

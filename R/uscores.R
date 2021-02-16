@@ -1,11 +1,11 @@
 #' Uscores for multiple columns of censored data
 #'
-#' @description Computes uscores of censored data in the indicator format. Multiple DLs allowed.
+#' @description Computes uscores or the ranks of uscores of censored data in the indicator format. Multiple DLs allowed.
 #' @param dat.frame A data frame. Default format is paired = `TRUE`, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its corresponding indicator column.
 #' @param paired When paired = `FALSE`, the input format is C1 C2 C3 I1 I2 I3 where the C columns contain concentrations or a detection limit, and the I columns are their associated indicators, in the same order as the concentration columns.
 #' @param rnk A logical `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
 #'
-#' @return A matrix of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores is returned.
+#' @return A matrix of uscores or ranks of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores or ranks of uscores is returned.
 #' @export
 #'
 #' @examples

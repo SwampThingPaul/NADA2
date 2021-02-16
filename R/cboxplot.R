@@ -1,13 +1,13 @@
 #' Draws censored boxplots
 #'
 #' @description
-#' Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
+#' Draws boxplots  for lleft-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
 #' @param y1 The column of y (response variable) values plus detection limits.
 #' @param y2 The y-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param group An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.
 #' @param LOG `TRUE`/`FALSE` indicator of whether to plot the Y axis data on the original scale (`FALSE`) or log scale (`TRUE`).
 #' @param show `TRUE`\/`FALSE` indicator of whether to show estimated values computed using ROS for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).
-#' @param minmax `NULL`/`FALSE` indicator of whether to draw outliers individually. Default is to show outliers. Setting `minmax = FALSE` (or any text) will draw the whiskers out to the max and min of the dataset.
+#' @param minmax `NULL`/`FALSE` indicator of whether to draw outliers (`minmax=NULL`) individually. Default is to show outliers. Setting `minmax = TRUE` (or any text) will draw the whiskers out to the max and min of the dataset.
 #' @param ordr A vector indicating the order of boxes to be drawn on the boxplot, if not in alphabetical order (the default).  Example: for 4 boxplots for groups A, B, C, D, to change the order to the reverse type ordr = c(4, 3, 2, 1).  Example 2: To change the order to A, C, D, B, type ordr = c(1, 3, 4, 2)
 #' @param Ylab Y axis label text, if something is wanted other than the Y variable name in the dataset.
 #' @param Xlab X axis label text, if something is wanted other than the group variable name in the dataset.
@@ -263,7 +263,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
     }
   }
  }   # end of when there are nondetects
-  
+
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
     if (is.null(group) == TRUE)    # no group

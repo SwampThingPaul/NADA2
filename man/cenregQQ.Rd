@@ -7,7 +7,7 @@
 cenregQQ(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL)
 }
 \arguments{
-\item{y.var}{The column of \code{y} (response variable) values plus detection limits. Alternative, with interval-censord data, the column of the lower end of the interval.}
+\item{y.var}{The column of \code{y} (response variable) values plus detection limits. Alternatively, with interval-censord data, the column of the lower end of the interval.}
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.  Alternatively, with interval-censored data the column of the high end of the interval.}
 
@@ -17,7 +17,7 @@ cenregQQ(y.var, cen.var, x.vars, LOG = TRUE, intcens = FALSE, main = NULL)
 
 \item{intcens}{a logical value indicating the input data is interval-censored instead of a column of values plus a column of indicators.}
 
-\item{main}{overal ltitle for the plot}
+\item{main}{overall title for the plot. A default titel will be used if none is specified.}
 }
 \value{
 Q-Q Plot of model residuals and Shapiro-Francia test results.

@@ -1,19 +1,18 @@
 #' Q-Q Plot censored data
 #'
-#' @description Plots quantile-quantile (Q-Q) plot of censored data fitted a data distribution
+#' @description Plots a quantile-quantile (Q-Q) plot of censored data versus a fitted data distribution
 #' @param y.var The column of `y` (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param dist One of three distributional shapes to fit to your data:  lognormal (`lnorm`), normal (`norm`) or gamma (`gamma`).
-#' @param Yname Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the name of the `y.var` input variable.
+#' @param Yname Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the `Yname` name of the `y.var` input variable.
 #' @export
 #'
-#' @return A single Q-Q plot of data fitted to normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
+#' @return A single Q-Q plot of data fitted by normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
 #'
 #' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'

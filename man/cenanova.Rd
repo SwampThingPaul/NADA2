@@ -16,9 +16,9 @@ cenanova(y1, y2, grp, LOG = TRUE)
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 }
 \value{
-Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes lognormal(\code{LOG=TRUE}) or nomal(\code{LOG=FALSE}) distribution of residuals from group means.
+Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes log-normal(\code{LOG=TRUE}) or normal(\code{LOG=FALSE}) distribution of residuals from group means.
 
-Tukey's multiple comparison p-values of pairwise differenes in group means are also printed.
+Tukey's multiple comparison p-values of pairwise differences in group means are also printed.
 \itemize{
 \item Group Names of groups (NOTE: \verb{== 0} indicates null hypothesis of "equals zero").
 \item \code{Estimate} Estimated difference between group means.

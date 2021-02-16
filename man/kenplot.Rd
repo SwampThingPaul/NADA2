@@ -36,7 +36,7 @@ kenplot(
 Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
 }
 \description{
-Function used by other functions to plot Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression. Both Y and X variables may be censored.
+Function used by other functions to plot the Akritas-Theil-Sen (ATS) line for censored data.  Only one x variable allowed. Both Y and X variables may be censored.
 }
 \examples{
 \dontrun{

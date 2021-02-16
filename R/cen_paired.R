@@ -13,12 +13,12 @@
 #' @export
 #' @return  A list of statistics containing the following components:
 #' \itemize{
-#' \item `n` Number of samples
+#' \item `n` Number of observations
 #' \item `Z` The value of the test statistic
 #' \item `p.value` the p-value of the test
 #' \item `Mean difference` the mean difference between `xd` and `yd`
 #' }
-#' @details You may also test for whether the x data exceed a standard by entering the single number for the standard as `yd`.  In that case no `yc` is required.
+#' @details You may also test for whether the mean of the `xd` data exceeds a standard by entering the single number for the standard as `yd`.  In that case no `yc` is required.
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'

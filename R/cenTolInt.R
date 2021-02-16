@@ -1,8 +1,8 @@
 #' Upper Tolerance interval for censored data
 #'
-#' @description Computes a one-sided upper tolerance interval for censored data assuming lognormal, gamma and normal distributions.
+#' @description Computes a one-sided upper tolerance interval for censored data assuming log-normal, gamma and normal distributions.
 #' @param y.var The column of y (response variable) values plus detection limits
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detectionlimit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param cover Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.
 #' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).  See Details.
@@ -10,7 +10,7 @@
 #' @importFrom fitdistrplus fitdistcens
 #' @export
 #'
-#' @return  Prints and returns the percentile (`cover`), upper tolerance limit (`conf`) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values as legend.
+#' @return  Prints and returns the percentile (`cover`), upper tolerance limit (`conf`) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values in the legend.
 #' @details Computes upper one-sided tolerance intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle); robust ROS is available as an alternate method for all three distributions. The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). For more info on the relative merits of robust ROS versus mle, see Helsel (2011) and Millard (2013).
 #'
 #' @references

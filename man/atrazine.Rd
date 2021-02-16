@@ -18,9 +18,9 @@ From the \code{NADA} R-Package.
 
 Atrazine concentrations in a series of Nebraska wells before (June) and after (September) the growing season.
 
-Objective is to determine if concentrations increase from June to September. There is one detection limit, at 0.01 ug/L. Used in Chapters 4, 5, and 9 of the NADA book.
+Objective is to determine if concentrations increase from June to September. There is one detection limit, at 0.01 ug/L. Used in Chapters 4, 5, and 9 of the Helsel (2011) book.
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. 2011. Statistics for Censored Environmental Data Using Minitab and R. 2nd ed. John Wiley and Sons, USA, N.J.
 }
 \keyword{dataset}

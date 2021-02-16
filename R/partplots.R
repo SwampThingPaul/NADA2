@@ -2,7 +2,7 @@
 #'
 #' @description Draws a partial plot for each X variable in regression of a censored Y variable against multiple X variables.
 #' @param y.var The column of y (response variable) values plus detection limits.
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
+#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param x.vars Multiple uncensored explanatory variable(s). See Details
 #' @param LOG Indicator of whether to compute the censored regression in the original y units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original Y units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @param smooth.method Method for drawing a smooth on the partial plot.  Options are c("gam", "none"). "gam" is a censored generalized additive model using the cenGAM and mgcv packages.
@@ -26,9 +26,9 @@
 #'
 #' `x.vars`: Enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time).
 #'
-#' Gray open circles represent censored data and are the residual between the detection limit and the predicted value from the censored regression.  As predictions recognize that the detection limit is an upper limit, predicted values on the regression line are most often below the detection limit, leading to positive residuals.  Note that the true residual could be anywhere below that value.  That fact is recognized by the censored regression but is difficult to represent on a plot.
+#' Gray open circles represent censored data and are the residual between the detection limit and the predicted value from the censored regression.  The GAM recognizes that the detection limit is an upper limit, predicted values on the regression line are most often below the detection limit, leading to positive residuals.  Note that the true residual for censored data could be anywhere below the plotted value.  That fact is recognized by the censored GAM but is difficult to represent on a plot.
 #'
-#' AIC for regression models with untransformed X, log and cube-root transforms of X are printed to evaluate which of the three transformationss results in the ‘best’ model.
+#' AIC for regression models with un-transformed X, log and cube-root transforms of X are printed to evaluate which of the three transformations results in the ‘best’ model.
 #'
 
 #' @seealso [survival::survreg]

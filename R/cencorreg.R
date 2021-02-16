@@ -1,6 +1,6 @@
 #' Correlation and Regression with censored data
 #'
-#' @description Computes three parametric correlation coefficients for one X variable and the corresponding R2 for multiple X variables, and a regression equation for censored data.
+#' @description Computes three parametric correlation coefficients for one X variable and the corresponding R squared for multiple X variables, and a regression equation for censored data.
 #' @param y.var The column of y (response variable) values plus detection limits.
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value is in `y.var`.
 #' @param x.vars One or more uncensored explanatory variable(s). See Details
@@ -9,24 +9,24 @@
 #' @export
 #' @return
 #' When `x.vars` is one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (`R`) are printed.
-#' When `x.vars` is more than one variable, likelihood, rescaled likelihood and McFaddens coefficent of determination (`R2`) are printed.
+#' When `x.vars` is a `data.frame` of more than one variable, likelihood, rescaled likelihood and McFaddens coefficent of determination (`R2`) are printed.
 #'
-#' Model coefficients (intercept and slopes), Chi-Squared statistic and p-value for test that all slope coefficients equal zero (overall test), and model AIC and BIC are provided.
+#' Model coefficients (intercept and slopes), Chi-Squared statistic and p-value for the test that all slope coefficients equal zero (overall test), and model AIC and BIC are provided.
 #'
-#' Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value are plotted for evaluation of model distributional assumptions.
+#' A Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value are plotted for evaluation of model distributional assumptions when `verbose=2` (the default).
 #'
 #' @importFrom survival survreg Surv
 #' @importFrom EnvStats gofTestCensored qqPlotCensored
 #'
 #' @details
 #'
-#' `x.vars`: If 1 x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time).
+#' `x.vars`: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as `X` variables in the regression are allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time) used as teh `X` variables in the regression.
 #'
 #' AIC and BIC are printed to help evaluate the ‘best’ regression model.
 #'
 #' The default is that the Y variable will be log transformed.
 #'
-#' `verbose` option. Default is 2 which provides full output including qqplots, a value of 1 just provides results in the console, and a value of 0 provides no output.
+#' `verbose` option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no qqplots. A value of 0 provides no output; the returning computations will be stored in the specified object.
 #'
 #' @seealso [survival::survreg]
 #'

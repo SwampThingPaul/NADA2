@@ -15,7 +15,7 @@ ordranks(dat.frame, paired = TRUE)
 Returns columns of ranks of censored data in the same order as the paired columns of input data.  For 3 chemical parameters, the data frame returned will be R1 R2 R3 where R represents the ranks of the C1 C2 C3 input data accounting for the censoring indicated by columns I1 I2 I3.
 }
 \description{
-Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection detection limit.
+Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection limit.
 }
 \examples{
 library(NADA) #For example data

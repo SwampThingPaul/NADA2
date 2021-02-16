@@ -1,6 +1,6 @@
 #' Trend analysis of censored data with a covariate
 #'
-#' @description Trend analysis after adjustment of censored data for a covariate.
+#' @description Computes the ATS (Mann-Kendall trend test for censored data) after adjustment of censored data for a covariate.
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param y.cens The column of indicators, where 1 (or `TRUE`) indicates a detectionlimit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param x.var Column of a covariate (not time).  `y.var` will be smoothed versus `x.var` and residuals taken to subtract out the relationship between `y` and `x`.
@@ -21,14 +21,13 @@
 #'
 #' @details
 #'
-#' Default `link` = identity. Other options are available see `cenGAM::tobit1` for more options.
+#' Default `link` = identity. The y variables are then used in their original units. Other options are available see `cenGAM::tobit1` for more options.
 #'
 #' Default `Smooth` is `"cs"` for shrinkage cubic regression splines. See `mgcv::smooth.terms` for other types of smoothing algorithms.  '"ts"' is a thin-plate regression spline and is also commonly used.
 #'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 #'
 #'@seealso [mgcv::gam]
 #'
@@ -61,18 +60,18 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
   par(mfrow=c(3,1))
- 
+
    # plot 1.  Y data vs covariate, with smooth
   x.cens = rep(0, times=length(dat.nonas[,3]) )
   cenxyplot(dat.nonas[,2], as.logical(x.cens), dat.nonas[,1], as.logical(dat.nonas[,5]), main = "1. Data and GAM Smooth", ylab = yname, xlab = xname, pch = 19, cex = 0.7)
   # draw the smooth
   lines (dat.nonas[o,2], gam.y$fitted.values[o], col = 'red')
-  
+
   # plot 2. Y residuals from smooth vs. covariate
   plot(gam.y$residuals ~ dat.nonas[,2], main = "2. Residuals from GAM Smooth", xlab = xname, ylab = y.txt)
   abline (h=0, col = "blue")
   cat("Trend analysis of", yname, "adjusted for", xname, "\n")
-  
+
   # plot 3.  Y residuals vs time with ATS line
   ats.out <- ATS(gam.y$residuals, dat.nonas[,5], dat.nonas[,3], x.cens, LOG = FALSE, xlabel = tname, ylabel = y.txt)
   dat.out <- data.frame(gam.y$residuals, dat.nonas[,2])

@@ -16,20 +16,15 @@ After several edits and updates (new version 1.0.0)
  Possibly mis-spelled words in DESCRIPTION:
     Helsel (13:51)
     Minitab (15:20)
+  Found the following (possibly) invalid URLs:
   
+      From: DESCRIPTION
+      Message: Not Found
+      Status: 404
+    URL: https://github.com/SwampThingPaul/NADA2/issues
     URL: https://github.com/SwampThingPaul/NADA2
       From: DESCRIPTION
       Status: 404
-  
-      From: DESCRIPTION
-      Status: 404
       Message: Not Found
-  
-  The Description field contains
-    videos at https://practicalstats.com. This package is an expansion of
-  Please enclose URLs in angle brackets (<...>).
-      Message: Not Found
-    URL: https://github.com/SwampThingPaul/NADA2/issues
-  Found the following (possibly) invalid URLs:
 ```
 

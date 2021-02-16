@@ -1,7 +1,7 @@
 #' Plot robust median ATS line for censored data
 #'
 #' @description
-#' Function used by other functions to plot Akritas-Theil-Sen (ATS) line for censored data.  For one x variable regression. Both Y and X variables may be censored.
+#' Function used by other functions to plot the Akritas-Theil-Sen (ATS) line for censored data.  Only one x variable allowed. Both Y and X variables may be censored.
 #' @param y1 The column of y (response variable) values plus detection limits
 #' @param ycen The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and `0` (or `FALSE`) indicates a detected value in `y.var`.
 #' @param x1 The column of x (explanatory variable) values plus detection limits
@@ -13,7 +13,7 @@
 #' @importFrom NADA cenken
 #' @return
 #' Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
-#' 
+#'
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -67,7 +67,7 @@ kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, T
   plot(detected$x1, detected$y1, ylim = c(ymin, ymax), xlim = c(xmin, xmax), ylab = ynam, xlab = xnam, pch=19, cex=0.7, main=Title, xaxs="r", yaxs="r")
   if (atsline == TRUE) {
     abline(int, slp, col = "purple")}
-  
+
   # vertial dashed lines for y censored
   if (nyc != 0) {
       for (i in 1:nyc ){

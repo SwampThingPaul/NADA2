@@ -18,7 +18,7 @@ cen_ecdf(y.var, cen.var, group = NULL, xlim = c(0, max(y.var)), Ylab = varname)
 \item{Ylab}{Optional – input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the \code{y.var} input variable.}
 }
 \value{
-Plots an empirical cumulative distribution function. If \code{group=NULL} the ECDF of the entire dataset is produced. If \code{group} is identified then ECDFs are plotted for each group and a legend added.
+Plots an empirical cumulative distribution function. If \code{group=NULL} the ECDF of the entire dataset is produced. If \code{group} is identified then ECDFs are plotted for each group seperately and a legend added.
 }
 \description{
 Plots ecdfs of one or more groups of censored data.  Illustrates the differences between groups for group tests such as those done using cen1way or cenanova.

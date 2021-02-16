@@ -18,9 +18,9 @@ From the \code{NADA} R-Package.
 
 Lead concentrations in the blood and several organs of herons in Virginia.
 
-Objective is to determine the relationships between lead concentrations in the blood and various organs. Do concentrations reflect environmental lead concentrations, as represented by dosing groups? There is one detection limit, at 0.02 ug/g. Used in Chapters 10 and 11 of the NADA book.
+Objective is to determine the relationships between lead concentrations in the blood and various organs. Do concentrations reflect environmental lead concentrations, as represented by dosing groups? There is one detection limit, at 0.02 ug/g. Used in Chapters 10 and 11 of the Helsel (2011).
 }
 \references{
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
+Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }
 \keyword{dataset}

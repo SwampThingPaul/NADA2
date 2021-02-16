@@ -20,7 +20,7 @@ cen_paired(xd, xc, yd, yc, alternative = "two.sided")
 \value{
 A list of statistics containing the following components:
 \itemize{
-\item \code{n} Number of samples
+\item \code{n} Number of observations
 \item \code{Z} The value of the test statistic
 \item \code{p.value} the p-value of the test
 \item \verb{Mean difference} the mean difference between \code{xd} and \code{yd}
@@ -30,7 +30,7 @@ A list of statistics containing the following components:
 Performs a parametric test of whether the mean difference between two columns of paired censored data equals 0. Assumes that the paired differences follow a gaussian (normal) distribution.
 }
 \details{
-You may also test for whether the x data exceed a standard by entering the single number for the standard as \code{yd}.  In that case no \code{yc} is required.
+You may also test for whether the mean of the \code{xd} data exceeds a standard by entering the single number for the standard as \code{yd}.  In that case no \code{yc} is required.
 }
 \examples{
 

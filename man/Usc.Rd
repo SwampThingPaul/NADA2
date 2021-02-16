@@ -17,7 +17,7 @@ Usc(y, ind, rnk = TRUE)
 Returns a single column of uscores or the ranks of uscores for a single pair of (concentration, indicator) censored data columns.
 }
 \description{
-Computes the column of uscores from 2 columns of data in the indicator value format. Multiple detection limits allowed.  Called by the uscores function, uscore (this function) is not expected to be of much use to users on its own.
+Computes the column of uscores from 2 columns of data in the indicator value format. Multiple detection limits allowed.  Called by the uscores function, Usc (this function) is not expected to be of much use to users on its own.
 }
 \examples{
 data(Brumbaugh)

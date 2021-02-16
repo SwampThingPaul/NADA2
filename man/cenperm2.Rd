@@ -15,7 +15,7 @@ cenperm2(y1, y2, grp, R = 9999, alternative = "two.sided")
 
 \item{R}{The number of permutations used. Default is 9999}
 
-\item{alternative}{indicates the alternative hypothesis and must be one of "\code{two.sided}", "\code{greater}" or "\code{less}". You can specify just the initial letter. Default is "\code{two.sided}".}
+\item{alternative}{indicates the alternative hypothesis and must be one of "\code{two.sided}", "\code{greater}" or "\code{less}". You may also specify just the initial letter. Default is "\code{two.sided}".}
 }
 \value{
 Permutation test results with the number of permutations, range in group means and their difference, and range in \code{p-value}.
@@ -31,7 +31,7 @@ data(PbHeron)
 cenperm2(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,alternative="t")
 }
 \references{
-Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \url{https://doi.org/10.1007/978-1-4757-3235-1}
+Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \doi{https://doi.org/10.1007/978-1-4757-3235-1}
 
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 

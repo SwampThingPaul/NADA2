@@ -17,7 +17,7 @@ partplots(
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits.}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value is in \code{y.var}.}
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{x.vars}{Multiple uncensored explanatory variable(s). See Details}
 
@@ -43,9 +43,9 @@ Partial plots for uncensored data often are drawn with superimposed smooths. At 
 
 \code{x.vars}: Enter the name of a data frame of columns of the x variables. No extra columns unused in the regression allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time).
 
-Gray open circles represent censored data and are the residual between the detection limit and the predicted value from the censored regression.  As predictions recognize that the detection limit is an upper limit, predicted values on the regression line are most often below the detection limit, leading to positive residuals.  Note that the true residual could be anywhere below that value.  That fact is recognized by the censored regression but is difficult to represent on a plot.
+Gray open circles represent censored data and are the residual between the detection limit and the predicted value from the censored regression.  The GAM recognizes that the detection limit is an upper limit, predicted values on the regression line are most often below the detection limit, leading to positive residuals.  Note that the true residual for censored data could be anywhere below the plotted value.  That fact is recognized by the censored GAM but is difficult to represent on a plot.
 
-AIC for regression models with untransformed X, log and cube-root transforms of X are printed to evaluate which of the three transformationss results in the ‘best’ model.
+AIC for regression models with un-transformed X, log and cube-root transforms of X are printed to evaluate which of the three transformations results in the ‘best’ model.
 }
 \examples{
 

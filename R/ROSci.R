@@ -5,7 +5,7 @@
 #' @param conf Confidence coefficient of the interval (Default is 0.95)
 #' @return Prints a lower (LCL) and upper (UCL) confidence interval based on the `conf` provided (Default is 95%)
 #' @details
-#' This function uses an ROS model output based on the `ros` funtion in the `NADA` package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional.
+#' This function uses an ROS model output based on the `ros` function in the `NADA` package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
 #' For more detail on ROS modeling see the `ros` help file (`?NADA::ros`).
 #'
 #' For implementation of `ROSci(...)` see the examples below.
@@ -15,9 +15,9 @@
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' Lee, L., Helsel, D., 2005. Statistical analysis of water-quality data containing multiple detection limits: S-language software for regression on order statistics. Computers & Geosciences 31, 1241–1248. <https://doi.org/10.1016/j.cageo.2005.03.012>
+#' Lee, L., Helsel, D., 2005. Statistical analysis of water-quality data containing multiple detection limits: S-language software for regression on order statistics. Computers & Geosciences 31, 1241–1248. \doi{https://doi.org/10.1016/j.cageo.2005.03.012}
 #'
-#' Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. <https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2>
+#' Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. \doi{https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2}
 #'
 #' @seealso [NADA::ros]
 #'

@@ -5,14 +5,14 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param R The number of permutations used. Default is 9999
-#' @param alternative indicates the alternative hypothesis and must be one of "`two.sided`", "`greater`" or "`less`". You can specify just the initial letter. Default is "`two.sided`".
+#' @param alternative indicates the alternative hypothesis and must be one of "`two.sided`", "`greater`" or "`less`". You may also specify just the initial letter. Default is "`two.sided`".
 #' @keywords permutation difference test
 #' @export
 #' @return Permutation test results with the number of permutations, range in group means and their difference, and range in `p-value`.
 #' @details Because this is a permutation test it avoids the problem with MLE tests (`cen2means`) that assume a normal distribution.  No values are modeled as below zero and `p-values` are trustworthy. Ranges in means and p-values are due to interval-censoring of censored data means.
 #'
 #' @references
-#' Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. <https://doi.org/10.1007/978-1-4757-3235-1>
+#' Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \doi{https://doi.org/10.1007/978-1-4757-3235-1}
 #'
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'

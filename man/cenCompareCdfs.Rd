@@ -11,12 +11,12 @@ cenCompareCdfs(y.var, cen.var, dist3 = "norm", Yname = yname)
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
-\item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distrubtion). Alternate third distribution is \code{weibull}(for Weibull).  Lognormal and gamma distributions are always used.}
+\item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distribution). Alternate third distribution is \code{weibull}(for Weibull distribution).  Log-normal and gamma distributions are always used.}
 
 \item{Yname}{Optional – input text in quotes to be used as the variable name.  The default is the name of the \code{y.var} input variable.}
 }
 \value{
-prints a plot of the empirial CDFs with BIC value for each distribution.
+prints a plot of the empirical CDFs with BIC value for each distribution.
 }
 \description{
 Plots the empirical cdf and cdfs of three theoretical distributions, fit by maximum likelihood estimation (MLE).

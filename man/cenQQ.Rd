@@ -13,13 +13,13 @@ cenQQ(y.var, cen.var, dist = "lnorm", Yname = yname)
 
 \item{dist}{One of three distributional shapes to fit to your data:  lognormal (\code{lnorm}), normal (\code{norm}) or gamma (\code{gamma}).}
 
-\item{Yname}{Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the name of the \code{y.var} input variable.}
+\item{Yname}{Optional – input text in quotes to be used as the variable name on the Q-Q plot.  The default is the \code{Yname} name of the \code{y.var} input variable.}
 }
 \value{
-A single Q-Q plot of data fitted to normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
+A single Q-Q plot of data fitted by normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
 }
 \description{
-Plots quantile-quantile (Q-Q) plot of censored data fitted a data distribution
+Plots a quantile-quantile (Q-Q) plot of censored data versus a fitted data distribution
 }
 \examples{
 \dontrun{
@@ -32,8 +32,6 @@ cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen,dist="gamma")
 }
 \references{
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-
-Helsel, D.R., 2005. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st ed. John Wiley and Sons, USA, N.J.
 
 Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 }

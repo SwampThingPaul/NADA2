@@ -10,9 +10,9 @@
 #' @importFrom stats residuals
 #' @export
 #' @return
-#' Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and `p-value` of the test. Test assumes lognormal(`LOG=TRUE`) or nomal(`LOG=FALSE`) distribution of residuals from group means.
+#' Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and `p-value` of the test. Test assumes log-normal(`LOG=TRUE`) or normal(`LOG=FALSE`) distribution of residuals from group means.
 #'
-#' Tukey's multiple comparison p-values of pairwise differenes in group means are also printed.
+#' Tukey's multiple comparison p-values of pairwise differences in group means are also printed.
 #' \itemize{
 #' \item Group Names of groups (NOTE: `== 0` indicates null hypothesis of "equals zero").
 #' \item `Estimate` Estimated difference between group means.

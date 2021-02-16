@@ -26,9 +26,9 @@
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. <https://doi.org/10.2307/2344317>
+#' Peto, R., Peto, J., 1972. Asymptotically Efficient Rank Invariant Test Procedures. Journal of the Royal Statistical Society. Series A (General) 135, 185. \doi{https://doi.org/10.2307/2344317}
 #'
-#'Benjamini, Y., Hochberg, Y., 1995. Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.  Journal of the Royal Statistical Society. Series B (Methodological), 57, 289-300.
+#' Benjamini, Y., Hochberg, Y., 1995. Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing.  Journal of the Royal Statistical Society. Series B (Methodological), 57, 289-300.
 #'
 
 #'

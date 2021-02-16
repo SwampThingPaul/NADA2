@@ -1,6 +1,6 @@
 #' Computes ranks of data with one or multiple detection limits
 #'
-#' @description Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection detection limit.
+#' @description Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection limit.
 #' @param dat.frame A data frame. Default format is paired = `TRUE`, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its censoring indicator column.
 #' @param paired An option to specify paired = `FALSE`, where the input format would be C1 C2 C3 I1 I2 I3 where the C columns contain concentrations or a detection limit, and the I columns are their associated indicators, in the same order as the concentration columns.
 #' @export

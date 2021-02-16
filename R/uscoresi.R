@@ -1,12 +1,12 @@
 
 #' U-scores for interval-censored data (multiple columns)
 #'
-#' @description Computes uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
+#' @description Computes uscores or the ranks off uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
 #' @param dat.frame A data frame. Default format is: paired = `TRUE`, the default input format is ylo1 yhi1 ylo2 yhi2 ylo3 yhi3, where ylo is the low end of the interval of possible values, and yhi is the high end. There is a pair of columns for each censored parameter.
 #' @param paired An option to specify paired = `FALSE`, where the format would be ylo1 ylo2 ylo3 yhi1 yhi2 yhi3, low values for each parameter followed by the high values in the same order.
 #' @param rnk rnk=`TRUE` returns the ranks of uscores.  rnk = `FALSE` returns the uscores themselves. Default is rnk = `TRUE` to return the ranks.
 #' @param Cnames Cnames =`1` uses the "lo" column names to name the uscores columns (the default).  Cnames = `2` uses the "hi" column names.
-#' @details Input is a data.frame of paired low and high possible range of values, in an interval-censored format. ylo = the lower end of the interval is the first (left) column in the pair.  yhi is the upper end of the interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore is the number of observations known to be lower minus the number of observations known to be higher. Ties, including those such as <1 vs <3 or 4 vs 4 or <3 vs 2, are given a 0 value in the uscore computation.
+#' @details Input is a data.frame of paired low and high possible range of values, in an interval-censored format. ylo = the lower end of the interval is the first (left) column in the pair.  yhi is the upper end of the interval, at the second (right) column in the pair. For a detected value, ylo=yhi.  For a ND,  ylo != yhi. The uscore is the number of observations known to be lower minus the number of observations known to be higher. Ties, including those such as <1 vs <3 or 4 vs 4 or <3 vs 2, are given a 0 value in the uscore computation. The ranks of uscores provides a scale that is often more manageable than the uscores themselves.
 #'
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

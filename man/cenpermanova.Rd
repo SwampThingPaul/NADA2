@@ -22,7 +22,7 @@ Permutation test results with the number of permutations, range in test statisti
 Performs a permutation test of differences in means between groups of censored data.
 }
 \details{
-Because this is a permutation test it avoids the problem with MLE tests (cenanova) that assume a normal distribution.  No values are modeled as below zero and group means and \code{p-values} are trustworthy.
+Because this is a permutation test it avoids the problem with MLE tests (see \code{cenanova}) that assume a normal distribution.  No values are modeled as below zero and group means and \code{p-values} are trustworthy.
 }
 \examples{
 
@@ -30,7 +30,7 @@ data(PbHeron)
 cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 }
 \references{
-Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \url{https://doi.org/10.1007/978-1-4757-3235-1}
+Good, P., 2000. Permutation Tests: A Practical Guide to Resampling Methods for Testing Hypotheses, 2nd ed, Springer Series in Statistics. Springer-Verlag, New York, NY. \doi{https://doi.org/10.1007/978-1-4757-3235-1}
 
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 }

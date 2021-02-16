@@ -9,7 +9,7 @@ cen_signedranktest(xd, xc, yd, yc, alternative = "two.sided")
 \arguments{
 \item{xd}{The first column of data values plus detection limits}
 
-\item{xc}{The column of censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the xd column, and 0 (or \code{FALSE}) indicates a detected value in xd.}
+\item{xc}{The column of censoring indicators for \code{xd}, where 1 (or \code{TRUE}) indicates a detection limit in the xd column, and 0 (or \code{FALSE}) indicates a detected value in xd.}
 
 \item{yd}{The second column of data values plus detection limits, or a single number representing a standard / guideline value.}
 
@@ -26,7 +26,7 @@ Prints a list of Wilcoxon Signed-Rank test with Pratt correction for ties statis
 }
 }
 \description{
-Performs a nonparametric Wilcoxon signed-rank test of whether the median difference between two columns of paired censored data equals 0.  Uses the Pratt adjustment for pairs of equal values.
+Performs a nonparametric Wilcoxon signed-rank test of whether the median difference between two columns of paired censored data equals 0.  Uses the Pratt adjustment for pairs of equal or indistinguishable values.
 }
 \examples{
 
@@ -37,7 +37,7 @@ cen_signedranktest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
-Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. \url{https://doi.org/10.2307/2282965}
+Page, E.B., 1963. Ordered Hypotheses for Multiple Treatments: A Significance Test for Linear Ranks. Journal of the American Statistical Association 58, 216–230. \doi{https://doi.org/10.2307/2282965}
 
-Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. \url{https://doi.org/10.2307/2282543}
+Pratt, J.W., 1959. Remarks on Zeros and Ties in the Wilcoxon Signed Rank Procedures. Journal of the American Statistical Association 54, 655–667. \doi{https://doi.org/10.2307/2282543}
 }

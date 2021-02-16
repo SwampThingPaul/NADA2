@@ -7,7 +7,7 @@
 #' @param xlim Limits for the x (data) axis of the ecdf plot.  Default is 0 to the maximum of the y.var variable.  To change, use option xlim = c(0, 50) if 50 is to be the maximum on the plot.
 #' @param Ylab Optional – input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the `y.var` input variable.
 #' @keywords CDF ECDF
-#' @return Plots an empirical cumulative distribution function. If `group=NULL` the ECDF of the entire dataset is produced. If `group` is identified then ECDFs are plotted for each group and a legend added.
+#' @return Plots an empirical cumulative distribution function. If `group=NULL` the ECDF of the entire dataset is produced. If `group` is identified then ECDFs are plotted for each group seperately and a legend added.
 #' @export
 #' @importFrom EnvStats ecdfPlotCensored ecdfPlot
 

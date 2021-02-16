@@ -1,11 +1,11 @@
 #' U-score (individual value)
 #'
-#' @description Computes the uscore of data (required 2-columns) with one ore more detection limits.
+#' @description Computes the uscore of data (required 2-columns) with one or more detection limits.
 #' @param y The column of data values plus detection limits
 #' @param ind The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y` column, and 0 (or `FALSE`) indicates a detected value in `y`.
 #' @param rnk  A `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
 #' @export
-#' @return prints uscore number of observations known to be lower - number of observations known to be higher
+#' @return prints the uscore number of observations known to be lower - number of observations known to be higher, for each observation.
 #'
 #' @examples
 #' data(Brumbaugh)
