@@ -31,6 +31,8 @@ citation('NADA2')
 
 ## Installation <a name="install"></a>
 
+Development version can be installed from this repo. 
+
 ```{r,eval=F}
 install.packages("devtools");# if you do not have it installed on your PC
 devtools::install_github("SwampThingPaul/NADA2")
