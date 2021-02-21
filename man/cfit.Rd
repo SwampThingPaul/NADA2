@@ -12,7 +12,7 @@ cfit(
   plot.pos = 0.375,
   q.type = 7,
   Cdf = TRUE,
-  printstats = TRUE,
+  printstat = TRUE,
   Ylab = NULL
 )
 }
@@ -31,12 +31,12 @@ cfit(
 
 \item{Cdf}{Logical \code{TRUE}/\code{FALSE} indicator of whether to plot the empirical cumulative distribution function (cdf).}
 
-\item{printstats}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is TRUE.}
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 
 \item{Ylab}{Optional input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the \code{y1} input variable.}
 }
 \value{
-If \code{printstats=TRUE}: Based on the provided \code{conf} value, Kaplan-Meier summary statistics (\code{mean},\code{sd},\code{median}), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples are returned. The specified quantile values are also printed and returned.
+If \code{printstat=TRUE}: Based on the provided \code{conf} value, Kaplan-Meier summary statistics (\code{mean},\code{sd},\code{median}), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples are returned. The specified quantile values are also printed and returned.
 
 If \code{Cdf=TRUE}: The ecdf of censored data is plotted.
 }

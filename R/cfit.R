@@ -6,14 +6,14 @@
 #' @param conf The confidence coefficient for confidence intervals around the Kaplan-Meier mean and median. Default = 0.95.
 #' @param qtls Probabilities for the quantiles to be estimated.  Defaults are (0.10, 0.25, 0.50, 0.75, 0.90).  You may add and/or substitute probabilities -- all must be between and not including 0 to 1.
 #' @param Cdf Logical `TRUE`/`FALSE` indicator of whether to plot the empirical cumulative distribution function (cdf).
-#' @param printstats Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is TRUE.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @param Ylab Optional input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the `y1` input variable.
 #' @param plot.pos numeric scalar between 0 and 1 containing the value of the plotting position constant. The default value is `plot.pos=0.375`, the Blom plotting position
 #' @param q.type an integer between 1 and 9 selecting one of the nine quantile algorithms detailed below to be used. See `stats::quantile` for more detail, default is set to 7.
 #' @importFrom survival Surv survfit
 #' @importFrom stats quantile
 #' @return
-#' If `printstats=TRUE`: Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples are returned. The specified quantile values are also printed and returned.
+#' If `printstat=TRUE`: Based on the provided `conf` value, Kaplan-Meier summary statistics (`mean`,`sd`,`median`), lower and upper confidence intervals around the mean and median value, sample size and percent of censored samples are returned. The specified quantile values are also printed and returned.
 #'
 #' If `Cdf=TRUE`: The ecdf of censored data is plotted.
 #' @details Quantiles and parameters are estimated using the enparCensored and ecdfPlotCensored functions of the EnvStats package. This avoids a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al. for more discussion on the bias.
@@ -38,7 +38,7 @@
 #' cfit(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 
-cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), plot.pos = 0.375, q.type = 7, Cdf = TRUE, printstats = TRUE, Ylab = NULL)
+cfit <- function(y1, y2, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90), plot.pos = 0.375, q.type = 7, Cdf = TRUE, printstat = TRUE, Ylab = NULL)
 { N <- length(y2)
 if (is.null(Ylab)) Ylab <- deparse(substitute(y1))
 Conf <- 100*conf
@@ -87,9 +87,9 @@ Qtls <- as.character(signif(ecdf.yvals, 4))
 Qtls <- ifelse(ecdf.out$Censored[ecdf.ranks], paste("<", Qtls, sep=""), Qtls)
 KMmedian <- Qtls[qtls == 0.50]
 
-LCLmedian <- signif(flip.const - NADA2.survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
+LCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95UCL"], 4)
 LCLmedian <- ifelse(is.na(LCLmedian), KMmedian, LCLmedian)
-UCLmedian <- signif(flip.const - NADA2.survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
+UCLmedian <- signif(flip.const - NADA2_survmean(y.out,  rmean=flip.const) [[1]]["0.95LCL"], 4)
 UCLmedian <- ifelse(is.na(UCLmedian), paste("<", UCLmedian, sep=""), UCLmedian)
 }
 
@@ -121,7 +121,7 @@ quant.char <- paste ("Q", as.character(100*(qtls[1:k])), sep = "")
 Cpct <- paste(Conf, "%", sep = "")
 stats <- data.frame (N, PctND, Conf, KMmean, KMsd, KMmedian, LCLmean, UCLmean, LCLmedian, UCLmedian)
 
-if (printstats == TRUE) {cat("\n", "Output for", Ylab, "            ", Cpct, "Confidence Intervals", "\n", "Statistics:", "\n")
+if (printstat == TRUE) {cat("\n", "Output for", Ylab, "            ", Cpct, "Confidence Intervals", "\n", "Statistics:", "\n")
   print(stats)
   cat("\n")
   cat("Quantiles:", quant.char, "\n", sep="\t")
@@ -137,15 +137,13 @@ return (invisible (cstats))
 
 
 #' quantile confidence interval
-#'
 #' @param n length
 #' @param q quantile
 #' @param alpha CI value
 #' @keywords internal
 #' @importFrom stats qbinom
+#' @return Returns the order statistics and the actual coverage.
 
-#' @export
-#'
 
 quantile_CI <- function(n, q, alpha=0.05) {
   #
@@ -160,26 +158,25 @@ quantile_CI <- function(n, q, alpha=0.05) {
   if (max(coverage) < 1-alpha) i <- which(coverage==max(coverage)) else
     i <- which(coverage == min(coverage[coverage >= 1-alpha]))
   i <- i[1]
-  #
-  # Return the order statistics and the actual coverage.
-  #
+
   u <- rep(u, each=5)[i]
   l <- rep(l, 5)[i]
   return(list(Interval=c(l,u), Coverage=coverage[i]))
-  # end of quantile_CI function
+
 }
 
 #' Summary statistics of survival curve (from `survival:::survmean`)
+#' @description computes mean survival times consisent with `survival:::survmean`
 #' @param x the result of a call to the survfit function.
 #' @param scale a numeric value to rescale the survival time, e.g., if the input data to survfit were in days, scale=365 would scale the printout to years.
-#' @param rmean restricited mean
+#' @param rmean restricted mean
 #' @importFrom stats median
 #' @keywords internal
 #'
-#' @export
-NADA2.survmean=function(x, scale = 1, rmean)
+#'
+NADA2_survmean=function(x, scale = 1, rmean)
 {
-  # Extracted from survival::survmean
+  # Extracted from survival:::survmean
   if (!is.null(x$start.time))
     start.time <- x$start.time
   else start.time <- min(0, x$time)

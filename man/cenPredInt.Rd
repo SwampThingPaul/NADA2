@@ -10,7 +10,8 @@ cenPredInt(
   pi.type = "two-sided",
   conf = 0.95,
   newobs = 1,
-  method = "mle"
+  method = "mle",
+  printstat = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ cenPredInt(
 \item{newobs}{The number of new observations to be contained in the interval.}
 
 \item{method}{Character string specifying the method of estimation. Default is \code{mle} (maximum likelihood). See details.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 A table of prediction limits based on user provided confidence coefficient (\code{conf}) and prediction invterval type (\code{pi.type})
@@ -47,7 +50,7 @@ cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=0.5)
 
 # User defined confidence coefficient outside of acceptable range
 # the procedure will stop and give an error.
-\dontrun{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
+\donttest{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
 
 # User defined prediction interval type
 cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")

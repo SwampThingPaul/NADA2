@@ -4,18 +4,20 @@
 \alias{ROSci}
 \title{Computes confidence intervals on regression on order statistics (ROS) mean}
 \usage{
-ROSci(cenros.out, conf = 0.95)
+ROSci(cenros.out, conf = 0.95, printstat = TRUE)
 }
 \arguments{
 \item{cenros.out}{an ROS model output object (see details)}
 
 \item{conf}{Confidence coefficient of the interval (Default is 0.95)}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints a lower (LCL) and upper (UCL) confidence interval based on the \code{conf} provided (Default is 95\%)
 }
 \description{
-Uses ROS model output from the NADA package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
+Uses ROS model output from the \code{NADA} package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
 }
 \details{
 This function uses an ROS model output based on the \code{ros} function in the \code{NADA} package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.

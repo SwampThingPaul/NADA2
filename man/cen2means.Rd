@@ -4,7 +4,7 @@
 \alias{cen2means}
 \title{Censored data two-group test for difference in means}
 \usage{
-cen2means(y1, y2, grp, LOG = TRUE)
+cen2means(y1, y2, grp, LOG = TRUE, printstat = TRUE)
 }
 \arguments{
 \item{y1}{The column of data values plus detection limits}
@@ -14,6 +14,8 @@ cen2means(y1, y2, grp, LOG = TRUE)
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Q-Q Plot with Shapiro-Francia test for normality W and p-values.

@@ -15,6 +15,9 @@ uscoresi(dat.frame, paired = TRUE, rnk = TRUE, Cnames = 1)
 
 \item{Cnames}{Cnames =\code{1} uses the "lo" column names to name the uscores columns (the default).  Cnames = \code{2} uses the "hi" column names.}
 }
+\value{
+prints the uscore number of observations known to be lower - number of observations known to be higher, for each observation.
+}
 \description{
 Computes uscores or the ranks off uscores within columns of interval-censored data (the "i").  Data may have one or more detection limits.
 }

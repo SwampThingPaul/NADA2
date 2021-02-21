@@ -11,6 +11,7 @@
 #' @param ynam Custom label for the y axis of plots.  Default is y variable column name.
 #' @param Title Custom title for plots.  Default is "Akritas - Theil - Sen line".
 #' @importFrom NADA cenken
+#' @export
 #' @return
 #' Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
 #'
@@ -20,7 +21,7 @@
 #' @seealso [NADA::cenken]
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Both y and x are censored
 #' data(PbHeron)
 #' with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))

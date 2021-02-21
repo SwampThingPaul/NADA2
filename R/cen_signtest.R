@@ -6,6 +6,7 @@
 #' @param yd The second column of data values plus detection limits.
 #' @param yc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the `yd` column, and 0 (or `FALSE`) indicates a detected value in `yd`.
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @importFrom stats dbinom pbinom binom.test
 #' @export
@@ -22,7 +23,7 @@
 #' cen_signtest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
 
-cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
+cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided",printstat=TRUE) {
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
   nonas <- na.omit(data.frame(xd, xc, yd, yc))
@@ -87,9 +88,14 @@ cen_signtest <- function(xd, xc, yd, yc, alternative="two.sided") {
   # denom.Fong <- 2*(1-pbinom(floor((N-ties+1)/2)-1, N, prob=0.5))
   # p.Fong <- num.Fong/denom.Fong}
 
-
+if(printstat==TRUE){
   txt <- paste("Censored sign test for median(x:", xname, " - ", "y:", yname, ") equals 0", sep = "")
   txt2 <- paste("  n =", N, "  n+ =", x.gt.y, "  n- =", x.lt.y, "   ties:", ties, "\n")
   cat(txt, "\n",txt3, "\n", txt2, "\n", " No correction for ties:", "  p-value =", signif(s.binom$p.value, 4), "\n")
   if (ties != 0) cat("Fong correction for ties:", "  p-value =", signif(p.Fong, 4))
+}
+  x=list(n=N,nplus=x.gt.y,nminu=x.lt.y,ties=ties,
+         p.value=signif(s.binom$p.value, 4),
+         p.value.corr=if(ties!=0){signif(p.Fong,4)}else{NA})
+  invisible(x)
 }

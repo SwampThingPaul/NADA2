@@ -4,7 +4,7 @@
 \alias{cen_signedranktest}
 \title{Wilcoxcon Signed-Rank test for censored data}
 \usage{
-cen_signedranktest(xd, xc, yd, yc, alternative = "two.sided")
+cen_signedranktest(xd, xc, yd, yc, alternative = "two.sided", printstat = TRUE)
 }
 \arguments{
 \item{xd}{The first column of data values plus detection limits}
@@ -16,6 +16,8 @@ cen_signedranktest(xd, xc, yd, yc, alternative = "two.sided")
 \item{yc}{The column of censoring indicators for yd, where 1 (or \code{TRUE}) indicates a detection limit in the yd column, and 0 (or \code{FALSE}) indicates a detected value in \code{yd}. Not needed if \code{yd} is a single standard number.}
 
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints a list of Wilcoxon Signed-Rank test with Pratt correction for ties statistics containing the following components:

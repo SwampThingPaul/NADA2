@@ -18,7 +18,8 @@ cboxplot(
   dl.col = "red",
   bxcol = "white",
   Ymax = NULL,
-  minmax = FALSE
+  minmax = FALSE,
+  printstat = TRUE
 )
 }
 \arguments{
@@ -49,6 +50,8 @@ cboxplot(
 \item{Ymax}{Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.}
 
 \item{minmax}{\code{TRUE}/\code{FALSE} indicator of whether to draw outliers individually. Default is to show outliers. Setting \code{minmax = TRUE} will draw the whiskers out to the max and min of the dataset.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.

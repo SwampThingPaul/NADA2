@@ -1,8 +1,9 @@
 #' Computes confidence intervals on regression on order statistics (ROS) mean
 #'
-#' @description Uses ROS model output from the NADA package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
+#' @description Uses ROS model output from the `NADA` package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
 #' @param cenros.out an ROS model output object (see details)
 #' @param conf Confidence coefficient of the interval (Default is 0.95)
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @return Prints a lower (LCL) and upper (UCL) confidence interval based on the `conf` provided (Default is 95%)
 #' @details
 #' This function uses an ROS model output based on the `ros` function in the `NADA` package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
@@ -34,13 +35,11 @@
 #' ROSci(myros)
 
 
-ROSci <- function(cenros.out, conf=0.95) {
+ROSci <- function(cenros.out, conf=0.95,printstat=TRUE) {
   p <- 1-((1-conf)/2)
   n <- length(cenros.out$obs)
   c <- as.character(100*conf)
-  ciname1 <- paste ("   LCL", c, sep = "")
-  ciname2 <- paste ("    UCL", c, sep = "")
-  cinames <- paste (ciname1, ciname2)
+
   if (cenros.out$forwardT == "log") {
     # For the default lognormal distribution, Cox’s method is used.
     scale <- as.vector(cenros.out[1]$coefficients[2])
@@ -50,15 +49,26 @@ ROSci <- function(cenros.out, conf=0.95) {
     gamz <- qt(p,(n-1)) * sqrt((scale^2/n) + (((0.5)*scale^4)/(n-1)))
     #  Zhou and Gao 1997 modified Cox’s method for the CI of a lognormal distribution
     cilog <- c(exp(bhat - gamz), exp(bhat + gamz))
-    cat(cinames, "    assuming a lognormal distribution", "\n")
-    cat(cilog, sep = "  ")}
+    rslt<-data.frame(LCL=cilog[1],UCL=cilog[2])
+
+    if(printstat==TRUE){
+    cat("Assuming a lognormal distribution", "\n")
+    print(rslt)
+    }
+
+    }
 
   else { # for a gaussian distribution;
     tstat <- qt(p,(n-1))
     halfw <- tstat*(sd(cenros.out)/sqrt(n))
     ciNorm <- c(mean(cenros.out) - halfw, mean(cenros.out) + halfw)
-    cat(cinames, "    assuming a gaussian distribution", "\n")
-    cat(ciNorm, sep = "  ")
-  }
 
+    rslt<-data.frame(LCL=ciNorm[1],UCL=ciNorm[2])
+    if(printstat==TRUE){
+    cat("Assuming a gaussian distribution", "\n")
+    print(rslt)
+    }
+
+  }
+return(invisible(rslt))
 }

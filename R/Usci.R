@@ -5,11 +5,20 @@
 #' @param yhi The upper end of the concentration interval
 #' @param rnk A `TRUE`/`FALSE` variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=`TRUE`, use the ranks. rnk = `FALSE` returns the uscores.
 #' @return Returns a single column of uscores or the ranks of uscores for a single pair of (low, high) interval-censored data columns.
-#' 
+#'
 #' @export
+#'
+#' @examples
+#'
+#' data(Brumbaugh)
+#'
+#' # for demonstration purposes create a lower end concentration interval
+#' Brumbaugh$lowHg<-Brumbaugh$Hg*(1-Brumbaugh$HgCen)
+#'
+#' with(Brumbaugh,Usci(lowHg,Hg))
 
 
-Usci <- function(ylo, yhi, rnk=T){
+Usci <- function(ylo, yhi, rnk=TRUE){
   x <- na.omit(data.frame (ylo, yhi))
   n = length(x$ylo)
   yadj=x$yhi-(sign(x$yhi-x$ylo)*0.001*x$yhi) #sets a <1 to be <1

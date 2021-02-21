@@ -16,6 +16,8 @@
 #' @param dl.col Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but all standard R colors may be used.
 #' @param bxcol Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+
 #' @details If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 #' @export
 #' @importFrom graphics boxplot lines plot polygon
@@ -34,7 +36,7 @@
 
 
 
-cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE) {
+cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE,printstat = TRUE) {
 
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
@@ -58,8 +60,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   y.nona <- nonas[,1]
   nd <- (nonas[,2] == 1)   # nd is vector of logical T/F
   if(sum(1-nonas[,2]) <= 2 )  {
-    cat("Note: Data had fewer than 3 detects and so cannot be plotted", "\n")
-    stop }
+    stop("Note: Data had fewer than 3 detects and so cannot be plotted")}
   try(if(sum(as.integer(nonas[,2])) == 0) stop("All data are detected.  Use the boxplot function."))
 
   if (LOG == TRUE)  {
@@ -103,8 +104,8 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       j=0
       for (i in 1:gpnum) {
         if(sum(1-as.integer(nd[y.grp==levels(grp)[i]])) <=2 )  {
-          cat("Note: One group had fewer than 3 detects and so cannot be plotted.", "\n")
-          #       maxDL[i] <- 0
+          warning("Note: One group had fewer than 3 detects and so cannot be plotted.")
+
           maxDL[i] <- max(y.nona[y.grp == levels(grp)[i]] * as.integer(nd[y.grp == levels(grp)[i]]) )
           k=length(y.nona[y.grp == levels(grp)[i]])
           y.spacer <- rep(NA, k)
@@ -151,14 +152,16 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
-      else {  cat("Maximum DL","Group", "\n", sep = "   ")
+      else {
+        rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(log(ymin.all), log(ymin.all), log(maxDL[i]), log(maxDL[i]))
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
         lx = c(i-0.45, i+0.45)
         ly = c(log(maxDL[i]), log(maxDL[i]))
         lines(lx, ly, col = dl.col, lty="longdash", lwd=1.5)
-        cat("  ", maxDL[i], levels(grp.all)[i], "\n", sep = "   ")
+        rslt[i,1]=maxDL[i]
+        rslt[i,2]=levels(grp.all)[i]
         }
       }  }
   }
@@ -206,8 +209,8 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       j=0
       for (i in 1:gpnum) {
         if(sum(1-as.integer(nd[y.grp==levels(grp)[i]])) <=2 )  {
-          cat("Note: One group had fewer than 3 detects and so cannot be plotted.", "\n")
-          #       maxDL[i] <- 0
+          warning("Note: One group had fewer than 3 detects and so cannot be plotted.")
+
           maxDL[i] <- max(y.nona[y.grp == levels(grp)[i]] * as.integer(nd[y.grp == levels(grp)[i]]) )
           k=length(y.nona[y.grp == levels(grp)[i]])
           y.spacer <- rep(NA, k)
@@ -250,14 +253,16 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         abline(h=dlmax, col = dl.col, lty="longdash", lwd=2)
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
-      else {cat("Maximum DL","Group", "\n", sep = "   ")
+      else {
+        rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(ymin.all, ymin.all, maxDL[i], maxDL[i])
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
         lx = c(i-0.45, i+0.45)
         ly = c(maxDL[i], maxDL[i])
         lines(lx, ly, col = dl.col, lty="longdash", lwd=1.5)
-        cat("  ", maxDL[i], levels(grp.all)[i], "\n", sep = "   ")
+        rslt[i,1]=maxDL[i]
+        rslt[i,2]=levels(grp.all)[i]
         }
       }
     }
@@ -276,4 +281,5 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
   }
   }
+if(printstat==TRUE){return(rslt)}else{invisible(rslt)}
 }

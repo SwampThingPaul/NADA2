@@ -5,6 +5,7 @@
 #' @param yd The second column of data values plus detection limits
 #' @param yc The column of censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @importFrom survival survfit Surv
 #' @importFrom stats na.exclude pnorm
@@ -23,7 +24,7 @@
 #' ppw.test(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Bone,PbHeron$BoneCen)
 #'
 
-ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
+ppw.test <- function(xd, xc, yd, yc, alternative="two.sided",printstat=TRUE)
 {
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
@@ -167,8 +168,10 @@ ppw.test <- function(xd, xc, yd, yc, alternative="two.sided")
 #  print(retval)
   txt <- paste("Paired Prentice Wilcoxon test for (x:", xname, " - ", "y:", yname, ") equals 0", "\n", "    alternative: ", altern, "\n", sep = "")
   txt2 <- paste("n =", param, "  Z =", signif(stat, 4), "  p-value =", signif(pvalue, 4))
-  
+
+  if(printstat==TRUE){
   cat(txt, "\n", txt2, "\n")
   cat(" ", median.diff, "\n")
+  }
   return(invisible(retval))
 }

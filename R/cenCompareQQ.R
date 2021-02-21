@@ -4,6 +4,7 @@
 #' @param y.var The column of y (response variable) values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param Yname Optional – input text in quotes to be used as the variable name on all plots.  The default `Yname` is the name of the `y.var` input variable.
+#' @param printrslt Logical `TRUE`/`FALSE` option of whether to print the best distribution in the console window, or not.  Default is `TRUE.`
 #' @export
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which one has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
@@ -19,9 +20,9 @@
 #' @examples
 #' data(Brumbaugh)
 #'
-#' \dontrun{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
+#' \donttest{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
 
-cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
+cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
 
@@ -39,7 +40,8 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname)  {
     best.dist <- paste (var.choose$decision, "is a good fit")}
   else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
   }
-  cat(best.dist, "\n")
+  if(printrslt==TRUE){cat(best.dist, "\n")}
+
   par(mfrow=c(2,2))
   qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
   mtext(norm.text)
@@ -73,7 +75,9 @@ if (var.choose$decision != "Nonparametric") {
   best.dist <- paste (var.choose$decision, "is a good fit")}
 else { best.dist <- paste ("Best of the three distributions is the", max.distrib)
 }
-cat(best.dist, "\n")
+
+if(printrslt==TRUE){cat(best.dist, "\n")}
+
 par(mfrow=c(2,2))
 EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
 mtext(norm.text)
@@ -87,5 +91,5 @@ mtext(gamma.text)
 plot(c(0, 1), c(0, 1), ann = F, bty = 'n', type = 'n', xaxt = 'n', yaxt = 'n')
 text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sans", font=1, adj=1)
 par(mfrow=c(1,1))
-  }
+}
 }

@@ -12,7 +12,8 @@ censeaken(
   LOG = FALSE,
   R = 4999,
   nmin = 4,
-  seaplots = FALSE
+  seaplots = FALSE,
+  printstat = TRUE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ censeaken(
 \item{nmin}{The minimum number of observations needed for the entire time period to be tested, per season.  For example, with 1 sample per year per season over an 8-year period, you have 8 observations for each season.  You can increase this number if you want a higher minimum.  Don’t decrease it below the default of 4.  If there are fewer than nmin values that season is skipped and not included in the overall test and a note of this will be printed in the console.}
 
 \item{seaplots}{In addition to the plot of the overall Seasonal Kendall trend line, plots of the trend in individual seasons can also be drawn.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints the Kendall trend test results for each season individually. The overall Seasonal Kendall test and Theil-Sen line results are both printed and returned.
@@ -42,14 +45,15 @@ If \code{seaplots=FALSE} only the overall Seasonal Kendall (Akritas-Theil-Sen) l
 Seasonal Kendall permutation test on censored data
 }
 \examples{
-
+\donttest{
 data(Brumbaugh)
 
-#Artifical time and season variables for demonstration purposes
+# Artificial time and season variables for demonstration purposes
 Brumbaugh$time=1:nrow(Brumbaugh)
 Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 
 with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
+}
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

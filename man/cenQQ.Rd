@@ -22,7 +22,7 @@ A single Q-Q plot of data fitted by normal, lognormal or gamma distributions wit
 Plots a quantile-quantile (Q-Q) plot of censored data versus a fitted data distribution
 }
 \examples{
-\dontrun{
+\donttest{
 data(Brumbaugh)
 cenQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
 

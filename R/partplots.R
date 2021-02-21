@@ -8,6 +8,7 @@
 #' @param smooth.method Method for drawing a smooth on the partial plot.  Options are c("gam", "none"). "gam" is a censored generalized additive model using the cenGAM and mgcv packages.
 #' @param gam.method	Method for computing the gam smooth.  See the mgcv package for options.  Default is a thinplate ("tp") spline.  "cs" is another good option.
 #' @param multiplot  If TRUE, plots are drawn 6 per page.  If FALSE, all plots are drawn on a separate page.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @export
 #' @return
 #' When `x.vars` is one variable, a message is printed that partial plots are not possible with only one X variable and execution stops.
@@ -45,13 +46,13 @@
 #' # For demostration purposes
 #' partplots (Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
-partplots <- function (y.var, cen.var, x.vars, LOG = TRUE, smooth.method = "gam", gam.method = "tp", multiplot = TRUE)
+partplots <- function (y.var, cen.var, x.vars, LOG = TRUE, smooth.method = "gam", gam.method = "tp", multiplot = TRUE,printstat=TRUE)
 {  yname <- deparse(substitute(y.var))
 nonas <- na.omit(cbind(y.var, cen.var, x.vars))
 xnona <- data.frame(nonas[,-(1:2)])
 pch.symb <- (nonas[, 2] + 16) - nonas[, 2] *16
 col.symb <- (nonas[, 2] + 1) + nonas[, 2] *6
-oldpar<- par(no.readonly=T)
+oldpar<- par(no.readonly=TRUE)
 on.exit(par(oldpar))
 if (multiplot == TRUE) {par(mfrow = c(3,2))}
 
@@ -100,6 +101,7 @@ if (LOG == TRUE)  {
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
 
     # compute and print one line (verbose = 1) of r2 and AIC for original and possible x transforms
+    if(printstat==TRUE){
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
     notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = 1)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
@@ -122,7 +124,7 @@ if (LOG == TRUE)  {
     AIC.diff <- AIC.none - min(AIC.log, AIC.cube)
     cat("Decrease in AIC from transformation of", colnames(xnona[i]), "=", max(0,AIC.diff), "\n", "\n")
     }  # end of cycle thru x variables
-
+}
   }  # end of multiple x vars
   else (stop("For only one x variable partial plots not needed."))
 }    # end of logs.
@@ -161,6 +163,7 @@ else {
     if (multiplot == FALSE) {title(paste("Open circles are", yname, "nondetects"))}
 
     # compute and print one line (verbose = 1) of r2 and AIC for original and possible x transforms
+    if(printstat==TRUE){
     cat(colnames(xnona[i]), "\n", "untransformed", "\n")
     notrans <- cencorreg(nonas[,1], nonas[,2], xnona, verbose = 1)
     AIC.none <- -2*notrans$loglik[2] + (2*notrans$df +1)
@@ -182,7 +185,7 @@ else {
     cat("Cannot take logs of zero or negative values.", "\n")}
     AIC.diff <- AIC.none - min(AIC.log, AIC.cube)
     cat("Decrease in AIC from transformation of", colnames(xnona[i]), "=", max(0,AIC.diff), "\n", "\n")
-
+}
     }  # end of cycle thru multiple x variables
   }  # end of multiple variables
   else {stop("For only one x variable partial plots not needed.")}

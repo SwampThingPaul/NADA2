@@ -6,6 +6,8 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param mcomp.method One of the standard methods for adjusting p-values for multiple comparisons.  Type ?p.adjust for the list of possible methods. Default is Benjamini-Hochberg "BH" false discover rate.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#'
 #' @importFrom survminer pairwise_survdiff
 #' @importFrom survival survdiff Surv
 #' @importFrom stats pchisq
@@ -42,7 +44,7 @@
 #' # More than two groups
 #' cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
-cen1way <- function(y1,y2, grp,mcomp.method = "BH") {
+cen1way <- function(y1,y2, grp,mcomp.method = "BH",printstat=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))
   rho=1
@@ -62,7 +64,7 @@ cen1way <- function(y1,y2, grp,mcomp.method = "BH") {
   for (i in 1:nlevels(Factor))    {
     y1gp <- y1[Factor==groupnames[i]]
     y2gp <- y2[Factor==groupnames[i]]
-    Cstats <- suppressWarnings(cfit(y1gp, as.logical(y2gp), printstats=FALSE, Cdf = FALSE))
+    Cstats <- suppressWarnings(cfit(y1gp, as.logical(y2gp), printstat=FALSE, Cdf = FALSE))
     Cstats <- Cstats[c(1:6)]
     Cstats <- Cstats[-3]
     Cstats <- data.frame(Cstats)
@@ -77,8 +79,21 @@ cen1way <- function(y1,y2, grp,mcomp.method = "BH") {
   # rownames(Cen.stats) <-  groupnames
   Cen.stats <- Cen.stats[,c(6,1:5)] # reordered the data frame
   colnames(Cen.stats) <- cnames[c(6,1:5)] # reordered the data frame
+
+  if(printstat==TRUE){
   print.data.frame(Cen.stats, print.gap = 3)
   cat('\n',"     Oneway Peto-Peto test of CensData:", yname, "  by Factor:", gname, '\n', "     Chisq =", signif(y.out$chisq, 4), "  on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
   if (df >1) {mcomp <- pairwise_survdiff(Surv(flip, detect) ~ Factor, data=CensData, p.adjust.method = mcomp.method, rho=rho)
   print(mcomp)}
+  }
+
+  PetoPeto<-list(data.name=paste(yname, "  by Factor:", gname,"\n"),
+                 ChiSq=signif(y.out$chisq, 4),df=df,p.value=signif(pval,3))
+
+  if(df>1){mcomp=mcomp}else{mcomp=NA}
+
+  x<-list(SummaryStats=Cen.stats,
+          PetoPeto=PetoPeto,
+          mcomp=mcomp)
+  invisible(x)
 }

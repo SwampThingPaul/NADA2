@@ -33,14 +33,15 @@
 #' bestaic(Brumbaugh$Hg, Brumbaugh$HgCen, Brumbaugh[, c("SedMeHg","PctWetland", "SedAVS")])
 
 bestaic <- function (y.var, cen.var, x.vars, LOG = TRUE, n.models = 10)
-{  yname <- deparse(substitute(y.var))
-nonas <- na.omit(cbind(y.var, cen.var, x.vars))
-xnona <- data.frame(nonas[,-(1:2)])
-xnames <- names(xnona)
-nxvars <- ncol(xnona)      # number of x variables
-num.model = 0
-nmodels = (2^nxvars)-1
-cat("Evaluating", nmodels, "models and printing the", n.models, "lowest AIC models", "\n")
+  {
+  yname <- deparse(substitute(y.var))
+  nonas <- na.omit(cbind(y.var, cen.var, x.vars))
+  xnona <- data.frame(nonas[,-(1:2)])
+  xnames <- names(xnona)
+  nxvars <- ncol(xnona)      # number of x variables
+  num.model = 0
+  nmodels = (2^nxvars)-1
+
 for (i in 1:nxvars)  {
   combs <- combn(nxvars, i)  # i is number of xvars in regression model
   ncolcombs <- ncol(combs)   # number of combinations for that model size
@@ -71,5 +72,8 @@ for (i in 1:nxvars)  {
 o <- order(model.out$aic)
 models.order <- model.out[o,]
 models.best <- models.order[(1:n.models),]
-print(models.best, row.names = FALSE)
+
+  cat("Evaluating", nmodels, "models and printing the", n.models, "lowest AIC models", "\n")
+  print(models.best, row.names = FALSE)
+
 }

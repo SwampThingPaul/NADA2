@@ -39,7 +39,7 @@ Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y v
 Function used by other functions to plot the Akritas-Theil-Sen (ATS) line for censored data.  Only one x variable allowed. Both Y and X variables may be censored.
 }
 \examples{
-\dontrun{
+\donttest{
 # Both y and x are censored
 data(PbHeron)
 with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))

@@ -7,6 +7,7 @@
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param newobs The number of new observations to be contained in the interval.
 #' @param method Character string specifying the method of estimation. Default is `mle` (maximum likelihood). See details.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @keywords prediction interval
 #' @export
 #' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm
@@ -17,7 +18,7 @@
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Springer-Verlag, New York.
-#' 
+#'
 #' Krishnamoorthy, K., Mathew, T., Mukherjee, S., 2008. Normal-Based Methods for a Gamma Distribution, Technometrics, 50, 69-78.
 #'
 #' @seealso [EnvStats::enormCensored]
@@ -34,14 +35,14 @@
 #'
 #' # User defined confidence coefficient outside of acceptable range
 #' # the procedure will stop and give an error.
-#' \dontrun{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
+#' \donttest{cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)}
 #'
 #' # User defined prediction interval type
 #' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")
 #' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
 
 
-cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle")  {
+cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle",printstat=TRUE)  {
   if(conf>1|conf<0){stop("Please select a confidence coefficient between 0 and 1.")}
 
   obj.lnorm <- elnormCensored (y.var, cen.var, method = method)
@@ -73,8 +74,6 @@ cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newob
   pi.gamma <- (obj.gamma2$interval$limits[2])^3
   }
 
-  cat (title.txt)
-
   Distribution <- c("Lognormal", "Gamma", "Normal")
   lpl <- c(obj.lnorm2$interval$limits[1], max(0, (obj.gamma2$interval$limits)[1]^3), obj.norm2$interval$limits[1])
   if (pi.type == "upper") {lpl[1:3] <- "NA"}
@@ -82,6 +81,11 @@ cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newob
   if (pi.type == "lower") {upl[1:3] <- "NA"}
   results <- data.frame(Distribution, lpl, upl)
   names(results) <- c("Distribution", pi1.text, pi2.text)
+
+if(printstat==TRUE){
+  cat (title.txt)
   return(results)
+}
+  invisible(results)
 }
 

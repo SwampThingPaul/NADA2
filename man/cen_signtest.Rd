@@ -4,7 +4,7 @@
 \alias{cen_signtest}
 \title{Sign test for censored data}
 \usage{
-cen_signtest(xd, xc, yd, yc, alternative = "two.sided")
+cen_signtest(xd, xc, yd, yc, alternative = "two.sided", printstat = TRUE)
 }
 \arguments{
 \item{xd}{The first column of data values plus detection limits}
@@ -16,6 +16,8 @@ cen_signtest(xd, xc, yd, yc, alternative = "two.sided")
 \item{yc}{The column of censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{yd} column, and 0 (or \code{FALSE}) indicates a detected value in \code{yd}.}
 
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Returns the number of \code{xd} and \code{yd} values greater than, less than and tied. Corrected and uncorrected \code{p-value} for ties also displayed.

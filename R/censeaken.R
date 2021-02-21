@@ -8,6 +8,7 @@
 #' @param R The number of repetitions in the permutation process.  R is often between 999 and 9999 (adding +1 to represent the observed test statistic produces 1000 to 10000 repetitions). By default R=4999. Increasing R results in lower variation in the p-values produced between runs.
 #' @param nmin The minimum number of observations needed for the entire time period to be tested, per season.  For example, with 1 sample per year per season over an 8-year period, you have 8 observations for each season.  You can increase this number if you want a higher minimum.  Don’t decrease it below the default of 4.  If there are fewer than nmin values that season is skipped and not included in the overall test and a note of this will be printed in the console.
 #' @param seaplots In addition to the plot of the overall Seasonal Kendall trend line, plots of the trend in individual seasons can also be drawn.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @return Prints the Kendall trend test results for each season individually. The overall Seasonal Kendall test and Theil-Sen line results are both printed and returned.
 #'
@@ -23,17 +24,18 @@
 #' @seealso [NADA::cenken]
 #'
 #' @examples
-#'
+#'\donttest{
 #' data(Brumbaugh)
 #'
-#' #Artifical time and season variables for demonstration purposes
+#' # Artificial time and season variables for demonstration purposes
 #' Brumbaugh$time=1:nrow(Brumbaugh)
 #' Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 #'
 #' with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
+#' }
 
 
-censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, seaplots = FALSE)
+censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, seaplots = FALSE,printstat=TRUE)
 {
   xname = deparse(substitute(time))
   yname = deparse(substitute(y))
@@ -45,7 +47,7 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   else {nonas <- na.omit(data.frame(time, y, y.cen, group)) }
 
   df = data.frame(TIME = xname, Y = yname, SEASON = grpname)
-  cat("\n", "DATA ANALYZED:", yname, "vs", xname, "by", grpname, sep=" ","\n")
+  if(printstat==TRUE){cat("\n", "DATA ANALYZED:", yname, "vs", xname, "by", grpname, sep=" ","\n")}
 
   xxx<-nonas$time
   yyy<-nonas[,2]
@@ -57,7 +59,7 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   # compute median of uncensored time (all data)
   xmedian<-median(xxx)
   #  compute KM median of censored y.  Assumes all <ND go to 0 at lower end.
-  y.dist <- cfit(yyy, ccc, Cdf = FALSE, printstats = FALSE, Ylab = yname)
+  y.dist <- cfit(yyy, ccc, Cdf = FALSE, printstat = FALSE, Ylab = yname)
   ymedian <- y.dist$KMmedian
 
   # compute the Kaplan-Meier mean (all data)
@@ -82,13 +84,12 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   ntest<-length(xc[[i]])
   if (ntest < nmin) {
     cat(dsh)
-    cat(as.character(grp[1]),"\n")
-    cat("Note: Season dropped --",ntest, "are too few obs", sep=" ","\n")
+    warning(paste(as.character(grp[1]),"\n","Season dropped --",ntest, "are too few obs","\n", sep=" "))
   }
   ## DONE CHECKING
   if (ntest < nmin) next
 
-  cat(dsh)
+  if(printstat==TRUE){cat(dsh)}
   j=j+1
   #  Season by season computations
   perm.sea[1:R,j] <- computeS (xc[[i]], yc[[i]], cc[[i]], seas = sea, R = R)
@@ -119,13 +120,14 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
 
   # ATS results for the season, not pemutation tests
   RESULTS1<-data.frame(Season = sea, N = ntest, S=s, Tau=tau, Pvalue=signif(pval,5), Intercept = signif(int, 5), MedianSlope = signif(medslop, 4))
-  print(RESULTS1)
+
+  if(printstat==TRUE){print(RESULTS1)}
 
   }         # end of seasonal computations
-  cat(dsh)
+  if(printstat==TRUE){cat(dsh)}
 
   # Overall computations for all of the data
-  cat("Seasonal Kendall test and Theil-Sen line", "\n");
+  if(printstat==TRUE){cat("Seasonal Kendall test and Theil-Sen line", "\n");}
   Kendall_S <- as.vector(rowSums(perm.sea))   # S overall for each permutation
   tau_all<- (s_all)/denomall
   all.out <- ATSmini(yyy, ccc, xxx)
@@ -143,8 +145,8 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   abline (v = s_alt, col = "red", lty = 2)
 
   RESULTS <- data.frame(reps_R = R, N=nall, S_SK=s_all, tau_SK =signif(tau_all,3), pval=signif(pval_all, 5), intercept = signif(intall,5), slope = signif(medslope,4))
-  print(RESULTS)
-  cat(dsh)
+  if(printstat==TRUE){print(RESULTS)}
+  if(printstat==TRUE){cat(dsh)}
 
   kenplot(yyy, ccc, xxx, xcen = rep(0, times=nall), xnam=xname, ynam=yname, Title = "Seasonal Kendall Test")
   abline(intall, medslope, lwd=2, col = "blue")

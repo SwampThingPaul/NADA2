@@ -52,7 +52,16 @@ pkgdown::build_site()
 # devtools::build()
 
 
+# -------------------------------------------------------------------------
 
-# data(Brumbaugh)
-# y.var=Brumbaugh$Hg
-# cen.var=Brumbaugh$HgCen
+library(NADA2)
+
+
+# centrend
+
+y.var=Brumbaugh$Hg
+y.cens=Brumbaugh$HgCen
+x.var=Brumbaugh$SedTotHg
+time.var=1:nrow(Brumbaugh)
+Smooth = "cs"
+link = "identity"

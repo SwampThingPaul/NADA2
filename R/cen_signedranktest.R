@@ -6,6 +6,7 @@
 #' @param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
 #' @param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @importFrom coin wilcoxsign_test statistic pvalue
 #' @export
@@ -29,7 +30,7 @@
 #'
 #' cen_signedranktest(atrazine$June,atrazine$JuneCen,atrazine$Sept,atrazine$SeptCen)
 
-cen_signedranktest <- function(xd, xc, yd, yc, alternative="two.sided") {
+cen_signedranktest <- function(xd, xc, yd, yc, alternative="two.sided",printstat=TRUE) {
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
   nonas <- na.omit(data.frame(xd, xc, yd, yc))
@@ -68,7 +69,19 @@ cen_signedranktest <- function(xd, xc, yd, yc, alternative="two.sided") {
 
   s.out <- wilcoxsign_test(x~y, alternative = alternative)
   txt <- paste("Censored signed-rank test for (x:", xname, " - ", "y:", yname, ") equals 0", "\n", txt3, "\n", sep = "")
-  txt2 <- paste("n =", N, "  Z=", signif(statistic(s.out), 4), "  p-value =", signif(pvalue(s.out), 4))
 
-  cat(txt, "\n","Pratt correction for ties", "\n", txt2, "\n")
+  names(N)<-"n"
+  Z<-signif(statistic(s.out), 4)
+  names(Z)<-"Z"
+  pval<-signif(pvalue(s.out), 4)
+
+  x <- list(n=N,statistic=Z,p.value=pval)
+  out<-c(paste(names(x$n),"=",x$n),paste(names(x$statistic),"=",x$statistic),paste("p.value =",x$p.value))
+
+  if(printstat==TRUE){
+  cat(txt, "\n","Pratt correction for ties", "\n")
+  cat(strwrap(paste(out,collapse=", ")),sep="\n")
+  }
+  invisible(x)
+
 }

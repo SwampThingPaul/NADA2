@@ -3,6 +3,7 @@
 #' @description Computes the equivalent sample size of censored data.  Observations at lower detection limits have a greater percent of the equivalent information of a detected value than observations at higher detection limits.
 #' @param y.var The column of data values plus detection limits.
 #' @param y.cen The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @keywords Sample Size censored
 #' @export
 #' @importFrom NADA censummary
@@ -46,22 +47,35 @@
 #'
 #' equivalent_n(Brumbaugh$Hg,Brumbaugh$HgCen)
 
-equivalent_n <- function(y.var, y.cen){
+equivalent_n <- function(y.var, y.cen,printstat=TRUE){
 
   ycen <- as.logical(y.cen)
   yname <- deparse(substitute(y.var))
 
-aa <- censummary(y.var, ycen)
-n.equiv <- sum(aa$limits[,2]*aa$limits[,4] + aa$limits[,3])
-n_total <- sum(aa$limits[,2] + aa$limits[,3])
-n_detected <- sum(aa$limits[,3])
-n_cens <- sum(aa$limits[,2])
-n.cen.equiv <- sum(aa$limits[,2]*aa$limits[,4])
-n.detected <- n.equiv - n.cen.equiv
-message(yname); print(aa)
-equiv.out <- data.frame(n.equiv,  n.cen.equiv, n.detected)
-cat("equivalent sample size:", "\n")
-print(equiv.out, row.names = FALSE, print.gap = 3)
-aa[["equivalent"]] <- equiv.out
-return (invisible (aa))
+  aa <- censummary(y.var, ycen)
+  all_df <-data.frame(aa[1])
+  all_df$variable <-rownames(all_df)
+  rownames(all_df)<- NULL
+  colnames(all_df[c(2,1)])<-c("variable","value")
+  limits_df<-data.frame(aa[2])
+  colnames(limits_df) <- c("limit","n","uncen","pexceed")
+
+  aa <- list(all=all_df,limits=limits_df)
+  n.equiv <- sum(aa$limits[,2]*aa$limits[,4] + aa$limits[,3])
+  n_total <- sum(aa$limits[,2] + aa$limits[,3])
+  n_detected <- sum(aa$limits[,3])
+  n_cens <- sum(aa$limits[,2])
+  n.cen.equiv <- sum(aa$limits[,2]*aa$limits[,4])
+  n.detected <- n.equiv - n.cen.equiv
+  equiv.out <- data.frame(n.equiv,  n.cen.equiv, n.detected)
+
+
+  if(printstat==TRUE){
+  cat("data:",yname,"\n")
+  print(aa)
+  cat("equivalent sample size:", "\n")
+  print(equiv.out, row.names = FALSE, print.gap = 3)
+  }
+  aa[["equivalent"]] <- equiv.out
+  return (invisible (aa))
 }

@@ -4,7 +4,7 @@
 \alias{cenperm2}
 \title{Censored two-group permutation test}
 \usage{
-cenperm2(y1, y2, grp, R = 9999, alternative = "two.sided")
+cenperm2(y1, y2, grp, R = 9999, alternative = "two.sided", printstat = TRUE)
 }
 \arguments{
 \item{y1}{The column of data values plus detection limits}
@@ -16,6 +16,8 @@ cenperm2(y1, y2, grp, R = 9999, alternative = "two.sided")
 \item{R}{The number of permutations used. Default is 9999}
 
 \item{alternative}{indicates the alternative hypothesis and must be one of "\code{two.sided}", "\code{greater}" or "\code{less}". You may also specify just the initial letter. Default is "\code{two.sided}".}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Permutation test results with the number of permutations, range in group means and their difference, and range in \code{p-value}.

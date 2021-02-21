@@ -11,7 +11,8 @@ partplots(
   LOG = TRUE,
   smooth.method = "gam",
   gam.method = "tp",
-  multiplot = TRUE
+  multiplot = TRUE,
+  printstat = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ partplots(
 \item{gam.method}{Method for computing the gam smooth.  See the mgcv package for options.  Default is a thinplate ("tp") spline.  "cs" is another good option.}
 
 \item{multiplot}{If TRUE, plots are drawn 6 per page.  If FALSE, all plots are drawn on a separate page.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 When \code{x.vars} is one variable, a message is printed that partial plots are not possible with only one X variable and execution stops.

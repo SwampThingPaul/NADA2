@@ -7,6 +7,7 @@
 #' @param yd The second column of data values plus detection limits, or a single number representing a standard / guideline value.
 #' @param yc The column of censoring indicators for yd, where 1 (or `TRUE`) indicates a detection limit in the yd column, and 0 (or `FALSE`) indicates a detected value in `yd`. Not needed if `yd` is a single standard number.
 #' @param alternative The usual notation for the alternate hypothesis.  Default is `“two.sided”`.  Options are `“greater”` or `“less”`.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @importFrom fitdistrplus plotdistcens
 #' @importFrom survival survreg Surv
@@ -33,7 +34,7 @@
 #' # Comparing standard/guieline value
 #' cen_paired(atrazine$June, atrazine$JuneCen, 0.01, alternative = "greater")
 
-cen_paired <- function(xd, xc, yd, yc, alternative="two.sided") {
+cen_paired <- function(xd, xc, yd, yc, alternative="two.sided",printstat = TRUE) {
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
   mu <- 0
@@ -93,8 +94,21 @@ cen_paired <- function(xd, xc, yd, yc, alternative="two.sided") {
   txt <- paste(" Censored paired test for mean(", xname, ") equals ", mu, sep = "")}
   }
   txt2 <- paste("n =", N, "  Z=", round(Z, 4), "  p-value =", signif(pvalue, 4))
+
+  if(printstat==TRUE){
   if (mu == 0) {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n", "Mean difference =", signif(mean.diff,4), "\n")}
   else {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n",paste("Mean", xname), "=", signif(mean.diff+mu,4), "\n")}
+  }
+
+  names(N)<-"n"
+  Z<-round(Z,4)
+  names(Z)<-"Z"
+  pval<-signif(as.numeric(pvalue), 4)
+  diff.val<-as.numeric(signif(mean.diff+mu,4))
+  names(diff.val)<-paste("Mean", xname)
+
+  x <- list(n=N,statistic=Z,p.value=pval,MeanDifference=diff.val)
+
 
   #plot the cdf of differences
   sv.coefs <- data.frame(sv.out$icoef[1], exp(sv.out$icoef[2]))
@@ -105,5 +119,5 @@ cen_paired <- function(xd, xc, yd, yc, alternative="two.sided") {
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
   plotdistcens(minmax, distr = "norm", para = sv.coefs, main = "Differences: CDF and Fitted Normal Dist")
-
+  invisible(x)
 }

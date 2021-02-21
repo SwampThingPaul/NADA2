@@ -4,7 +4,7 @@
 \alias{cenpermanova}
 \title{Censored data one-factor permutation test}
 \usage{
-cenpermanova(y1, y2, grp, R = 9999)
+cenpermanova(y1, y2, grp, R = 9999, printstat = TRUE)
 }
 \arguments{
 \item{y1}{The column of data values plus detection limits.}
@@ -14,6 +14,8 @@ cenpermanova(y1, y2, grp, R = 9999)
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
 \item{R}{The number of permutations used. Default is 9999.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Permutation test results with the number of permutations, range in test statistics and \code{p-value} values through the various permutations. Group means are also listed.

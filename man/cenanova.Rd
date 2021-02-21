@@ -4,7 +4,7 @@
 \alias{cenanova}
 \title{ANOVA for censored data}
 \usage{
-cenanova(y1, y2, grp, LOG = TRUE)
+cenanova(y1, y2, grp, LOG = TRUE, printstat = TRUE)
 }
 \arguments{
 \item{y1}{The column of data values plus detection limits}
@@ -14,6 +14,8 @@ cenanova(y1, y2, grp, LOG = TRUE)
 \item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Returns the Maximum Likelihood Estimation (MLE) comparison results including Chi-Squared value, degrees of freedom and \code{p-value} of the test. Test assumes log-normal(\code{LOG=TRUE}) or normal(\code{LOG=FALSE}) distribution of residuals from group means.

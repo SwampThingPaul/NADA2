@@ -5,6 +5,7 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param R The number of permutations used. Default is 9999.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
 #' @importFrom NADA ros cenros
 #' @export
@@ -21,7 +22,7 @@
 #' data(PbHeron)
 #' cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
-cenpermanova <- function(y1, y2, grp, R = 9999) {
+cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))
   xdat <- na.omit(data.frame(y1, y2, grp))
@@ -77,8 +78,10 @@ cenpermanova <- function(y1, y2, grp, R = 9999) {
   p.lo <- min(pval.lo, pval.hi)
   p.hi <- max(pval.lo, pval.hi)
   result <- data.frame(teststat.lo, teststat.hi, p.lo, p.hi, group.means)
+  if(printstat==TRUE){
   cat(" Permutation test of mean CensData:", yname, "  by Factor:", gname, '\n', "   ", R, "Permutations", "\n")
   cat( "Test Statistic =", signif(teststat.lo, 4), "to", signif(teststat.hi, 4), "      p =", pval.lo, "to", pval.hi, '\n', "\n")
   print(group.means, row.names = FALSE, print.gap = 3)
+  }
   return(invisible(result))
 }

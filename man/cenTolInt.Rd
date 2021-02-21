@@ -4,7 +4,14 @@
 \alias{cenTolInt}
 \title{Upper Tolerance interval for censored data}
 \usage{
-cenTolInt(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
+cenTolInt(
+  y.var,
+  cen.var,
+  conf = 0.95,
+  cover = 0.9,
+  method.fit = "mle",
+  printstat = TRUE
+)
 }
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits}
@@ -16,6 +23,8 @@ cenTolInt(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
 \item{cover}{Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.}
 
 \item{method.fit}{The method used to compute the parameters of the distribution.  The default is maximum likelihood (\verb{“mle”}). The alternative is robust ROS (\verb{“rROS”}).  See Details.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints and returns the percentile (\code{cover}), upper tolerance limit (\code{conf}) and BIC of fit for lognormal, normal and approximated gamma distributions. Plots empirical and theoretical CDFs with BIC values in the legend.
@@ -40,7 +49,7 @@ cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=0.75)
 cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 
 # inputs outside acceptable ranges
-\dontrun{
+\donttest{
 cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
 cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
 cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")

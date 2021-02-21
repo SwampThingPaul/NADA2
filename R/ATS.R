@@ -10,6 +10,8 @@
 #' @param retrans Indicator of whether to retransform the plot and line back to original Y-variable units.  Not needed when `LOG = FALSE`. When `retrans = FALSE` & `LOG = TRUE` the plot is drawn with logY units (default). When `retrans =  TRUE` & `LOG = TRUE` the plot is drawn with original Y units.
 #' @param xlabel Custom label for the x axis of plots.  Default is x variable column name.
 #' @param ylabel Custom label for the y axis of plots.  Default is y variable column name.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#'
 #' @keywords trend censored
 #' @export
 #' @return  Coefficients (intercept and slope) for the ATS line are printed, along with Kendall's tau correlation coefficient, test statistic S, and the (single) p-value for the test that tau and slope both equal zero. A scatterplot with the fitted trend-line superimposed is also drawn.
@@ -33,7 +35,8 @@
 #' data(Brumbaugh)
 #' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
-ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL){
+
+ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL,printstat = TRUE){
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   y.cen <- as.logical(y.cen)
@@ -62,16 +65,26 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
       intercept <- Shifted$intercept - shift.amt
     }
     ylogname <- paste("ln(", yname, ")", sep = "")
+
+    if(slope>=0){
+      subtitle <- paste (ylogname, "=", round(intercept,4), "+", round(slope,4), "*", xname)
+    }
+    else{
+      subtitle <- paste(ylogname, "=", round(intercept,4), round(slope,4), "*", xname)
+    }
+
+    if(printstat==TRUE){
     cat ("Akritas-Theil-Sen line for censored data", "\n", "\n")
     if (slope >= 0) {cat (ylogname, "=", round(intercept,4), "+", round(slope,4), "*", xname, "\n")
-      subtitle <- paste (ylogname, "=", round(intercept,4), "+", round(slope,4), "*", xname)
+      subtitle
       short.t <- paste(round(intercept,4), "+", round(slope,4), "*", xname)
     }
     else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xname, "\n")  # neg slope
-      subtitle <- paste(ylogname, "=", round(intercept,4), round(slope,4), "*", xname)
+      subtitle
       short.t <- paste(round(intercept,4), round(slope,4), "*", xname)
     }
     cat("Kendall's tau =", round(tau,4), "  p-value =", round(pval, 5), "\n", "\n")
+    }
     # draw a scatterplot
     x <- c(min(alldat[,3]), max(alldat[,3]))
     y <- x*slope+intercept
@@ -112,12 +125,21 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
       intercept <- Shifted$intercept - shift.amt
     }
 
+    if(slope>=0){
+      subtitle <- paste (yname, "=", round(intercept,4), "+", round(slope,4), "*", xname)
+    }
+    else{
+      subtitle <- paste(yname, "=", round(intercept,4), round(slope,4), "*", xname)
+    }
+
+    if(printstat==TRUE){
     cat ("Akritas-Theil-Sen line for censored data", "\n", "\n")
     if (slope >= 0) {cat (yname, "=", round(intercept,4), "+", round(slope,4), "*", xname, "\n")
-      subtitle <- paste (yname, "=", round(intercept,4), "+", round(slope,4), "*", xname)}
+      }
     else {cat (yname, "=", round(intercept,4), round(slope,4), "*", xname, "\n")
-      subtitle <- paste (yname, "=", round(intercept,4), round(slope,4), "*", xname) }
+      }
     cat("Kendall's tau =", round(tau,4), "  p-value =", round(pval, 5), "\n", "\n")
+    }
 
     # draw a scatterplot with kenplot
     x <- c(min(alldat[,3]),max(alldat[,3]))

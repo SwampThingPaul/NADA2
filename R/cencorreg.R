@@ -46,7 +46,8 @@
 #'cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
 
-cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2) {
+cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
+  {
   yname <- deparse(substitute(y.var))
   nonas <- na.omit(cbind(y.var, cen.var, x.vars))
   xnona <- nonas[,-(1:2)]

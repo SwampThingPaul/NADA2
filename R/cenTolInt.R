@@ -6,6 +6,7 @@
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param cover Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.
 #' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).  See Details.
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @importFrom EnvStats elnormCensored predIntLnorm enormCensored predIntNorm eqlnormCensored eqnormCensored
 #' @importFrom fitdistrplus fitdistcens
 #' @export
@@ -34,13 +35,13 @@
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 #'
 #' # inputs outside acceptable ranges
-#' \dontrun{
+#' \donttest{
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
 #' }
 
-cenTolInt <- function(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle")
+cenTolInt <- function(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle",printstat=TRUE)
 {
   if(conf>1|conf<0){stop("Confidence coefficient should be between 0 and 1, please try again.")}
   if(cover>1|cover<0){stop("Percentile should be between 0 and 1, please try again.")}
@@ -86,5 +87,7 @@ ti.best = max(ti.best*dist.best)
 
 cenCompareCdfs (y.var, cen.var, Yname = nameofy, dist3 = "norm")
 abline (h=cover, lty = "dotted", col = "black")
-return (results)
+
+if(printstat==TRUE){results}else{invisible(results)}
+
 }

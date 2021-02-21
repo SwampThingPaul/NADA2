@@ -4,7 +4,7 @@
 \alias{ppw.test}
 \title{Test for difference in left-censored samples}
 \usage{
-ppw.test(xd, xc, yd, yc, alternative = "two.sided")
+ppw.test(xd, xc, yd, yc, alternative = "two.sided", printstat = TRUE)
 }
 \arguments{
 \item{xd}{The first column of data values plus detection limits}
@@ -16,6 +16,8 @@ ppw.test(xd, xc, yd, yc, alternative = "two.sided")
 \item{yc}{The column of censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the yd column, and 0 (or \code{FALSE}) indicates a detected value in \code{yd}}
 
 \item{alternative}{The usual notation for the alternate hypothesis.  Default is \verb{“two.sided”}.  Options are \verb{“greater”} or \verb{“less”}.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Paired Prentice-Wilcoxon test results including Z-statistic, n (sample size), p-value and median difference

@@ -12,9 +12,9 @@ URL: https://github.com/SwampThingPaul/NADA2
 BugReports: https://github.com/SwampThingPaul/NADA2/issues
 Description: Contains methods described by Dennis Helsel in 
              his book "Statistics for Censored Environmental Data
-             using Minitab and R" (2011) and courses and videos at 
+             using `Minitab` and R" (2011) and courses and videos at 
              <https://practicalstats.com>. This package adds new functions to 
-             the NADA Package.
+             the `NADA` Package.
 License: MIT + file LICENSE
 Depends: R (>= 3.6)
 Imports: grDevices,

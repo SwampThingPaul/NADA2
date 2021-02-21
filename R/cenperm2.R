@@ -6,6 +6,7 @@
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param R The number of permutations used. Default is 9999
 #' @param alternative indicates the alternative hypothesis and must be one of "`two.sided`", "`greater`" or "`less`". You may also specify just the initial letter. Default is "`two.sided`".
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @keywords permutation difference test
 #' @export
 #' @return Permutation test results with the number of permutations, range in group means and their difference, and range in `p-value`.
@@ -22,7 +23,7 @@
 #' data(PbHeron)
 #' cenperm2(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,alternative="t")
 
-cenperm2 <- function(y1, y2, grp, R = 9999, alternative = "two.sided") {
+cenperm2 <- function(y1, y2, grp, R = 9999, alternative = "two.sided",printstat=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))
   xdat <- na.omit(data.frame(y1, y2, grp))
@@ -72,8 +73,11 @@ cenperm2 <- function(y1, y2, grp, R = 9999, alternative = "two.sided") {
   if(alternative%in%c('t','g','l')){alternative <- switch(alternative,"t"="two.sided","g"="greater","l"="less")}
   #  write results
   mean.txt <- paste("     Mean (", grpname[1], " - ", grpname[2], ") = ", sep="")
+
+  if(printstat==TRUE){
   cat(" Permutation test of mean CensData:", yname, "  by Factor:", gname, '\n', "   ", R, "Permutations", "    alternative =", alternative, "\n")
   cat ("  mean of", grpname[1], "=", signif(mu1lo, 4), "to", signif(mu1hi,4), "    mean of", grpname[2], "=", signif(mu2lo,4), "to", signif(mu2hi,4), "\n")
   cat( mean.txt, signif(dbarlo, 4), "to", signif(dbarhi, 4), "      p =", pval.lo, "to", pval.hi, '\n', "\n")
+  }
   return(invisible(result))
 }

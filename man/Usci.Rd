@@ -4,7 +4,7 @@
 \alias{Usci}
 \title{Interval-censored U-Score}
 \usage{
-Usci(ylo, yhi, rnk = T)
+Usci(ylo, yhi, rnk = TRUE)
 }
 \arguments{
 \item{ylo}{The lower end of the concentration interval}
@@ -18,4 +18,13 @@ Returns a single column of uscores or the ranks of uscores for a single pair of 
 }
 \description{
 Interval-censored computation of uscores and their ranks for 1 parameter.  Called by uscoresi. Usci is not expected to be of much use to users on its own.
+}
+\examples{
+
+data(Brumbaugh)
+
+# for demonstration purposes create a lower end concentration interval
+Brumbaugh$lowHg<-Brumbaugh$Hg*(1-Brumbaugh$HgCen)
+
+with(Brumbaugh,Usci(lowHg,Hg))
 }

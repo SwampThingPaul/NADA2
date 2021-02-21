@@ -6,6 +6,7 @@
 #' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = `TRUE`).  To compute in original units, specify the option LOG = `FALSE` (or LOG = 0).
+#' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @importFrom stats pchisq predict
 #' @export
 #' @return
@@ -27,7 +28,7 @@
 #' cen2means(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 
-cen2means <- function(y1, y2, grp, LOG=TRUE) {
+cen2means <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))
   # original units for LOG = FALSE
@@ -38,7 +39,7 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
   Factor <- as.factor(grp)
   df <- length(levels(Factor))-1
   grpname <- as.character(levels(Factor))
-  
+
   # ln units for LOG = 1
   if (LOG == TRUE)  {
     lnvar <- log(y1)
@@ -60,9 +61,11 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
     result <- data.frame(dist, statistic, df, pval)
 
     #  write results
+    if(printstat==TRUE){
     cat("     MLE 't-test' of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "   ",dist.test,'\n')
     cat("     geometric mean of", grpname[1], "=", signif(mean1, 4), "    geometric mean of", grpname[2], "=", signif(mean2,4), "\n")
     cat( "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', "\n")
+    }
     # Q-Q plot of residuals
     reg.predict <- predict(reg.out)
     two.group <- exp(reg.predict - flip.log)
@@ -84,11 +87,13 @@ cen2means <- function(y1, y2, grp, LOG=TRUE) {
   result <- data.frame(dist, statistic, df, pval)
 
   #  write results
+  if(printstat==TRUE){
   cat("     MLE 't-test' of mean CensData:", yname, "  by Factor:", gname, '\n', "   ",dist.test,'\n')
   cat("     mean of", grpname[1], "=", signif(mean1, 4), "    mean of", grpname[2], "=", signif(mean2,4), "\n")
   cat("     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
   # A warning
-  cat("\n", "  NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n")
+  warning(paste("NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n"))
+  }
   # Q-Q plot of residuals
   reg.predict <- predict(reg.out)
   two.group <- reg.predict - flip

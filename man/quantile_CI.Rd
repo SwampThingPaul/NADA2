@@ -13,6 +13,9 @@ quantile_CI(n, q, alpha = 0.05)
 
 \item{alpha}{CI value}
 }
+\value{
+Returns the order statistics and the actual coverage.
+}
 \description{
 quantile confidence interval
 }

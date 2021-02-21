@@ -4,7 +4,15 @@
 \alias{centrend}
 \title{Trend analysis of censored data with a covariate}
 \usage{
-centrend(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs")
+centrend(
+  y.var,
+  y.cens,
+  x.var,
+  time.var,
+  link = "identity",
+  Smooth = "cs",
+  printstat = TRUE
+)
 }
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits}
@@ -18,6 +26,8 @@ centrend(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs")
 \item{link}{Default = \verb{“identity”} which means it uses data in the original units. See details.}
 
 \item{Smooth}{Type of smoother used in the GAM. Default is \verb{“cs”}, shrinkage cubic regression splines. See details for other options.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints three plots: Y data vs time with GAM Smooth, Residuals from GAM Smooth vs time, and ATS trend line of residuals vs time.

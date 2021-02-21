@@ -43,4 +43,5 @@ uMDS <- function(uscor, group = NULL, title=NULL, legend.pos = "bottomleft") {
     text(plot.col, "sites", pos=4, cex = 0.8)
     legend(legend.pos, legend=levels(gp.factor), bty="n",col = gp.nlevels, pch = 19)
   }
+  return(invisible(u.mds))
 }

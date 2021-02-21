@@ -16,7 +16,7 @@
 #' @seealso [vegan::metaMDS]
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' data(PbHeron)
 #'
 #' # without group specified

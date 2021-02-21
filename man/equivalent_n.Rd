@@ -4,12 +4,14 @@
 \alias{equivalent_n}
 \title{Censored data sample size}
 \usage{
-equivalent_n(y.var, y.cen)
+equivalent_n(y.var, y.cen, printstat = TRUE)
 }
 \arguments{
 \item{y.var}{The column of data values plus detection limits.}
 
 \item{y.cen}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+
+\item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 }
 \value{
 Prints summary statistics including
