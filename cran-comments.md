@@ -2,7 +2,7 @@
 
 * Local: Windows, R version 3.6.1
 
-## R CMD check results (2021-02-15)
+## R CMD check results (2021-02-21)
 After several edits and updates (new version 1.0.0)
 
 ### devtools::check() locally:

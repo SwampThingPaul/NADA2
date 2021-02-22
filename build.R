@@ -43,7 +43,7 @@ devtools::check()
 devtools::check_rhub()
 
 # NEWs file
-usethis::use_news_md()
+# usethis::use_news_md()
 
 ## Builds package down webpage
 pkgdown::build_site()

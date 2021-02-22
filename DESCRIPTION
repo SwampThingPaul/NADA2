@@ -2,7 +2,7 @@ Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
 Version: 1.0.0
-Date: 2021-02-15
+Date: 2021-02-21
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
@@ -21,7 +21,6 @@ Imports: grDevices,
         graphics,
         stats,
         utils,
-        EnvStats,
         fitdistrplus,
         Kendall,
         multcomp,
@@ -32,7 +31,8 @@ Imports: grDevices,
         cenGAM,
         vegan,
         coin,
-        survival
+        survival,
+        EnvStats
 Suggests: knitr,
           rmarkdown
 Encoding: UTF-8

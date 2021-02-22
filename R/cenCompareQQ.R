@@ -6,10 +6,10 @@
 #' @param Yname Optional – input text in quotes to be used as the variable name on all plots.  The default `Yname` is the name of the `y.var` input variable.
 #' @param printrslt Logical `TRUE`/`FALSE` option of whether to print the best distribution in the console window, or not.  Default is `TRUE.`
 #' @export
-#' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #' @details Produces three Q-Q plots and reports which one has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
+#' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #'
-#' @importFrom EnvStats distChoose distChooseCensored qqPlotCensored
+#' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -18,9 +18,11 @@
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'
 #' @examples
+#' \donttest{
 #' data(Brumbaugh)
 #'
-#' \donttest{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
+#'cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
+#'}
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
   yname <- deparse(substitute(y.var))
