@@ -34,8 +34,6 @@
 #' data(PbHeron)
 #' cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
-
-
 cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE,printstat = TRUE) {
 
   oldpar<- par(no.readonly = TRUE)
@@ -281,5 +279,6 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
   }
   }
-if(printstat==TRUE){return(rslt)}else{invisible(rslt)}
+if(printstat==TRUE&sum(y2)>0){return(rslt)}else if(printstat==FALSE&sum(y2)>0){invisible(rslt)}
+  else{warning("Dataset does not have any censored data.")}
 }

@@ -6,7 +6,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# NADA2 <img src="man/figures/logo.png" align="right" alt="" width="120" />
+# NADA2 <img src="man/lakeO.png" align="right" alt="" width="120" />
 
 ## Table of Contents
 
@@ -15,18 +15,16 @@ knitr::opts_chunk$set(echo = TRUE)
 * [Installation](#install)
 
 ## Introduction <a name="intro"></a>
-For many environmental professionals, the way to deal with "nondetects" is less than obvious. Values below detection or reporting limits result from measuring trace amounts of a variety of organic and inorganic chemicals. This package includes methods for plotting, computing summary statistics, hypothesis tests, and regression models for data with one or more detection limits. Most are adaptations of or direct use of existing methods found in survival analysis (such as in the survival package) and in cancer research (such as in the interval package).
+Functions in this package calculate normal and recovery stage envelopes for Lake Okeechobee.
 
-This package is a series of new procedures or improvements on current ones in the `NADA` package developed through a series of webinars, online courses, and updates to Helsel (2004) and Helsel (2011).
-
-- Helsel, D.R., 2004. Nondetects and Data Analysis: Statistics for Censored Environmental Data, 1st edition. ed. Wiley-Interscience, Hoboken, N.J.
-- Helsel, D.R., 2011. Statistics for Censored Environmental Data Using Minitab© and R, 2nd edition. ed. Wiley-Interscience, Hoboken, N.J.
+```{r}
+Library()
 
 
 ## Citing package <a name="cite"></a>
 
 ```{r}
-citation('NADA2')
+citation('LORECOVER')
 ```
 
 
@@ -36,7 +34,7 @@ Development version can be installed from this repo.
 
 ```{r,eval=F}
 install.packages("devtools");# if you do not have it installed on your PC
-devtools::install_github("SwampThingPaul/NADA2")
+devtools::install_github("SwampThingPaul/LORECOVER")
 ```
 
 

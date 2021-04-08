@@ -21,7 +21,6 @@
 #'
 #' data(PbHeron)
 #' cenpermanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
-
 cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   yname <- deparse(substitute(y1))
   gname <- deparse(substitute(grp))
@@ -69,7 +68,7 @@ cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   # group means
   for (i in 1:nlevels(Factor)) {
     ros.out <- suppressWarnings(cenros(x1[Factor == gpname[i]], as.logical(x2[Factor == gpname[i]])))
-    group.means[i] <- signif(mean(ros.out),4)
+    group.means[i] <- signif(mean(ros.out$modeled),4)
     mean.names[i] <- paste("mean(", gpname[i], ")", sep="")
   }
   names(group.means) <- mean.names
