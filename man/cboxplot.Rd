@@ -19,7 +19,8 @@ cboxplot(
   bxcol = "white",
   Ymax = NULL,
   minmax = FALSE,
-  printstat = TRUE
+  printstat = FALSE,
+  Hlines = NULL
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ cboxplot(
 \item{minmax}{\code{TRUE}/\code{FALSE} indicator of whether to draw outliers individually. Default is to show outliers. Setting \code{minmax = TRUE} will draw the whiskers out to the max and min of the dataset.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
+
+\item{Hlines}{Data to add horizontal reference lines to the boxplot. Required input is a data frame of 4 columns.  See Details.}
 }
 \value{
 Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
@@ -61,6 +64,8 @@ Draws boxplots for left-censored data with one ore more detection limit(s). Port
 }
 \details{
 If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
+
+The reuired input to draw additional horizontal lines (Hlines option) is a data frame with 4 columns of input, one row per horizontal line.  More than one line may be drawn.  Column one is the Y axis value for the line.  Column 2 is the line color, column 3 is the line type (lty) and column 4 is the text to be added just above the line.  To add one line at a value of 40, for example, use Hlines = yline, after defining yline = data.frame(c(40, "purple", "dotted", "New Health Std")).  To draw two lines, define yline as yline = data.frame(matrix(c(40, "purple", "dotted", "New Health Std", 70, "blue", "longdash", "Old Health Std"), ncol = 4, byrow=TRUE))) . If no text is wanted use " " for the column 4 entry for that line. See ?par under lty for standard line types.
 }
 \examples{
 data(PbHeron)

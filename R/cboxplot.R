@@ -17,8 +17,10 @@
 #' @param bxcol Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#' @param Hlines Data to add horizontal reference lines to the boxplot. Required input is a data frame of 4 columns.  See Details.
 
 #' @details If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
+#' @details The reuired input to draw additional horizontal lines (Hlines option) is a data frame with 4 columns of input, one row per horizontal line.  More than one line may be drawn.  Column one is the Y axis value for the line.  Column 2 is the line color, column 3 is the line type (lty) and column 4 is the text to be added just above the line.  To add one line at a value of 40, for example, use Hlines = yline, after defining yline = data.frame(c(40, "purple", "dotted", "New Health Std")).  To draw two lines, define yline as yline = data.frame(matrix(c(40, "purple", "dotted", "New Health Std", 70, "blue", "longdash", "Old Health Std"), ncol = 4, byrow=TRUE))) . If no text is wanted use " " for the column 4 entry for that line. See ?par under lty for standard line types.
 #' @export
 #' @importFrom graphics boxplot lines plot polygon
 #' @importFrom grDevices adjustcolor
@@ -34,7 +36,8 @@
 #' data(PbHeron)
 #' cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
-cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE,printstat = TRUE) {
+
+cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
 
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
@@ -50,6 +53,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   Ylim <- NULL
   grp.all = "1"
   gname = NULL
+  rslt<-data.frame(MaximumDL=NA,Group=NA)
 
   if (sum(y2) > 0)    # not all data are detects
   { dlmax <- max(y1[y2 == 1])
@@ -80,7 +84,9 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       abline (h=y.min, col=bdl.col, lwd=8)
       abline(h=log(dlmax), col = dl.col, lty="longdash", lwd=2)
       text(1.35, log(dlmax), labels = dltxt, pos=1, col=dl.col, cex=0.8)
+      rslt<-data.frame(MaximumDL=dlmax, Group= "all")
     }
+
     else {              # log scale, with groups
       nonas <- na.omit(data.frame(y1, y2, group))  # omits NAs for the sake of the ros function
       y.nona <- nonas[,1]
@@ -149,9 +155,11 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         polygon(xx, yy, col = bdl.col, border=bdl.col)
         abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
+        rslt[,1] <- dl.loc
+        rslt[,2] <- levels(group)
       }
       else {
-        rslt<-data.frame(MaximumDL=NA,Group=NA)
+#        rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(log(ymin.all), log(ymin.all), log(maxDL[i]), log(maxDL[i]))
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
@@ -183,6 +191,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       abline (h=y.min, col=bdl.col, lwd=8)
       abline(h=dlmax, col = dl.col, lty="longdash", lwd=2)
       text(1.35, dlmax, labels = dltxt, pos=3, col=dl.col, cex=0.8)
+      rslt<-data.frame(MaximumDL=dlmax, Group= "all")
     }
 
     else {            #  LOG = FALSE, with groups
@@ -252,7 +261,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
       else {
-        rslt<-data.frame(MaximumDL=NA,Group=NA)
+ #      rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(ymin.all, ymin.all, maxDL[i], maxDL[i])
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
@@ -270,15 +279,30 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
   if (is.null(group) == TRUE)    # no group
-  {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)}
+  {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)
+    rslt<-data.frame(MaximumDL="none", Group= "all")
+  }
   else        # with groups
   {gname <- deparse(substitute(group))
   if (is.null(ordr) == FALSE)  {
     group = factor(group, levels(group)[ordr]) }
   glabs <- levels(group)
   boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
+  rslt[,1] <- "none"
+  rslt[,2]= glabs
   }
   }
-if(printstat==TRUE&sum(y2)>0){return(rslt)}else if(printstat==FALSE&sum(y2)>0){invisible(rslt)}
+
+if (!is.null(Hlines))
+ { if (!is.null(group)) {xpos <- 0.6 + (0.05 * length(levels(grp)))}
+  else {xpos = 0.6}
+  for (j in 1:nrow(Hlines))
+  { if (LOG == FALSE) {abline(h=Hlines[j,1], col=Hlines[j,2], lty = Hlines[j,3])
+      text(x=as.vector(xpos), y=as.vector(as.numeric(Hlines[j,1])), labels = Hlines[j,4], pos=3, col=Hlines[j,2], cex=0.8, offset = 0.25)}
+  else {abline(h=log(as.numeric(Hlines[j,1])), col=Hlines[j,2], lty = Hlines[j,3])
+    text(x=as.vector(xpos), y=log(as.vector(as.numeric(Hlines[j,1]))), labels = Hlines[j,4], pos=3, col=Hlines[j,2], cex=0.8, offset = 0.25)}
+  }
+  }
+  if(printstat==TRUE&sum(y2)>0){return(rslt)}else if(printstat==FALSE&sum(y2)>0){invisible(rslt)}
   else{warning("Dataset does not have any censored data.")}
 }

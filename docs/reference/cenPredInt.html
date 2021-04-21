@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -134,7 +134,8 @@
   pi.type <span class='op'>=</span> <span class='st'>"two-sided"</span>,
   conf <span class='op'>=</span> <span class='fl'>0.95</span>,
   newobs <span class='op'>=</span> <span class='fl'>1</span>,
-  method <span class='op'>=</span> <span class='st'>"mle"</span>
+  method <span class='op'>=</span> <span class='st'>"mle"</span>,
+  printstat <span class='op'>=</span> <span class='cn'>TRUE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -163,6 +164,10 @@
     <tr>
       <th>method</th>
       <td><p>Character string specifying the method of estimation. Default is <code>mle</code> (maximum likelihood). See details.</p></td>
+    </tr>
+    <tr>
+      <th>printstat</th>
+      <td><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></td>
     </tr>
     </table>
 
@@ -199,8 +204,8 @@
 #&gt; 3       Normal -6.0029976395 12.280833</div><div class='input'>
 <span class='co'># User defined confidence coefficient outside of acceptable range</span>
 <span class='co'># the procedure will stop and give an error.</span>
-<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>cenPredInt</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>Liver</span>,<span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>LiverCen</span>, conf<span class='op'>=</span><span class='fl'>1.1</span><span class='op'>)</span>
-
+<span class='fu'>cenPredInt</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>Liver</span>,<span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>LiverCen</span>, conf<span class='op'>=</span><span class='fl'>1.1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in cenPredInt(PbHeron$Liver, PbHeron$LiverCen, conf = 1.1): Please select a confidence coefficient between 0 and 1.</span></div><div class='input'>
 <span class='co'># User defined prediction interval type</span>
 <span class='fu'>cenPredInt</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>Liver</span>,<span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>LiverCen</span>,pi.type<span class='op'>=</span><span class='st'>"lower"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; 95% Lower Prediction Limit</div><div class='output co'>#&gt;   Distribution       95% LPL 95% UPL

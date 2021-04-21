@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@
     <p>Performs a parametric test of differences in means between groups of censored data, followed by a parametric Tukey's multiple comparison test.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cenanova</span><span class='op'>(</span><span class='va'>y1</span>, <span class='va'>y2</span>, <span class='va'>grp</span>, LOG <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cenanova</span><span class='op'>(</span><span class='va'>y1</span>, <span class='va'>y2</span>, <span class='va'>grp</span>, LOG <span class='op'>=</span> <span class='cn'>TRUE</span>, printstat <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,6 +148,10 @@
     <tr>
       <th>LOG</th>
       <td><p>Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (<code>LOG = TRUE</code>).  To compute in original units, specify the option <code>LOG = FALSE</code> (or <code>LOG = 0</code>).</p></td>
+    </tr>
+    <tr>
+      <th>printstat</th>
+      <td><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></td>
     </tr>
     </table>
 

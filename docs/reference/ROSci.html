@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -125,10 +125,10 @@
     </div>
 
     <div class="ref-description">
-    <p>Uses ROS model output from the NADA package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.</p>
+    <p>Uses ROS model output from the <code>NADA</code> package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>ROSci</span><span class='op'>(</span><span class='va'>cenros.out</span>, conf <span class='op'>=</span> <span class='fl'>0.95</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>ROSci</span><span class='op'>(</span><span class='va'>cenros.out</span>, conf <span class='op'>=</span> <span class='fl'>0.95</span>, printstat <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +140,10 @@
     <tr>
       <th>conf</th>
       <td><p>Confidence coefficient of the interval (Default is 0.95)</p></td>
+    </tr>
+    <tr>
+      <th>printstat</th>
+      <td><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></td>
     </tr>
     </table>
 
@@ -189,8 +193,9 @@ For more detail on ROS modeling see the <code>ros</code> help file (<code><a hre
 </div><div class='output co'>#&gt; [1] 0.3555983</div><div class='input'>
 <span class='co'># 95% CI around the ROS mean</span>
 <span class='fu'>ROSci</span><span class='op'>(</span><span class='va'>myros</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: argument is not numeric or logical: returning NA</span></div><div class='output co'>#&gt;    LCL95     UCL95     assuming a lognormal distribution 
-#&gt; NA  NA</div></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: argument is not numeric or logical: returning NA</span></div><div class='output co'>#&gt; Assuming a lognormal distribution 
+#&gt;   LCL UCL
+#&gt; 1  NA  NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

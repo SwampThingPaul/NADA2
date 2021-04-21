@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Uscores for multiple columns of censored data — uscores • NADA2</title>
+<title>Summary statistics of survival curve (from survival:::survmean) — NADA2_survmean • NADA2</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Uscores for multiple columns of censored data — uscores" />
-<meta property="og:description" content="Computes uscores or the ranks of uscores of censored data in the indicator format. Multiple DLs allowed." />
+<meta property="og:title" content="Summary statistics of survival curve (from survival:::survmean) — NADA2_survmean" />
+<meta property="og:description" content="computes mean survival times consisent with survival:::survmean" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -119,70 +119,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Uscores for multiple columns of censored data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/SwampThingPaul/NADA2/blob/master/R/uscores.R'><code>R/uscores.R</code></a></small>
-    <div class="hidden name"><code>uscores.Rd</code></div>
+    <h1>Summary statistics of survival curve (from <code>survival:::survmean</code>)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/SwampThingPaul/NADA2/blob/master/R/cfit.R'><code>R/cfit.R</code></a></small>
+    <div class="hidden name"><code>NADA2_survmean.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Computes uscores or the ranks of uscores of censored data in the indicator format. Multiple DLs allowed.</p>
+    <p>computes mean survival times consisent with <code>survival:::survmean</code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>uscores</span><span class='op'>(</span><span class='va'>dat.frame</span>, paired <span class='op'>=</span> <span class='cn'>TRUE</span>, rnk <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>NADA2_survmean</span><span class='op'>(</span><span class='va'>x</span>, scale <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>rmean</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dat.frame</th>
-      <td><p>A data frame. Default format is paired = <code>TRUE</code>, where for 3 chemical parameters the input format is C1 I1 C2 I2 C3 I3, a concentration column followed by its corresponding indicator column.</p></td>
+      <th>x</th>
+      <td><p>the result of a call to the survfit function.</p></td>
     </tr>
     <tr>
-      <th>paired</th>
-      <td><p>When paired = <code>FALSE</code>, the input format is C1 C2 C3 I1 I2 I3 where the C columns contain concentrations or a detection limit, and the I columns are their associated indicators, in the same order as the concentration columns.</p></td>
+      <th>scale</th>
+      <td><p>a numeric value to rescale the survival time, e.g., if the input data to survfit were in days, scale=365 would scale the printout to years.</p></td>
     </tr>
     <tr>
-      <th>rnk</th>
-      <td><p>A logical <code>TRUE</code>/<code>FALSE</code> variable on whether to compute the multivariate pattern on the uscores, or the ranks of the uscores.  Default is rnk=<code>TRUE</code>, use the ranks. rnk = <code>FALSE</code> returns the uscores.</p></td>
+      <th>rmean</th>
+      <td><p>restricted mean</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A matrix of uscores or ranks of uscores, one column for each chemical parameter.  If there is only one chemical parameter a vector of uscores or ranks of uscores is returned.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>)</span>
-
-<span class='fu'>uscores</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       usc.Liver usc.Bone usc.Brain usc.Feather usc.Blood usc.Kidney
-#&gt;  [1,]        20      7.0        11         3.0        10          5
-#&gt;  [2,]        13      1.5        15         1.5        10          4
-#&gt;  [3,]         4      1.5        20        15.0        10          2
-#&gt;  [4,]        10      3.0         7         7.0        10          6
-#&gt;  [5,]         4      4.0         2        11.0        10          8
-#&gt;  [6,]         8     10.0         5         5.0        19          3
-#&gt;  [7,]         7      5.0         2         4.0        10          1
-#&gt;  [8,]        14     14.0        12        10.0        10         15
-#&gt;  [9,]        21      8.0        26         1.5        10          9
-#&gt; [10,]        12     17.0        23        16.0        22         13
-#&gt; [11,]        18      9.0        18         6.0        10          7
-#&gt; [12,]         4      6.0         9        13.0        10         10
-#&gt; [13,]         4     13.0        10         8.0        10         11
-#&gt; [14,]         4     12.0         4         9.0        10         12
-#&gt; [15,]        24     24.0        25        25.0        24         25
-#&gt; [16,]        26     23.0        27        20.0        25         26
-#&gt; [17,]         1     11.0         2        17.0        10         18
-#&gt; [18,]        15     18.0        17        26.0        20         23
-#&gt; [19,]        11     16.0         8        14.0         1         14
-#&gt; [20,]        25     26.0        16        22.0        27         24
-#&gt; [21,]        23     21.0        21        23.0        23         21
-#&gt; [22,]        19     20.0        19        19.0        18         17
-#&gt; [23,]        16     22.0        14        18.0        10         19
-#&gt; [24,]        17     19.0        13        21.0        21         20
-#&gt; [25,]        22     25.0        24        24.0        10         22
-#&gt; [26,]        27     27.0        22        27.0        26         27
-#&gt; [27,]         9     15.0         6        12.0         2         16</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

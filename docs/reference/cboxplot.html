@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -142,7 +142,9 @@
   dl.col <span class='op'>=</span> <span class='st'>"red"</span>,
   bxcol <span class='op'>=</span> <span class='st'>"white"</span>,
   Ymax <span class='op'>=</span> <span class='cn'>NULL</span>,
-  minmax <span class='op'>=</span> <span class='cn'>FALSE</span>
+  minmax <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  printstat <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  Hlines <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -204,6 +206,14 @@
       <th>minmax</th>
       <td><p><code>TRUE</code>/<code>FALSE</code> indicator of whether to draw outliers individually. Default is to show outliers. Setting <code>minmax = TRUE</code> will draw the whiskers out to the max and min of the dataset.</p></td>
     </tr>
+    <tr>
+      <th>printstat</th>
+      <td><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></td>
+    </tr>
+    <tr>
+      <th>Hlines</th>
+      <td><p>Data to add horizontal reference lines to the boxplot. Required input is a data frame of 4 columns.  See Details.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -212,6 +222,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.</p>
+<p>The reuired input to draw additional horizontal lines (Hlines option) is a data frame with 4 columns of input, one row per horizontal line.  More than one line may be drawn.  Column one is the Y axis value for the line.  Column 2 is the line color, column 3 is the line type (lty) and column 4 is the text to be added just above the line.  To add one line at a value of 40, for example, use Hlines = yline, after defining yline = data.frame(c(40, "purple", "dotted", "New Health Std")).  To draw two lines, define yline as yline = data.frame(matrix(c(40, "purple", "dotted", "New Health Std", 70, "blue", "longdash", "Old Health Std"), ncol = 4, byrow=TRUE))) . If no text is wanted use " " for the column 4 entry for that line. See ?par under lty for standard line types.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley &amp; Sons, USA, N.J.</p>
@@ -219,11 +230,11 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>)</span>
 <span class='fu'>cboxplot</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>Liver</span>,<span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>LiverCen</span>,<span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>Group</span><span class='op'>)</span>
-</div><div class='img'><img src='cboxplot-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; Maximum DL   Group   
-#&gt;      0.04   1   
-#&gt;      0.04   2   
-#&gt;      0   3   
-#&gt;      0   4   </div></pre>
+</div><div class='img'><img src='cboxplot-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;   MaximumDL Group
+#&gt; 1      0.04     1
+#&gt; 2      0.04     2
+#&gt; 3      0.00     3
+#&gt; 4      0.00     4</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -163,66 +163,66 @@ Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and
 <span class='va'>PbHeron.u</span> <span class='op'>&lt;-</span> <span class='fu'><a href='uscores.html'>uscores</a></span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span><span class='op'>)</span>
 <span class='fu'>uMDS</span><span class='op'>(</span><span class='va'>PbHeron.u</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Run 0 stress 0.07773434 
-#&gt; Run 1 stress 0.07851582 
-#&gt; Run 2 stress 0.08660761 
-#&gt; Run 3 stress 0.07788834 
-#&gt; ... Procrustes: rmse 0.01183531  max resid 0.03751065 
-#&gt; Run 4 stress 0.07851582 
-#&gt; Run 5 stress 0.07844726 
-#&gt; Run 6 stress 0.07793355 
-#&gt; ... Procrustes: rmse 0.007557852  max resid 0.02869716 
-#&gt; Run 7 stress 0.1271665 
-#&gt; Run 8 stress 0.137392 
-#&gt; Run 9 stress 0.08660761 
-#&gt; Run 10 stress 0.07851582 
-#&gt; Run 11 stress 0.08660761 
-#&gt; Run 12 stress 0.07851582 
-#&gt; Run 13 stress 0.07762542 
+#&gt; Run 1 stress 0.07788834 
+#&gt; ... Procrustes: rmse 0.01183499  max resid 0.03750395 
+#&gt; Run 2 stress 0.08639937 
+#&gt; Run 3 stress 0.07773434 
+#&gt; ... Procrustes: rmse 5.868035e-06  max resid 2.390805e-05 
+#&gt; ... Similar to previous best
+#&gt; Run 4 stress 0.07762542 
 #&gt; ... New best solution
-#&gt; ... Procrustes: rmse 0.009282949  max resid 0.03814709 
-#&gt; Run 14 stress 0.07844726 
-#&gt; Run 15 stress 0.1399472 
-#&gt; Run 16 stress 0.07762542 
-#&gt; ... Procrustes: rmse 2.754347e-06  max resid 7.457448e-06 
+#&gt; ... Procrustes: rmse 0.00928235  max resid 0.03814038 
+#&gt; Run 5 stress 0.07851582 
+#&gt; Run 6 stress 0.07762542 
+#&gt; ... Procrustes: rmse 5.248297e-06  max resid 1.972615e-05 
 #&gt; ... Similar to previous best
+#&gt; Run 7 stress 0.07851582 
+#&gt; Run 8 stress 0.07788834 
+#&gt; ... Procrustes: rmse 0.00800859  max resid 0.03036184 
+#&gt; Run 9 stress 0.07851582 
+#&gt; Run 10 stress 0.07851582 
+#&gt; Run 11 stress 0.08639937 
+#&gt; Run 12 stress 0.07844726 
+#&gt; Run 13 stress 0.1275347 
+#&gt; Run 14 stress 0.1364098 
+#&gt; Run 15 stress 0.1271808 
+#&gt; Run 16 stress 0.1416526 
 #&gt; Run 17 stress 0.07844726 
-#&gt; Run 18 stress 0.07762542 
-#&gt; ... Procrustes: rmse 2.490847e-06  max resid 8.130522e-06 
-#&gt; ... Similar to previous best
-#&gt; Run 19 stress 0.1376148 
-#&gt; Run 20 stress 0.1409812 
+#&gt; Run 18 stress 0.07851582 
+#&gt; Run 19 stress 0.1356214 
+#&gt; Run 20 stress 0.07793355 
+#&gt; ... Procrustes: rmse 0.01225903  max resid 0.03832107 
 #&gt; *** Solution reached</div><div class='output co'>#&gt; <span class='message'>species scores not available</span></div><div class='img'><img src='uMDS-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># With group specific</span>
 <span class='fu'>uMDS</span><span class='op'>(</span><span class='va'>PbHeron.u</span>,group<span class='op'>=</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>DosageGroup</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; Run 0 stress 0.07773434 
-#&gt; Run 1 stress 0.08639937 
-#&gt; Run 2 stress 0.07762542 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 0.009282713  max resid 0.03814753 
+#&gt; Run 1 stress 0.07844726 
+#&gt; Run 2 stress 0.1414935 
 #&gt; Run 3 stress 0.07851582 
 #&gt; Run 4 stress 0.07851582 
-#&gt; Run 5 stress 0.07788834 
-#&gt; ... Procrustes: rmse 0.008007354  max resid 0.03036284 
-#&gt; Run 6 stress 0.07762542 
-#&gt; ... New best solution
-#&gt; ... Procrustes: rmse 6.895875e-06  max resid 2.663195e-05 
-#&gt; ... Similar to previous best
-#&gt; Run 7 stress 0.08660761 
-#&gt; Run 8 stress 0.08660761 
-#&gt; Run 9 stress 0.1271666 
-#&gt; Run 10 stress 0.08639937 
-#&gt; Run 11 stress 0.07788834 
-#&gt; ... Procrustes: rmse 0.008009262  max resid 0.03037544 
-#&gt; Run 12 stress 0.1353489 
-#&gt; Run 13 stress 0.07851582 
+#&gt; Run 5 stress 0.07851582 
+#&gt; Run 6 stress 0.07851582 
+#&gt; Run 7 stress 0.07844726 
+#&gt; Run 8 stress 0.0866076 
+#&gt; Run 9 stress 0.0866076 
+#&gt; Run 10 stress 0.07788834 
+#&gt; ... Procrustes: rmse 0.01183568  max resid 0.03750226 
+#&gt; Run 11 stress 0.07851582 
+#&gt; Run 12 stress 0.07844726 
+#&gt; Run 13 stress 0.129461 
 #&gt; Run 14 stress 0.07844726 
-#&gt; Run 15 stress 0.1302845 
-#&gt; Run 16 stress 0.07844726 
-#&gt; Run 17 stress 0.07844726 
-#&gt; Run 18 stress 0.07851582 
-#&gt; Run 19 stress 0.07793355 
-#&gt; ... Procrustes: rmse 0.01226022  max resid 0.03832923 
-#&gt; Run 20 stress 0.07844726 
+#&gt; Run 15 stress 0.07844726 
+#&gt; Run 16 stress 0.07851582 
+#&gt; Run 17 stress 0.07788834 
+#&gt; ... Procrustes: rmse 0.01183525  max resid 0.03750413 
+#&gt; Run 18 stress 0.07762542 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 0.00928356  max resid 0.03814751 
+#&gt; Run 19 stress 0.07762542 
+#&gt; ... Procrustes: rmse 3.63746e-06  max resid 1.593564e-05 
+#&gt; ... Similar to previous best
+#&gt; Run 20 stress 0.07773434 
+#&gt; ... Procrustes: rmse 0.009283499  max resid 0.03812502 
 #&gt; *** Solution reached</div><div class='img'><img src='uMDS-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

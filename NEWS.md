@@ -4,4 +4,6 @@
 
 * Submitted to CRAN (2021-02-16)
 
-* troubleshooted some minor errors in `cboxplot` and `cenpermanova` functions (2021-04-08)
+* troubleshooted some minor errors in `cenpermanova` functions (2021-04-08)
+
+* troubleshooted some minor errors in `cboxplot` functions (2021-04-21)

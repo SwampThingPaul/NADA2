@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -128,7 +128,7 @@
     <p>Computes the equivalent sample size of censored data.  Observations at lower detection limits have a greater percent of the equivalent information of a detected value than observations at higher detection limits.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>equivalent_n</span><span class='op'>(</span><span class='va'>y.var</span>, <span class='va'>y.cen</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>equivalent_n</span><span class='op'>(</span><span class='va'>y.var</span>, <span class='va'>y.cen</span>, printstat <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -140,6 +140,10 @@
     <tr>
       <th>y.cen</th>
       <td><p>The column of indicators, where 1 (or <code>TRUE</code>) indicates a detection limit in the <code>y.var</code> column, and 0 (or <code>FALSE</code>) indicates a detected value in <code>y.var</code>.</p></td>
+    </tr>
+    <tr>
+      <th>printstat</th>
+      <td><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></td>
     </tr>
     </table>
 
@@ -182,11 +186,16 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>Brumbaugh</span><span class='op'>)</span>
 
 <span class='fu'>equivalent_n</span><span class='op'>(</span><span class='va'>Brumbaugh</span><span class='op'>$</span><span class='va'>Hg</span>,<span class='va'>Brumbaugh</span><span class='op'>$</span><span class='va'>HgCen</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Brumbaugh$Hg</span></div><div class='output co'>#&gt; all:
-#&gt;        n    n.cen  pct.cen      min      max 
-#&gt; 133.0000  15.0000  11.2782   0.0300   4.2200 
+</div><div class='output co'>#&gt; data: Brumbaugh$Hg 
+#&gt; $all
+#&gt;        all variable
+#&gt; 1 133.0000        n
+#&gt; 2  15.0000    n.cen
+#&gt; 3  11.2782  pct.cen
+#&gt; 4   0.0300      min
+#&gt; 5   4.2200      max
 #&gt; 
-#&gt; limits:
+#&gt; $limits
 #&gt;   limit n uncen   pexceed
 #&gt; 1  0.03 3     1 0.9348371
 #&gt; 2  0.05 4    10 0.9131161

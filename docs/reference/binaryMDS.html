@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -165,15 +165,89 @@
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/vegan/man/metaMDS.html'>vegan::metaMDS</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>)</span>
 
 <span class='co'># without group specified</span>
 <span class='fu'>binaryMDS</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; Run 0 stress 9.202781e-05 
+#&gt; Run 1 stress 5.215399e-05 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 0.08145068  max resid 0.2437797 
+#&gt; Run 2 stress 5.248582e-05 
+#&gt; ... Procrustes: rmse 0.1095925  max resid 0.3156595 
+#&gt; Run 3 stress 9.636584e-05 
+#&gt; ... Procrustes: rmse 0.1168464  max resid 0.1745211 
+#&gt; Run 4 stress 9.668213e-05 
+#&gt; ... Procrustes: rmse 0.05381145  max resid 0.171439 
+#&gt; Run 5 stress 0.04650387 
+#&gt; Run 6 stress 4.484104e-05 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 0.01947791  max resid 0.03778588 
+#&gt; Run 7 stress 0.0008385034 
+#&gt; Run 8 stress 0.05911466 
+#&gt; Run 9 stress 0.05574189 
+#&gt; Run 10 stress 0.0002023722 
+#&gt; ... Procrustes: rmse 0.08636116  max resid 0.2360349 
+#&gt; Run 11 stress 0 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 0.03106244  max resid 0.1014902 
+#&gt; Run 12 stress 0.07002519 
+#&gt; Run 13 stress 0.04186816 
+#&gt; Run 14 stress 0.04374122 
+#&gt; Run 15 stress 8.871544e-05 
+#&gt; ... Procrustes: rmse 0.02548211  max resid 0.07890825 
+#&gt; Run 16 stress 8.019225e-05 
+#&gt; ... Procrustes: rmse 0.1200295  max resid 0.3360453 
+#&gt; Run 17 stress 0.001191335 
+#&gt; Run 18 stress 0.0579734 
+#&gt; Run 19 stress 9.379246e-05 
+#&gt; ... Procrustes: rmse 0.1120606  max resid 0.3358354 
+#&gt; Run 20 stress 0 
+#&gt; ... Procrustes: rmse 0.1174075  max resid 0.3436832 
+#&gt; *** No convergence -- monoMDS stopping criteria:
+#&gt;      8: no. of iterations &gt;= maxit
+#&gt;     10: stress &lt; smin
+#&gt;      2: stress ratio &gt; sratmax</div><div class='output co'>#&gt; <span class='warning'>Warning: stress is (nearly) zero: you may have insufficient data</span></div><div class='output co'>#&gt; <span class='message'>species scores not available</span></div><div class='img'><img src='binaryMDS-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># With Group argument</span>
 <span class='fu'>binaryMDS</span><span class='op'>(</span><span class='va'>PbHeron</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>15</span><span class='op'>]</span>,group<span class='op'>=</span><span class='va'>PbHeron</span><span class='op'>$</span><span class='va'>DosageGroup</span><span class='op'>)</span>
-<span class='op'>}</span>
+</div><div class='output co'>#&gt; Run 0 stress 9.202781e-05 
+#&gt; Run 1 stress 9.789276e-05 
+#&gt; ... Procrustes: rmse 0.1081153  max resid 0.2515593 
+#&gt; Run 2 stress 0.05797328 
+#&gt; Run 3 stress 0 
+#&gt; ... New best solution
+#&gt; ... Procrustes: rmse 0.05376114  max resid 0.1715295 
+#&gt; Run 4 stress 9.481935e-05 
+#&gt; ... Procrustes: rmse 0.1295238  max resid 0.3071093 
+#&gt; Run 5 stress 9.756426e-05 
+#&gt; ... Procrustes: rmse 0.1071173  max resid 0.2690496 
+#&gt; Run 6 stress 3.785053e-06 
+#&gt; ... Procrustes: rmse 0.02632724  max resid 0.05545704 
+#&gt; Run 7 stress 0 
+#&gt; ... Procrustes: rmse 0.02524149  max resid 0.08269285 
+#&gt; Run 8 stress 0.05797329 
+#&gt; Run 9 stress 0.05797321 
+#&gt; Run 10 stress 0.05926778 
+#&gt; Run 11 stress 0 
+#&gt; ... Procrustes: rmse 0.04209702  max resid 0.1123111 
+#&gt; Run 12 stress 0.001849104 
+#&gt; Run 13 stress 8.988837e-05 
+#&gt; ... Procrustes: rmse 0.02060557  max resid 0.04441905 
+#&gt; Run 14 stress 0.0002117601 
+#&gt; ... Procrustes: rmse 0.05199627  max resid 0.175558 
+#&gt; Run 15 stress 8.698919e-05 
+#&gt; ... Procrustes: rmse 0.04042953  max resid 0.08023905 
+#&gt; Run 16 stress 0.04707708 
+#&gt; Run 17 stress 0.05797326 
+#&gt; Run 18 stress 0.00204676 
+#&gt; Run 19 stress 0.0001953699 
+#&gt; ... Procrustes: rmse 0.1267913  max resid 0.2606174 
+#&gt; Run 20 stress 0.04707704 
+#&gt; *** No convergence -- monoMDS stopping criteria:
+#&gt;      5: no. of iterations &gt;= maxit
+#&gt;      9: stress &lt; smin
+#&gt;      6: stress ratio &gt; sratmax</div><div class='output co'>#&gt; <span class='warning'>Warning: stress is (nearly) zero: you may have insufficient data</span></div><div class='output co'>#&gt; <span class='message'>species scores not available</span></div><div class='img'><img src='binaryMDS-2.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
