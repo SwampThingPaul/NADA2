@@ -41,9 +41,8 @@ cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   # see "Permutation Tests, Second Edition" by Good (2000), page 44.
   Wprime.groups <- function (x, Factor) {
     Wprime <- 0
-    gpname <- as.character(levels(Factor))
     for (i in 1:nlevels(Factor)) {
-      W.grp <- (sum(x[Factor == gpname[i]]))^2 / length(x[Factor == gpname[i]])
+      W.grp <- (sum(x[Factor == grpname[i]]))^2 / length(x[Factor == grpname[i]])
       Wprime <- Wprime + W.grp
     }
     return(invisible(Wprime))
@@ -67,7 +66,7 @@ cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
 
   # group means
   for (i in 1:nlevels(Factor)) {
-    ros.out <- suppressWarnings(cenros(x1[Factor == gpname[i]], as.logical(x2[Factor == gpname[i]])))
+    ros.out <- suppressWarnings(cenros(x1[Factor == grpname[i]], as.logical(x2[Factor == grpname[i]])))
     group.means[i] <- signif(mean(ros.out$modeled),4)
     mean.names[i] <- paste("mean(", gpname[i], ")", sep="")
   }
@@ -78,9 +77,9 @@ cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   p.hi <- max(pval.lo, pval.hi)
   result <- data.frame(teststat.lo, teststat.hi, p.lo, p.hi, group.means)
   if(printstat==TRUE){
-  cat(" Permutation test of mean CensData:", yname, "  by Factor:", gname, '\n', "   ", R, "Permutations", "\n")
-  cat( "Test Statistic =", signif(teststat.lo, 4), "to", signif(teststat.hi, 4), "      p =", pval.lo, "to", pval.hi, '\n', "\n")
-  print(group.means, row.names = FALSE, print.gap = 3)
+    cat(" Permutation test of mean CensData:", yname, "  by Factor:", gname, '\n', "   ", R, "Permutations", "\n")
+    cat( "Test Statistic =", signif(teststat.lo, 4), "to", signif(teststat.hi, 4), "      p =", pval.lo, "to", pval.hi, '\n', "\n")
+    print(group.means, row.names = FALSE, print.gap = 3)
   }
   return(invisible(result))
 }
