@@ -67,7 +67,7 @@ cenpermanova <- function(y1, y2, grp, R = 9999,printstat=TRUE) {
   # group means
   for (i in 1:nlevels(Factor)) {
     ros.out <- suppressWarnings(cenros(x1[Factor == grpname[i]], as.logical(x2[Factor == grpname[i]])))
-    group.means[i] <- signif(mean(ros.out$modeled),4)
+    group.means[i] <- signif(NADA::mean(ros.out$modeled),4)
     mean.names[i] <- paste("mean(", gpname[i], ")", sep="")
   }
   names(group.means) <- mean.names
