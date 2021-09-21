@@ -13,3 +13,9 @@
 # NADA2 1.0.1
 
 * Submitted to CRAN (2021-04-29)
+
+# NADA2 1.0.2
+
+* Minor edit to `ROSci` function to reduce dependencies on the original `NADA` package.
+
+* Added PollenThia dataset

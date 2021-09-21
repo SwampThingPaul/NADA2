@@ -44,7 +44,7 @@ ROSci <- function(cenros.out, conf=0.95,printstat=TRUE) {
     # For the default lognormal distribution, Cox’s method is used.
     scale <- as.vector(cenros.out[1]$coefficients[2])
     #  coefficient #2 is the scale, the sd of the logs
-    bhat <- log(mean(cenros.out))
+    bhat <- log(mean(cenros.out$modeled))
     #  Mean log plus one-half scale^2 ;  the mean transformed to log units
     gamz <- qt(p,(n-1)) * sqrt((scale^2/n) + (((0.5)*scale^4)/(n-1)))
     #  Zhou and Gao 1997 modified Cox’s method for the CI of a lognormal distribution
@@ -61,7 +61,7 @@ ROSci <- function(cenros.out, conf=0.95,printstat=TRUE) {
   else { # for a gaussian distribution;
     tstat <- qt(p,(n-1))
     halfw <- tstat*(sd(cenros.out)/sqrt(n))
-    ciNorm <- c(mean(cenros.out) - halfw, mean(cenros.out) + halfw)
+    ciNorm <- c(mean(cenros.out$modeled) - halfw, mean(cenros.out$modeled) + halfw)
 
     rslt<-data.frame(LCL=ciNorm[1],UCL=ciNorm[2])
     if(printstat==TRUE){

@@ -18,11 +18,9 @@
 #' Shapiro, S.S., Francia, R.S., 1972. An approximate analysis of variance test for normality. Journal of the American Statistical Association 67, 215–216.
 #'
 #' @examples
-#' \donttest{
-#' data(Brumbaugh)
 #'
-#'cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)
-#'}
+#' data(Brumbaugh)
+#' \donttest{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
 
 cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
   yname <- deparse(substitute(y.var))
