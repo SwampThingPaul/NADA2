@@ -1,4 +1,4 @@
-#' Atrazine concentrations in Nebraska ground water
+#' Thiamethoxam concentrations in pollen
 #'
 #' @description
 #' Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network.

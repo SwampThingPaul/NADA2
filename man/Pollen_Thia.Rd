@@ -3,7 +3,7 @@
 \docType{data}
 \name{Pollen_Thia}
 \alias{Pollen_Thia}
-\title{Atrazine concentrations in Nebraska ground water}
+\title{Thiamethoxam concentrations in pollen}
 \format{
 An object of class \code{data.frame} with 204 rows and 4 columns.
 }
