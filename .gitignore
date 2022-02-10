@@ -47,6 +47,6 @@ vignettes/*.pdf
 /CRAN NADA/
 /DRAFT BUILD/
 
-*.build.R
+*build*.R
 *NADA2_*.pdf
 *NADA Solutions to Exercises online 3_3*.docx

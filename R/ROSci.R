@@ -29,7 +29,7 @@
 #' summary(myros)
 #'
 #' # ROS Mean
-#' mean(myros)
+#' mean(myros$modeled)
 #'
 #' # 95% CI around the ROS mean
 #' ROSci(myros)

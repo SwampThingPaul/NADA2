@@ -65,3 +65,24 @@ x.var=Brumbaugh$SedTotHg
 time.var=1:nrow(Brumbaugh)
 Smooth = "cs"
 link = "identity"
+
+
+
+####
+test <- Brumbaugh
+
+# Estimate the mean with ROS
+Erg <- NADA::ros(test$Hg, test$HgCen)
+summary(Erg)
+
+mean(Erg)
+mean(Erg$modeled)
+
+Erg2 <- NADA::cenros(test$Hg, test$HgCen)
+summary(Erg2)
+
+mean(Erg)
+mean(Erg$modeled)
+
+# Estimate confidence interval of mean
+ROSci(Erg)
