@@ -49,11 +49,11 @@ cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=0.75)
 cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 
 # inputs outside acceptable ranges
-\donttest{
-cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
-cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
-cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
-}
+# Will result in errors/warnings
+# cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
+# cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
+# cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
+
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

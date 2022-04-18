@@ -24,7 +24,6 @@
 #' @seealso [EnvStats::enormCensored]
 #'
 #' @examples
-#'\donttest{
 #' data(PbHeron)
 #'
 #' # Default
@@ -35,12 +34,12 @@
 #'
 #' # User defined confidence coefficient outside of acceptable range
 #' # the procedure will stop and give an error.
-#' cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)
+#' # cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)
 #'
 #' # User defined prediction interval type
 #' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")
 #' cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
-#' }
+#'
 
 
 cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle",printstat=TRUE)  {

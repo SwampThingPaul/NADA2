@@ -2,7 +2,7 @@ Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
 Version: 1.0.2
-Date: 2022-04-05
+Date: 2022-04-18
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
@@ -16,7 +16,8 @@ Description: Contains methods described by Dennis Helsel in
              <https://practicalstats.com>. This package adds new functions to 
              the `NADA` Package.
 License: MIT + file LICENSE
-Depends: R (>= 3.6)
+Depends: R (>= 3.6),
+        EnvStats (>= 2.4)
 Imports: grDevices,
         graphics,
         stats,
@@ -31,8 +32,7 @@ Imports: grDevices,
         cenGAM,
         vegan,
         coin,
-        survival,
-        EnvStats
+        survival
 Suggests: knitr,
           rmarkdown
 Encoding: UTF-8

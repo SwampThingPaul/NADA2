@@ -35,11 +35,11 @@
 #' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=0.5)
 #'
 #' # inputs outside acceptable ranges
-#' \donttest{
-#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
-#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
-#' cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
-#' }
+#' # Will result in errors/warnings
+#' # cenTolInt(PbHeron$Liver,PbHeron$LiverCen,cover=1.25)
+#' # cenTolInt(PbHeron$Liver,PbHeron$LiverCen,conf=1.1)
+#' # cenTolInt(PbHeron$Liver,PbHeron$LiverCen,method.fit="ROS")
+#'
 
 cenTolInt <- function(y.var, cen.var, conf = 0.95, cover = 0.9, method.fit = "mle",printstat=TRUE)
 {

@@ -39,7 +39,6 @@ Computes prediction intervals for censored data assuming lognormal, gamma and no
 Computes prediction intervals for three distributions.  This is a front-end to the individual functions from the EnvStats package.  By default all three are computed using maximum likelihood estimation (mle). The gamma distribution for censored data uses the Wilson-Hilferty approximation (normal distribution on cube roots of data). Other methods are available in EnvStats, but few methods are available for all three distributions. For info on other methods, see help for elnormCensored and enormCensored commands in EnvStats.
 }
 \examples{
-\donttest{
 data(PbHeron)
 
 # Default
@@ -50,12 +49,12 @@ cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=0.5)
 
 # User defined confidence coefficient outside of acceptable range
 # the procedure will stop and give an error.
-cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)
+# cenPredInt(PbHeron$Liver,PbHeron$LiverCen, conf=1.1)
 
 # User defined prediction interval type
 cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="lower")
 cenPredInt(PbHeron$Liver,PbHeron$LiverCen,pi.type="upper")
-}
+
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
