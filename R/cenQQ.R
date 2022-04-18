@@ -9,7 +9,7 @@
 #'
 #' @return A single Q-Q plot of data fitted by normal, lognormal or gamma distributions with Shapiro-Francia W value printed on plot.
 #'
-#' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored
+#' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored qqPlot
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -67,18 +67,18 @@ cenQQ <- function(y.var, cen.var, dist = "lnorm", Yname = yname)  {
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
 
   if (dist == "norm") {
-    EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
+    qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
     mtext(norm.text)
   }
 
   if (dist == "lnorm")  {
     ylabel <- paste ("ln (", Yname, ")", sep = "")
-    EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
+    qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = ylabel, main = "Lognormal Q-Q Plot")
     mtext(lnorm.text)
   }
 
   if (dist == "gamma")  {
-    EnvStats::qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
+    qqPlot(y.var, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
     mtext(gamma.text)
   } }
 }

@@ -19,3 +19,5 @@
 * Minor edit to `ROSci` function to reduce dependencies on the original `NADA` package.
 
 * Added PollenThia dataset
+
+* Submitted to CRAN (2022-04-05)

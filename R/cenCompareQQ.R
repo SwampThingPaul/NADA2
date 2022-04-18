@@ -9,7 +9,8 @@
 #' @details Produces three Q-Q plots and reports which one has the highest Shapiro-Francia test statistic (W).  The distribution with the highest W is the best fit of the three.
 #' @return Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
 #'
-#' @importFrom EnvStats distChoose gofTestCensored qqPlotCensored distChooseCensored
+#' @importFrom EnvStats distChooseCensored distChoose gofTestCensored qqPlotCensored qqPlot
+#'
 #' @references
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
@@ -22,12 +23,13 @@
 #' data(Brumbaugh)
 #' \donttest{cenCompareQQ(Brumbaugh$Hg,Brumbaugh$HgCen)}
 
+
 cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
   yname <- deparse(substitute(y.var))
   if (sum(as.integer(cen.var)) > 0)    # not all data are detects
 
   { cen.logical <- as.logical(cen.var)
-  var.choose <- distChooseCensored(y.var, cen.logical)
+  var.choose <- EnvStats::distChooseCensored(x=y.var, censored=cen.logical)
   norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
   lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
   gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
@@ -43,15 +45,15 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
   if(printrslt==TRUE){cat(best.dist, "\n")}
 
   par(mfrow=c(2,2))
-  qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
+  EnvStats::qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", xlab = "Normal Quantiles", ylab = Yname, main = "Normal Q-Q Plot")
   mtext(norm.text)
   #  legend("bottomright", legend = norm.text)
 
-  qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
+  EnvStats::qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "lnorm", xlab = "Normal Quantiles", ylab = Yname, main = "Lognormal Q-Q Plot")
   mtext(lnorm.text)
   #  legend("bottomright", legend = lnorm.text)
 
-  qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
+  EnvStats::qqPlotCensored(y.var, cen.logical, pch = 19, add.line = TRUE, line.col = "red", distribution = "gamma", estimate.params = TRUE, ylab = Yname, main = "Gamma Q-Q Plot")
   mtext(gamma.text)
   #   legend("bottomright", legend = gamma.text)
 
@@ -62,7 +64,7 @@ cenCompareQQ <- function(y.var, cen.var, Yname = yname,printrslt=TRUE)  {
 
 else  # all data are detects
 { cen.logical <- as.logical(cen.var)
-var.choose <- distChoose(y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
+var.choose <- EnvStats::distChoose(x=y.var, method = "sf", alpha = 0.05, choices = c("norm", "gamma", "lnorm"))
 norm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$norm$statistic, 3) )
 lnorm.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$lnorm$statistic, 3) )
 gamma.text <- paste("Shapiro-Francia W =", signif(var.choose$test.results$gamma$statistic, 3) )
@@ -93,3 +95,4 @@ text(x = 0.47, y = 0.6, best.dist, pos = 1, cex = 1.2, col = "black", family="sa
 par(mfrow=c(1,1))
 }
 }
+
