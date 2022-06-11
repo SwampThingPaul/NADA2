@@ -1,7 +1,7 @@
 #' Prediction interval for censored data
 #'
 #' @description Computes prediction intervals for censored data assuming lognormal, gamma and normal distributions.
-#' @param y.var The column of y (response variable) detected values plus detection limits
+#' @param x.var The column of x (response variable) detected values plus detection limits
 #' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param pi.type Designation of either a `“two-sided”` interval (default) or a 1-sided `“upper”` or 1-sided `“lower”` interval.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
@@ -42,8 +42,11 @@
 #'
 
 
-cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle",printstat=TRUE)  {
+cenPredInt <- function(x.var, cens.var, pi.type = "two-sided", conf = 0.95, newobs = 1, method = "mle", printstat=TRUE)  {
   if(conf>1|conf<0){stop("Please select a confidence coefficient between 0 and 1.")}
+
+  ydat <- na.omit(data.frame(x.var, cens.var))
+  y.var <- ydat[,1];  cen.var <- ydat[,2]
 
   obj.lnorm <- elnormCensored (y.var, cen.var, method = method)
   obj.lnorm2 <- predIntLnorm (obj.lnorm, k=newobs, pi.type = pi.type, conf.level = conf)
@@ -82,10 +85,9 @@ cenPredInt <- function(y.var, cen.var, pi.type = "two-sided", conf = 0.95, newob
   results <- data.frame(Distribution, lpl, upl)
   names(results) <- c("Distribution", pi1.text, pi2.text)
 
-if(printstat==TRUE){
-  cat (title.txt)
-  return(results)
-}
+  if(printstat==TRUE){
+    cat (title.txt)
+    return(results)
+  }
   invisible(results)
 }
-

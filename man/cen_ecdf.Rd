@@ -4,18 +4,24 @@
 \alias{cen_ecdf}
 \title{Censored Empirical Cumulative Distribution Function}
 \usage{
-cen_ecdf(y.var, cen.var, group = NULL, xlim = c(0, max(y.var)), Ylab = varname)
+cen_ecdf(
+  x.var,
+  cens.var,
+  xgroup = NULL,
+  xlim = c(0, max(y.var)),
+  Ylab = varname
+)
 }
 \arguments{
-\item{y.var}{The column of data values plus detection limits}
-
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
-
-\item{group}{Optional - grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
+\item{x.var}{The column of data values plus detection limits}
 
 \item{xlim}{Limits for the x (data) axis of the ecdf plot.  Default is 0 to the maximum of the y.var variable.  To change, use option xlim = c(0, 50) if 50 is to be the maximum on the plot.}
 
 \item{Ylab}{Optional – input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the \code{y.var} input variable.}
+
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+
+\item{group}{Optional - grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 }
 \value{
 Plots an empirical cumulative distribution function. If \code{group=NULL} the ECDF of the entire dataset is produced. If \code{group} is identified then ECDFs are plotted for each group seperately and a legend added.

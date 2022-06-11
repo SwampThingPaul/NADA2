@@ -2,8 +2,8 @@
 #'
 #' @description
 #' Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.
-#' @param y1 The column of data values plus detection limits
-#' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
+#' @param x1 The column of data values plus detection limits
+#' @param x2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
 #' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param mcomp.method One of the standard methods for adjusting p-values for multiple comparisons.  Type ?p.adjust for the list of possible methods. Default is Benjamini-Hochberg "BH" false discover rate.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
@@ -44,9 +44,13 @@
 #' # More than two groups
 #' cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
-cen1way <- function(y1,y2, grp,mcomp.method = "BH",printstat=TRUE) {
-  yname <- deparse(substitute(y1))
-  gname <- deparse(substitute(grp))
+cen1way <- function(x1, x2, group, mcomp.method = "BH", printstat=TRUE) {
+  yname <- deparse(substitute(x1))
+  gname <- deparse(substitute(group))
+
+  ydat <- na.omit(data.frame(x1, x2, group))
+  y1 <- ydat[,1];  y2 <- as.logical(ydat[,2]); grp <- ydat[,3]
+
   rho=1
   fconst <- max(y1) + 1
   flip <- fconst - y1
@@ -81,10 +85,10 @@ cen1way <- function(y1,y2, grp,mcomp.method = "BH",printstat=TRUE) {
   colnames(Cen.stats) <- cnames[c(6,1:5)] # reordered the data frame
 
   if(printstat==TRUE){
-  print.data.frame(Cen.stats, print.gap = 3)
-  cat('\n',"     Oneway Peto-Peto test of CensData:", yname, "  by Factor:", gname, '\n', "     Chisq =", signif(y.out$chisq, 4), "  on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
-  if (df >1) {mcomp <- pairwise_survdiff(Surv(flip, detect) ~ Factor, data=CensData, p.adjust.method = mcomp.method, rho=rho)
-  print(mcomp)}
+    print.data.frame(Cen.stats, print.gap = 3)
+    cat('\n',"     Oneway Peto-Peto test of CensData:", yname, "  by Factor:", gname, '\n', "     Chisq =", signif(y.out$chisq, 4), "  on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
+    if (df >1) {mcomp <- pairwise_survdiff(Surv(flip, detect) ~ Factor, data=CensData, p.adjust.method = mcomp.method, rho=rho)
+    print(mcomp)}
   }
 
   PetoPeto<-list(data.name=paste(yname, "  by Factor:", gname,"\n"),

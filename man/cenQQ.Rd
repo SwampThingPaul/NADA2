@@ -4,12 +4,12 @@
 \alias{cenQQ}
 \title{Q-Q Plot censored data}
 \usage{
-cenQQ(y.var, cen.var, dist = "lnorm", Yname = yname)
+cenQQ(x.var, cens.var, dist = "lnorm", Yname = yname)
 }
 \arguments{
-\item{y.var}{The column of \code{y} (response variable) values plus detection limits}
+\item{x.var}{The column of \code{x} (response variable) values plus detection limits}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{cens.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{dist}{One of three distributional shapes to fit to your data:  lognormal (\code{lnorm}), normal (\code{norm}) or gamma (\code{gamma}).}
 

@@ -1,9 +1,9 @@
 #' ANOVA for censored data
 #'
 #' @description Performs a parametric test of differences in means between groups of censored data, followed by a parametric Tukey's multiple comparison test.
-#' @param y1 The column of data values plus detection limits
-#' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
-#' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
+#' @param x1 The column of data values plus detection limits
+#' @param x2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y1` column, and 0 (or `FALSE`) indicates a detected value in `y1`.
+#' @param group Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (`LOG = TRUE`).  To compute in original units, specify the option `LOG = FALSE` (or `LOG = 0`).
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @importFrom survival survreg Surv
@@ -35,9 +35,12 @@
 #' cenanova(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup,LOG=FALSE)
 
 
-cenanova <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
-  yname <- deparse(substitute(y1))
-  gname <- deparse(substitute(grp))
+cenanova <- function(x1, x2, group, LOG=TRUE, printstat=TRUE) {
+  yname <- deparse(substitute(x1))
+  gname <- deparse(substitute(group))
+
+  ydat <- na.omit(data.frame(x1, x2, group))
+  y1 <- ydat[,1];  y2 <- as.logical(ydat[,2]); grp <- ydat[,3]
 
   # for both log and original units
   detect <- as.logical(1 - as.integer(y2))  # reverses TRUE/FALSE to fit survival functions
@@ -62,9 +65,9 @@ cenanova <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
 
     #  write test results
     if(printstat==TRUE){
-    cat('\n',"     MLE test of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "    ",dist.test,'\n', "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', '\n')
-    # multiple comparisons
-    x.mc <- glht(reg.out, linfct = mcp(Factor = "Tukey"))
+      cat('\n',"     MLE test of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "    ",dist.test,'\n', "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', '\n')
+      # multiple comparisons
+      x.mc <- glht(reg.out, linfct = mcp(Factor = "Tukey"))
     }
     # Q-Q plot of residuals
     reg.predict <- predict(reg.out)
@@ -83,9 +86,9 @@ cenanova <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
 
     #  write test results
     if(printstat==TRUE){
-    cat('\n',"     MLE test of mean CensData:", yname, "  by Factor:", gname, '\n', "    ",dist.test,'\n', "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
-    # A warning
-    cat("\n", "  NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n", '\n')
+      cat('\n',"     MLE test of mean CensData:", yname, "  by Factor:", gname, '\n', "    ",dist.test,'\n', "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
+      # A warning
+      cat("\n", "  NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n", '\n')
     }
 
     # multiple comparisons
@@ -108,8 +111,8 @@ cenanova <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
 
   #print group means and mult comparison results
   if(printstat==TRUE){
-  print(group.means, row.names = FALSE, print.gap = 3)
-  print(summary(x.mc))
+    print(group.means, row.names = FALSE, print.gap = 3)
+    print(summary(x.mc))
   }
   return(invisible(result))
 }

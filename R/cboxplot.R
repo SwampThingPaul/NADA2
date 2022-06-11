@@ -2,9 +2,9 @@
 #'
 #' @description
 #' Draws boxplots for left-censored data with one ore more detection limit(s). Portions below the maximum detection limit(s) are not shown by default, as their percentiles are not known.
-#' @param y1 The column of y (response variable) values plus detection limits.
-#' @param y2 The y-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
-#' @param group An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.
+#' @param x1 The column of x (response variable) values plus detection limits.
+#' @param x2 The x-variable censoring indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
+#' @param xgroup An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.
 #' @param LOG `TRUE`/`FALSE` indicator of whether to plot the Y axis data on the original scale (`FALSE`) or log scale (`TRUE`).
 #' @param show `TRUE`\/`FALSE` indicator of whether to show estimated values computed using ROS for the portion of the box below the maximum DL (`TRUE`), or just leave the lower portion blank (`FALSE`).
 #' @param minmax `TRUE`/`FALSE` indicator of whether to draw outliers individually. Default is to show outliers. Setting `minmax = TRUE` will draw the whiskers out to the max and min of the dataset.
@@ -37,7 +37,15 @@
 #' cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
 
-cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
+cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
+
+  box.fill <- 0
+  if (is.null(xgroup) == TRUE) { ydat <- na.omit(data.frame(x1, x2))
+  y1 <- ydat[,1];  y2 <- ydat[,2]; group <- xgroup
+  }
+  else {ydat <- na.omit(data.frame(x1, x2, xgroup))
+  y1 <- ydat[,1];  y2 <- ydat[,2]; group <- ydat[,3]
+  }
 
   oldpar<- par(no.readonly = TRUE)
   on.exit(par(oldpar))
@@ -45,7 +53,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   box.fill <- adjustcolor( "white", alpha.f = 0.6)
   if (show==TRUE) {bdl.col <- box.fill}
   else {bdl.col <- "white"}
-  yname <- deparse(substitute(y1))
+  yname <- deparse(substitute(x1))
   if (is.null(Ylab))  Ylab <- yname
   y1 <- as.numeric(y1)
   y2 <- as.integer(y2)
@@ -93,7 +101,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       nd <- (nonas[,2] == 1)   # nd is vector of logical T/F
       y.grp <- nonas[,3]
       grp <- as.factor(y.grp)
-      gname <- deparse(substitute(group))
+      gname <- deparse(substitute(xgroup))
       if (is.null(ordr) == FALSE)  {
         grp = factor(grp, levels(grp)[ordr])
       }
@@ -156,10 +164,10 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
         rslt[,1] <- dl.loc
-        rslt[,2] <- levels(group)
+        rslt[,2] <- t(glevels)
       }
       else {
-#        rslt<-data.frame(MaximumDL=NA,Group=NA)
+        #        rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(log(ymin.all), log(ymin.all), log(maxDL[i]), log(maxDL[i]))
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
@@ -201,7 +209,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
       y.grp <- nonas[,3]
 
       grp <- as.factor(y.grp)
-      gname <- deparse(substitute(group))
+      gname <- deparse(substitute(xgroup))
       gpnum <- length(levels(grp))
       glevels <- levels(grp)
       if (is.null(ordr) == FALSE)  {
@@ -261,7 +269,7 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
       }
       else {
- #      rslt<-data.frame(MaximumDL=NA,Group=NA)
+        #      rslt<-data.frame(MaximumDL=NA,Group=NA)
         for (i in 1:gpnum) {xgrp <- c(i-0.5, i+0.5, i+0.5, i-0.5)   # different max DL per group
         ygrp = c(ymin.all, ymin.all, maxDL[i], maxDL[i])
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
@@ -293,15 +301,15 @@ cboxplot <- function(y1, y2, group=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Yl
   }
   }
 
-if (!is.null(Hlines))
- { if (!is.null(group)) {xpos <- 0.6 + (0.05 * length(levels(grp)))}
-  else {xpos = 0.6}
-  for (j in 1:nrow(Hlines))
-  { if (LOG == FALSE) {abline(h=Hlines[j,1], col=Hlines[j,2], lty = Hlines[j,3])
+  if (!is.null(Hlines))
+  { if (!is.null(group)) {xpos <- 0.6 + (0.05 * length(levels(grp)))}
+    else {xpos = 0.6}
+    for (j in 1:nrow(Hlines))
+    { if (LOG == FALSE) {abline(h=Hlines[j,1], col=Hlines[j,2], lty = Hlines[j,3])
       text(x=as.vector(xpos), y=as.vector(as.numeric(Hlines[j,1])), labels = Hlines[j,4], pos=3, col=Hlines[j,2], cex=0.8, offset = 0.25)}
-  else {abline(h=log(as.numeric(Hlines[j,1])), col=Hlines[j,2], lty = Hlines[j,3])
-    text(x=as.vector(xpos), y=log(as.vector(as.numeric(Hlines[j,1]))), labels = Hlines[j,4], pos=3, col=Hlines[j,2], cex=0.8, offset = 0.25)}
-  }
+      else {abline(h=log(as.numeric(Hlines[j,1])), col=Hlines[j,2], lty = Hlines[j,3])
+        text(x=as.vector(xpos), y=log(as.vector(as.numeric(Hlines[j,1]))), labels = Hlines[j,4], pos=3, col=Hlines[j,2], cex=0.8, offset = 0.25)}
+    }
   }
   if(printstat==TRUE&sum(y2)>0){return(rslt)}else if(printstat==FALSE&sum(y2)>0){invisible(rslt)}
   else{warning("Dataset does not have any censored data.")}

@@ -38,8 +38,10 @@ cen_paired <- function(xd, xc, yd, yc, alternative="two.sided",printstat = TRUE)
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
   mu <- 0
+  print(xd)
   if (length(yd)==1) {yc <- rep(FALSE, length(xd))
   mu <- yd[1]; yd <- rep(mu, length(xd))}
+  cat(xd, xc, yd, yc)
   nonas <- na.omit(data.frame(xd, xc, yd, yc))
   if(length(nonas[,1]) != length(nonas[,3]))
     stop("Lengths of x and y must be the same for paired data.")
@@ -96,8 +98,8 @@ cen_paired <- function(xd, xc, yd, yc, alternative="two.sided",printstat = TRUE)
   txt2 <- paste("n =", N, "  Z=", round(Z, 4), "  p-value =", signif(pvalue, 4))
 
   if(printstat==TRUE){
-  if (mu == 0) {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n", "Mean difference =", signif(mean.diff,4), "\n")}
-  else {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n",paste("Mean", xname), "=", signif(mean.diff+mu,4), "\n")}
+    if (mu == 0) {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n", "Mean difference =", signif(mean.diff,4), "\n")}
+    else {cat( txt, "\n", txt3, "\n", "\n", txt2, "\n",paste("Mean", xname), "=", signif(mean.diff+mu,4), "\n")}
   }
 
   names(N)<-"n"

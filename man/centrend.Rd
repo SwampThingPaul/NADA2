@@ -11,7 +11,8 @@ centrend(
   time.var,
   link = "identity",
   Smooth = "cs",
-  printstat = TRUE
+  printstat = TRUE,
+  stackplots = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ centrend(
 \item{Smooth}{Type of smoother used in the GAM. Default is \verb{“cs”}, shrinkage cubic regression splines. See details for other options.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
+
+\item{stackplots}{logical 'TRUE'/'FALSE' option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.}
 }
 \value{
 Prints three plots: Y data vs time with GAM Smooth, Residuals from GAM Smooth vs time, and ATS trend line of residuals vs time.

@@ -8,6 +8,7 @@
 #' @param link Default = `“identity”` which means it uses data in the original units. See details.
 #' @param Smooth Type of smoother used in the GAM. Default is `“cs”`, shrinkage cubic regression splines. See details for other options.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#' @param stackplots logical 'TRUE'/'FALSE' option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.
 #' @keywords trend analysis GAM spline
 #' @export
 #'
@@ -40,7 +41,7 @@
 #'
 #' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
 
-centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs",printstat=TRUE) {
+centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs", printstat=TRUE, stackplots = FALSE) {
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   tname <- deparse(substitute(time.var))
@@ -61,10 +62,11 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   o <- order(dat.nonas[,2] , dat.nonas [,1])
   #plot(dat.nonas[,1] ~ dat.nonas[,2], main = "1. Data and GAM Smooth", ylab = yname, xlab = xname)
 
-  oldpar<- par(no.readonly = TRUE)
-  on.exit(par(oldpar))
-  par(mfrow=c(3,1))
-
+  if (stackplots) {
+    oldpar<- par(no.readonly = TRUE)
+    on.exit(par(oldpar))
+    par(mfrow=c(3,1))
+  }
   # plot 1.  Y data vs covariate, with smooth
   x.cens = rep(0, times=length(dat.nonas[,3]) )
   cenxyplot(dat.nonas[,2], as.logical(x.cens), dat.nonas[,1], as.logical(dat.nonas[,5]), main = "1. Data and GAM Smooth", ylab = yname, xlab = xname, pch = 19, cex = 0.7)

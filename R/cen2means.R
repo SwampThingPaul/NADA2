@@ -2,9 +2,9 @@
 #'
 #' @description
 #' Performs a parametric test of differences in means between two groups of censored data, either in original or in log units (the latter becomes a test for difference in geometric means).
-#' @param y1 The column of data values plus detection limits
-#' @param y2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
-#' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
+#' @param x1 The column of data values plus detection limits
+#' @param x2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
+#' @param group Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param LOG Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (LOG = `TRUE`).  To compute in original units, specify the option LOG = `FALSE` (or LOG = 0).
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @importFrom stats pchisq predict
@@ -28,9 +28,13 @@
 #' cen2means(PbHeron$Liver,PbHeron$LiverCen,PbHeron$DosageGroup)
 
 
-cen2means <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
-  yname <- deparse(substitute(y1))
-  gname <- deparse(substitute(grp))
+cen2means <- function(x1, x2, group, LOG=TRUE,printstat=TRUE) {
+  yname <- deparse(substitute(x1))
+  gname <- deparse(substitute(group))
+
+  ydat <- na.omit(data.frame(x1, x2, group))
+  y1 <- ydat[,1];  y2 <- ydat[,2]; grp <- ydat[,3]
+
   # original units for LOG = FALSE
   fconst <- max(y1)
   flip <- fconst - y1
@@ -52,7 +56,7 @@ cen2means <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
     # print(reg.out$coefficients)   # before unflipping
     reg.out$coefficients <- (-1)* reg.out$coefficients
     reg.out$coefficients[1] <- fconst + reg.out$coefficients[1]  #reversing the flip
-  #  print(reg.out$coefficients)
+    #  print(reg.out$coefficients)
     dist.test <- "Assuming lognormal distribution of residuals around group geometric means"
     pval = pchisq(reg.chisq, df, lower.tail = FALSE)
     mean1 <- exp(reg.out$coefficients[1])
@@ -62,9 +66,9 @@ cen2means <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
 
     #  write results
     if(printstat==TRUE){
-    cat("     MLE 't-test' of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "   ",dist.test,'\n')
-    cat("     geometric mean of", grpname[1], "=", signif(mean1, 4), "    geometric mean of", grpname[2], "=", signif(mean2,4), "\n")
-    cat( "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', "\n")
+      cat("     MLE 't-test' of mean natural logs of CensData:", yname, "by Factor:", gname, '\n', "   ",dist.test,'\n')
+      cat("     geometric mean of", grpname[1], "=", signif(mean1, 4), "    geometric mean of", grpname[2], "=", signif(mean2,4), "\n")
+      cat( "     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n', "\n")
     }
     # Q-Q plot of residuals
     reg.predict <- predict(reg.out)
@@ -88,11 +92,11 @@ cen2means <- function(y1, y2, grp, LOG=TRUE,printstat=TRUE) {
 
   #  write results
   if(printstat==TRUE){
-  cat("     MLE 't-test' of mean CensData:", yname, "  by Factor:", gname, '\n', "   ",dist.test,'\n')
-  cat("     mean of", grpname[1], "=", signif(mean1, 4), "    mean of", grpname[2], "=", signif(mean2,4), "\n")
-  cat("     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
-  # A warning
-  warning(paste("NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n"))
+    cat("     MLE 't-test' of mean CensData:", yname, "  by Factor:", gname, '\n', "   ",dist.test,'\n')
+    cat("     mean of", grpname[1], "=", signif(mean1, 4), "    mean of", grpname[2], "=", signif(mean2,4), "\n")
+    cat("     Chisq =", signif(reg.chisq, 4), " on", df, "degrees of freedom", "    p =", signif(pval,3), '\n')
+    # A warning
+    warning(paste("NOTE: Data with nondetects may be projected below 0 with MLE normal distribution.", "\n", "  If so, p-values will be unreliable (often too small).  Use perm test instead.", "\n"))
   }
   # Q-Q plot of residuals
   reg.predict <- predict(reg.out)

@@ -5,9 +5,9 @@
 \title{Draws censored boxplots}
 \usage{
 cboxplot(
-  y1,
-  y2,
-  group = NULL,
+  x1,
+  x2,
+  xgroup = NULL,
   LOG = FALSE,
   show = FALSE,
   ordr = NULL,
@@ -24,11 +24,11 @@ cboxplot(
 )
 }
 \arguments{
-\item{y1}{The column of y (response variable) values plus detection limits.}
+\item{x1}{The column of x (response variable) values plus detection limits.}
 
-\item{y2}{The y-variable censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
+\item{x2}{The x-variable censoring indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
 
-\item{group}{An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.}
+\item{xgroup}{An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.}
 
 \item{LOG}{\code{TRUE}/\code{FALSE} indicator of whether to plot the Y axis data on the original scale (\code{FALSE}) or log scale (\code{TRUE}).}
 

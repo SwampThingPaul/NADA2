@@ -4,16 +4,16 @@
 \alias{cenCompareCdfs}
 \title{Comparison of empirical cdf of censored data}
 \usage{
-cenCompareCdfs(y.var, cen.var, dist3 = "norm", Yname = yname)
+cenCompareCdfs(x.var, cens.var, dist3 = "norm", Yname = yname)
 }
 \arguments{
-\item{y.var}{The column of y (response variable) values plus detection limits}
-
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
-
 \item{dist3}{Name of the third distribution to be plotted, default is \code{norm} (normal distribution). Alternate third distribution is \code{weibull}(for Weibull distribution).  Log-normal and gamma distributions are always used.}
 
 \item{Yname}{Optional – input text in quotes to be used as the variable name.  The default is the name of the \code{y.var} input variable.}
+
+\item{y.var}{The column of y (response variable) values plus detection limits}
+
+\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 }
 \value{
 prints a plot of the empirical CDFs with BIC value for each distribution.

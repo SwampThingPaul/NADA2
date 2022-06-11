@@ -4,18 +4,18 @@
 \alias{cen1way}
 \title{Peto-Peto one-factor test}
 \usage{
-cen1way(y1, y2, grp, mcomp.method = "BH", printstat = TRUE)
+cen1way(x1, x2, group, mcomp.method = "BH", printstat = TRUE)
 }
 \arguments{
-\item{y1}{The column of data values plus detection limits}
+\item{x1}{The column of data values plus detection limits}
 
-\item{y2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
-
-\item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
+\item{x2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the y1 column, and 0 (or \code{FALSE}) indicates a detected value in y1.}
 
 \item{mcomp.method}{One of the standard methods for adjusting p-values for multiple comparisons.  Type ?p.adjust for the list of possible methods. Default is Benjamini-Hochberg "BH" false discover rate.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
+
+\item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 }
 \value{
 A list of summary statistics for each group evaluated containing the following components:

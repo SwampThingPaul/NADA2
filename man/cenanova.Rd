@@ -4,14 +4,14 @@
 \alias{cenanova}
 \title{ANOVA for censored data}
 \usage{
-cenanova(y1, y2, grp, LOG = TRUE, printstat = TRUE)
+cenanova(x1, x2, group, LOG = TRUE, printstat = TRUE)
 }
 \arguments{
-\item{y1}{The column of data values plus detection limits}
+\item{x1}{The column of data values plus detection limits}
 
-\item{y2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y1} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y1}.}
+\item{x2}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y1} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y1}.}
 
-\item{grp}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
+\item{group}{Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.}
 
 \item{LOG}{Indicator of whether to compute tests in the original units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 

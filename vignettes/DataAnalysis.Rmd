@@ -1,0 +1,525 @@
+---
+title: "Data Analysis Using NADA2"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{DataAnalysis}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, include = FALSE}
+# see https://r-pkgs.org/vignettes.html
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Start RStudio
+
+***Caveat:** recently there has been debate on the use and practices surrounding setting a working directory and workflow critiques (see [link](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)). For purposes of this vignette/training, we will use `setwd()` for simplicity. But honestly, do what works and is comfortable for you. Go forth and code!*
+
+### Set the working directory:
+
+Set the working directory to one in which you will save any worksheets or output. In RStudio you can easily do this using RStudio's pull-down menu: `Session > Set working directory > Choose directory`
+
+or
+
+```{r,eval=FALSE}
+setwd(".../NADA2")
+```
+
+if you are using `setwd()`, for reproducibility it is recommend to use the code above.
+
+### Load Packages
+
+Load the packages needed. Install 15 packages: You can either do this manually via the packages tab by checking the boxes next to the package names or via console/R-script using `install.packages(...)` and `library(...)`.
+
+*Here is a trick to use a list of packages combined with a function that will check if the package is installed, if not install it and then load it.*
+
+```{r,warning=F,message=F,eval=F}
+check.packages <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) 
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+
+pkg <- c("bestglm","car","cenGAM","EnvStats","fitdistrplus","Kendall",
+         "mgcv","multcomp","NADA","nlme","perm","rms","survminer",
+         "vegan","NADA2")
+check.packages(pkg)
+```
+
+*Loading libraries using console/R-script*
+
+```{r setup,warning=F,message=F}
+# Load Package
+library(bestglm)
+library(car)
+library(cenGAM)
+library(EnvStats)
+library(fitdistrplus)
+library(Kendall)
+library(mgcv)
+library(multcomp)
+library(NADA)
+library(nlme)
+library(perm)
+library(rms)
+library(survminer)
+library(vegan)
+library(NADA2)
+```
+
+## Loading R Format Databases From Packages
+
+Some packages have datasets contained within them. When you load the packages you have access to those datasets. You can type data() to list all datasets available within the R base packages and in the packages you've loaded. Once you know the names of the datasets you want to load, use the data (datasetname) command to load the dataset.
+
+```{r load data example}
+data(Golden); # From NADA package
+
+head(Golden,5L)
+```
+
+## Loading External Datasets of Various Formats
+
+For purposes of this vignette, we won't be loading external dataset, but here is a description of how to load data of several formats from external files.
+
+### Read in an R-format (`.rda`) file.
+
+In the Environment tab, click the open folder icon. Go to the directory where the data are located and choose the file name.
+
+**console/R-script**
+
+```{r,eval=F}
+dat<-load(".../path/to/data/data.rda")
+```
+
+### Read in an excel format (`.xlsx`/`.xls`) file.
+
+In the environment tab, click on the Import Data button. Choose the "From Excel" option. Go to the folder where the data file is located and choose the file name. If there are variable names stored as column names, make sure the box next to First Row as Names is checked, and click Import.
+
+**console/R-script**
+
+There are several R-packages that will read `xlsx` or `xls` files into R. Beware some packages have recod limitations.
+
+```{r,eval=F}
+library(readxl)
+dat <- read_excel(".../path/to/data/data.xlsx",sheet=4)
+
+# or 
+
+library(openxlsx)
+dat <- read.xlsx(".../path/to/data/data.xlsx",sheet=4)
+
+```
+
+### Read in an csv format (`.csv`) file.
+
+In the environment tab, click on the Import Data button. Choose the "From Text (base)..." option. Go to the folder containing the file and choose the file name. Make sure the Heading button YES is selected if the first row in the dataset are the variable names (text). Change the na.strings entry to whatever in the dataset represents a missing value (often a blank in Excel). Click the Import button.
+
+**console/R-script**
+
+```{r,eval=F}
+dat <- read.csv(".../path/to/data/data.csv")
+```
+
+### Read in an txt format (`.txt`) file.
+
+In the environment tab, click on the Import Data button. Choose the "From Text (base)..." option. Go to the folder containing the data file and choose the file name. Make sure the Heading button YES is selected if the first row in the dataset are the variable names (text). If necessary, change the na.strings entry to whatever in the dataset represents a missing value (often a blank in Excel). Click the Import button.
+
+**console/R-script**
+
+```{r,eval=F}
+dat <- read.table(".../path/to/data/data.txt")
+```
+
+For other data with specific delimiters (i.e. tab delimited) run `?read.table` or `?read.delim` for more info.
+
+## Plotting Censored Data
+
+### Boxplots
+
+*Data: Zinc dataset*
+
+```{r bxplot1,fig.width=6.5,fig.height=4,fig.align='center'}
+data(CuZn); # Data from the NADA package
+
+cboxplot(CuZn$Zn,CuZn$ZnCen,CuZn$Zone,minmax = TRUE,Xlab="Zone",Ylab="Zn")
+```
+
+```{r bxplot2,fig.width=6.5,fig.height=4,fig.align='center'}
+
+cboxplot(CuZn$Zn,CuZn$ZnCen,CuZn$Zone,LOG=TRUE,Xlab="Zone",Ylab="Zn")
+```
+
+Note that without the minmax option, outlier observations such as the one in the Alluvial Fan data, are shown individually.
+
+```{r bxplot3,fig.width=6.5,fig.height=4,fig.align='center'}
+
+cboxplot(CuZn$Zn,CuZn$ZnCen,CuZn$Zone,LOG=TRUE,show = TRUE, minmax = TRUE,
+         Xlab="Zone",Ylab="Zn")
+```
+
+The show=TRUE option models the portion of each group's data below the highest detection limit (the lines in gray) using ROS.
+
+### Scatterplots
+
+*Data: TCE concentrations in ground water*
+
+```{r scatplot1,fig.width=6.5,fig.height=4,fig.align='center'}
+data(TCEReg); # Data from the NADA package
+
+cenxyplot(TCEReg$PopDensity, 1-TCEReg$PopAbv1, TCEReg$TCEConc, TCEReg$TCECen)
+```
+
+```{r scatplot2,fig.width=6.5,fig.height=4,fig.align='center'}
+cenxyplot(TCEReg$PopDensity, 1-TCEReg$PopAbv1, TCEReg$TCEConc, TCEReg$TCECen,
+          xlab="Population Denisty",ylab="TCE Concentration, in ug/L")
+```
+
+```{r scatplot3,fig.width=6.5,fig.height=4,fig.align='center'}
+cenxyplot(TCEReg$PopDensity, 1-TCEReg$PopAbv1, TCEReg$TCEConc, TCEReg$TCECen,
+          xlab="Population Denisty",ylab="TCE Concentration, in ug/L", 
+          main = "Your Title Here", log ="y")
+```
+
+### Cumulative distribution functions (CDFs)
+
+*Data: Zinc, Pyrene*
+
+```{r cdf1,fig.width=6.5,fig.height=4,fig.align='center'}
+# Data already loaded
+
+cen_ecdf(CuZn$Zn, CuZn$ZnCen)
+```
+
+```{r cdf2,fig.width=6.5,fig.height=4,fig.align='center'}
+cen_ecdf(CuZn$Zn, CuZn$ZnCen,CuZn$Zone,
+         Ylab="Zinc Concentration, in ug/L")
+```
+
+#### Compare CDFs
+
+```{r cdf comp1,fig.width=6.5,fig.height=4,fig.align='center'}
+data(ShePyrene); # From the NADA package
+
+cenCompareCdfs(ShePyrene$Pyrene,ShePyrene$PyreneCen)
+```
+
+```{r cdf comp2,fig.width=6.5,fig.height=4,fig.align='center'}
+cenCompareCdfs(ShePyrene$Pyrene,ShePyrene$PyreneCen,dist3 = "weibull")
+```
+
+### Probability (Q-Q) Plots: Pyrene data
+
+*Data: Pyrene*
+
+```{r QQ1,fig.width=6.5,fig.height=4,fig.align='center'}
+cenQQ(ShePyrene$Pyrene,ShePyrene$PyreneCen)
+```
+
+#### Compare QQs
+```{r QQ2,fig.width=7,fig.height=6,fig.align='center'}
+cenCompareQQ(ShePyrene$Pyrene,ShePyrene$PyreneCen,Yname="Pyrene",cex=0.75)
+```
+
+## Estimate Descriptive Statistics
+
+### Exploring the data
+In R, the summary command is used to briefly describe the characteristics of the data. In
+the NADA for R package, the censummary command fulfills the same role for censored
+data:
+```{r sum}
+censummary(ShePyrene$Pyrene,ShePyrene$PyreneCen)
+```
+
+There are 11 nondetects located at 8 different detection limits. The probabilities of being less than or equal to the detection limit value is (1-pexceed), one minus the exceedance probability. So the limit at a concentration of 28 is at the (1-0.964), or the 3.6th percentile of the data. And (1-0.179) or 82.1% of the observations are below the highest detection limit of 174.
+
+I’ll demonstrate how to compute MLE, K-M and ROS statistics using both the NADA and EnvStats packages.
+
+### Maximum Likelihood Estimation (MLE)
+The cenmle command in the NADA package assumes by default that data follow a *lognormal* distribution. Other distributions may be specified as options. We will use the *lognormal* because it was the best-fitting distribution, as seen in the Plotting Data exercise. The results have been stored as  an object `(Pyr.mle.nada`, below) and by typing the object name you get the output.
+
+```{r}
+Pyr.mle.nada <- with(ShePyrene,
+                     cenmle(Pyrene,PyreneCen))
+Pyr.mle.nada
+```
+
+The EnvStats package provides different commands for each distribution chosen. As with the plots, *“lnorm”* indicates a *lognormal* distribution, “norm” a normal distribution, and “gamma” a gamma distribution. These come after the *“e”* in the command name. The *“Alt”* in the command tells `EnvStats` to report back the *lognormal* results not in log units, but transformed back into original units. The output is much more detailed than in the `NADA` package. In this example, options for computing two-sided confidence intervals of the mean are specified, which we’ll discuss in the next section of the vignette.
+
+```{r}
+Pyr.mle <- with(ShePyrene,
+                elnormAltCensored(Pyrene, PyreneCen, 
+                             ci=TRUE, ci.method ="bootstrap",
+                             n.bootstraps = 5000))
+EnvStats::print(Pyr.mle)
+```
+
+Using the print statement after storing the output in an object (`Pyr.mle` was used here) produces the table type output shown above. Without the print statement, just typing the object name, the output is generic and not ready to be pasted into a results document.
+
+### Kaplan-Meier
+The cenfit function in the `NADA` package has a slightly incorrect detail in its computation of the mean. Here it is, but remember that this issue generally makes the computed mean slightly too high.
+
+```{r}
+Pyr.km.nada <- with(ShePyrene,
+                    cenfit(Pyrene, PyreneCen))
+Pyr.km.nada
+```
+
+You should use the `EnvStats` command `enparCensored` instead for Kaplan-Meier, until
+this issue in the `NADA` package is corrected. The `EnvStats` command uses “npar” for nonparametric to produce the Kaplan-Meier estimates.
+
+```{r}
+Pyr.km <- with(ShePyrene,
+                enparCensored(Pyrene, PyreneCen, 
+                             ci=TRUE, ci.method ="bootstrap",
+                             n.bootstraps = 5000))
+EnvStats::print(Pyr.km)
+```
+
+Note that as with all bootstrap estimates the confidence intervals above will differ slightly from your results.
+
+### Regression on Order Statistics (ROS)
+The `cenros` command in the `NADA` package constructs ROS models. The default model fits the data to a *lognormal* distribution. A Q-Q plot is drawn by the plot command using the ROS model. The cenros function will not take data with embedded NA values – manually delete them first or use the `elnormAltCensored` function as in the next section.
+
+```{r, fig.width=6.5,fig.height=4,fig.align='center',fig.cap="Lognormal probability of pyrene data"}
+Pyr.ROS.nada <- with(ShePyrene,
+                     cenros(Pyrene, PyreneCen))
+mean(Pyr.ROS.nada)
+
+sd(Pyr.ROS.nada)
+
+quantile(Pyr.ROS.nada)
+
+plot(Pyr.ROS.nada)
+```
+
+
+The `EnvStats` command is again `elnormAltCensored`, but here with the “rROS” option to compute ROS. In that case the *lognormal* assumption is only for the nondetect data. It also produces confidence intervals for the ROS mean by bootstrapping, making it very useful.
+
+```{r}
+Pyr.ROS <- with(ShePyrene,
+                elnormAltCensored(Pyrene, PyreneCen, method="rROS",
+                             ci=TRUE, ci.method ="bootstrap",
+                             n.bootstraps = 5000))
+
+EnvStats::print(Pyr.ROS)
+```
+
+### All at once
+Descriptive stats for all three methods, again for the default lognormal distribution, can quickly be produced using the censtats command of the NADA package: Unfortunately this `NADA` package command also cannot currently incorporate `NA` values, so remove them prior to running the command.
+
+```{r}
+with(ShePyrene,censtats(Pyrene, PyreneCen))
+```
+
+K-M and ROS use the high outlier data value to estimate the mean. MLE uses the lognormal model, whose value at that percentile is lower and therefore the MLE estimate of the mean for this dataset is lower. And again, the K-M mean computed in this `NADA` package function is slightly biased high.
+
+## Interval Estimates
+
+Several of the commands to obtain confidence intervals are identical to what we was done in the Estimating Descriptive Statistics section Prediction and tolerance intervals are new.
+
+### Confidene Intervals
+
+#### Kaplan-Meier
+A confidence interval around the KM mean is computed using the enparCensored command. Since K-M is a nonparametric method, the bootstrap method for computing a CI is recommended, as it too requires no assumed distribution. Note that the default CI method is a t-interval, which requires that the distribution of possible estimates of the mean is a normal distribution in order for this confidence interval to be valid. When the
+sample size is around 70+ this may be a reasonable assumption. For this example it is not. Bootstrap intervals work fine with large and smaller data, say 20 observations and above. First the bootstrap:
+
+```{r}
+## from above
+EnvStats::print(Pyr.km)
+```
+
+Then the default normal assumption (basically, a t-interval using the K-M estimates of mean and standard deviation):
+
+```{r}
+Pyr.km2 <- with(ShePyrene,enparCensored(Pyrene,PyreneCen, ci=TRUE))
+
+EnvStats::print(Pyr.km2)
+```
+
+This t-interval (Normal Approximation) LCL goes down considerably lower (66.5) than the BCa bootstrap interval (98.3) because the t-interval must be symmetric, and the upper end is approx. 100 ug/L above the mean, so the LCL must be 100 below the mean. The data don't warrant that low of an interval as they are asymmetric, and the bootstrap LCL picks up on that information.
+
+#### MLE
+Computing the mean of an cenmle object also gives its confidence interval:
+
+```{r}
+pymle <- with(ShePyrene,cenmle(Pyrene, PyreneCen,conf.int=0.95))
+
+mean(pymle)
+```
+
+These assume the default *lognormal* distribution. Change the `conf.int=` value to get an interval with something other than the default 0.95 confidence coefficient. To get the more typical normal distribution interval, use the `dist="gaussian"` option.
+
+```{r}
+pymlenorm <- with(ShePyrene,cenmle(Pyrene, PyreneCen, dist="gaussian"))
+
+mean(pymlenorm)
+```
+
+A better method for computing confidence intervals and bounds for skewed data would be bootstrapping. This is the option we used in the Descriptive Statistics exercise above. For the *lognormal* MLE method:
+
+```{r}
+pyr.lnorm <- with(ShePyrene,
+                  elnormAltCensored(Pyrene, PyreneCen, 
+                                    ci=TRUE, ci.method ="bootstrap", 
+                                    n.bootstraps = 5000))
+
+EnvStats::print(pyr.lnorm)
+```
+
+#### ROS
+The `cenros` command in `NADA` does not compute confidence intervals for the mean. Use the `EnvStats` command `elnormAltCensored` as done previously in the Descriptive Statistics exercise to bootstrap a confidence interval for the ROS method.
+
+```{r}
+# from above
+EnvStats::print(Pyr.ROS)
+```
+
+Generally, I recommend using a bootstrap estimate when there is sufficient data, which there are here, as theoretical methods such as Cox are strongly dependent on the *lognormal* shape that often does not fit exactly. Remember, ROS assumes a distribution but only for the censored observations.
+
+### Prediction Intervals
+Intervals for computing the range of probable values for new observations when the data distribution has not changed can be quickly performed using MLE for three assumed distributions using the cenPredInt command:
+
+```{r}
+with(ShePyrene,cenPredInt(Pyrene, PyreneCen))
+```
+
+The default intervals here are for 1 new observation. That can be changed with the `newobs = `option. See NADA2  package. You can ignore the warnings about NAs in the dataset, they are deleted prior to computing the intervals, just as you would by hand if necessary.
+
+The same function can be used to compute PIs using ROS, here for 2 new observations, which will make them wider than the intervals for 1 new observation above:
+
+```{r}
+with(ShePyrene,cenPredInt(Pyrene, PyreneCen,newobs =2, method = "rROS"))
+```
+
+The normal distribution is this example is not a good fit, as shown by the negative value of the lower 95% prediction intervals when assuming a normal distribution.
+
+### Tolerance Intervals
+
+Intervals for computing an upper bound on the true X% percentile, to state that we are 95% confident that no more than (1-X%) of data will exceed it, are computed using MLE by:
+
+(Here for the 90th percentile – no more than 10% exceedances).
+
+To compute a tolerance interval for three distributions, plus a graph showing BIC stats to determine which is best (lowest BIC is best), use the `cenTolInt` function in the `NADA2` package:
+
+```{r, fig.width=6.5,fig.height=4,fig.align='center'}
+with(ShePyrene,cenTolInt(Pyrene, PyreneCen, cover=0.9))
+```
+
+What’s inside this function? If you would like info on the commands this function uses, its below. If that’s not your thing, just use the function! Here’s how you would get the lognormal tolerance interval:
+
+```{r}
+example <- with(ShePyrene,
+            eqlnormCensored (Pyrene, PyreneCen, p=0.9, 
+                             ci=TRUE, ci.type ="upper"))
+EnvStats::print(example)
+```
+
+Here’s how you would compute a gamma tolerance interval by first taking cube roots, then using those in a censored normal routine to get a tolerance interval on a percentile, then retransforming back to the original data scale by cubing the result:
+
+```{r}
+
+dat.gamma <- ShePyrene$Pyrene^(1/3)
+
+obj.gamma <- eqnormCensored(dat.gamma, ShePyrene$PyreneCen, p=0.9, 
+                            ci=TRUE, ci.type ="upper")
+pct.gamma <- obj.gamma$quantiles^3 # the 90th percentile in orig units
+pct.gamma
+
+ti.gamma <- (obj.gamma$interval$limits[2])^3 # the upper tol limit in orig units
+ti.gamma
+
+```
+
+This agrees with the output of the `cenTolInt` command used above, where the results for a gamma distribution are printed.
+
+## Matched Pair Tests and Comparing Data to Standards
+
+### Compare Data to a Standard Using a Matched Pair Test
+
+**Example 1** Use the `cen_paired` function to determine if arsenic concentrations in
+groundwater exceed the drinking water standard of 10 ug/L standard for the Example1 dataset.
+```{r, fig.width=6.5,fig.height=5,fig.align='center'}
+data(Example1) # From NADA2 package
+
+head(Example1,5L)
+
+with(Example1,cen_paired(Arsenic, NDisTRUE, 10, alt = "greater"))
+```
+
+The mean arsenic concentration does not exceed 10 ug/L.
+
+### Test for Differences in Two Paired Columns of Data
+**Example 2** Test whether atrazine concentrations were the same in June versus September groundwaters on the same dates in a variety of wells (rows – paired data). Test both for differences in the mean as well as differences in the cdfs and the medians.
+
+```{r}
+data(Atra); # From NADA package
+
+head(Atra,5L)
+
+with(Atra,cen_paired(June, JuneCen, Sept, SeptCen))
+```
+
+The p-value is well above 0.05. Do not reject that the mean difference in concentration for the two months could be 0.
+
+```{r}
+# test for the median difference = 0 using the sign test.
+with(Atra,cen_signtest(June, JuneCen, Sept, SeptCen))
+```
+
+Because it is important to correct for the numbers of tied values within a pair, the p-value of 0.089 results in the conclusion to not reject that the median difference in concentration between the two months could be 0.
+
+```{r}
+# test for a difference in the cdfs of the two months using the signed-rank
+with(Atra,cen_signedranktest(June, JuneCen, Sept, SeptCen))
+```
+
+The signed-rank test has more power to see differences than did the sign test. It also is comparing the cdfs, the entire set of percentiles, between the two months. It finds a difference because the upper end of the distribution is quite a bit higher in the Sept data.
+
+### Comparing Data to Standards Using an Upper Confidence Limit
+
+Using the Example 1 data, compute the UCL95 for censored data.
+
+**Step 1.** Sample size. There are 21 observations. Since it is on the borderline for deciding whether to use a distributional or nonparametric method, both will be demonstrated here.
+
+**Step 2. Distributional Method**
+
+Draw the boxplot for "censored data" (data with nondetects).
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+
+with(Example1,
+     cboxplot(Arsenic, NDisTRUE, Ylab="Arsenic Conc", show = TRUE))
+```
+
+Note that the highest detection limit is drawn as the horizontal dashed line at 4 ug/L. Everything below that includes values estimated using a lognormal ROS. Three "outliers" (not 'bad data') lie above the estimated whisker, showing that the data are skewed.
+
+Decide which of three distributions best fits the data using the `cenCompareCdfs` command. Choose the distribution with the smallest BIC.
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(Example1,
+     cenCompareCdfs (Arsenic, NDisTRUE, Yname = "Arsenic concentration in ug/L"))
+```
+
+The gamma distribution has the smallest BIC.
+
+Note that the curve representing the normal distribution dips below zero (x=0) at about the 10th percentile. A distribution of concentrations with 10% negative numbers is not realistic, which results in a higher BIC statistic.
+
+Use the best-fit distribution (gamma) from 2b to compute the UCL95.
+
+```{r}
+egam <- with(Example1,
+             egammaAltCensored(Arsenic, NDisTRUE, 
+                               ci=TRUE, ci.type = "upper",
+                               ci.method = "normal.approx"))
+EnvStats::print(egam)
+```
+
+Use the print statement to get the “table format” for the output from this EnvStats function. The UCL95 equals 2.57 assuming a gamma distribution. Because this is lower than the 10 ug/L standard, the null hypothesis of non-compliance is rejected, and the site from which these data came is found to be in compliance.
+
+**Step 3. Nonparametric Method**
