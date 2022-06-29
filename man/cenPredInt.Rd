@@ -17,6 +17,8 @@ cenPredInt(
 \arguments{
 \item{x.var}{The column of x (response variable) detected values plus detection limits}
 
+\item{cens.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+
 \item{pi.type}{Designation of either a \verb{“two-sided”} interval (default) or a 1-sided \verb{“upper”} or 1-sided \verb{“lower”} interval.}
 
 \item{conf}{Confidence coefficient of the interval, 0.95 (default).}
@@ -26,8 +28,6 @@ cenPredInt(
 \item{method}{Character string specifying the method of estimation. Default is \code{mle} (maximum likelihood). See details.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
-
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 }
 \value{
 A table of prediction limits based on user provided confidence coefficient (\code{conf}) and prediction invterval type (\code{pi.type})

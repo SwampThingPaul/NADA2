@@ -2,7 +2,7 @@
 #'
 #' @description Computes prediction intervals for censored data assuming lognormal, gamma and normal distributions.
 #' @param x.var The column of x (response variable) detected values plus detection limits
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param cens.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param pi.type Designation of either a `“two-sided”` interval (default) or a 1-sided `“upper”` or 1-sided `“lower”` interval.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param newobs The number of new observations to be contained in the interval.

@@ -4,7 +4,7 @@
 #' Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.
 #' @param x1 The column of data values plus detection limits
 #' @param x2 The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the y1 column, and 0 (or `FALSE`) indicates a detected value in y1.
-#' @param grp Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
+#' @param group Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param mcomp.method One of the standard methods for adjusting p-values for multiple comparisons.  Type ?p.adjust for the list of possible methods. Default is Benjamini-Hochberg "BH" false discover rate.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'

@@ -2,7 +2,7 @@
 #'
 #' @description Computes a one-sided upper tolerance interval for censored data assuming log-normal, gamma and normal distributions.
 #' @param x.var The column of x (response variable) values plus detection limits
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param cens.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param conf Confidence coefficient of the interval, 0.95 (default).
 #' @param cover Coverage, the percentile probability above which the tolerance interval is computed.  The default is 90, so a tolerance interval will be computed above the 90th percentile of the data.
 #' @param method.fit The method used to compute the parameters of the distribution.  The default is maximum likelihood (`“mle”`). The alternative is robust ROS (`“rROS”`).  See Details.

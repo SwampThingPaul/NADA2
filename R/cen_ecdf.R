@@ -2,8 +2,8 @@
 #'
 #' @description Plots ecdfs of one or more groups of censored data.  Illustrates the differences between groups for group tests such as those done using cen1way or cenanova.
 #' @param x.var The column of data values plus detection limits
-#' @param cen.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
-#' @param group Optional - grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
+#' @param cens.var The column of indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
+#' @param xgroup Optional - grouping or factor variable. Can be either a text or numeric value indicating the group assignment.
 #' @param xlim Limits for the x (data) axis of the ecdf plot.  Default is 0 to the maximum of the y.var variable.  To change, use option xlim = c(0, 50) if 50 is to be the maximum on the plot.
 #' @param Ylab Optional – input text in quotes to be used as the variable name on the ecdf plot.  The default is the name of the `y.var` input variable.
 #' @keywords CDF ECDF

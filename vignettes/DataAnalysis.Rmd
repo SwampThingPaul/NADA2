@@ -1,5 +1,6 @@
 ---
 title: "Data Analysis Using NADA2"
+author: "Dennis Helsel"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{DataAnalysis}
@@ -13,7 +14,8 @@ editor_options:
 # see https://r-pkgs.org/vignettes.html
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  fig.width=6.5,fig.height=4,fig.align='center'
 )
 ```
 
@@ -57,8 +59,6 @@ check.packages(pkg)
 
 ```{r setup,warning=F,message=F}
 # Load Package
-library(bestglm)
-library(car)
 library(cenGAM)
 library(EnvStats)
 library(fitdistrplus)
@@ -66,12 +66,16 @@ library(Kendall)
 library(mgcv)
 library(multcomp)
 library(NADA)
-library(nlme)
 library(perm)
 library(rms)
 library(survminer)
 library(vegan)
 library(NADA2)
+library(bestglm)
+library(car)
+library(nlme)
+library(rms)
+
 ```
 
 ## Loading R Format Databases From Packages
@@ -443,7 +447,7 @@ This agrees with the output of the `cenTolInt` command used above, where the res
 
 ### Compare Data to a Standard Using a Matched Pair Test
 
-**Example 1** Use the `cen_paired` function to determine if arsenic concentrations in
+**Example 1:** Use the `cen_paired` function to determine if arsenic concentrations in
 groundwater exceed the drinking water standard of 10 ug/L standard for the Example1 dataset.
 ```{r, fig.width=6.5,fig.height=5,fig.align='center'}
 data(Example1) # From NADA2 package
@@ -456,9 +460,9 @@ with(Example1,cen_paired(Arsenic, NDisTRUE, 10, alt = "greater"))
 The mean arsenic concentration does not exceed 10 ug/L.
 
 ### Test for Differences in Two Paired Columns of Data
-**Example 2** Test whether atrazine concentrations were the same in June versus September groundwaters on the same dates in a variety of wells (rows – paired data). Test both for differences in the mean as well as differences in the cdfs and the medians.
+**Example 2:** Test whether atrazine concentrations were the same in June versus September groundwaters on the same dates in a variety of wells (rows – paired data). Test both for differences in the mean as well as differences in the cdfs and the medians.
 
-```{r}
+```{r, fig.width=6.5,fig.height=5,fig.align='center'}
 data(Atra); # From NADA package
 
 head(Atra,5L)
@@ -523,3 +527,393 @@ EnvStats::print(egam)
 Use the print statement to get the “table format” for the output from this EnvStats function. The UCL95 equals 2.57 assuming a gamma distribution. Because this is lower than the 10 ug/L standard, the null hypothesis of non-compliance is rejected, and the site from which these data came is found to be in compliance.
 
 **Step 3. Nonparametric Method**
+
+**Example 1:**
+
+There are multiple detection limits for this arsenic data.  Compute the Kaplan-Meier estimate of the mean and percentile bootstrap UCL95, the latter because of the high percent of nondetects (66.67%) in the data. 
+
+```{r}
+arsenic.out <- with(Example1,
+                    enparCensored(Arsenic, NDisTRUE, 
+                                  ci=TRUE, ci.method="bootstrap", ci.type="upper",
+                                  n.bootstraps=5000))
+EnvStats::print(arsenic.out)
+```
+
+The percentile bootstrap estimate of the UCL95 equals 2.52.  This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.
+
+**Example 2:** Computation of a UCL95 for data with both detected and non-detected values, DL unknown.
+
+Data:  Methyl Isobutyl Ketone (MIBK) in air above a medium-sized US city.  
+
+```{r}
+data(Example2)
+```
+
+*A: Computation of the mean and UCL95*
+
+The MIBK concentrations are given as reported in column 1 -- no detection limit was provided.  Nondetects were designated only as ND.   The lowest detected value in the data equals 0.1229.  Assuming all ND values are lower than this, all NDs were changed to <0.1229 as shown in the MIBK and MIBKcen columns.  
+
+This results in only one reporting limit in the data, so the Kaplan-Meier estimate will be biased a bit high.  Instead, use the robust ROS method with bootstrapping:
+
+```{r}
+mibk.ucl95 <- with(Example2, 
+                   elnormAltCensored (MIBK, MIBKcen, method = "rROS", 
+                                      ci=TRUE, ci.method = "bootstrap", 
+                                      ci.type = "upper", n.bootstraps = 5000))
+EnvStats::print(mibk.ucl95)
+```
+
+The percentile bootstrap UCL95 based on the robust ROS mean equals 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled 0.293). Remember that your bootstrap result will slightly differ from the one here.  To decrease differences between runs, increase the number of bootstraps, say to 10,000.
+
+*B: What if the detection limit had been known?*
+
+If a reporting limit of 0.029 had been provided by the laboratory, the data would be as given in the MIBK2 and MIBK2cen columns.  Using the same procedure gives slightly lower results for both mean and UCL95:
+
+```{r}
+mibk2.out <- with(Example2, 
+                  elnormAltCensored (MIBK2, MIBK2cen, method = "rROS", 
+                                     ci=TRUE, ci.method = "bootstrap", 
+                                     ci.type = "upper", n.bootstraps = 5000))
+EnvStats::print(mibk2.out)
+```
+
+The percentile bootstrap UCL95 using rROS equals 0.284 with this known detection limit.  It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.
+
+**Example 3:** Computation of the expected percent of observations exceeding a health advisory when all data are NDs.  More details of this method are found in Chapter 8 of Statistics for Censored Environmental Data Using Minitab and R (Helsel, 2012).
+
+```{r}
+data(Example3)
+```
+
+All detection limits used are below the 10 ppb drinking water MCL for arsenic.  Therefore we know that 0 out of 14 current observations exceed the MCL of 10 ppb.  What is the range of percent of observations in the aquifer that might exceed the MCL (with 95% probability)?  Use the binomial test command, entering the number of observations in the dataset that exceed the MCL (0) and the number of total observations (14).  The `alternative =”less”` option states that this is a one-sided confidence interval – we are looking only for possible exceedances, nothing on the low end.
+
+```{r}
+binom.test(0,14,alternative="less")
+```
+
+Most of what is returned concerns a test for whether the proportion of observations above the MCL differs from 50%, but this test is of no interest here.  What is of interest is the confidence interval on the proportion of observations in the population that could be above the MCL, based on the 14 samples observed.  The UCL95 of the proportion equals 0.192.  Therefore we can say with 95% probability that there are no more than 19.2% of concentrations in the aquifer exceeding the MCL – we expect that there are fewer because the MCL of 10 is considerably above the highest detection limit of 4 ppb, and this interval is actually the probability of exceeding 4 ppb.  Taking this conservative approach that the probability of values falling above 4 ppb is the same probability of falling above 10 ppb, the expected percent of samples at this location above the MCL of 10 ppb is no more than 19.2%.  This range could be tightened by taking more samples, of course.  For other questions that can be answered when all values are nondetects, see Chapter 8 in Helsel (2012).
+
+## Two-Group Tests
+
+The MLE version of a "t-test" for censored data uses an MLE regression with one X variable, a 0/1 group indicator.  Assuming a normal distribution:
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cen2means(Zn,ZnCen,Zone,LOG=FALSE))
+```
+
+No difference between group means can be seen.  But do the residuals follow a normal distribution, as required?  The corresponding Q-Q plot of regression residuals and corresponding Shapiro-Francia test show that the data do not follow a normal distribution.
+
+MLE also builds a model of the two groups after estimating their mean and standard deviations. When assuming a normal distribution with data close to zero it is easy for the model to project data down below zero.  Besides being unrealistic, this can lead to a false separation between the groups and p-values that are too low.  To avoid this, either assume a lognormal distribution (the default, or use LOG=TRUE) or use a permutation test instead.
+
+Use the cenperm2 function to perform a two-group permutation test.  This avoids an assumption of a normal distribution while testing for differences in means:
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cenperm2(Zn,ZnCen,Zone))
+```
+
+The two groups do not have significantly different means.  These are p-values that you can believe, as they do not depend on the normal assumption and do not project data values below zero.
+
+Assume a lognormal distribution (uses the default LOG=TRUE option). This tests for differences in geometric means:
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cen2means(Zn,ZnCen,Zone))
+```
+
+No significant difference between geometric means.  And the corresponding Q-Q plot of regression residuals show that the data do not follow a lognormal distribution either (one large outlier), but it is the better fit of the two distributions.  A permutation test using cenperm2 after computing the logarithms would be a better test for differences in geometric means.
+
+The Peto-Peto test is run using the cen1way function. It reports the Kaplan-Meier medians in each of the groups:
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cen1way(Zn,ZnCen,Zone))
+```
+
+The two group medians (10 vs 17) are found different at p = 0.0228, without assuming normality or substituting anything for the nondetects censored at multiple (in this case, two) reporting limits.  The cdfs for the two groups are also shown, drawn using the cen_ecdf function.
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cen_ecdf (Zn,ZnCen,Zone,
+                    Ylab="Zinc Concentration, in ug/L"))
+```
+
+Above approximately the 40th percentile or so, the Basin Trough (dashed line) data are higher than (to the right of) the Alluvial Fan data.  Boxplots might show the group differences better than do the cdfs, especially for non-statisticians.
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(CuZn,cboxplot(Zn,ZnCen,Zone,
+                    Ylab="Zinc Concentration, in ug/L"))
+```
+
+Now for the two simpler tests, where all values below the highest DL must be re-censored.
+
+Contingency tables are a test to determine whether the proportions of data in categories are the same in two or more groups.  With nondetects the cutoff level is again the highest reporting limit.  Use the `TCE2` dataset with the highest of 4 DLs at 5 ug/L.  The test determines whether the proportions of data above versus below the cutoff are the same in each group.  It differs from a rank-sum in that all data above the limit are simply in the same ‘Above’ group rather than ranked individually. This loses some information as compared to the rank-sum test. Density is a text variable (a factor) representing the groups, while Below5Cens has a 1 for data below 5 ug/L and a 0 for data at or below 5.  First we combine them into a matrix using the ftable command, then compute a ‘cross-tabulation’ with the `xtabs(...)` command that the `chisq.test(...)` command expects. Finally the chisquare test is computed.  Its null hypothesis is that there is no difference in the percent of data above the cutoff of 5 ug/L in the two groups.
+
+```{r}
+data(TCE2)
+
+with(TCE2,ftable(Density~Below5Cens))
+
+tab=with(TCE2,xtabs(~Below5Cens+Density))
+chisq.test(tab)
+```
+
+The contingency table finds a difference in the proportions.  It is less powerful than the rank-sum test (which will also find a difference) when there are data that can be ranked above the highest reporting limit.
+
+The nonparametric Wilcoxon rank-sum test can be calculated using the `wilcox.test(...)` command.  First you must have or create a column that contains the concentrations for all detected values at the maxDL and above, plus a single number (I use -1) below the max DL for all values below the maxDL.
+
+```{r}
+TCE2$Below5[TCE2$Below5Cens== 1] <- -1      # all <5s are now a -1
+
+wilcox.test(Below5~Density,TCE2)
+```
+
+The two-sided p-value is significant at 0.027.  The smaller p-value than the contingency table test reflects the additional information in the individual values at and above 5 that the rank-sum tests uses.  The slightly smaller p-value for the Peto-Peto test shows that it is the most appropriate test when there are multiple detection limits.
+
+Is re-censoring at the highest DL and running the rank-sum test really better than the typical method of running a t-test on data with one-half DL subbed for nondetects?  
+
+```{r}
+t.test(Half.DL~Density,TCE2)
+```
+
+No significant difference found.  The arbitrariness of the substitution process, not to mention that this puts the same number in many times, and so likely decreases the standard deviation artificially, should get you to quickly use a nonparametric test instead.
+
+## Three or more groups
+
+The `Golden` data present lead concentrations in organs of herons after exposing them to lead.  There are four dosage groups (“Dosage” or “Group” columns), zero plus three amounts of lead.  The objective was to determine if feathers or another non-destructive part of the birds could be used as an environmental indicator, so it would not be necessary to sacrifice a bird in order to measure their lead concentrations.  A censored boxplot of the Golden liver lead data shows that the third and fourth groups have generally higher values.
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+data(Golden)
+
+with(Golden,cboxplot(Liver, LiverCen, Dosage,
+                     Ylab = "Lead concentrations in liver, in ppb"))
+```
+
+The skewness of the 0.05 group and the outlier of the 0.25 group indicates that logs should end up being the better set of units to use.
+
+### Kruskal-Wallis test
+
+First the groups can be compared using a Kruskal-Wallis test, setting all values below the highest detection limit of 0.04 as tied.  Note that there are detected observations below 0.04, so either the data had a second and lower detection limit with no nondetects below it, or more likely were reported using “insider censoring” (see *Statistics for Censored Environmental Data Using Minitab and R* to find out what that is and the problem it causes).
+
+**Step 1** - Create a variable -- call it Below04 -- with zeros (or -1, or any value below the highest DL) for all data below the highest DL of 0.04.  Be careful not just to assign all 0.04s as nondetects, as some of these could be detected 0.04s.  Instead, use two steps, the first to set all values BELOW 0.04 as a 0 (or -1), and the second to set all data marked as nondetects (which will include the <0.04 values) as a 0 (or -1).  The result is a variable with an indicator (-1 recommended) for all data below the highest reporting limit, and original values for all detected data at and above the highest reporting limit.  The logical operators < (less-than) and == (equal to) are used here.
+
+```{r}
+Golden$Below04 <- Golden$Liver
+Golden$Below04[Golden$Liver<0.04] <- -1
+Golden$Below04[Golden$LiverCen==TRUE] <- -1
+
+```
+
+
+**Step 2** - run the Kruskal-Wallis test
+
+```{r}
+kruskal.test(Below04~Dosage,Golden)
+```
+
+The result shows that there is a difference (p = 0.049) between group medians using this simple nonparametric test.  An ANOVA on data after substituting one-half DL will not find a difference (trust me on this).
+
+### Peto-Peto test
+
+The nonparametric Peto-Peto test, the multi-DL nonparametric test, is computed using the `cen1way(...)` command:
+```{r}
+with(Golden,cen1way(Liver,LiverCen,Dosage))
+```
+
+
+The cdfs show that the higher two groups appear to differ in their percentiles as compared to the lower two groups. 
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+with(Golden,cen_ecdf(Liver,LiverCen,Dosage))
+```
+
+This is more easily seen by plotting the empirical cdfs in log units: 
+
+```{r,fig.width=6.5,fig.height=4,fig.align='center'}
+Golden$lnLiver=log(Golden$Liver)
+
+with(Golden,cen_ecdf(lnLiver,LiverCen,Dosage,
+                     xlim = c(min(lnLiver), max(lnLiver)), 
+                     Ylab = "Natural Logs of Lead Concentrations in Liver"))
+```
+
+The 0.05 and 0.025 groups appear to have the higher liver lead concentrations (are further to the right) than the other two groups. 
+
+### The MLE "ANOVA"
+
+For the parametric approach, use the `cenanova(...)` command to run a censored regression with the groups as ‘factor’ explanatory variables.  By default, `cenanova` assumes the residuals follow a lognormal distribution, so use the associated Q-Q plot to see if the residuals in log units appear approximately like a normal distribution.
+
+```{r}
+with(Golden,cenanova(Liver,LiverCen,Dosage))
+```
+
+The overall test has a p-value of 0.014.  Therefore the four group mean logarithms (geometric means) differ.  p-values for the individual pairwise tests of differences show differences in two pairs of groups.  The p-values of 0.0150 (0.05 versus 0 groups) and 0.0323 (0.05 versus 0.01 groups) show that the 0.05 group differs from the lowest two groups, but not from the 0.25 group.  The residuals plot shows that log are a very good set of units to use, as their residuals are close to a normal distribution:
+
+If instead you had wanted to test differences in the arithmetic means, use a permutation test as a normal distribution will not fit these data very well.
+
+```{r}
+with(Golden,cenpermanova(Liver,LiverCen,Dosage))
+```
+
+No significant difference in the means was found.  This test did not assume a normal distribution, though it is still influenced by outliers because it evaluates means, which are influenced by outliers.  The permutation test will not extrapolate data to values below zero as would MLE.    
+
+Note that the means of two groups, and so much of the data in the two groups, falls below zero when estimated by MLE assuming a normal distribution:
+
+```{r}
+with(Golden,cenanova(Liver,LiverCen,Dosage,LOG=FALSE))
+```
+
+The p-value of 0.0755 is too small because the group differences are exaggerated by pushing data down below 0.  Given that the actual data cannot go below zero, the cenpermanova p-value of 0.14 is a much more realistic test result.
+
+## Correlation and Regression
+
+```{r}
+data(Recon)
+```
+
+First test for high vifs by computing a standard regression equation that ignores the censoring indicator column, ignoring all results except for the vifs:
+
+```{r}
+vif(lm(AtraConc ~ Area + Applic + PctCorn + SoilGp + Temp + Precip + Dyplant + Pctl,Recon))
+```
+
+All of the variables appear uncorrelated with the others (all VIFs well below 10).  Therefore the p-values obtained in regression should be reliable.  
+
+**Step 1** - Create the 8-X variable `data.frame` and run the regression with all variables.  Decide which scale the Y variable should be used (no transformation, log, cube-root).
+
+```{r}
+recon.8 <- with(Recon,data.frame(Area, Applic, PctCorn, SoilGp, Temp, Precip, Dyplant, Pctl))
+reg.recon.8 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.8))
+
+summary(reg.recon.8)
+```
+
+The Rescaled likelihood R is fairly high (0.82) and the AIC equals 804.4. The Q-Q plot (below) shows a fairly straight pattern of data and W = 0.966, so it would be difficult to find a better transformation  of the Y variable than the log.  Use log Y.
+
+**Step 2** -  Decide whether to transform the scale of each X variable.
+Run the partplots procedure to see whether curvature in the Y-X relationship means that a transformation of the X variable should be taken.  
+
+```{r,fig.height=10}
+layout(matrix(1:8,4,2))
+with(Recon,partplots(AtraConc, AtraCen, recon.8,multiplot = F))
+```
+
+Only PctCorn showed an appreciable drop in AIC with a transformation. As a percentage it is bounded by 0 and 100 so it’s a little odd to do a transform.  However the partial plot shows an increase in the percent of "filled circle" detected observations and so a general increase in atrazine with increasing PctCorn.  The relationship may be nonlinear so I'll take the cube root of PctCorn.
+
+```{r}
+Recon$cbrtPctCorn <- recon.8$PctCorn^(1/3)
+
+recon.8onecube <- cbind(recon.8[, -3], Recon$cbrtPctCorn)
+
+reg.recon.8onecube = with(Recon,cencorreg(AtraConc, AtraCen, recon.8onecube))
+```
+
+```{r,fig.height=10}
+layout(matrix(1:8,4,2))
+with(Recon,partplots(AtraConc, AtraCen, recon.8onecube,multiplot = F))
+
+```
+
+No other variables indicate a further transformation is necessary after running partplots -- the cbrtPctCorn variable is already transformed so taking the log or cube root of the cube root would not make much sense.
+
+**Step 3a** - Can we lower the AIC by dropping unimportant variables?
+
+```{r}
+summary(reg.recon.8onecube)
+```
+
+Both Precip and Soil Gp are very non-significant.  Soil Group was a number looked up in a book at the county scale and so wasn’t really expected to provide much information (your insight as a scientist is needed when using regression).  Delete either Precip or Soil Group and run the 7-variable model.
+
+```{r}
+# an alternative way to make a data.frame without using data.frame(...)
+recon.7 <- Recon[,c("Area", "Applic", "cbrtPctCorn", "Temp", "Precip", "Dyplant", "Pctl")]
+
+reg.recon.7 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.7))
+```
+
+AIC has decreased so this is better than the 8-variable model.  The residuals plot looks much the same -- this is expected in regression.  The normality of residuals is primarily determined by the scale of the Y variable.  Going to a six-variable model is an easy choice: Precip has a high p-value.  
+
+```{r}
+recon.6 <- Recon[,c("Area", "Applic", "cbrtPctCorn", "Temp","Dyplant", "Pctl")]
+
+reg.recon.6 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.6))
+
+summary(reg.recon.6)
+```
+
+AIC has decreased by 1.5.  The next variable with a high p-value is Area.  The order of deleting these 3 variables likely wouldn't matter and you'd get to this 5 variable model even if you dropped them in a different order.
+
+```{r}
+recon.5 <- Recon[,c("Applic", "cbrtPctCorn", "Temp","Dyplant", "Pctl")]
+
+reg.recon.5 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.5))
+
+summary(reg.recon.5)
+```
+
+AIC has decreased by 0.7, so this is a very slightly better model.  The only other insignificant variable is Applic, the application amounts of ag chemicals.  These are known only on a county level so are estimated by cutting and pasting county boundaries with watershed boundaries.  They also are voluntary amounts, and may not always provide accurate information to the Federal government.  But probably the main evidence against the variable is its negative slope – we would expect more atrazine to wash off with more applications.  So we drop this variable to see its effect.
+
+```{r}
+recon.4 <- Recon[,c( "cbrtPctCorn", "Temp","Dyplant", "Pctl")]
+
+reg.recon.4 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.4))
+
+summary(reg.recon.4)
+```
+
+The AIC goes up but only a little.  This would be the scientist’s choice to use either the 5-variable or the 4-variable model.  I usually choose the larger model if all p-values are under 0.10 because AIC and similar metrics are known to choose too few variables.  Here however the Applic p-value in the 5-varable model is 0.124 and so I'd drop it, choosing the 4-variable model.  What is also behind my decision to drop Applic is that it is a crude measure of amount of pesticide applied (county level data cut and pasted) and cbrtPctCorn essentially measures the same thing.  Use your knowledge of the data to make your decision.
+
+**Step 3b** - Use the bestaic function to lower the AIC?
+
+Starting with the full 8 variables, though PctCorn has been transformed to become cbrtPctCorn, run the bestaic function to see what models the computer selects:
+
+```{r}
+with(Recon,bestaic(AtraConc, AtraCen, recon.8onecube))
+```
+
+Many models are very similar in AIC, but the 'best' is the 5-variable model that we named `recon.5`, above.  Second best was the four variable model we called `recon.4.`  So by deleting sequentially we did get to the "best" models, but this is a lot quicker. As you see in the list there are several other models around an AIC of 798, and if it were less expensive to use the variables in one of these, it would be an excellent substitute for the mathematically lowest AIC model. For example the fourth model down uses Area instead of Applic, with all other variables the same.  If `Applic` were expensive to collect, this model has an AIC only 0.9 units higher.
+
+**Finding the best one-variable model.**  To find the best 1-variable model (just to compare to the ATS equation), run the four possible 1-variable models using the variables from the 4-variable model. 
+
+```{r}
+reg.recon.cbrtPctCorn  <- with(Recon,cencorreg(AtraConc, AtraCen, cbrtPctCorn))
+```
+
+```{r}
+reg.recon.Temp   <- with(Recon,cencorreg(AtraConc, AtraCen, Temp))
+```
+
+```{r}
+reg.recon.Dyplant   <- with(Recon,cencorreg(AtraConc, AtraCen, Dyplant ))
+```
+
+```{r}
+reg.recon.Pctl  <- with(Recon,cencorreg(AtraConc, AtraCen, Pctl))
+```
+
+The Dyplant (days since planting) variable has the lowest AIC.  Its residuals plot (above) shows a linear pattern pulled away from the normal theory line because of six high outliers.  The negative slope is reasonable:  as there are more days since planting of corn, and atrazine is only applied before planting, the more time it sits on the ground the lower the amounts available to be washed off into the stream.  The outliers are probably high flows that would be accounted for by the Pctl variable if it were in the model.  Here are the details for the Dyplant 1-variable model:
+
+```{r}
+summary(reg.recon.Dyplant)
+```
+
+**The Nonparametric ATS line:**
+Using Dyplant as the X variable, 
+
+```{r}
+with(Recon,ATS(AtraConc, AtraCen, Dyplant))
+```
+
+Seeing this transformed back into the original units will look much better.
+
+```{r}
+with(Recon,ATS(AtraConc, AtraCen, Dyplant,retrans=TRUE))
+```
+
+For this dataset, the maximum likelihood and ATS slopes for Dyplant are very similar (different by 0.006).  The intercepts are similar as well when you realize that a difference of 2.0 is small when concentrations go up to 100.
+
+The plot of the relationship of atrazine to flow percentile (Pctl) shows a clear washoff effect at higher flows:
+```{r}
+with(Recon,ATS(AtraConc, Pctl, Dyplant,retrans=TRUE))
+```
+
+There is not yet (June 2022) a good nonparametric “multiple regression” method for censored data.  There are ‘robust regression’ methods that perform nonparametric regression but I’ve never seen them applied to censored data.
+
+## Trend Analysis for Censored Data

@@ -9,11 +9,13 @@ cenCompareQQ(x.var, cens.var, Yname = yname, printrslt = TRUE, ...)
 \arguments{
 \item{x.var}{The column of x (response variable) values plus detection limits}
 
+\item{cens.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+
 \item{Yname}{Optional – input text in quotes to be used as the variable name on all plots.  The default \code{Yname} is the name of the \code{y.var} input variable.}
 
 \item{printrslt}{Logical \code{TRUE}/\code{FALSE} option of whether to print the best distribution in the console window, or not.  Default is \code{TRUE.}}
 
-\item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
+\item{...}{further graphical parameters (from par), such as srt, family and xpd.}
 }
 \value{
 Plots three Q-Q plots based on normal, lognormal and gamma distributions and prints the best-fit distribution.
