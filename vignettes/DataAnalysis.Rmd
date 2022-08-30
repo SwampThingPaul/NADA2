@@ -917,3 +917,84 @@ with(Recon,ATS(AtraConc, Pctl, Dyplant,retrans=TRUE))
 There is not yet (June 2022) a good nonparametric “multiple regression” method for censored data.  There are ‘robust regression’ methods that perform nonparametric regression but I’ve never seen them applied to censored data.
 
 ## Trend Analysis for Censored Data
+
+Load the Gales_Creek dataset: 
+```{r}
+data("Gales_Creek")
+```
+
+### Nonparametric Methods
+
+*ATS (no covariate or seasonal variation)*
+We choose to use the original units (`LOG=FALSE`) because the data appear linear over time with one large outlier, and a nonparametric test will not be overly influenced by one outlier.  Running the ATS function on concentration versus decimal time, we find strong evidence for a downtrend (p = 0.006):
+
+```{r}
+with(Gales_Creek,ATS(TCr,CrND,dectime,LOG=FALSE))
+```
+
+It isn’t easy to see on the plot, but the detection limits shown as dashed lines are higher before 2012 as opposed to after 2012.  The methods of this section of the course work well with multiple detection limits in the data record.
+
+*ATS on residuals from a smooth with a covariate*
+Using the centrend function, we first smooth the chromium – streamflow relationship, and then test the residuals for trend:
+
+```{r}
+with(Gales_Creek,centrend(TCr,CrND,discharge,dectime))
+```
+
+There is no trend in chromium concentration once the effect of streamflow has been subtracted out.  It appears that the evidence for a downtrend was due to a change in the flow regime over the time period.  There is a strong relationship between flow and chromium concentrations.  
+
+*Seasonal Kendall test*
+Perhaps there is a trend in either the dry season alone, ignoring the effects of high flows on the trend test?  Perform the Seasonal Kendall test using the censeaken function and pay attention to the individual season results by plotting them using the `seaplots = TRUE` option.
+
+```{r}
+with(Gales_Creek,censeaken(dectime,TCr,CrND,Season,seaplots=TRUE))
+```
+
+There is an overall trend once the Seasonal Kendall test has removed all comparisons between values in different seasons.  Also, the dry season has a p-value of 0.069.  The prevailing wisdom in statistics in 2019 is to not get too rigid about an alpha of 0.05.  A value of 0.069 is close to 0.05 and the trend in the dry season graph appears strong.  I would report in this case that there is an overall downtrend and a downtrend in the dry season.  The high flows in the wet season were preventing the non-seasonal `centrend` function from seeing the trend.
+
+*Seasonal Kendall test with a covariate*
+The centrendsea function will perform the seasonal Kendall test on the residuals from a GAM smooth of the original Y variable verses a covariate, like flow.  This first computes the same covariate adjustment of the centrend function and using the residuals from the smooth, tests the "covariate-adjusted trend" using the Seasonal Kendall test. The variables to be entered are, in order, the Y variable to be tested for trend, the T/F indicator of censoring for the Y variable, the covariate, the time variable, and the season category variable.  
+
+```{r}
+with(Gales_Creek,centrendsea(TCr,CrND,discharge,dectime,Season))
+```
+
+There is no trend in flow-adjusted chromium found for this site and dates.  The slight decrease of the ATS line above, which includes the influence of the below detection limit observations as well as detected observations, is not significantly different from a zero slope.
+
+### Parametric Method
+
+*Simple Censored Regression*
+Using the default log transformation of chromium because we know there is one large outlier lurking, the `cencorreg` function shows that the residuals are not a normal distribution, but the data appear quite straight except for the one high outlier.  There is likely no better scale to work in – untransformed concentrations would be far worse.  Without deleting the outlier (you should check it to see if there’s been an error, but you can’t because this isn’t your data!), do not delete the outlier without cause and work in the log units.
+
+```{r}
+with(Gales_Creek,cencorreg(TCr,CrND,dectime))
+```
+
+The regression p-value of 0.03 says that there is a trend.  The slope of – 0.095 log units per year will be approximately a 10% decrease in chromium per year.  But is this slope a good estimate, given that there appear to be a confounding effect of streamflow?  So perform a censored multiple regression.
+
+*Censored Multiple Regression*
+Create a data frame of the two X variables, dectime and flow, and try again.  This is a better model if flow explains a lot of the variation in concentration.  If that’s the case the model’s AIC will be lower than the previous AIC of 163.48.
+
+```{r}
+timeflow <- with(Gales_Creek,data.frame(dectime, discharge))
+with(Gales_Creek,cencorreg(TCr,CrND, CrND, timeflow))
+
+```
+
+The QQ plot looks great, and the residuals do not differ from a normal distribution.  The AIC is considerably lower for the 2-variable model, so this model that accounts for flow variation should be used instead of the original model.
+
+*Censored Multiple Regression with Seasonal Variables*
+Sounds like a menu option (‘seasonal vegetables’), doesn’t it?  Create the sin and cos function variables using `2*pi*dectime`, and add it to the stew.  See if they add anything.
+
+```{r}
+sinT <- with(Gales_Creek, sin(2*pi*dectime))
+cosT <- with(Gales_Creek, cos(2*pi*dectime))
+timeflowseas <- with(Gales_Creek,data.frame(dectime, discharge))
+timeflowseas <- cbind(timeflowseas,sinT,cosT)
+with(Gales_Creek, cencorreg(TCr, CrND, timeflowseas))
+
+```
+
+The QQ plot looks good.  The sin and cos model has a lower AIC (106.3 versus the 2-variable model’s 113.5) so this is the best model of the three.  The slope of -0.098 per year still maps to around a 10% decrease in concentration per year.
+
+## Logistic Regression
