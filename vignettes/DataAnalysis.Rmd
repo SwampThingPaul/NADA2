@@ -998,3 +998,261 @@ with(Gales_Creek, cencorreg(TCr, CrND, timeflowseas))
 The QQ plot looks good.  The sin and cos model has a lower AIC (106.3 versus the 2-variable model’s 113.5) so this is the best model of the three.  The slope of -0.098 per year still maps to around a 10% decrease in concentration per year.
 
 ## Logistic Regression
+
+The ReconLogistic dataset presents atrazine concentrations at streams across the midwestern United States.  There were multiple detection limits, and a health advisory of 1 ug/L.  Several characteristics of the basin at the time of sampling, including streamflow, are also recorded.
+
+```{r}
+data(Recon)
+
+head(Recon,3)
+
+Recon$GT_1=Recon$AtraConc>1
+
+```
+
+We will model the above/below 1 ug/L pattern using the `GT_1` variable. The primary assumption is that there is a linear relationship between the X variables and the log(odds).  Start by checking VIFs for all 6 candidate variables.  The `glm` command using the `family=binomial(logit)` link function produces the equation:
+
+```{r}
+glm.1 <- glm(GT_1~
+               Applic+
+               PctCorn+
+               SoilGp+
+               Precip+
+               Dyplant+
+               Pctl,
+             Recon,family=binomial(logit))
+vif(glm.1)
+```
+
+There is no multicollinearity between the variables, as indicated by VIF values of less than 2. Therefore the reported p-values should be trustworthy.
+
+```{r}
+summary(glm.1)
+```
+
+To compute the overall test of whether this model is better than no model at all, the test that all slopes are zero, first compute the null model by using a 1 instead of any X variables in the right-hand side of the equation:
+
+```{r}
+glm.null <- glm(GT_1~1,Recon,family=binomial(logit))
+
+anova(glm.null,glm.1,test="Chisq")
+```
+
+The test statistic often named G equals 312.1.  Compared to a chi-squared distribution with 6 degrees of freedom, the difference in the number of X variables between the two models, this statistic has a p-value of 2 x 10^-16, and so is very significant.  We conclude that there is information in this model for predicting atrazine occurrence above 1 and proceed to try and find the best model.  The simplest way to have the computer tell you the best logistic regression model is to use the bestglm command.  But let’s try manually first and see how we do.  We need to see if any of the X variables need to be transformed. 
+
+```{r}
+residualPlots(glm.1,type="deviance")
+
+```
+
+It is hard to judge residuals plots with logistic regression because there are separate groups of residuals for the Y = 0 and 1 data.  The smooth for DYPLANT appears curved, but is not an improvement. If `log(Dyplant)` is substituted for `Dyplant` the AIC increases, so is not a better model.  
+
+Using `glm.1`, `Applic` had the highest p-value, so we’ll drop it and see if AIC goes below 259.9.
+
+```{r}
+glm.3 <- glm(GT_1~
+               PctCorn+
+               SoilGp+
+               Precip+
+               Dyplant+
+               Pctl,
+             Recon,family=binomial(logit))
+summary(glm.3)
+```
+
+This 5-variable model is improved over `glm.1`.  `SoilGp` remains insignificant so let’s drop that and see the effect on AIC.
+
+```{r}
+glm.4 <- glm(GT_1~
+               PctCorn+
+               Precip+
+               Dyplant+
+               Pctl,
+             Recon,family=binomial(logit))
+summary(glm.4)
+```
+
+AIC is lower (improved).  All terms are significant.  We’ll settle on this as our final model.  This is the model found ‘best’ using `bestglm` (note that `bestglm` requires the `data.frame` to have the 0/1 Y variable in the last column, which `Recon` does).
+
+```{r}
+bestglm(Recon,family = binomial(logit), IC = "AIC")
+
+```
+
+glm.4 has slopes with algebraic signs that make scientific sense, and all explanatory variables are significant at alpha = 0.05.  The model can be compared to the original 6 variable model using either a partial test, or with the AIC.  The partial test determines whether the two variables that were dropped add significantly to the explanatory power of the model, just as in multiple linear regression.  The null hypothesis is that they do not; not rejecting the null hypothesis says to keep the simpler model.  
+
+```{r}
+anova(glm.4, glm.1, test="Chisq")
+```
+
+We do not reject that the smaller model is just as good.  Go with `glm.4`. Finally, if we want to get an r-squared or a Brier score, and get some plots of the relation between the log-odds and each X variable, compute the same 4-variable model using the `lrm` command from the `rms` package:
+
+```{r}
+Recon.frame = with(Recon, datadist(PctCorn, Dyplant, Pctl, Temp, GT_1))
+options(datadist = "Recon.frame")
+lrm4 <- lrm(GT_1 ~ PctCorn + Dyplant + Pctl + Temp, data = Recon)
+lrm4
+```
+
+## Multivariate Methods for Censored Data
+
+Symonds et al (2016) used microbial source tracking (MST) markers to detect fecal pollution in waters along the coast of Florida.  Six MST markers are in the dataset `Markers` in interval-censored format, where (0 to MDL) indicate values below a limit of detection.  Nonzero lower ends of the interval indicate either (MDL to QL) data or detected values above the QL.  Also included is the US EPA total enterococci marker `Entero1A`, a general fecal pollution indicator.
+
+1. Test whether the pattern of the six MST markers plus the `Entero1A` indicator differs among the five sites using `ANOSIM`.
+
+2. Test whether there is a ‘trend’ (correlation) between the six MST markers versus the general fecal pollution indicator using the Mantel test for trend analysis using Kendall’s tau correlation between the matrices (multivariate nonparametric correlation).
+
+***
+*Solution*
+
+1. Load the data and compute the ranks of the uscores; then compute the anosim test for group differences and illustrate the results with an MDS:
+
+```{r}
+data(Markers)
+head(Markers,3)
+
+Mdat <- Markers[, -15] # remove the Site Name column
+
+M.usc <- uscoresi(Mdat)    # uscoresi drops rows with NAs  (row 13 here)
+M.euclid <- dist(M.usc)
+Site <- Markers$Site_Name[-13]  # delete the site entry for row 13 with NAs
+M.anosim <- anosim(M.euclid, Site)
+M.anosim
+
+
+anosimPlot(M.anosim)
+```
+
+There is a difference between the five sites.  To illustrate which sites appear different than others, draw an NMDS plot:
+
+```{r}
+uMDS(M.usc, group = Site, 
+     legend.pos = "topright", 
+     title = "NMDS of rank(uscores) for markers + entero")
+```
+
+From the left-right axis (NMDS1) we see that all three inlets (Port of Miami, Port Everglades and Baker’s Haulover) are on the left side, while Miami Central, an ocean outfall site, is on the right side.  That is the main contrast between sites.  From the second axis (NMDS2) there are one or two samples within Sites that are ‘outliers’ towards the top as compared to others in that site.  Some characteristic differs in those samples.  Sample 11 compared to the rest of Miami_North and site 14 compared to the rest of Baker’s Haulover, for example.  Second axes for NMDS aren’t always interpretable, but the first axis should be expected to show the main difference detected by the ANOSIM result.
+
+If you’d like to draw the NMDS plot manually, perhaps to change some options from what is in the function, here is the R code that will draw the same plot as the `uMDS` function:
+
+```{r}
+M.nmds <- metaMDS(M.euclid)
+Site <- as.factor(Site)
+gp.color <- as.integer(Site)
+Mplot <- ordiplot(M.nmds, type="none", display = "sites", 
+                  main="NMDS of rank(uscores) for markers + entero")
+points(Mplot, "sites", pch=19, col=gp.color)
+text(Mplot, "sites", pos=4, cex = 0.8)
+leg.col <- c(1: length(levels(Site)))
+legend("topright", legend=levels(Site), bty="n", col = leg.col, text.col = leg.col, pch = 19)
+
+```
+
+2. Create two triangular distance matrices, one for the 6 MST markers and the second for the general fecal pollution indicator (entero1A) data.  Then correlate the two matrices using the Mantel command.  This is to see if there is a ‘trend’ in the MST marker pattern with increasing entero1A.
+
+```{r}
+Mdata <- Markers[-13,]  # delete row with NAs
+M6 <- Mdata[, -(13:15)]  # only keep columns for the 6 markers
+M6.usc <- uscoresi(M6)
+M6.euclid <- dist(M6.usc)  # matrix for the 6 MST markers
+ent <- Mdat[, 13:14]   # the entero1A data
+ent.usc<-uscoresi(ent)
+ent.euclid<-dist(ent.usc)  # matrix for the entero1A data
+M6.Ktau <- mantel(ent.euclid, M6.euclid, method="kendall", permutations = 9999) 
+M6.Ktau
+
+### Error ent.euclid and M6.euclid different dimensions
+
+```
+
+There is a significant positive correlation between the MST marker values and the entero1A values.  One way to picture the correlation is to plot their distance matrix entries against one another.  The x,y pairs are those in the triangular matrices that are being correlated using Kendall’s tau in the mantel test.  If there was a positive correlation, for example, larger distances (relating small to large entero1A data) would also have larger M6 distances between MST marker concentrations.  This is the pattern seen in the plot.
+
+```{r}
+Site <-  as.factor(Markers$Site_Name)
+gp.color <- as.numeric(Site)  # assigns numbers to group names in Site_Name
+plot(ent.euclid, M6.euclid, pch = 19, 
+     col = gp.color, 
+     main = "Correlation of distance matrix of rank(uscores)")
+lws <- lowess(ent.euclid, M6.euclid)
+lines(lws)
+legend("bottomright", legend=levels(Site), bty="n", col = 1:nlevels(Site), pch = 19)
+
+### Error ent.euclid and M6.euclid different dimensions
+```
+
+The plot, in addition to being colorful, shows the general increase of M6 distances as a function of entero1A distances, as shown by the lowess smooth.  As entero1A values increase, the pattern of 6 marker concentrations also increases.
+
+
+*Extra Credit:*
+Which MST marker(s) have the highest correlation with the Entero1A values?  This can be determined with the bioenv command in the vegan package.  This command performs iterative mantel tests with subsets of the marker data.  The highest correlation coefficient is the set of best predictors, which may be 1 up to all 6 of the markers. 
+
+```{r}
+bioenv(ent.euclid, M6.usc, method = "kendall")
+### Error ent.euclid and M6.euclid different dimensions
+```
+
+The highest correlation model is with one marker, HF183.  This can be illustrated by plotting the entero1A uscores against the HF183 uscores.  HF183 was the 4th of six columns within M6.
+
+```{r}
+plot(ent.usc, M6.usc[,4], pch = 19)
+### Error ent.euclid and M6.euclid different dimensions
+```
+
+You can plot ent.usc against the other five MST markers if you wish to see which markers appear to be related to the Entero1A concentrations.  My look at the plots – BacHum is also correlated, and HPyV has a binary style correlation – as Entero1A increases the probability of a high rather than low PHyV increases -- rather than a linear relationship.  This is because HPyV values occur in just two categories, (0 to 249) and (250 to 499).  Had all data been censored to <500 this relationship would not have been visible.  See the plot below.  HpyV was the 5th of the 6 marker columns. The other three markers (all animal MST markers) show little correlation with Entero1A.
+
+```{r}
+plot(ent.usc, M6.usc[,5], ylab = "HPyv rank of uscores")
+```
+
+## References:
+* Helsel, D.R., 2012. Statistics for censored environmental data using Minitab and R, 2nd edition.  John Wiley and Sons, New York.  344 p.
+
+* Millard, S.P., 2013.  EnvStats: An R Package for Environmental Statistics (2nd Edition).  Springer, New York.
+
+* Singh, A., Maichle, R. and S. Lee, 2006.  On the Computation of a 95% Upper Confidence Limit of the Unknown Population Mean Based Upon Data Sets with Below Detection Limit Observations.  Office of Research and Development, USEPA.  EPA/600/R-06/022.  123 p.
+
+* Symonds et al., 2016. Faecal pollution along the southeastern coast of Florida and insight into the use of pepper mild mottle virus as an indicator, Journ Applied Microbio 121, p. 1469-1481.
+
+* Thode, H.C., 2002. Testing for Normality.  Marcel Dekker, New York.  479 p.
+
+
+## Appendix
+### A "Flowchart" for Computation of UCL / EPC for Data with Nondetects
+
+
+The following steps can guide your choice of a method to compare a UCL to a legal standard or health advisory.  Methods depend on the number of observations (detects and nondetects) available.
+
+1.	Are there at least 20 observations?
+NO:	Assume the best fitting distribution to estimate the UCL.  Go to step 2.
+YES:	Use a bootstrap (nonparametric estimation) method.  Go to step 3.
+
+2.	Distributional Methods 
+2a)	Use a boxplot (the cboxplot command) to take a first look at the data.  Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study.  If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study.  If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly.  Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical.  If they are part of what people have been exposed to, keep them.  If they are mistakes or represent an area that is not to be considered, delete them.  A statistical test cannot be used to make this decision for you.
+
+2b)	Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function.  Of these three, select the distribution with either the highest PPCC or lowest BIC statistic.  I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.
+
+** If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated.  If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high.  You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.  
+
+2c)	Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:
+
+```{r,eval=F}
+enormCensored(Data, Cen,ci=TRUE, ci.type="upper", ci.method="normal.approx")
+elnormAltCensored(Data, Cen, ci=TRUE, ci.type="upper", ci.method="bootstrap")
+egammaAltCensored(Data, Cen, ci=TRUE, ci.type="upper", ci.method="bootstrap")
+```
+
+In each of these commands, the input column of concentrations plus detection limits is shown as “Data”, and the censoring indicator column (0/1 or FALSE/TRUE) as “Cen”.  Use the appropriate variable names in your dataset instead.
+
+
+3.  Nonparametric Methods
+3a)	If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate.  Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114).  Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.  
+
+```{r,eval=F}
+enparCensored(Data, Cen, ci=TRUE, ci.method="bootstrap", ci.type="upper", n.bootstraps=5000)
+```
+
+3b)	If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs.  It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean.  I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.  
+
+Singh et al. (2006) state that the UCL95 is better estimated using KM than by ROS methods for censored data, and based on this overall statement, recommend that KM be used in any situation with nondetects.  I believe they haven't split out the one-DL situations separately and looked at the resulting bias.  They simply state that they've shown that KM is always better.  Statisticians disagree.
+
+
