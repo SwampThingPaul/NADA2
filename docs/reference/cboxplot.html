@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -94,6 +94,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/DataAnalysis.html">Data Analysis Using NADA2</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -129,9 +141,9 @@
     </div>
 
     <pre class="usage"><span class='fu'>cboxplot</span><span class='op'>(</span>
-  <span class='va'>y1</span>,
-  <span class='va'>y2</span>,
-  group <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>x1</span>,
+  <span class='va'>x2</span>,
+  xgroup <span class='op'>=</span> <span class='cn'>NULL</span>,
   LOG <span class='op'>=</span> <span class='cn'>FALSE</span>,
   show <span class='op'>=</span> <span class='cn'>FALSE</span>,
   ordr <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -151,15 +163,15 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>y1</th>
-      <td><p>The column of y (response variable) values plus detection limits.</p></td>
+      <th>x1</th>
+      <td><p>The column of x (response variable) values plus detection limits.</p></td>
     </tr>
     <tr>
-      <th>y2</th>
-      <td><p>The y-variable censoring indicators, where 1 (or <code>TRUE</code>) indicates a detection limit in the y1 column, and 0 (or <code>FALSE</code>) indicates a detected value in y1.</p></td>
+      <th>x2</th>
+      <td><p>The x-variable censoring indicators, where 1 (or <code>TRUE</code>) indicates a detection limit in the y1 column, and 0 (or <code>FALSE</code>) indicates a detected value in y1.</p></td>
     </tr>
     <tr>
-      <th>group</th>
+      <th>xgroup</th>
       <td><p>An optional column of a grouping variable.  Draws side-by-side boxplots if this variable is present.</p></td>
     </tr>
     <tr>

@@ -51,7 +51,7 @@ check.packages <- function(pkg){
 
 pkg <- c("bestglm","car","cenGAM","EnvStats","fitdistrplus","Kendall",
          "mgcv","multcomp","NADA","nlme","perm","rms","survminer",
-         "vegan","NADA2")
+         "vegan","NADA2","bestglm")
 check.packages(pkg)
 ```
 
@@ -1200,7 +1200,7 @@ You can plot ent.usc against the other five MST markers if you wish to see which
 plot(ent.usc, M6.usc[,5], ylab = "HPyv rank of uscores")
 ```
 
-## References:
+## References
 * Helsel, D.R., 2012. Statistics for censored environmental data using Minitab and R, 2nd edition.  John Wiley and Sons, New York.  344 p.
 
 * Millard, S.P., 2013.  EnvStats: An R Package for Environmental Statistics (2nd Edition).  Springer, New York.
@@ -1223,13 +1223,13 @@ NO:	Assume the best fitting distribution to estimate the UCL.  Go to step 2.
 YES:	Use a bootstrap (nonparametric estimation) method.  Go to step 3.
 
 2.	Distributional Methods 
-2a)	Use a boxplot (the cboxplot command) to take a first look at the data.  Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study.  If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study.  If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly.  Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical.  If they are part of what people have been exposed to, keep them.  If they are mistakes or represent an area that is not to be considered, delete them.  A statistical test cannot be used to make this decision for you.
++	Use a boxplot (the cboxplot command) to take a first look at the data.  Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study.  If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study.  If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly.  Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical.  If they are part of what people have been exposed to, keep them.  If they are mistakes or represent an area that is not to be considered, delete them.  A statistical test cannot be used to make this decision for you.
 
-2b)	Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function.  Of these three, select the distribution with either the highest PPCC or lowest BIC statistic.  I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.
++	Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function.  Of these three, select the distribution with either the highest PPCC or lowest BIC statistic.  I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.
 
-** If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated.  If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high.  You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.  
+  + If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated.  If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high.  You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.  
 
-2c)	Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:
++	Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:
 
 ```{r,eval=F}
 enormCensored(Data, Cen,ci=TRUE, ci.type="upper", ci.method="normal.approx")
@@ -1241,13 +1241,13 @@ In each of these commands, the input column of concentrations plus detection lim
 
 
 3.  Nonparametric Methods
-3a)	If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate.  Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114).  Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.  
++	If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate.  Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114).  Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.  
 
 ```{r,eval=F}
 enparCensored(Data, Cen, ci=TRUE, ci.method="bootstrap", ci.type="upper", n.bootstraps=5000)
 ```
 
-3b)	If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs.  It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean.  I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.  
++	If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs.  It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean.  I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.  
 
 Singh et al. (2006) state that the UCL95 is better estimated using KM than by ROS methods for censored data, and based on this overall statement, recommend that KM be used in any situation with nondetects.  I believe they haven't split out the one-DL situations separately and looked at the resulting bias.  They simply state that they've shown that KM is always better.  Statisticians disagree.
 

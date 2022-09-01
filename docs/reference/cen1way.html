@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -94,6 +94,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/DataAnalysis.html">Data Analysis Using NADA2</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -128,21 +140,21 @@
     <p>Performs a Peto-Peto nonparametric test of differences in cdfs between groups.  If more than two groups, the test is followed by a nonparametric multiple comparison test.  Uses the BH method of adjusting p-values.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>cen1way</span><span class='op'>(</span><span class='va'>y1</span>, <span class='va'>y2</span>, <span class='va'>grp</span>, mcomp.method <span class='op'>=</span> <span class='st'>"BH"</span>, printstat <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cen1way</span><span class='op'>(</span><span class='va'>x1</span>, <span class='va'>x2</span>, <span class='va'>group</span>, mcomp.method <span class='op'>=</span> <span class='st'>"BH"</span>, printstat <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>y1</th>
+      <th>x1</th>
       <td><p>The column of data values plus detection limits</p></td>
     </tr>
     <tr>
-      <th>y2</th>
+      <th>x2</th>
       <td><p>The column of indicators, where 1 (or <code>TRUE</code>) indicates a detection limit in the y1 column, and 0 (or <code>FALSE</code>) indicates a detected value in y1.</p></td>
     </tr>
     <tr>
-      <th>grp</th>
+      <th>group</th>
       <td><p>Grouping or factor variable. Can be either a text or numeric value indicating the group assignment.</p></td>
     </tr>
     <tr>

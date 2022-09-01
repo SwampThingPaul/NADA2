@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -94,6 +94,18 @@
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/DataAnalysis.html">Data Analysis Using NADA2</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">Changelog</a>
@@ -183,14 +195,18 @@
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>atrazine</span><span class='op'>)</span>
 
 <span class='fu'>cen_paired</span><span class='op'>(</span><span class='va'>atrazine</span><span class='op'>$</span><span class='va'>June</span>,<span class='va'>atrazine</span><span class='op'>$</span><span class='va'>JuneCen</span>,<span class='va'>atrazine</span><span class='op'>$</span><span class='va'>Sept</span>,<span class='va'>atrazine</span><span class='op'>$</span><span class='va'>SeptCen</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Censored paired test for mean(atrazine$June - atrazine$Sept) equals 0. 
+</div><div class='output co'>#&gt;  [1] 0.38 0.04 0.01 0.03 0.03 0.05 0.02 0.01 0.01 0.01 0.11 0.09 0.01 0.01 0.01
+#&gt; [16] 0.01 0.02 0.03 0.02 0.02 0.05 0.03 0.05 0.01
+#&gt; 0.38 0.04 0.01 0.03 0.03 0.05 0.02 0.01 0.01 0.01 0.11 0.09 0.01 0.01 0.01 0.01 0.02 0.03 0.02 0.02 0.05 0.03 0.05 0.01 FALSE FALSE TRUE FALSE FALSE FALSE FALSE TRUE TRUE TRUE FALSE FALSE TRUE TRUE TRUE TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE 2.66 0.63 0.59 0.05 0.84 0.58 0.02 0.01 0.01 0.01 0.09 0.31 0.02 0.01 0.5 0.03 0.09 0.06 0.03 0.01 0.1 0.25 0.03 88.36 FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE TRUE TRUE FALSE FALSE FALSE TRUE FALSE FALSE FALSE FALSE FALSE TRUE FALSE FALSE FALSE FALSECensored paired test for mean(atrazine$June - atrazine$Sept) equals 0. 
 #&gt;  alternative hypothesis: true mean difference does not equal 0. 
 #&gt;  
 #&gt;  n = 24   Z= -1.0924   p-value = 0.2747 
 #&gt;  Mean difference = -3.927 </div><div class='img'><img src='cen_paired-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Comparing standard/guieline value</span>
 <span class='fu'>cen_paired</span><span class='op'>(</span><span class='va'>atrazine</span><span class='op'>$</span><span class='va'>June</span>, <span class='va'>atrazine</span><span class='op'>$</span><span class='va'>JuneCen</span>, <span class='fl'>0.01</span>, alternative <span class='op'>=</span> <span class='st'>"greater"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  Censored paired test for mean(atrazine$June) equals 0.01 
+</div><div class='output co'>#&gt;  [1] 0.38 0.04 0.01 0.03 0.03 0.05 0.02 0.01 0.01 0.01 0.11 0.09 0.01 0.01 0.01
+#&gt; [16] 0.01 0.02 0.03 0.02 0.02 0.05 0.03 0.05 0.01
+#&gt; 0.38 0.04 0.01 0.03 0.03 0.05 0.02 0.01 0.01 0.01 0.11 0.09 0.01 0.01 0.01 0.01 0.02 0.03 0.02 0.02 0.05 0.03 0.05 0.01 FALSE FALSE TRUE FALSE FALSE FALSE FALSE TRUE TRUE TRUE FALSE FALSE TRUE TRUE TRUE TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE TRUE 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 0.01 FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE Censored paired test for mean(atrazine$June) equals 0.01 
 #&gt;  alternative hypothesis: true mean atrazine$June exceeds 0.01. 
 #&gt;  
 #&gt;  n = 24   Z= 2.1004   p-value = 0.01785 
