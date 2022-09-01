@@ -1,6 +1,6 @@
 ---
 title: "Data Analysis Using NADA2"
-author: "Dennis Helsel"
+author: "Dennis Helsel and Paul Julian"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{DataAnalysis}
@@ -1074,7 +1074,7 @@ summary(glm.4)
 
 AIC is lower (improved).  All terms are significant.  We’ll settle on this as our final model.  This is the model found ‘best’ using `bestglm` (note that `bestglm` requires the `data.frame` to have the 0/1 Y variable in the last column, which `Recon` does).
 
-```{r}
+```{r,warning=FALSE}
 bestglm(Recon,family = binomial(logit), IC = "AIC")
 
 ```
@@ -1107,7 +1107,7 @@ Symonds et al (2016) used microbial source tracking (MST) markers to detect feca
 
 1. Load the data and compute the ranks of the uscores; then compute the anosim test for group differences and illustrate the results with an MDS:
 
-```{r}
+```{r,message = FALSE,results="hide"}
 data(Markers)
 head(Markers,3)
 
@@ -1125,7 +1125,7 @@ anosimPlot(M.anosim)
 
 There is a difference between the five sites.  To illustrate which sites appear different than others, draw an NMDS plot:
 
-```{r}
+```{r,message = FALSE,results="hide"}
 uMDS(M.usc, group = Site, 
      legend.pos = "topright", 
      title = "NMDS of rank(uscores) for markers + entero")
@@ -1135,7 +1135,7 @@ From the left-right axis (NMDS1) we see that all three inlets (Port of Miami, Po
 
 If you’d like to draw the NMDS plot manually, perhaps to change some options from what is in the function, here is the R code that will draw the same plot as the `uMDS` function:
 
-```{r}
+```{r,message = FALSE,results="hide"}
 M.nmds <- metaMDS(M.euclid)
 Site <- as.factor(Site)
 gp.color <- as.integer(Site)
@@ -1155,13 +1155,11 @@ Mdata <- Markers[-13,]  # delete row with NAs
 M6 <- Mdata[, -(13:15)]  # only keep columns for the 6 markers
 M6.usc <- uscoresi(M6)
 M6.euclid <- dist(M6.usc)  # matrix for the 6 MST markers
-ent <- Mdat[, 13:14]   # the entero1A data
+ent <- Mdata[, 13:14]   # the entero1A data
 ent.usc<-uscoresi(ent)
 ent.euclid<-dist(ent.usc)  # matrix for the entero1A data
 M6.Ktau <- mantel(ent.euclid, M6.euclid, method="kendall", permutations = 9999) 
 M6.Ktau
-
-### Error ent.euclid and M6.euclid different dimensions
 
 ```
 
@@ -1177,7 +1175,6 @@ lws <- lowess(ent.euclid, M6.euclid)
 lines(lws)
 legend("bottomright", legend=levels(Site), bty="n", col = 1:nlevels(Site), pch = 19)
 
-### Error ent.euclid and M6.euclid different dimensions
 ```
 
 The plot, in addition to being colorful, shows the general increase of M6 distances as a function of entero1A distances, as shown by the lowess smooth.  As entero1A values increase, the pattern of 6 marker concentrations also increases.
@@ -1188,14 +1185,13 @@ Which MST marker(s) have the highest correlation with the Entero1A values?  This
 
 ```{r}
 bioenv(ent.euclid, M6.usc, method = "kendall")
-### Error ent.euclid and M6.euclid different dimensions
+
 ```
 
 The highest correlation model is with one marker, HF183.  This can be illustrated by plotting the entero1A uscores against the HF183 uscores.  HF183 was the 4th of six columns within M6.
 
 ```{r}
 plot(ent.usc, M6.usc[,4], pch = 19)
-### Error ent.euclid and M6.euclid different dimensions
 ```
 
 You can plot ent.usc against the other five MST markers if you wish to see which markers appear to be related to the Entero1A concentrations.  My look at the plots – BacHum is also correlated, and HPyV has a binary style correlation – as Entero1A increases the probability of a high rather than low PHyV increases -- rather than a linear relationship.  This is because HPyV values occur in just two categories, (0 to 249) and (250 to 499).  Had all data been censored to <500 this relationship would not have been visible.  See the plot below.  HpyV was the 5th of the 6 marker columns. The other three markers (all animal MST markers) show little correlation with Entero1A.
