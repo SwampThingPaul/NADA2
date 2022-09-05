@@ -3,10 +3,9 @@
 \docType{data}
 \name{Example3}
 \alias{Example3}
-\alias{Example2}
 \title{Example3}
 \format{
-An object of class \code{data.frame} with 31 rows and 5 columns.
+An object of class \code{data.frame} with 14 rows and 4 columns.
 }
 \source{
 unknown

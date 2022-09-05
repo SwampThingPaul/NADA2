@@ -31,3 +31,5 @@
 * Added `centrendsea` function (2022-09-01)
 
 * Finalized vignette (2022-09-01)
+
+* Submitted to CRAN (2022-09-02)

@@ -41,7 +41,7 @@ Load the packages needed. Install 15 packages: You can either do this manually v
 
 *Here is a trick to use a list of packages combined with a function that will check if the package is installed, if not install it and then load it.*
 
-```{r,warning=F,message=F,eval=F}
+```{r,warning=F,message=F,eval=T,results="hide"}
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
@@ -57,7 +57,7 @@ check.packages(pkg)
 
 *Loading libraries using console/R-script*
 
-```{r setup,warning=F,message=F}
+```{r setup,warning=F,message=F,results="hide"}
 # Load Package
 library(cenGAM)
 library(EnvStats)
@@ -326,7 +326,7 @@ K-M and ROS use the high outlier data value to estimate the mean. MLE uses the l
 
 ## Interval Estimates
 
-Several of the commands to obtain confidence intervals are identical to what we was done in the Estimating Descriptive Statistics section Prediction and tolerance intervals are new.
+Several of the commands to obtain confidence intervals are identical to what we was done in the Estimating Descriptive Statistics section Prediction. and tolerance intervals are new.
 
 ### Confidene Intervals
 
@@ -540,7 +540,7 @@ arsenic.out <- with(Example1,
 EnvStats::print(arsenic.out)
 ```
 
-The percentile bootstrap estimate of the UCL95 equals 2.52.  This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.
+The percentile bootstrap estimate of the UCL95 will be near to 2.53, with the output varying slightly each time a bootstrap estimate is run.  This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.
 
 **Example 2:** Computation of a UCL95 for data with both detected and non-detected values, DL unknown.
 
@@ -578,7 +578,7 @@ mibk2.out <- with(Example2,
 EnvStats::print(mibk2.out)
 ```
 
-The percentile bootstrap UCL95 using rROS equals 0.284 with this known detection limit.  It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.
+The percentile bootstrap UCL95 based on the robust ROS mean will be near to 0.290 with this known detection limit.  It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.
 
 **Example 3:** Computation of the expected percent of observations exceeding a health advisory when all data are NDs.  More details of this method are found in Chapter 8 of Statistics for Censored Environmental Data Using Minitab and R (Helsel, 2012).
 
@@ -614,7 +614,7 @@ with(CuZn,cenperm2(Zn,ZnCen,Zone))
 
 The two groups do not have significantly different means.  These are p-values that you can believe, as they do not depend on the normal assumption and do not project data values below zero.
 
-Assume a lognormal distribution (uses the default LOG=TRUE option). This tests for differences in geometric means:
+Using cen2means to perform the test using the default lognormal distribution, the difference in geometric means (not arithmetic means) is performed below.
 
 ```{r,fig.width=6.5,fig.height=4,fig.align='center'}
 with(CuZn,cen2means(Zn,ZnCen,Zone))
@@ -622,7 +622,7 @@ with(CuZn,cen2means(Zn,ZnCen,Zone))
 
 No significant difference between geometric means.  And the corresponding Q-Q plot of regression residuals show that the data do not follow a lognormal distribution either (one large outlier), but it is the better fit of the two distributions.  A permutation test using cenperm2 after computing the logarithms would be a better test for differences in geometric means.
 
-The Peto-Peto test is run using the cen1way function. It reports the Kaplan-Meier medians in each of the groups:
+"A nonparametric test between the two groups will test differences between their cdfs (often considered as a test for difference in medians) instead of testing the difference between means. The Peto-Peto test is run using the cen1way function. It reports the Kaplan-Meier medians in each of the groups:
 
 ```{r,fig.width=6.5,fig.height=4,fig.align='center'}
 with(CuZn,cen1way(Zn,ZnCen,Zone))
@@ -644,7 +644,7 @@ with(CuZn,cboxplot(Zn,ZnCen,Zone,
 
 Now for the two simpler tests, where all values below the highest DL must be re-censored.
 
-Contingency tables are a test to determine whether the proportions of data in categories are the same in two or more groups.  With nondetects the cutoff level is again the highest reporting limit.  Use the `TCE2` dataset with the highest of 4 DLs at 5 ug/L.  The test determines whether the proportions of data above versus below the cutoff are the same in each group.  It differs from a rank-sum in that all data above the limit are simply in the same ‘Above’ group rather than ranked individually. This loses some information as compared to the rank-sum test. Density is a text variable (a factor) representing the groups, while Below5Cens has a 1 for data below 5 ug/L and a 0 for data at or below 5.  First we combine them into a matrix using the ftable command, then compute a ‘cross-tabulation’ with the `xtabs(...)` command that the `chisq.test(...)` command expects. Finally the chisquare test is computed.  Its null hypothesis is that there is no difference in the percent of data above the cutoff of 5 ug/L in the two groups.
+Contingency tables are a test to determine whether the proportions of data in categories are the same in two or more groups.  With nondetects the cutoff level is again the highest reporting limit.  Use the `TCE2` dataset with the highest of 4 DLs at 5 ug/L.  The test determines whether the proportions of data above versus below the cutoff are the same in each group.  It differs from a rank-sum in that all data above the limit are simply in the same ‘Above’ group rather than ranked individually. This loses some information as compared to the rank-sum test. Density is a text variable (a factor) representing the groups, while Below5Cens has a 1 for data below 5 ug/L and a 0 for data at or above 5.  First we combine them into a matrix using the ftable command, then compute a ‘cross-tabulation’ with the `xtabs(...)` command that the `chisq.test(...)` command expects. Finally the chisquare test is computed.  Its null hypothesis is that there is no difference in the percent of data above the cutoff of 5 ug/L in the two groups.
 
 ```{r}
 data(TCE2)
@@ -911,7 +911,7 @@ For this dataset, the maximum likelihood and ATS slopes for Dyplant are very sim
 
 The plot of the relationship of atrazine to flow percentile (Pctl) shows a clear washoff effect at higher flows:
 ```{r}
-with(Recon,ATS(AtraConc, Pctl, Dyplant,retrans=TRUE))
+with(Recon,ATS(AtraConc,AtraCen, Pctl,retrans=TRUE))
 ```
 
 There is not yet (June 2022) a good nonparametric “multiple regression” method for censored data.  There are ‘robust regression’ methods that perform nonparametric regression but I’ve never seen them applied to censored data.
@@ -920,7 +920,7 @@ There is not yet (June 2022) a good nonparametric “multiple regression” meth
 
 Load the Gales_Creek dataset: 
 ```{r}
-data("Gales_Creek")
+data(Gales_Creek)
 ```
 
 ### Nonparametric Methods
@@ -977,7 +977,7 @@ Create a data frame of the two X variables, dectime and flow, and try again.  Th
 
 ```{r}
 timeflow <- with(Gales_Creek,data.frame(dectime, discharge))
-with(Gales_Creek,cencorreg(TCr,CrND, CrND, timeflow))
+with(Gales_Creek,cencorreg(TCr,CrND,timeflow))
 
 ```
 
@@ -1002,11 +1002,9 @@ The QQ plot looks good.  The sin and cos model has a lower AIC (106.3 versus the
 The ReconLogistic dataset presents atrazine concentrations at streams across the midwestern United States.  There were multiple detection limits, and a health advisory of 1 ug/L.  Several characteristics of the basin at the time of sampling, including streamflow, are also recorded.
 
 ```{r}
-data(Recon)
+data(ReconLogistic)
 
-head(Recon,3)
-
-Recon$GT_1=Recon$AtraConc>1
+head(ReconLogistic,3)
 
 ```
 
@@ -1014,13 +1012,13 @@ We will model the above/below 1 ug/L pattern using the `GT_1` variable. The prim
 
 ```{r}
 glm.1 <- glm(GT_1~
-               Applic+
-               PctCorn+
-               SoilGp+
-               Precip+
-               Dyplant+
-               Pctl,
-             Recon,family=binomial(logit))
+               APPLIC+
+               CORNpct+
+               SOILGP+
+               PRECIP+
+               DYPLANT+
+               FPCTL,
+             ReconLogistic,family=binomial(logit))
 vif(glm.1)
 ```
 
@@ -1033,7 +1031,7 @@ summary(glm.1)
 To compute the overall test of whether this model is better than no model at all, the test that all slopes are zero, first compute the null model by using a 1 instead of any X variables in the right-hand side of the equation:
 
 ```{r}
-glm.null <- glm(GT_1~1,Recon,family=binomial(logit))
+glm.null <- glm(GT_1~1,ReconLogistic,family=binomial(logit))
 
 anova(glm.null,glm.1,test="Chisq")
 ```
@@ -1051,12 +1049,12 @@ Using `glm.1`, `Applic` had the highest p-value, so we’ll drop it and see if A
 
 ```{r}
 glm.3 <- glm(GT_1~
-               PctCorn+
-               SoilGp+
-               Precip+
-               Dyplant+
-               Pctl,
-             Recon,family=binomial(logit))
+               CORNpct+
+               SOILGP+
+               PRECIP+
+               DYPLANT+
+               FPCTL,
+             ReconLogistic,family=binomial(logit))
 summary(glm.3)
 ```
 
@@ -1064,18 +1062,18 @@ This 5-variable model is improved over `glm.1`.  `SoilGp` remains insignificant 
 
 ```{r}
 glm.4 <- glm(GT_1~
-               PctCorn+
-               Precip+
-               Dyplant+
-               Pctl,
-             Recon,family=binomial(logit))
+               CORNpct+
+               PRECIP+
+               DYPLANT+
+               FPCTL,
+             ReconLogistic,family=binomial(logit))
 summary(glm.4)
 ```
 
 AIC is lower (improved).  All terms are significant.  We’ll settle on this as our final model.  This is the model found ‘best’ using `bestglm` (note that `bestglm` requires the `data.frame` to have the 0/1 Y variable in the last column, which `Recon` does).
 
 ```{r,warning=FALSE}
-bestglm(Recon,family = binomial(logit), IC = "AIC")
+bestglm(ReconLogistic,family = binomial(logit), IC = "AIC")
 
 ```
 
@@ -1088,9 +1086,9 @@ anova(glm.4, glm.1, test="Chisq")
 We do not reject that the smaller model is just as good.  Go with `glm.4`. Finally, if we want to get an r-squared or a Brier score, and get some plots of the relation between the log-odds and each X variable, compute the same 4-variable model using the `lrm` command from the `rms` package:
 
 ```{r}
-Recon.frame = with(Recon, datadist(PctCorn, Dyplant, Pctl, Temp, GT_1))
+Recon.frame = with(ReconLogistic, datadist(CORNpct, DYPLANT, FPCTL, TEMP, GT_1))
 options(datadist = "Recon.frame")
-lrm4 <- lrm(GT_1 ~ PctCorn + Dyplant + Pctl + Temp, data = Recon)
+lrm4 <- lrm(GT_1 ~ CORNpct + DYPLANT + FPCTL + TEMP, data = ReconLogistic)
 lrm4
 ```
 
@@ -1223,13 +1221,14 @@ NO:	Assume the best fitting distribution to estimate the UCL.  Go to step 2.
 YES:	Use a bootstrap (nonparametric estimation) method.  Go to step 3.
 
 2.	Distributional Methods 
-+	Use a boxplot (the cboxplot command) to take a first look at the data.  Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study.  If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study.  If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly.  Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical.  If they are part of what people have been exposed to, keep them.  If they are mistakes or represent an area that is not to be considered, delete them.  A statistical test cannot be used to make this decision for you.
+    
+a) Use a boxplot (the cboxplot command) to take a first look at the data.  Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study.  If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study.  If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly.  Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical.  If they are part of what people have been exposed to, keep them.  If they are mistakes or represent an area that is not to be considered, delete them.  A statistical test cannot be used to make this decision for you.
 
-+	Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function.  Of these three, select the distribution with either the highest PPCC or lowest BIC statistic.  I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.
+b) Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function.  Of these three, select the distribution with either the highest PPCC or lowest BIC statistic.  I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.
 
-  + If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated.  If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high.  You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.  
+    * If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated.  If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high.  You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.  
 
-+	Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:
+c)	Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:
 
 ```{r,eval=F}
 enormCensored(Data, Cen,ci=TRUE, ci.type="upper", ci.method="normal.approx")
@@ -1241,14 +1240,15 @@ In each of these commands, the input column of concentrations plus detection lim
 
 
 3.  Nonparametric Methods
-+	If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate.  Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114).  Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.  
+
+a) If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate.  Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114).  Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.  
 
 ```{r,eval=F}
 enparCensored(Data, Cen, ci=TRUE, ci.method="bootstrap", ci.type="upper", n.bootstraps=5000)
 ```
 
-+	If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs.  It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean.  I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.  
+b)	If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs.  It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean.  I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.  
 
-Singh et al. (2006) state that the UCL95 is better estimated using KM than by ROS methods for censored data, and based on this overall statement, recommend that KM be used in any situation with nondetects.  I believe they haven't split out the one-DL situations separately and looked at the resulting bias.  They simply state that they've shown that KM is always better.  Statisticians disagree.
+    Singh et al. (2006) state that the UCL95 is better estimated using KM than by ROS methods for censored data, and based on this overall statement, recommend that KM be used in any situation with nondetects.  I believe they haven't split out the one-DL situations separately and looked at the resulting bias.  They simply state that they've shown that KM is always better.  Statisticians disagree.
 
 

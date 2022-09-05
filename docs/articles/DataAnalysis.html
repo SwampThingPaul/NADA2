@@ -387,10 +387,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.23997</span>
-<span class="co">#&gt;                                  Pct.UCL = 190.02465</span>
-<span class="co">#&gt;                                  BCa.LCL =  99.21954</span>
-<span class="co">#&gt;                                  BCa.UCL = 189.91858</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.19752</span>
+<span class="co">#&gt;                                  Pct.UCL = 189.59557</span>
+<span class="co">#&gt;                                  BCa.LCL =  98.93206</span>
+<span class="co">#&gt;                                  BCa.UCL = 186.26693</span></code></pre></div>
 <p>Using the print statement after storing the output in an object (<code>Pyr.mle</code> was used here) produces the table type output shown above. Without the print statement, just typing the object name, the output is generic and not ready to be pasted into a results document.</p>
 </div>
 <div id="kaplan-meier" class="section level3">
@@ -454,12 +454,12 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.56251</span>
-<span class="co">#&gt;                                  Pct.UCL = 265.97546</span>
-<span class="co">#&gt;                                  BCa.LCL =  99.47655</span>
-<span class="co">#&gt;                                  BCa.UCL = 262.30257</span>
-<span class="co">#&gt;                                  t.LCL   = 102.21316</span>
-<span class="co">#&gt;                                  t.UCL   = 607.20199</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.24109</span>
+<span class="co">#&gt;                                  Pct.UCL = 266.32293</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.43064</span>
+<span class="co">#&gt;                                  BCa.UCL = 258.74622</span>
+<span class="co">#&gt;                                  t.LCL   = 101.56044</span>
+<span class="co">#&gt;                                  t.UCL   = 601.76528</span></code></pre></div>
 <p>Note that as with all bootstrap estimates the confidence intervals above will differ slightly from your results.</p>
 </div>
 <div id="regression-on-order-statistics-ros" class="section level3">
@@ -534,10 +534,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.10709</span>
-<span class="co">#&gt;                                  Pct.UCL = 263.60303</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.64727</span>
-<span class="co">#&gt;                                  BCa.UCL = 257.50474</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.57514</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.67806</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.88247</span>
+<span class="co">#&gt;                                  BCa.UCL = 257.36782</span></code></pre></div>
 </div>
 <div id="all-at-once" class="section level3">
 <h3 class="hasAnchor">
@@ -557,7 +557,7 @@ Lognormal probability of pyrene data
 <div id="interval-estimates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#interval-estimates" class="anchor"></a>Interval Estimates</h2>
-<p>Several of the commands to obtain confidence intervals are identical to what we was done in the Estimating Descriptive Statistics section Prediction and tolerance intervals are new.</p>
+<p>Several of the commands to obtain confidence intervals are identical to what we was done in the Estimating Descriptive Statistics section Prediction. and tolerance intervals are new.</p>
 <div id="confidene-intervals" class="section level3">
 <h3 class="hasAnchor">
 <a href="#confidene-intervals" class="anchor"></a>Confidene Intervals</h3>
@@ -612,12 +612,12 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.56251</span>
-<span class="co">#&gt;                                  Pct.UCL = 265.97546</span>
-<span class="co">#&gt;                                  BCa.LCL =  99.47655</span>
-<span class="co">#&gt;                                  BCa.UCL = 262.30257</span>
-<span class="co">#&gt;                                  t.LCL   = 102.21316</span>
-<span class="co">#&gt;                                  t.UCL   = 607.20199</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.24109</span>
+<span class="co">#&gt;                                  Pct.UCL = 266.32293</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.43064</span>
+<span class="co">#&gt;                                  BCa.UCL = 258.74622</span>
+<span class="co">#&gt;                                  t.LCL   = 101.56044</span>
+<span class="co">#&gt;                                  t.UCL   = 601.76528</span></code></pre></div>
 <p>Then the default normal assumption (basically, a t-interval using the K-M estimates of mean and standard deviation):</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Pyr.km2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>,<span class="va">PyreneCen</span>, ci<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
@@ -726,10 +726,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.82488</span>
-<span class="co">#&gt;                                  Pct.UCL = 190.29997</span>
-<span class="co">#&gt;                                  BCa.LCL =  98.50184</span>
-<span class="co">#&gt;                                  BCa.UCL = 186.07301</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.86732</span>
+<span class="co">#&gt;                                  Pct.UCL = 187.51642</span>
+<span class="co">#&gt;                                  BCa.LCL =  99.30753</span>
+<span class="co">#&gt;                                  BCa.UCL = 185.93402</span></code></pre></div>
 </div>
 <div id="ros" class="section level4">
 <h4 class="hasAnchor">
@@ -779,10 +779,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.10709</span>
-<span class="co">#&gt;                                  Pct.UCL = 263.60303</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.64727</span>
-<span class="co">#&gt;                                  BCa.UCL = 257.50474</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.57514</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.67806</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.88247</span>
+<span class="co">#&gt;                                  BCa.UCL = 257.36782</span></code></pre></div>
 <p>Generally, I recommend using a bootstrap estimate when there is sufficient data, which there are here, as theoretical methods such as Cox are strongly dependent on the <em>lognormal</em> shape that often does not fit exactly. Remember, ROS assumes a distribution but only for the censored observations.</p>
 </div>
 </div>
@@ -1072,19 +1072,19 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of Times Bootstrap</span>
 <span class="co">#&gt; Repeated Because Too Few</span>
-<span class="co">#&gt; Uncensored Observations:         16</span>
+<span class="co">#&gt; Uncensored Observations:         13</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval Type:        upper</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 2.572204</span>
+<span class="co">#&gt;                                  Pct.UCL = 2.550041</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 2.545915</span>
+<span class="co">#&gt;                                  BCa.UCL = 2.519142</span>
 <span class="co">#&gt;                                  t.LCL   = 0.000000</span>
-<span class="co">#&gt;                                  t.UCL   = 3.741909</span></code></pre></div>
-<p>The percentile bootstrap estimate of the UCL95 equals 2.52. This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.</p>
+<span class="co">#&gt;                                  t.UCL   = 3.621762</span></code></pre></div>
+<p>The percentile bootstrap estimate of the UCL95 will be near to 2.53, with the output varying slightly each time a bootstrap estimate is run. This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.</p>
 <p><strong>Example 2:</strong> Computation of a UCL95 for data with both detected and non-detected values, DL unknown.</p>
 <p>Data: Methyl Isobutyl Ketone (MIBK) in air above a medium-sized US city.</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
@@ -1141,9 +1141,9 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 0.2896171</span>
+<span class="co">#&gt;                                  Pct.UCL = 0.2883397</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 0.2686247</span></code></pre></div>
+<span class="co">#&gt;                                  BCa.UCL = 0.2663916</span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean equals 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled 0.293). Remember that your bootstrap result will slightly differ from the one here. To decrease differences between runs, increase the number of bootstraps, say to 10,000.</p>
 <p><em>B: What if the detection limit had been known?</em></p>
 <p>If a reporting limit of 0.029 had been provided by the laboratory, the data would be as given in the MIBK2 and MIBK2cen columns. Using the same procedure gives slightly lower results for both mean and UCL95:</p>
@@ -1196,10 +1196,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 0.2847939</span>
+<span class="co">#&gt;                                  Pct.UCL = 0.2844306</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 0.2747093</span></code></pre></div>
-<p>The percentile bootstrap UCL95 using rROS equals 0.284 with this known detection limit. It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.</p>
+<span class="co">#&gt;                                  BCa.UCL = 0.2723776</span></code></pre></div>
+<p>The percentile bootstrap UCL95 based on the robust ROS mean will be near to 0.290 with this known detection limit. It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.</p>
 <p><strong>Example 3:</strong> Computation of the expected percent of observations exceeding a health advisory when all data are NDs. More details of this method are found in Chapter 8 of Statistics for Censored Environmental Data Using Minitab and R (Helsel, 2012).</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Example3</span><span class="op">)</span></code></pre></div>
@@ -1241,10 +1241,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt;  Permutation test of mean CensData: Zn   by Factor: Zone </span>
 <span class="co">#&gt;      9999 Permutations     alternative = two.sided </span>
 <span class="co">#&gt;   mean of AlluvialFan = 21.22 to 23.51     mean of BasinTrough = 21.28 to 21.94 </span>
-<span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 1 to 0.9988 </span>
+<span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 0.9999 to 0.9992 </span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>The two groups do not have significantly different means. These are p-values that you can believe, as they do not depend on the normal assumption and do not project data values below zero.</p>
-<p>Assume a lognormal distribution (uses the default LOG=TRUE option). This tests for differences in geometric means:</p>
+<p>Using cen2means to perform the test using the default lognormal distribution, the difference in geometric means (not arithmetic means) is performed below.</p>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">CuZn</span>,<span class="fu"><a href="../reference/cen2means.html">cen2means</a></span><span class="op">(</span><span class="va">Zn</span>,<span class="va">ZnCen</span>,<span class="va">Zone</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;      MLE 't-test' of mean natural logs of CensData: Zn by Factor: Zone </span>
@@ -1254,7 +1254,7 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span></code></pre></div>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-41-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>No significant difference between geometric means. And the corresponding Q-Q plot of regression residuals show that the data do not follow a lognormal distribution either (one large outlier), but it is the better fit of the two distributions. A permutation test using cenperm2 after computing the logarithms would be a better test for differences in geometric means.</p>
-<p>The Peto-Peto test is run using the cen1way function. It reports the Kaplan-Meier medians in each of the groups:</p>
+<p>"A nonparametric test between the two groups will test differences between their cdfs (often considered as a test for difference in medians) instead of testing the difference between means. The Peto-Peto test is run using the cen1way function. It reports the Kaplan-Meier medians in each of the groups:</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">CuZn</span>,<span class="fu"><a href="../reference/cen1way.html">cen1way</a></span><span class="op">(</span><span class="va">Zn</span>,<span class="va">ZnCen</span>,<span class="va">Zone</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;             grp    N   PctND   KMmean    KMsd   KMmedian</span>
@@ -1274,7 +1274,7 @@ Lognormal probability of pyrene data
                     Ylab<span class="op">=</span><span class="st">"Zinc Concentration, in ug/L"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-44-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>Now for the two simpler tests, where all values below the highest DL must be re-censored.</p>
-<p>Contingency tables are a test to determine whether the proportions of data in categories are the same in two or more groups. With nondetects the cutoff level is again the highest reporting limit. Use the <code>TCE2</code> dataset with the highest of 4 DLs at 5 ug/L. The test determines whether the proportions of data above versus below the cutoff are the same in each group. It differs from a rank-sum in that all data above the limit are simply in the same ‘Above’ group rather than ranked individually. This loses some information as compared to the rank-sum test. Density is a text variable (a factor) representing the groups, while Below5Cens has a 1 for data below 5 ug/L and a 0 for data at or below 5. First we combine them into a matrix using the ftable command, then compute a ‘cross-tabulation’ with the <code><a href="https://rdrr.io/r/stats/xtabs.html">xtabs(...)</a></code> command that the <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test(...)</a></code> command expects. Finally the chisquare test is computed. Its null hypothesis is that there is no difference in the percent of data above the cutoff of 5 ug/L in the two groups.</p>
+<p>Contingency tables are a test to determine whether the proportions of data in categories are the same in two or more groups. With nondetects the cutoff level is again the highest reporting limit. Use the <code>TCE2</code> dataset with the highest of 4 DLs at 5 ug/L. The test determines whether the proportions of data above versus below the cutoff are the same in each group. It differs from a rank-sum in that all data above the limit are simply in the same ‘Above’ group rather than ranked individually. This loses some information as compared to the rank-sum test. Density is a text variable (a factor) representing the groups, while Below5Cens has a 1 for data below 5 ug/L and a 0 for data at or above 5. First we combine them into a matrix using the ftable command, then compute a ‘cross-tabulation’ with the <code><a href="https://rdrr.io/r/stats/xtabs.html">xtabs(...)</a></code> command that the <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test(...)</a></code> command expects. Finally the chisquare test is computed. Its null hypothesis is that there is no difference in the percent of data above the cutoff of 5 ug/L in the two groups.</p>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">TCE2</span><span class="op">)</span>
 
@@ -1417,10 +1417,10 @@ Lognormal probability of pyrene data
 #&gt; Linear Hypotheses:
 #&gt;                  Estimate Std. Error z value Pr(&gt;|z|)  
 #&gt; 0.01 - 0 == 0      0.2877     1.0841   0.265   0.9935  
-#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0157 *
-#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1449  
+#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0151 *
+#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1448  
 #&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0324 *
-#&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2457  
+#&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2456  
 #&gt; 0.25 - 0.05 == 0  -1.0336     1.0749  -0.962   0.7712  
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
@@ -1431,7 +1431,7 @@ Lognormal probability of pyrene data
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenpermanova.html">cenpermanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;  Permutation test of mean CensData: Liver   by Factor: Dosage </span>
 <span class="co">#&gt;      9999 Permutations </span>
-<span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1413 to 0.1433 </span>
+<span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1433 to 0.1441 </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;    mean(0)   mean(0.01)   mean(0.05)   mean(0.25)   </span>
 <span class="co">#&gt;     0.1000       0.1395      12.1100       6.8660</span></code></pre></div>
@@ -1901,11 +1901,11 @@ summary(reg.recon.4)
 <p>For this dataset, the maximum likelihood and ATS slopes for Dyplant are very similar (different by 0.006). The intercepts are similar as well when you realize that a difference of 2.0 is small when concentrations go up to 100.</p>
 <p>The plot of the relationship of atrazine to flow percentile (Pctl) shows a clear washoff effect at higher flows:</p>
 <div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">AtraConc</span>, <span class="va">Pctl</span>, <span class="va">Dyplant</span>,retrans<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">AtraConc</span>,<span class="va">AtraCen</span>, <span class="va">Pctl</span>,retrans<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Akritas-Theil-Sen line for censored data </span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt; ln(AtraConc) = -2.9958 0 * Dyplant </span>
-<span class="co">#&gt; Kendall's tau = 0   p-value = 1 </span>
+<span class="co">#&gt; ln(AtraConc) = -5.4878 + 0.0889 * Pctl </span>
+<span class="co">#&gt; Kendall's tau = 0.3465   p-value = 0 </span>
 <span class="co">#&gt; </span></code></pre></div>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-76-1.png" width="624" style="display: block; margin: auto;"><img src="DataAnalysis_files/figure-html/unnamed-chunk-76-2.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is not yet (June 2022) a good nonparametric “multiple regression” method for censored data. There are ‘robust regression’ methods that perform nonparametric regression but I’ve never seen them applied to censored data.</p>
@@ -1915,7 +1915,7 @@ summary(reg.recon.4)
 <a href="#trend-analysis-for-censored-data" class="anchor"></a>Trend Analysis for Censored Data</h2>
 <p>Load the Gales_Creek dataset:</p>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"Gales_Creek"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Gales_Creek</span><span class="op">)</span></code></pre></div>
 <div id="nonparametric-methods" class="section level3">
 <h3 class="hasAnchor">
 <a href="#nonparametric-methods" class="anchor"></a>Nonparametric Methods</h3>
@@ -1958,7 +1958,7 @@ summary(reg.recon.4)
 #&gt; Seasonal Kendall test and Theil-Sen line</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-80-3.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code>#&gt;   reps_R  N S_SK tau_SK   pval intercept    slope
-#&gt; 1   4999 63 -203  -0.21 0.0114    181.26 -0.08965
+#&gt; 1   4999 63 -203  -0.21 0.0148    181.26 -0.08965
 #&gt; ----------</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-80-4.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is an overall trend once the Seasonal Kendall test has removed all comparisons between values in different seasons. Also, the dry season has a p-value of 0.069. The prevailing wisdom in statistics in 2019 is to not get too rigid about an alpha of 0.05. A value of 0.069 is close to 0.05 and the trend in the dry season graph appears strong. I would report in this case that there is an overall downtrend and a downtrend in the dry season. The high flows in the wet season were preventing the non-seasonal <code>centrend</code> function from seeing the trend.</p>
@@ -1979,8 +1979,8 @@ summary(reg.recon.4)
 #&gt; ---------- 
 #&gt; Seasonal Kendall test and Akritas-Theil-Sen line on residuals</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-81-5.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code>#&gt;   reps_R  N S_SK  tau_SK   pval intercept    slope
-#&gt; 1   4999 63  -66 -0.0683 0.4374    59.654 -0.02967
+<pre><code>#&gt;   reps_R  N S_SK  tau_SK  pval intercept    slope
+#&gt; 1   4999 63  -66 -0.0683 0.439    59.654 -0.02967
 #&gt; ----------</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-81-6.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is no trend in flow-adjusted chromium found for this site and dates. The slight decrease of the ATS line above, which includes the influence of the below detection limit observations as well as detected observations, is not significantly different from a zero slope.</p>
@@ -2012,25 +2012,23 @@ summary(reg.recon.4)
 <p><em>Censored Multiple Regression</em> Create a data frame of the two X variables, dectime and flow, and try again. This is a better model if flow explains a lot of the variation in concentration. If that’s the case the model’s AIC will be lower than the previous AIC of 163.48.</p>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">timeflow</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">dectime</span>, <span class="va">discharge</span><span class="op">)</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="../reference/cencorreg.html">cencorreg</a></span><span class="op">(</span><span class="va">TCr</span>,<span class="va">CrND</span>, <span class="va">CrND</span>, <span class="va">timeflow</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Warning in if (LOG == TRUE) {: the condition has length &gt; 1 and only the first</span>
-<span class="co">#&gt; element will be used</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="../reference/cencorreg.html">cencorreg</a></span><span class="op">(</span><span class="va">TCr</span>,<span class="va">CrND</span>,<span class="va">timeflow</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-83-1.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code>#&gt;  Likelihood R = -0.2641                     AIC = 335.0023 
-#&gt; Rescaled Likelihood R = -0.2648            BIC = 340.479 
-#&gt;  McFaddens R = -0.117 
+<pre><code>#&gt;  Likelihood R2 = 0.5926                     AIC = 113.5493 
+#&gt;  Rescaled Likelihood R2 = 0.6424            BIC = 121.1848 
+#&gt;  McFaddens R2 = 0.3511 
 #&gt; 
 #&gt; Call:
-#&gt; survreg(formula = "TCr", data = "CrND", dist = "gaussian")
+#&gt; survreg(formula = "log(TCr)", data = "dectime+discharge", dist = "gaussian")
 #&gt; 
 #&gt; Coefficients:
-#&gt; (Intercept)        CrND 
-#&gt;    1.939848   -1.681079 
+#&gt;   (Intercept)       dectime     discharge 
+#&gt; 220.206866401  -0.109654346   0.001290593 
 #&gt; 
-#&gt; Scale= 2.721983 
+#&gt; Scale= 0.5499025 
 #&gt; 
-#&gt; Loglik(model)= -164   Loglik(intercept only)= -166.3
-#&gt;  Chisq= 4.56 on 1 degrees of freedom, p= 0.0328 
+#&gt; Loglik(model)= -52.3   Loglik(intercept only)= -80.6
+#&gt;  Chisq= 56.57 on 2 degrees of freedom, p= 5.19e-13 
 #&gt; n= 63</code></pre>
 <p>The QQ plot looks great, and the residuals do not differ from a normal distribution. The AIC is considerably lower for the 2-variable model, so this model that accounts for flow variation should be used instead of the original model.</p>
 <p><em>Censored Multiple Regression with Seasonal Variables</em> Sounds like a menu option (‘seasonal vegetables’), doesn’t it? Create the sin and cos function variables using <code>2*pi*dectime</code>, and add it to the stew. See if they add anything.</p>
@@ -2066,35 +2064,33 @@ summary(reg.recon.4)
 <a href="#logistic-regression" class="anchor"></a>Logistic Regression</h2>
 <p>The ReconLogistic dataset presents atrazine concentrations at streams across the midwestern United States. There were multiple detection limits, and a health advisory of 1 ug/L. Several characteristics of the basin at the time of sampling, including streamflow, are also recorded.</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">Recon</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">ReconLogistic</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt;   Area Applic PctCorn SoilGp Temp Precip Dyplant Pctl AtraConc AtraCen</span>
-<span class="co">#&gt; 1  523   19.0      15    2.9 10.2   94.5      10   97     4.70   FALSE</span>
-<span class="co">#&gt; 2  523   19.0      15    2.9 10.2   94.5     130   19     0.90    TRUE</span>
-<span class="co">#&gt; 3  231   25.4      19    2.9 10.8   94.0     284   86     0.13    TRUE</span>
-
-<span class="va">Recon</span><span class="op">$</span><span class="va">GT_1</span><span class="op">=</span><span class="va">Recon</span><span class="op">$</span><span class="va">AtraConc</span><span class="op">&gt;</span><span class="fl">1</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ReconLogistic</span>,<span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt;   CORNpct SOILGP PRECIP DYPLANT FPCTL APPLIC TEMP GT_1</span>
+<span class="co">#&gt; 1      15    2.9   94.5      10    97   19.0 10.2    1</span>
+<span class="co">#&gt; 2      15    2.9   94.5     130    19   19.0 10.2    0</span>
+<span class="co">#&gt; 3      19    2.9   94.0     284    86   25.4 10.8    0</span></code></pre></div>
 <p>We will model the above/below 1 ug/L pattern using the <code>GT_1</code> variable. The primary assumption is that there is a linear relationship between the X variables and the log(odds). Start by checking VIFs for all 6 candidate variables. The <code>glm</code> command using the <code>family=binomial(logit)</code> link function produces the equation:</p>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">glm.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">GT_1</span><span class="op">~</span>
-               <span class="va">Applic</span><span class="op">+</span>
-               <span class="va">PctCorn</span><span class="op">+</span>
-               <span class="va">SoilGp</span><span class="op">+</span>
-               <span class="va">Precip</span><span class="op">+</span>
-               <span class="va">Dyplant</span><span class="op">+</span>
-               <span class="va">Pctl</span>,
-             <span class="va">Recon</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
+               <span class="va">APPLIC</span><span class="op">+</span>
+               <span class="va">CORNpct</span><span class="op">+</span>
+               <span class="va">SOILGP</span><span class="op">+</span>
+               <span class="va">PRECIP</span><span class="op">+</span>
+               <span class="va">DYPLANT</span><span class="op">+</span>
+               <span class="va">FPCTL</span>,
+             <span class="va">ReconLogistic</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/rms/man/vif.html">vif</a></span><span class="op">(</span><span class="va">glm.1</span><span class="op">)</span>
-<span class="co">#&gt;   Applic  PctCorn   SoilGp   Precip  Dyplant     Pctl </span>
+<span class="co">#&gt;   APPLIC  CORNpct   SOILGP   PRECIP  DYPLANT    FPCTL </span>
 <span class="co">#&gt; 1.802862 1.738165 1.467392 1.550877 1.172150 1.119903</span></code></pre></div>
 <p>There is no multicollinearity between the variables, as indicated by VIF values of less than 2. Therefore the reported p-values should be trustworthy.</p>
 <div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.1</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; glm(formula = GT_1 ~ Applic + PctCorn + SoilGp + Precip + Dyplant + </span>
-<span class="co">#&gt;     Pctl, family = binomial(logit), data = Recon)</span>
+<span class="co">#&gt; glm(formula = GT_1 ~ APPLIC + CORNpct + SOILGP + PRECIP + DYPLANT + </span>
+<span class="co">#&gt;     FPCTL, family = binomial(logit), data = ReconLogistic)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Deviance Residuals: </span>
 <span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span>
@@ -2103,12 +2099,12 @@ summary(reg.recon.4)
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)    </span>
 <span class="co">#&gt; (Intercept) -6.323566   1.693157  -3.735 0.000188 ***</span>
-<span class="co">#&gt; Applic       0.017530   0.020220   0.867 0.385984    </span>
-<span class="co">#&gt; PctCorn      0.034572   0.023263   1.486 0.137250    </span>
-<span class="co">#&gt; SoilGp       0.439216   0.503541   0.872 0.383070    </span>
-<span class="co">#&gt; Precip       0.039064   0.015949   2.449 0.014315 *  </span>
-<span class="co">#&gt; Dyplant     -0.016791   0.001919  -8.749  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Pctl         0.036820   0.006130   6.006  1.9e-09 ***</span>
+<span class="co">#&gt; APPLIC       0.017530   0.020220   0.867 0.385984    </span>
+<span class="co">#&gt; CORNpct      0.034572   0.023263   1.486 0.137250    </span>
+<span class="co">#&gt; SOILGP       0.439216   0.503541   0.872 0.383070    </span>
+<span class="co">#&gt; PRECIP       0.039064   0.015949   2.449 0.014315 *  </span>
+<span class="co">#&gt; DYPLANT     -0.016791   0.001919  -8.749  &lt; 2e-16 ***</span>
+<span class="co">#&gt; FPCTL        0.036820   0.006130   6.006  1.9e-09 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
@@ -2121,13 +2117,13 @@ summary(reg.recon.4)
 <span class="co">#&gt; Number of Fisher Scoring iterations: 6</span></code></pre></div>
 <p>To compute the overall test of whether this model is better than no model at all, the test that all slopes are zero, first compute the null model by using a 1 instead of any X variables in the right-hand side of the equation:</p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">glm.null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">GT_1</span><span class="op">~</span><span class="fl">1</span>,<span class="va">Recon</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">glm.null</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">GT_1</span><span class="op">~</span><span class="fl">1</span>,<span class="va">ReconLogistic</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">glm.null</span>,<span class="va">glm.1</span>,test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span>
 <span class="co">#&gt; Analysis of Deviance Table</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model 1: GT_1 ~ 1</span>
-<span class="co">#&gt; Model 2: GT_1 ~ Applic + PctCorn + SoilGp + Precip + Dyplant + Pctl</span>
+<span class="co">#&gt; Model 2: GT_1 ~ APPLIC + CORNpct + SOILGP + PRECIP + DYPLANT + FPCTL</span>
 <span class="co">#&gt;   Resid. Df Resid. Dev Df Deviance  Pr(&gt;Chi)    </span>
 <span class="co">#&gt; 1       422      558.0                          </span>
 <span class="co">#&gt; 2       416      245.9  6    312.1 &lt; 2.2e-16 ***</span>
@@ -2138,29 +2134,29 @@ summary(reg.recon.4)
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/car/man/residualPlots.html">residualPlots</a></span><span class="op">(</span><span class="va">glm.1</span>,type<span class="op">=</span><span class="st">"deviance"</span><span class="op">)</span></code></pre></div>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-89-1.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code>#&gt;         Test stat Pr(&gt;|Test stat|)    
-#&gt; Applic     2.2736        0.1315939    
-#&gt; PctCorn    0.9137        0.3391386    
-#&gt; SoilGp     8.8183        0.0029822 ** 
-#&gt; Precip     4.2759        0.0386572 *  
-#&gt; Dyplant   12.0510        0.0005177 ***
-#&gt; Pctl       3.4084        0.0648658 .  
+#&gt; APPLIC     2.2736        0.1315939    
+#&gt; CORNpct    0.9137        0.3391386    
+#&gt; SOILGP     8.8183        0.0029822 ** 
+#&gt; PRECIP     4.2759        0.0386572 *  
+#&gt; DYPLANT   12.0510        0.0005177 ***
+#&gt; FPCTL      3.4084        0.0648658 .  
 #&gt; ---
 #&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>It is hard to judge residuals plots with logistic regression because there are separate groups of residuals for the Y = 0 and 1 data. The smooth for DYPLANT appears curved, but is not an improvement. If <code><a href="https://rdrr.io/r/base/Log.html">log(Dyplant)</a></code> is substituted for <code>Dyplant</code> the AIC increases, so is not a better model.</p>
 <p>Using <code>glm.1</code>, <code>Applic</code> had the highest p-value, so we’ll drop it and see if AIC goes below 259.9.</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">glm.3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">GT_1</span><span class="op">~</span>
-               <span class="va">PctCorn</span><span class="op">+</span>
-               <span class="va">SoilGp</span><span class="op">+</span>
-               <span class="va">Precip</span><span class="op">+</span>
-               <span class="va">Dyplant</span><span class="op">+</span>
-               <span class="va">Pctl</span>,
-             <span class="va">Recon</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
+               <span class="va">CORNpct</span><span class="op">+</span>
+               <span class="va">SOILGP</span><span class="op">+</span>
+               <span class="va">PRECIP</span><span class="op">+</span>
+               <span class="va">DYPLANT</span><span class="op">+</span>
+               <span class="va">FPCTL</span>,
+             <span class="va">ReconLogistic</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.3</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; glm(formula = GT_1 ~ PctCorn + SoilGp + Precip + Dyplant + Pctl, </span>
-<span class="co">#&gt;     family = binomial(logit), data = Recon)</span>
+<span class="co">#&gt; glm(formula = GT_1 ~ CORNpct + SOILGP + PRECIP + DYPLANT + FPCTL, </span>
+<span class="co">#&gt;     family = binomial(logit), data = ReconLogistic)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Deviance Residuals: </span>
 <span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span>
@@ -2169,11 +2165,11 @@ summary(reg.recon.4)
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)    </span>
 <span class="co">#&gt; (Intercept) -6.818507   1.599850  -4.262 2.03e-05 ***</span>
-<span class="co">#&gt; PctCorn      0.045965   0.019277   2.384  0.01711 *  </span>
-<span class="co">#&gt; SoilGp       0.509550   0.495964   1.027  0.30424    </span>
-<span class="co">#&gt; Precip       0.043378   0.015074   2.878  0.00401 ** </span>
-<span class="co">#&gt; Dyplant     -0.016598   0.001876  -8.848  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Pctl         0.037835   0.005993   6.313 2.73e-10 ***</span>
+<span class="co">#&gt; CORNpct      0.045965   0.019277   2.384  0.01711 *  </span>
+<span class="co">#&gt; SOILGP       0.509550   0.495964   1.027  0.30424    </span>
+<span class="co">#&gt; PRECIP       0.043378   0.015074   2.878  0.00401 ** </span>
+<span class="co">#&gt; DYPLANT     -0.016598   0.001876  -8.848  &lt; 2e-16 ***</span>
+<span class="co">#&gt; FPCTL        0.037835   0.005993   6.313 2.73e-10 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
@@ -2187,16 +2183,16 @@ summary(reg.recon.4)
 <p>This 5-variable model is improved over <code>glm.1</code>. <code>SoilGp</code> remains insignificant so let’s drop that and see the effect on AIC.</p>
 <div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">glm.4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">GT_1</span><span class="op">~</span>
-               <span class="va">PctCorn</span><span class="op">+</span>
-               <span class="va">Precip</span><span class="op">+</span>
-               <span class="va">Dyplant</span><span class="op">+</span>
-               <span class="va">Pctl</span>,
-             <span class="va">Recon</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
+               <span class="va">CORNpct</span><span class="op">+</span>
+               <span class="va">PRECIP</span><span class="op">+</span>
+               <span class="va">DYPLANT</span><span class="op">+</span>
+               <span class="va">FPCTL</span>,
+             <span class="va">ReconLogistic</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.4</span><span class="op">)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Call:</span>
-<span class="co">#&gt; glm(formula = GT_1 ~ PctCorn + Precip + Dyplant + Pctl, family = binomial(logit), </span>
-<span class="co">#&gt;     data = Recon)</span>
+<span class="co">#&gt; glm(formula = GT_1 ~ CORNpct + PRECIP + DYPLANT + FPCTL, family = binomial(logit), </span>
+<span class="co">#&gt;     data = ReconLogistic)</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Deviance Residuals: </span>
 <span class="co">#&gt;     Min       1Q   Median       3Q      Max  </span>
@@ -2205,10 +2201,10 @@ summary(reg.recon.4)
 <span class="co">#&gt; Coefficients:</span>
 <span class="co">#&gt;              Estimate Std. Error z value Pr(&gt;|z|)    </span>
 <span class="co">#&gt; (Intercept) -5.856860   1.267119  -4.622 3.80e-06 ***</span>
-<span class="co">#&gt; PctCorn      0.039045   0.017943   2.176 0.029554 *  </span>
-<span class="co">#&gt; Precip       0.050493   0.013412   3.765 0.000167 ***</span>
-<span class="co">#&gt; Dyplant     -0.016507   0.001866  -8.846  &lt; 2e-16 ***</span>
-<span class="co">#&gt; Pctl         0.037770   0.005970   6.327 2.51e-10 ***</span>
+<span class="co">#&gt; CORNpct      0.039045   0.017943   2.176 0.029554 *  </span>
+<span class="co">#&gt; PRECIP       0.050493   0.013412   3.765 0.000167 ***</span>
+<span class="co">#&gt; DYPLANT     -0.016507   0.001866  -8.846  &lt; 2e-16 ***</span>
+<span class="co">#&gt; FPCTL        0.037770   0.005970   6.327 2.51e-10 ***</span>
 <span class="co">#&gt; ---</span>
 <span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span>
 <span class="co">#&gt; </span>
@@ -2221,48 +2217,51 @@ summary(reg.recon.4)
 <span class="co">#&gt; Number of Fisher Scoring iterations: 6</span></code></pre></div>
 <p>AIC is lower (improved). All terms are significant. We’ll settle on this as our final model. This is the model found ‘best’ using <code>bestglm</code> (note that <code>bestglm</code> requires the <code>data.frame</code> to have the 0/1 Y variable in the last column, which <code>Recon</code> does).</p>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/bestglm/man/bestglm.html">bestglm</a></span><span class="op">(</span><span class="va">Recon</span>,family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span>, IC <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/bestglm/man/bestglm.html">bestglm</a></span><span class="op">(</span><span class="va">ReconLogistic</span>,family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span><span class="va">logit</span><span class="op">)</span>, IC <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span>
 <span class="co">#&gt; Morgan-Tatar search since family is non-gaussian.</span>
 <span class="co">#&gt; AIC</span>
-<span class="co">#&gt; BICq equivalent for q in (0, 0.95363278720094)</span>
+<span class="co">#&gt; BICq equivalent for q in (0.388676345462891, 0.914863500091258)</span>
 <span class="co">#&gt; Best Model:</span>
-<span class="co">#&gt;              Estimate Std. Error       z value  Pr(&gt;|z|)</span>
-<span class="co">#&gt; (Intercept)  26.56607   28421.79  0.0009347077 0.9992542</span>
-<span class="co">#&gt; AtraCenTRUE -53.13214   35841.06 -0.0014824377 0.9988172</span></code></pre></div>
+<span class="co">#&gt;                Estimate  Std. Error   z value     Pr(&gt;|z|)</span>
+<span class="co">#&gt; (Intercept) -6.53329819 1.181212560 -5.531010 3.183926e-08</span>
+<span class="co">#&gt; CORNpct      0.04814197 0.018616040  2.586048 9.708340e-03</span>
+<span class="co">#&gt; DYPLANT     -0.01743824 0.002029210 -8.593611 8.427813e-18</span>
+<span class="co">#&gt; FPCTL        0.03585721 0.006189977  5.792787 6.922797e-09</span>
+<span class="co">#&gt; TEMP         0.50653496 0.102252080  4.953786 7.278310e-07</span></code></pre></div>
 <p>glm.4 has slopes with algebraic signs that make scientific sense, and all explanatory variables are significant at alpha = 0.05. The model can be compared to the original 6 variable model using either a partial test, or with the AIC. The partial test determines whether the two variables that were dropped add significantly to the explanatory power of the model, just as in multiple linear regression. The null hypothesis is that they do not; not rejecting the null hypothesis says to keep the simpler model.</p>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">glm.4</span>, <span class="va">glm.1</span>, test<span class="op">=</span><span class="st">"Chisq"</span><span class="op">)</span>
 <span class="co">#&gt; Analysis of Deviance Table</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Model 1: GT_1 ~ PctCorn + Precip + Dyplant + Pctl</span>
-<span class="co">#&gt; Model 2: GT_1 ~ Applic + PctCorn + SoilGp + Precip + Dyplant + Pctl</span>
+<span class="co">#&gt; Model 1: GT_1 ~ CORNpct + PRECIP + DYPLANT + FPCTL</span>
+<span class="co">#&gt; Model 2: GT_1 ~ APPLIC + CORNpct + SOILGP + PRECIP + DYPLANT + FPCTL</span>
 <span class="co">#&gt;   Resid. Df Resid. Dev Df Deviance Pr(&gt;Chi)</span>
 <span class="co">#&gt; 1       418     247.72                     </span>
 <span class="co">#&gt; 2       416     245.90  2   1.8257   0.4014</span></code></pre></div>
 <p>We do not reject that the smaller model is just as good. Go with <code>glm.4</code>. Finally, if we want to get an r-squared or a Brier score, and get some plots of the relation between the log-odds and each X variable, compute the same 4-variable model using the <code>lrm</code> command from the <code>rms</code> package:</p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">Recon.frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Recon</span>, <span class="fu"><a href="https://rdrr.io/pkg/rms/man/datadist.html">datadist</a></span><span class="op">(</span><span class="va">PctCorn</span>, <span class="va">Dyplant</span>, <span class="va">Pctl</span>, <span class="va">Temp</span>, <span class="va">GT_1</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">Recon.frame</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">ReconLogistic</span>, <span class="fu"><a href="https://rdrr.io/pkg/rms/man/datadist.html">datadist</a></span><span class="op">(</span><span class="va">CORNpct</span>, <span class="va">DYPLANT</span>, <span class="va">FPCTL</span>, <span class="va">TEMP</span>, <span class="va">GT_1</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>datadist <span class="op">=</span> <span class="st">"Recon.frame"</span><span class="op">)</span>
-<span class="va">lrm4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/lrm.html">lrm</a></span><span class="op">(</span><span class="va">GT_1</span> <span class="op">~</span> <span class="va">PctCorn</span> <span class="op">+</span> <span class="va">Dyplant</span> <span class="op">+</span> <span class="va">Pctl</span> <span class="op">+</span> <span class="va">Temp</span>, data <span class="op">=</span> <span class="va">Recon</span><span class="op">)</span>
+<span class="va">lrm4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rms/man/lrm.html">lrm</a></span><span class="op">(</span><span class="va">GT_1</span> <span class="op">~</span> <span class="va">CORNpct</span> <span class="op">+</span> <span class="va">DYPLANT</span> <span class="op">+</span> <span class="va">FPCTL</span> <span class="op">+</span> <span class="va">TEMP</span>, data <span class="op">=</span> <span class="va">ReconLogistic</span><span class="op">)</span>
 <span class="va">lrm4</span>
 <span class="co">#&gt; Logistic Regression Model</span>
 <span class="co">#&gt;  </span>
-<span class="co">#&gt;  lrm(formula = GT_1 ~ PctCorn + Dyplant + Pctl + Temp, data = Recon)</span>
+<span class="co">#&gt;  lrm(formula = GT_1 ~ CORNpct + DYPLANT + FPCTL + TEMP, data = ReconLogistic)</span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;                         Model Likelihood    Discrimination    Rank Discrim.    </span>
 <span class="co">#&gt;                               Ratio Test           Indexes          Indexes    </span>
 <span class="co">#&gt;  Obs           423    LR chi2     323.35    R2       0.729    C       0.939    </span>
-<span class="co">#&gt;   FALSE        266    d.f.             4    g        3.298    Dxy     0.877    </span>
-<span class="co">#&gt;   TRUE         157    Pr(&gt; chi2) &lt;0.0001    gr      27.049    gamma   0.877    </span>
+<span class="co">#&gt;   0            266    d.f.             4    g        3.298    Dxy     0.877    </span>
+<span class="co">#&gt;   1            157    Pr(&gt; chi2) &lt;0.0001    gr      27.049    gamma   0.877    </span>
 <span class="co">#&gt;  max |deriv| 8e-07                          gp       0.418    tau-a   0.410    </span>
 <span class="co">#&gt;                                             Brier    0.076                     </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;            Coef    S.E.   Wald Z Pr(&gt;|Z|)</span>
 <span class="co">#&gt;  Intercept -6.5333 1.1812 -5.53  &lt;0.0001 </span>
-<span class="co">#&gt;  PctCorn    0.0481 0.0186  2.59  0.0097  </span>
-<span class="co">#&gt;  Dyplant   -0.0174 0.0020 -8.59  &lt;0.0001 </span>
-<span class="co">#&gt;  Pctl       0.0359 0.0062  5.79  &lt;0.0001 </span>
-<span class="co">#&gt;  Temp       0.5065 0.1023  4.95  &lt;0.0001 </span>
+<span class="co">#&gt;  CORNpct    0.0481 0.0186  2.59  0.0097  </span>
+<span class="co">#&gt;  DYPLANT   -0.0174 0.0020 -8.59  &lt;0.0001 </span>
+<span class="co">#&gt;  FPCTL      0.0359 0.0062  5.79  &lt;0.0001 </span>
+<span class="co">#&gt;  TEMP       0.5065 0.1023  4.95  &lt;0.0001 </span>
 <span class="co">#&gt; </span></code></pre></div>
 </div>
 <div id="multivariate-methods-for-censored-data" class="section level2">
@@ -2337,7 +2336,7 @@ summary(reg.recon.4)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Upper quantiles of permutations (null model):</span>
 <span class="co">#&gt;    90%    95%  97.5%    99% </span>
-<span class="co">#&gt; 0.0474 0.0676 0.0874 0.1165 </span>
+<span class="co">#&gt; 0.0470 0.0666 0.0890 0.1151 </span>
 <span class="co">#&gt; Permutation: free</span>
 <span class="co">#&gt; Number of permutations: 9999</span></code></pre></div>
 <p>There is a significant positive correlation between the MST marker values and the entero1A values. One way to picture the correlation is to plot their distance matrix entries against one another. The x,y pairs are those in the triangular matrices that are being correlated using Kendall’s tau in the mantel test. If there was a positive correlation, for example, larger distances (relating small to large entero1A data) would also have larger M6 distances between MST marker concentrations. This is the pattern seen in the plot.</p>
@@ -2399,12 +2398,16 @@ summary(reg.recon.4)
 <li><p>Are there at least 20 observations? NO: Assume the best fitting distribution to estimate the UCL. Go to step 2. YES: Use a bootstrap (nonparametric estimation) method. Go to step 3.</p></li>
 <li><p>Distributional Methods</p></li>
 </ol>
-<ul>
+<ol style="list-style-type: lower-alpha">
 <li><p>Use a boxplot (the cboxplot command) to take a first look at the data. Decide whether or not outliers are retained or not based on the sampling strategy that was used and the objectives of the study. If data were collected using a probabilistic sample, an equal-area sample, or other representative sampling, keep all observations unless the portions of the area the outliers represent are to be excluded from the estimation study. If it is unclear what area each observation represents, investigate why the outliers occur and decide accordingly. Note that outliers will strongly affect the estimate of the UCL95, so this decision is critical. If they are part of what people have been exposed to, keep them. If they are mistakes or represent an area that is not to be considered, delete them. A statistical test cannot be used to make this decision for you.</p></li>
-<li><p>Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function. Of these three, select the distribution with either the highest PPCC or lowest BIC statistic. I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.</p></li>
-<li><p>If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated. If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high. You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.</p></li>
-<li><p>Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:</p></li>
+<li>
+<p>Decide which of three distributions best fits the data using either the cenCompareQQ or cenCompareCdfs function. Of these three, select the distribution with either the highest PPCC or lowest BIC statistic. I prefer the BIC statistic because it better measures the misfit caused by the normal distribution going negative and not matching the 0 lower limit of the data.</p>
+<ul>
+<li>If the normal distribution was selected, check the low (left) end of the plot to see when the projected values drop below zero, indicating negative concentrations are being estimated. If this percentage is more than a trace, the normal distribution is not a good fit, even if the PPCC was high. You should choose the next-highest PPCC distribution instead, or the lowest BIC statistic, instead of the normal distribution.</li>
 </ul>
+</li>
+<li><p>Use the best-fit distribution from 2b to compute the UCL. The three commands, one for each of the three distributions, are:</p></li>
+</ol>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enormCensored.html">enormCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>,ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"normal.approx"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html">elnormAltCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span>
@@ -2413,15 +2416,17 @@ summary(reg.recon.4)
 <ol start="3" style="list-style-type: decimal">
 <li>Nonparametric Methods</li>
 </ol>
-<ul>
+<ol style="list-style-type: lower-alpha">
 <li>If there are multiple detection limits, use the Kaplan-Meier (KM) estimate, computing a UCL95 with a BCA or percentile bootstrap estimate. Report the BCA UCL95 estimate for up to 40% NDs and the percentile bootstrap for greater than 40% censoring (Singh et al., 2006, page 114). Use 5000 bootstrap repetitions so that the estimate is stable from one time to the next.</li>
-</ul>
+</ol>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html">enparCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, n.bootstraps<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></code></pre></div>
-<ul>
-<li>If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs. It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean. I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.</li>
-</ul>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>
+<p>If there is only one detection limit the KM method in essence substitutes the detection limit for all NDs. It will not project values below the lowest DL as that would require a distribution to show how the values are arranged below the lowest DL. This will bias upward the estimate of the mean. I recommend you bootstrap the lognormal ROS method (elnormAltCensored command) instead.</p>
 <p>Singh et al. (2006) state that the UCL95 is better estimated using KM than by ROS methods for censored data, and based on this overall statement, recommend that KM be used in any situation with nondetects. I believe they haven’t split out the one-DL situations separately and looked at the resulting bias. They simply state that they’ve shown that KM is always better. Statisticians disagree.</p>
+</li>
+</ol>
 </div>
 </div>
   </div>
