@@ -29,7 +29,7 @@ A Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value a
 Computes three parametric correlation coefficients for one X variable and the corresponding R squared for multiple X variables, and a regression equation for censored data.
 }
 \details{
-\code{x.vars}: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as \code{X} variables in the regression are allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time) used as teh \code{X} variables in the regression.
+\code{x.vars}: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as \code{X} variables in the regression are allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time) used as the \code{X} variables in the regression.
 
 AIC and BIC are printed to help evaluate the ‘best’ regression model.
 
@@ -44,7 +44,7 @@ data(Brumbaugh)
 # One variable
 cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg)
 
-# More than one variable for demostration purposes
+# More than one variable for demonstration purposes
 cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 }
 \references{

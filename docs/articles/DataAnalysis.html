@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Analysis Using NADA2 • NADA2</title>
+<title>Censored Data Analysis • NADA2</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Data Analysis Using NADA2">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Censored Data Analysis">
 <meta property="og:description" content="NADA2">
 <meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -61,7 +61,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/DataAnalysis.html">Data Analysis Using NADA2</a>
+      <a href="../articles/DataAnalysis.html">Censored Data Analysis</a>
     </li>
   </ul>
 </li>
@@ -89,7 +89,7 @@
       </header><script src="DataAnalysis_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Data Analysis Using NADA2</h1>
+      <h1 data-toc-skip>Censored Data Analysis</h1>
                         <h4 class="author">Dennis Helsel and Paul Julian</h4>
             
       
@@ -143,7 +143,7 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">perm</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/rms/">rms</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html">survminer</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org">vegan</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/vegandevs/vegan">vegan</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SwampThingPaul/NADA2">NADA2</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">bestglm</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/">car</a></span><span class="op">)</span>
@@ -387,10 +387,10 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.19752</span>
-<span class="co">#&gt;                                  Pct.UCL = 189.59557</span>
-<span class="co">#&gt;                                  BCa.LCL =  98.93206</span>
-<span class="co">#&gt;                                  BCa.UCL = 186.26693</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.2065</span>
+<span class="co">#&gt;                                  Pct.UCL = 190.3429</span>
+<span class="co">#&gt;                                  BCa.LCL =  98.6393</span>
+<span class="co">#&gt;                                  BCa.UCL = 187.0166</span></code></pre></div>
 <p>Using the print statement after storing the output in an object (<code>Pyr.mle</code> was used here) produces the table type output shown above. Without the print statement, just typing the object name, the output is generic and not ready to be pasted into a results document.</p>
 </div>
 <div id="kaplan-meier" class="section level3">
@@ -454,12 +454,12 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.24109</span>
-<span class="co">#&gt;                                  Pct.UCL = 266.32293</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.43064</span>
-<span class="co">#&gt;                                  BCa.UCL = 258.74622</span>
-<span class="co">#&gt;                                  t.LCL   = 101.56044</span>
-<span class="co">#&gt;                                  t.UCL   = 601.76528</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.86781</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.41553</span>
+<span class="co">#&gt;                                  BCa.LCL =  98.04542</span>
+<span class="co">#&gt;                                  BCa.UCL = 260.06195</span>
+<span class="co">#&gt;                                  t.LCL   = 102.57805</span>
+<span class="co">#&gt;                                  t.UCL   = 617.74140</span></code></pre></div>
 <p>Note that as with all bootstrap estimates the confidence intervals above will differ slightly from your results.</p>
 </div>
 <div id="regression-on-order-statistics-ros" class="section level3">
@@ -534,10 +534,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.57514</span>
-<span class="co">#&gt;                                  Pct.UCL = 264.67806</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.88247</span>
-<span class="co">#&gt;                                  BCa.UCL = 257.36782</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.42301</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.73735</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.72736</span>
+<span class="co">#&gt;                                  BCa.UCL = 260.11615</span></code></pre></div>
 </div>
 <div id="all-at-once" class="section level3">
 <h3 class="hasAnchor">
@@ -612,12 +612,12 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.24109</span>
-<span class="co">#&gt;                                  Pct.UCL = 266.32293</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.43064</span>
-<span class="co">#&gt;                                  BCa.UCL = 258.74622</span>
-<span class="co">#&gt;                                  t.LCL   = 101.56044</span>
-<span class="co">#&gt;                                  t.UCL   = 601.76528</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.86781</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.41553</span>
+<span class="co">#&gt;                                  BCa.LCL =  98.04542</span>
+<span class="co">#&gt;                                  BCa.UCL = 260.06195</span>
+<span class="co">#&gt;                                  t.LCL   = 102.57805</span>
+<span class="co">#&gt;                                  t.UCL   = 617.74140</span></code></pre></div>
 <p>Then the default normal assumption (basically, a t-interval using the K-M estimates of mean and standard deviation):</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">Pyr.km2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>,<span class="va">PyreneCen</span>, ci<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
@@ -726,10 +726,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.86732</span>
-<span class="co">#&gt;                                  Pct.UCL = 187.51642</span>
-<span class="co">#&gt;                                  BCa.LCL =  99.30753</span>
-<span class="co">#&gt;                                  BCa.UCL = 185.93402</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.79976</span>
+<span class="co">#&gt;                                  Pct.UCL = 188.61835</span>
+<span class="co">#&gt;                                  BCa.LCL =  98.85931</span>
+<span class="co">#&gt;                                  BCa.UCL = 186.28284</span></code></pre></div>
 </div>
 <div id="ros" class="section level4">
 <h4 class="hasAnchor">
@@ -779,10 +779,10 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Confidence Interval:             Pct.LCL = 100.57514</span>
-<span class="co">#&gt;                                  Pct.UCL = 264.67806</span>
-<span class="co">#&gt;                                  BCa.LCL =  97.88247</span>
-<span class="co">#&gt;                                  BCa.UCL = 257.36782</span></code></pre></div>
+<span class="co">#&gt; Confidence Interval:             Pct.LCL =  99.42301</span>
+<span class="co">#&gt;                                  Pct.UCL = 264.73735</span>
+<span class="co">#&gt;                                  BCa.LCL =  97.72736</span>
+<span class="co">#&gt;                                  BCa.UCL = 260.11615</span></code></pre></div>
 <p>Generally, I recommend using a bootstrap estimate when there is sufficient data, which there are here, as theoretical methods such as Cox are strongly dependent on the <em>lognormal</em> shape that often does not fit exactly. Remember, ROS assumes a distribution but only for the censored observations.</p>
 </div>
 </div>
@@ -1072,18 +1072,18 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Number of Times Bootstrap</span>
 <span class="co">#&gt; Repeated Because Too Few</span>
-<span class="co">#&gt; Uncensored Observations:         13</span>
+<span class="co">#&gt; Uncensored Observations:         8</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval Type:        upper</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 2.550041</span>
+<span class="co">#&gt;                                  Pct.UCL = 2.536871</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 2.519142</span>
+<span class="co">#&gt;                                  BCa.UCL = 2.533098</span>
 <span class="co">#&gt;                                  t.LCL   = 0.000000</span>
-<span class="co">#&gt;                                  t.UCL   = 3.621762</span></code></pre></div>
+<span class="co">#&gt;                                  t.UCL   = 3.667217</span></code></pre></div>
 <p>The percentile bootstrap estimate of the UCL95 will be near to 2.53, with the output varying slightly each time a bootstrap estimate is run. This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.</p>
 <p><strong>Example 2:</strong> Computation of a UCL95 for data with both detected and non-detected values, DL unknown.</p>
 <p>Data: Methyl Isobutyl Ketone (MIBK) in air above a medium-sized US city.</p>
@@ -1141,9 +1141,9 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 0.2883397</span>
+<span class="co">#&gt;                                  Pct.UCL = 0.2886721</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 0.2663916</span></code></pre></div>
+<span class="co">#&gt;                                  BCa.UCL = 0.2641253</span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean equals 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled 0.293). Remember that your bootstrap result will slightly differ from the one here. To decrease differences between runs, increase the number of bootstraps, say to 10,000.</p>
 <p><em>B: What if the detection limit had been known?</em></p>
 <p>If a reporting limit of 0.029 had been provided by the laboratory, the data would be as given in the MIBK2 and MIBK2cen columns. Using the same procedure gives slightly lower results for both mean and UCL95:</p>
@@ -1196,9 +1196,9 @@ Lognormal probability of pyrene data
 <span class="co">#&gt; Confidence Level:                95%</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  Pct.UCL = 0.2844306</span>
+<span class="co">#&gt;                                  Pct.UCL = 0.2814889</span>
 <span class="co">#&gt;                                  BCa.LCL = 0.0000000</span>
-<span class="co">#&gt;                                  BCa.UCL = 0.2723776</span></code></pre></div>
+<span class="co">#&gt;                                  BCa.UCL = 0.2733443</span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean will be near to 0.290 with this known detection limit. It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.</p>
 <p><strong>Example 3:</strong> Computation of the expected percent of observations exceeding a health advisory when all data are NDs. More details of this method are found in Chapter 8 of Statistics for Censored Environmental Data Using Minitab and R (Helsel, 2012).</p>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
@@ -1241,7 +1241,7 @@ Lognormal probability of pyrene data
 <span class="co">#&gt;  Permutation test of mean CensData: Zn   by Factor: Zone </span>
 <span class="co">#&gt;      9999 Permutations     alternative = two.sided </span>
 <span class="co">#&gt;   mean of AlluvialFan = 21.22 to 23.51     mean of BasinTrough = 21.28 to 21.94 </span>
-<span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 0.9999 to 0.9992 </span>
+<span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 1 to 0.9985 </span>
 <span class="co">#&gt; </span></code></pre></div>
 <p>The two groups do not have significantly different means. These are p-values that you can believe, as they do not depend on the normal assumption and do not project data values below zero.</p>
 <p>Using cen2means to perform the test using the default lognormal distribution, the difference in geometric means (not arithmetic means) is performed below.</p>
@@ -1418,8 +1418,8 @@ Lognormal probability of pyrene data
 #&gt;                  Estimate Std. Error z value Pr(&gt;|z|)  
 #&gt; 0.01 - 0 == 0      0.2877     1.0841   0.265   0.9935  
 #&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0151 *
-#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1448  
-#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0324 *
+#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1452  
+#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0322 *
 #&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2456  
 #&gt; 0.25 - 0.05 == 0  -1.0336     1.0749  -0.962   0.7712  
 #&gt; ---
@@ -1431,7 +1431,7 @@ Lognormal probability of pyrene data
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenpermanova.html">cenpermanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;  Permutation test of mean CensData: Liver   by Factor: Dosage </span>
 <span class="co">#&gt;      9999 Permutations </span>
-<span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1433 to 0.1441 </span>
+<span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1365 to 0.138 </span>
 <span class="co">#&gt;  </span>
 <span class="co">#&gt;    mean(0)   mean(0.01)   mean(0.05)   mean(0.25)   </span>
 <span class="co">#&gt;     0.1000       0.1395      12.1100       6.8660</span></code></pre></div>
@@ -1958,7 +1958,7 @@ summary(reg.recon.4)
 #&gt; Seasonal Kendall test and Theil-Sen line</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-80-3.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code>#&gt;   reps_R  N S_SK tau_SK   pval intercept    slope
-#&gt; 1   4999 63 -203  -0.21 0.0148    181.26 -0.08965
+#&gt; 1   4999 63 -203  -0.21 0.0104    181.26 -0.08965
 #&gt; ----------</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-80-4.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is an overall trend once the Seasonal Kendall test has removed all comparisons between values in different seasons. Also, the dry season has a p-value of 0.069. The prevailing wisdom in statistics in 2019 is to not get too rigid about an alpha of 0.05. A value of 0.069 is close to 0.05 and the trend in the dry season graph appears strong. I would report in this case that there is an overall downtrend and a downtrend in the dry season. The high flows in the wet season were preventing the non-seasonal <code>centrend</code> function from seeing the trend.</p>
@@ -1980,7 +1980,7 @@ summary(reg.recon.4)
 #&gt; Seasonal Kendall test and Akritas-Theil-Sen line on residuals</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-81-5.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code>#&gt;   reps_R  N S_SK  tau_SK  pval intercept    slope
-#&gt; 1   4999 63  -66 -0.0683 0.439    59.654 -0.02967
+#&gt; 1   4999 63  -66 -0.0683 0.437    59.654 -0.02967
 #&gt; ----------</code></pre>
 <p><img src="DataAnalysis_files/figure-html/unnamed-chunk-81-6.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is no trend in flow-adjusted chromium found for this site and dates. The slight decrease of the ATS line above, which includes the influence of the below detection limit observations as well as detected observations, is not significantly different from a zero slope.</p>
@@ -2336,7 +2336,7 @@ summary(reg.recon.4)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Upper quantiles of permutations (null model):</span>
 <span class="co">#&gt;    90%    95%  97.5%    99% </span>
-<span class="co">#&gt; 0.0470 0.0666 0.0890 0.1151 </span>
+<span class="co">#&gt; 0.0476 0.0681 0.0889 0.1113 </span>
 <span class="co">#&gt; Permutation: free</span>
 <span class="co">#&gt; Number of permutations: 9999</span></code></pre></div>
 <p>There is a significant positive correlation between the MST marker values and the entero1A values. One way to picture the correlation is to plot their distance matrix entries against one another. The x,y pairs are those in the triangular matrices that are being correlated using Kendall’s tau in the mantel test. If there was a positive correlation, for example, larger distances (relating small to large entero1A data) would also have larger M6 distances between MST marker concentrations. This is the pattern seen in the plot.</p>

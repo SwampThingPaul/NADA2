@@ -1,5 +1,5 @@
 ---
-title: "Data Analysis Using NADA2"
+title: "Censored Data Analysis"
 author: "Dennis Helsel and Paul Julian"
 output: rmarkdown::html_vignette
 vignette: >

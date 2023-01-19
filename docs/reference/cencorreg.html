@@ -103,7 +103,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/DataAnalysis.html">Data Analysis Using NADA2</a>
+      <a href="../articles/DataAnalysis.html">Censored Data Analysis</a>
     </li>
   </ul>
 </li>
@@ -175,7 +175,7 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <p>A Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value are plotted for evaluation of model distributional assumptions when <code>verbose=2</code> (the default).</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>x.vars</code>: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as <code>X</code> variables in the regression are allowed. Create this by <code>x.frame &lt;- data.frame (Temp, Flow, Time)</code> for 3 variables (temperature, flow and time) used as teh <code>X</code> variables in the regression.</p>
+    <p><code>x.vars</code>: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as <code>X</code> variables in the regression are allowed. Create this by <code>x.frame &lt;- data.frame (Temp, Flow, Time)</code> for 3 variables (temperature, flow and time) used as the <code>X</code> variables in the regression.</p>
 <p>AIC and BIC are printed to help evaluate the ‘best’ regression model.</p>
 <p>The default is that the Y variable will be log transformed.</p>
 <p><code>verbose</code> option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no qqplots. A value of 0 provides no output; the returning computations will be stored in the specified object.</p>
@@ -209,7 +209,7 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 #&gt; Loglik(model)= -179.6   Loglik(intercept only)= -184.9
 #&gt; 	Chisq= 10.58 on 1 degrees of freedom, p= 0.00114 
 #&gt; n= 133 </div><div class='input'>
-<span class='co'># More than one variable for demostration purposes</span>
+<span class='co'># More than one variable for demonstration purposes</span>
 <span class='fu'>cencorreg</span><span class='op'>(</span><span class='va'>Brumbaugh</span><span class='op'>$</span><span class='va'>Hg</span>,<span class='va'>Brumbaugh</span><span class='op'>$</span><span class='va'>HgCen</span>,<span class='va'>Brumbaugh</span><span class='op'>[</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"SedMeHg"</span>,<span class='st'>"PctWetland"</span><span class='op'>)</span><span class='op'>]</span><span class='op'>)</span>
 </div><div class='img'><img src='cencorreg-2.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt;  Likelihood R2 = 0.1371                     AIC = 359.1937 
 #&gt;  Rescaled Likelihood R2 = 0.1461            BIC = 369.7851 

@@ -38,10 +38,10 @@ cen_paired <- function(xd, xc, yd, yc, alternative="two.sided",printstat = TRUE)
   xname <- deparse(substitute(xd))
   yname <- deparse(substitute(yd))
   mu <- 0
-  print(xd)
+#  print(xd)
   if (length(yd)==1) {yc <- rep(FALSE, length(xd))
   mu <- yd[1]; yd <- rep(mu, length(xd))}
-  cat(xd, xc, yd, yc)
+#  cat(xd, xc, yd, yc)
   nonas <- na.omit(data.frame(xd, xc, yd, yc))
   if(length(nonas[,1]) != length(nonas[,3]))
     stop("Lengths of x and y must be the same for paired data.")

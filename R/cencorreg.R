@@ -20,7 +20,7 @@
 #'
 #' @details
 #'
-#' `x.vars`: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as `X` variables in the regression are allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time) used as teh `X` variables in the regression.
+#' `x.vars`: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as `X` variables in the regression are allowed. Create this by `x.frame <- data.frame (Temp, Flow, Time)` for 3 variables (temperature, flow and time) used as the `X` variables in the regression.
 #'
 #' AIC and BIC are printed to help evaluate the ‘best’ regression model.
 #'
@@ -42,7 +42,7 @@
 #' # One variable
 #' cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg)
 #'
-#' # More than one variable for demostration purposes
+#' # More than one variable for demonstration purposes
 #'cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
 
 
