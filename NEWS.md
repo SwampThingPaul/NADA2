@@ -33,3 +33,10 @@
 * Finalized vignette (2022-09-01)
 
 * Submitted to CRAN (2022-09-02)
+
+
+# NADA2 1.1.1
+
+* Minor edits to typos (2023-01-19)
+
+* fixed `cen_paired` double results printing (2023-01-19)
