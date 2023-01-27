@@ -40,3 +40,7 @@
 * Minor edits to typos (2023-01-19)
 
 * fixed `cen_paired` double results printing (2023-01-19)
+
+# NADA2 1.1.2
+
+* Update `cencorreg.R` function

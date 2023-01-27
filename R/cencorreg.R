@@ -47,10 +47,11 @@
 
 
 cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
-  {
+{
   yname <- deparse(substitute(y.var))
-  nonas <- na.omit(cbind(y.var, cen.var, x.vars))
-  xnona <- nonas[,-(1:2)]
+  nonas <- na.omit(data.frame(y.var, cen.var, x.vars, stringsAsFactors = TRUE))
+  xnona <- nonas[,-(1:2)]      # data frame of x variables
+
   # default verbose = 2 prints detailed output and QQ plots.
   #         verbose = 1 prints only one line of output.  No plots.
   #         verbose = 0 prints no output or plots.
@@ -58,11 +59,12 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
   if (LOG == TRUE)  {lnvar <- log(nonas[,1])    # take logs of Y (default)
   flip.log <- max(lnvar) +1 - lnvar
   #  print(max(lnvar)+1)
-  surv.log <- Surv(flip.log, as.logical(1-nonas[,2]) )
+  surv.log <- Surv(flip.log, as.logical(nonas[,2]) )
 
-  if (is.data.frame(x.vars))  {             # multiple x variables
+  if (is.data.frame(xnona))  {             # multiple x variables
     reg.out <- survreg(surv.log ~ ., data = xnona, dist = "gaussian")
     cn <- names(reg.out$coefficients[-1])
+    #    print(cn)
     xvars.txt <- cn[1]
     for (i in 1:length(cn))  {j <-(i+1)
     if (i != length(cn)) xvars.txt <- paste(xvars.txt, cn[j], sep = "+")
@@ -75,7 +77,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
   names(x.df) <- xname
   reg.out <- survreg(surv.log~., data = x.df, dist = "gaussian")
   cn <- names(reg.out$coefficients[-1])
-  reg.out$call[3] <- cn
+  reg.out$call[3] <- xname
   }
 
   ylog.pred <- max(lnvar) +1 - reg.out$linear.predictors
@@ -97,7 +99,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
   else                                          #  Y in original units, normal Q-Q plot
   { if(min(nonas[,1] >= 0)) { y.low <- nonas[,1]*(1-nonas[,2])   #  0 for low end of all NDs
   surv.norm <- Surv(y.low, nonas[,1], type="interval2")
-  if (is.data.frame(x.vars))  {       # multiple x variables
+  if (is.data.frame(xnona))  {             # multiple x variables
     reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
     cn <- names(reg.out$coefficients[-1])
     xvars.txt <- cn[1]
@@ -112,7 +114,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
   names(x.df) <- xname
   reg.out <- survreg(surv.norm~., data = x.df, dist = "gaussian")
   cn <- names(reg.out$coefficients[-1])
-  reg.out$call[3] <- cn
+  reg.out$call[3] <- xname
   }
 
   reg.out$call[2] <- yname
@@ -133,7 +135,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
     else{ flip.norm <- max(nonas[,1]) +1 - nonas[,1]
     surv.norm <- Surv(flip.norm, as.logical(1-nonas[,2]) )
 
-    if (is.data.frame(x.vars))  {       # multiple x variables
+    if (is.data.frame(xnona))  {             # multiple x variables
       reg.out <- survreg(surv.norm ~ ., data = xnona, dist = "gaussian")
       cn <- names(reg.out$coefficients[-1])
       xvars.txt <- cn[1]
@@ -148,7 +150,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
     names(x.df) <- xname
     reg.out <- survreg(surv.norm~., data = x.df, dist = "gaussian")
     cn <- names(reg.out$coefficients[-1])
-    reg.out$call[3] <- cn
+    reg.out$call[3] <- xname
     }
 
     reg.out$call[2] <- yname
@@ -170,7 +172,7 @@ cencorreg <- function(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
     }   # end of flipping
   } # end of Y in original units
 
-  if (is.data.frame(x.vars))  {             # multiple x variables.  Print r-squared.
+  if (is.data.frame(xnona))       {   # multiple x variables.  Print r-squared.
     LRr2 <- signif(1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y)),4)
     McFr2 <- signif((1-reg.out$loglik[2]/reg.out$loglik[1]),4)
     Nag.r2 <- signif((1-exp(-2*(reg.out$loglik[2]-reg.out$loglik[1])/length(reg.out$y))) /(1-exp(2*reg.out$loglik[1]/length(reg.out$y))),4)
