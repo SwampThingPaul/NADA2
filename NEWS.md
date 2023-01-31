@@ -43,4 +43,6 @@
 
 # NADA2 1.1.2
 
-* Update `cencorreg.R` function
+* Update `cencorreg.R` function (2023-01-27)
+
+* Minor bug fix for `cencorreg.R` function (2023-01-31)

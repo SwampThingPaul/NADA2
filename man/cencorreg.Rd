@@ -11,7 +11,7 @@ cencorreg(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
 
 \item{cen.var}{The column of indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value is in \code{y.var}.}
 
-\item{x.vars}{One or more uncensored explanatory variable(s). See Details}
+\item{x.vars}{One or more uncensored explanatory variable(s). For multiple variables it must be a data frame of numeric, character and factor variables. See Details}
 
 \item{LOG}{Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 
