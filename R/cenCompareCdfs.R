@@ -59,9 +59,9 @@ cenCompareCdfs <- function(x.var, cens.var, dist3="norm", Yname = yname)  {
   }
   else            # all data are detects
   {
-    y.dist1 <- fitdist(var.frame, "lnorm", "mle")
-    y.dist2  <- fitdist(var.frame, "gamma", "mle")
-    y.dist3  <- fitdist(var.frame, dist3, "mle")
+    y.dist1 <- fitdist(y.var, "lnorm", "mle")
+    y.dist2  <- fitdist(y.var, "gamma", "mle")
+    y.dist3  <- fitdist(y.var, dist3, "mle")
 
     bic.dist1 <- paste("Lognormal BIC =", signif(y.dist1$bic, 3) )
     bic.dist2 <- paste("Gamma BIC =", signif(y.dist2$bic,3) )
