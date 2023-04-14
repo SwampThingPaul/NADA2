@@ -13,7 +13,8 @@ censeaken(
   R = 4999,
   nmin = 4,
   seaplots = FALSE,
-  printstat = TRUE
+  printstat = TRUE,
+  ...
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ censeaken(
 \item{seaplots}{In addition to the plot of the overall Seasonal Kendall trend line, plots of the trend in individual seasons can also be drawn.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
+
+\item{...}{other inputs associated with modifying plots produced by this function.}
 }
 \value{
 Prints the Kendall trend test results for each season individually. The overall Seasonal Kendall test and Theil-Sen line results are both printed and returned.

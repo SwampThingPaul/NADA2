@@ -14,6 +14,8 @@
 #' @param Title Text to show as the graph title.  Default is blank.
 #' @param dl.loc Location indicator of where to plot the "MaxDL=" text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.
 #' @param dl.col Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but all standard R colors may be used.
+#' @param dl.lty line type of max detection limit line(s).
+#' @param dl.lwd line wide of max detection limit line(s).
 #' @param bxcol Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
@@ -37,7 +39,11 @@
 #' cboxplot(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
 
-cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Ylab=yname, Xlab = gname, Title = NULL, dl.loc = "topright", dl.col = "red", bxcol = "white", Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
+cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
+                     Ylab=yname, Xlab = gname, Title = NULL,
+                     dl.loc = "topright", dl.col = "red",dl.lwd = 2,
+                     dl.lty = "longdash",bxcol = "white",
+                     Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
 
   box.fill <- 0
   if (is.null(xgroup) == TRUE) { ydat <- na.omit(data.frame(x1, x2))
@@ -90,7 +96,8 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Y
 
       polygon (xx, yy, col = bdl.col, border=bdl.col)
       abline (h=y.min, col=bdl.col, lwd=8)
-      abline(h=log(dlmax), col = dl.col, lty="longdash", lwd=2)
+      abline(h = log(dlmax), col = dl.col,
+             lty = dl.lty, lwd = dl.lwd)
       text(1.35, log(dlmax), labels = dltxt, pos=1, col=dl.col, cex=0.8)
       rslt<-data.frame(MaximumDL=dlmax, Group= "all")
     }
@@ -161,7 +168,8 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Y
       if (multiDL == FALSE) {     # plot all with same max DL
         # Everything below the max DL is gray, not black
         polygon(xx, yy, col = bdl.col, border=bdl.col)
-        abline(h=log(dlmax), col = dl.col, lty="longdash",lwd=2)
+        abline(h = log(dlmax), col = dl.col,
+               lty = dl.lty, lwd = dl.lwd)
         legend(dl.loc, legend = dltxt, bty="n", text.col=dl.col, cex=0.8)
         rslt[,1] <- dl.loc
         rslt[,2] <- t(glevels)
@@ -173,7 +181,7 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Y
         polygon(xgrp, ygrp, col = bdl.col, border = bdl.col)
         lx = c(i-0.45, i+0.45)
         ly = c(log(maxDL[i]), log(maxDL[i]))
-        lines(lx, ly, col = dl.col, lty="longdash", lwd=1.5)
+        lines(lx, ly, col = dl.col, lty = dl.lty, lwd = dl.lwd)
         rslt[i,1]=maxDL[i]
         rslt[i,2]=levels(grp.all)[i]
         }
@@ -293,7 +301,8 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL, Y
   else        # with groups
   {gname <- deparse(substitute(group))
   if (is.null(ordr) == FALSE)  {
-    group = factor(group, levels(group)[ordr]) }
+    group = factor(group, levels = ordr)
+    }
   glabs <- levels(group)
   boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
   rslt[,1] <- "none"

@@ -9,6 +9,7 @@
 #' @param nmin The minimum number of observations needed for the entire time period to be tested, per season.  For example, with 1 sample per year per season over an 8-year period, you have 8 observations for each season.  You can increase this number if you want a higher minimum.  Don’t decrease it below the default of 4.  If there are fewer than nmin values that season is skipped and not included in the overall test and a note of this will be printed in the console.
 #' @param seaplots In addition to the plot of the overall Seasonal Kendall trend line, plots of the trend in individual seasons can also be drawn.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#' @param ... other inputs associated with modifying plots produced by this function.
 #'
 #' @return Prints the Kendall trend test results for each season individually. The overall Seasonal Kendall test and Theil-Sen line results are both printed and returned.
 #'
@@ -35,7 +36,7 @@
 #' }
 
 
-censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, seaplots = FALSE,printstat=TRUE)
+censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, seaplots = FALSE,printstat=TRUE,...)
 {
   xname = deparse(substitute(time))
   yname = deparse(substitute(y))
@@ -113,7 +114,7 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
     int <- as.numeric(as.character(int[1]))
     y.seas <- x.seas*slp+int
     z <- data.frame(x.seas, y.seas)
-    kenplot(yc[[i]], cc[[i]], xc[[i]], xcen = rep(0, times=ntest), xnam=xname, ynam=yname, atsline = TRUE)
+    kenplot(yc[[i]], cc[[i]], xc[[i]], xcen = rep(0, times=ntest), xnam=xname, ynam=yname, atsline = TRUE,...)
     lines(z, col = "purple")
     mtext(paste("Season =", sea))
   }
@@ -148,7 +149,7 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   if(printstat==TRUE){print(RESULTS)}
   if(printstat==TRUE){cat(dsh)}
 
-  kenplot(yyy, ccc, xxx, xcen = rep(0, times=nall), xnam=xname, ynam=yname, Title = "Seasonal Kendall Test")
+  kenplot(yyy, ccc, xxx, xcen = rep(0, times=nall), xnam=xname, ynam=yname, Title = "Seasonal Kendall Test",...)
   abline(intall, medslope, lwd=2, col = "blue")
   mtext ("Overall Trend Line", col = "blue")
 

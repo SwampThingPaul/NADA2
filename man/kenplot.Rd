@@ -12,7 +12,14 @@ kenplot(
   atsline = FALSE,
   xnam = NULL,
   ynam = NULL,
-  Title = "Akritas - Theil - Sen line"
+  Title = "Akritas - Theil - Sen line",
+  ylim = NULL,
+  xlim = NULL,
+  pch = NULL,
+  cex = NULL,
+  xaxs = "r",
+  yaxs = "r",
+  ...
 )
 }
 \arguments{

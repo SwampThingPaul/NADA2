@@ -16,6 +16,8 @@ cboxplot(
   Title = NULL,
   dl.loc = "topright",
   dl.col = "red",
+  dl.lwd = 2,
+  dl.lty = "longdash",
   bxcol = "white",
   Ymax = NULL,
   minmax = FALSE,
@@ -45,6 +47,10 @@ cboxplot(
 \item{dl.loc}{Location indicator of where to plot the "MaxDL=" text on some versions of the plot.  Possible entries are “topleft”, “topright”, “topcenter”, and the corresponding “bottom” text.}
 
 \item{dl.col}{Color of the max detection limit line(s), and the legend text stating the max DL.  Default is “red”, but all standard R colors may be used.}
+
+\item{dl.lwd}{line wide of max detection limit line(s).}
+
+\item{dl.lty}{line type of max detection limit line(s).}
 
 \item{bxcol}{Color for interior of boxplots. Specify just one color if all boxes are to be the same color.  If a different color is desired for each of three boxplots, as one example, use bxcol = c(“red”, “white”, “blue”) etc.}
 

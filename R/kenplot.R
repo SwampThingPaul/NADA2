@@ -31,7 +31,8 @@
 #' with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 #' }
 
-kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, Title="Akritas - Theil - Sen line")  {
+kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, Title="Akritas - Theil - Sen line",
+                    ylim=NULL,xlim=NULL,pch=NULL,cex=NULL,xaxs="r", yaxs="r",...)  {
   alldat <- data.frame(y1, ycen, x1, xcen)
 
   if (!is.null(xnam)) {xnam = xnam}else(xnam=deparse(substitute(x1)))
@@ -65,7 +66,12 @@ kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, T
 #  oldpar <- par(no.readonly = TRUE)
 #  on.exit(par(oldpar))
 
-  plot(detected$x1, detected$y1, ylim = c(ymin, ymax), xlim = c(xmin, xmax), ylab = ynam, xlab = xnam, pch=19, cex=0.7, main=Title, xaxs="r", yaxs="r")
+  if(is.null(ylim)){ylim.val = c(ymin, ymax)}else{ylim.val=ylim}
+  if(is.null(xlim)){xlim.val = c(xmin, xmax)}else{xlim.val=xlim}
+  if(is.null(pch)){pch.val=19}else{pch.val=pch}
+  if(is.null(cex)){cex.val=0.7}else{cex.val=cex}
+
+  plot(detected$x1, detected$y1, ylim =ylim.val, xlim = xlim.val, ylab = ynam, xlab = xnam, pch=pch.val, cex=cex.val, main=Title,...)
   if (atsline == TRUE) {
     abline(int, slp, col = "purple")}
 
