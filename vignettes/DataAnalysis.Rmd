@@ -261,7 +261,7 @@ Pyr.mle <- with(ShePyrene,
                 elnormAltCensored(Pyrene, PyreneCen, 
                              ci=TRUE, ci.method ="bootstrap",
                              n.bootstraps = 5000))
-EnvStats::print(Pyr.mle)
+print(Pyr.mle)
 ```
 
 Using the print statement after storing the output in an object (`Pyr.mle` was used here) produces the table type output shown above. Without the print statement, just typing the object name, the output is generic and not ready to be pasted into a results document.
@@ -283,7 +283,7 @@ Pyr.km <- with(ShePyrene,
                 enparCensored(Pyrene, PyreneCen, 
                              ci=TRUE, ci.method ="bootstrap",
                              n.bootstraps = 5000))
-EnvStats::print(Pyr.km)
+print(Pyr.km)
 ```
 
 Note that as with all bootstrap estimates the confidence intervals above will differ slightly from your results.
@@ -312,7 +312,7 @@ Pyr.ROS <- with(ShePyrene,
                              ci=TRUE, ci.method ="bootstrap",
                              n.bootstraps = 5000))
 
-EnvStats::print(Pyr.ROS)
+print(Pyr.ROS)
 ```
 
 ### All at once
@@ -336,7 +336,7 @@ sample size is around 70+ this may be a reasonable assumption. For this example 
 
 ```{r}
 ## from above
-EnvStats::print(Pyr.km)
+print(Pyr.km)
 ```
 
 Then the default normal assumption (basically, a t-interval using the K-M estimates of mean and standard deviation):
@@ -344,7 +344,7 @@ Then the default normal assumption (basically, a t-interval using the K-M estima
 ```{r}
 Pyr.km2 <- with(ShePyrene,enparCensored(Pyrene,PyreneCen, ci=TRUE))
 
-EnvStats::print(Pyr.km2)
+print(Pyr.km2)
 ```
 
 This t-interval (Normal Approximation) LCL goes down considerably lower (66.5) than the BCa bootstrap interval (98.3) because the t-interval must be symmetric, and the upper end is approx. 100 ug/L above the mean, so the LCL must be 100 below the mean. The data don't warrant that low of an interval as they are asymmetric, and the bootstrap LCL picks up on that information.
@@ -374,7 +374,7 @@ pyr.lnorm <- with(ShePyrene,
                                     ci=TRUE, ci.method ="bootstrap", 
                                     n.bootstraps = 5000))
 
-EnvStats::print(pyr.lnorm)
+print(pyr.lnorm)
 ```
 
 #### ROS
@@ -382,7 +382,7 @@ The `cenros` command in `NADA` does not compute confidence intervals for the mea
 
 ```{r}
 # from above
-EnvStats::print(Pyr.ROS)
+print(Pyr.ROS)
 ```
 
 Generally, I recommend using a bootstrap estimate when there is sufficient data, which there are here, as theoretical methods such as Cox are strongly dependent on the *lognormal* shape that often does not fit exactly. Remember, ROS assumes a distribution but only for the censored observations.
@@ -422,7 +422,7 @@ What’s inside this function? If you would like info on the commands this funct
 example <- with(ShePyrene,
             eqlnormCensored (Pyrene, PyreneCen, p=0.9, 
                              ci=TRUE, ci.type ="upper"))
-EnvStats::print(example)
+print(example)
 ```
 
 Here’s how you would compute a gamma tolerance interval by first taking cube roots, then using those in a censored normal routine to get a tolerance interval on a percentile, then retransforming back to the original data scale by cubing the result:
@@ -521,7 +521,7 @@ egam <- with(Example1,
              egammaAltCensored(Arsenic, NDisTRUE, 
                                ci=TRUE, ci.type = "upper",
                                ci.method = "normal.approx"))
-EnvStats::print(egam)
+print(egam)
 ```
 
 Use the print statement to get the “table format” for the output from this EnvStats function. The UCL95 equals 2.57 assuming a gamma distribution. Because this is lower than the 10 ug/L standard, the null hypothesis of non-compliance is rejected, and the site from which these data came is found to be in compliance.
@@ -537,7 +537,7 @@ arsenic.out <- with(Example1,
                     enparCensored(Arsenic, NDisTRUE, 
                                   ci=TRUE, ci.method="bootstrap", ci.type="upper",
                                   n.bootstraps=5000))
-EnvStats::print(arsenic.out)
+print(arsenic.out)
 ```
 
 The percentile bootstrap estimate of the UCL95 will be near to 2.53, with the output varying slightly each time a bootstrap estimate is run.  This is essentially the same estimate as that for the gamma distribution, with the identical result – the site is found to be in compliance.
@@ -561,7 +561,7 @@ mibk.ucl95 <- with(Example2,
                    elnormAltCensored (MIBK, MIBKcen, method = "rROS", 
                                       ci=TRUE, ci.method = "bootstrap", 
                                       ci.type = "upper", n.bootstraps = 5000))
-EnvStats::print(mibk.ucl95)
+print(mibk.ucl95)
 ```
 
 The percentile bootstrap UCL95 based on the robust ROS mean equals 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled 0.293). Remember that your bootstrap result will slightly differ from the one here.  To decrease differences between runs, increase the number of bootstraps, say to 10,000.
@@ -575,7 +575,7 @@ mibk2.out <- with(Example2,
                   elnormAltCensored (MIBK2, MIBK2cen, method = "rROS", 
                                      ci=TRUE, ci.method = "bootstrap", 
                                      ci.type = "upper", n.bootstraps = 5000))
-EnvStats::print(mibk2.out)
+print(mibk2.out)
 ```
 
 The percentile bootstrap UCL95 based on the robust ROS mean will be near to 0.290 with this known detection limit.  It is always better to use the laboratory documented limit, but not having one should not stop the user from computing estimates using the lowest detected observation as the limit.
