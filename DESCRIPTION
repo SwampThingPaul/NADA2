@@ -1,8 +1,8 @@
 Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
-Version: 1.1.3
-Date: 2023-01-31
+Version: 1.1.4
+Date: 2023-08-27
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
@@ -42,6 +42,6 @@ Suggests: knitr,
 Encoding: UTF-8
 LazyLoad: yes
 LazyData: yes
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

@@ -49,8 +49,8 @@ devtools::check_rhub()
 pkgdown::build_site()
 
 ## Builds package
-# devtools::build()
-
+# devtools::build(vignettes=F)
+devtools::build()
 
 # -------------------------------------------------------------------------
 

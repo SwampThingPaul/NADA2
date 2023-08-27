@@ -41,7 +41,7 @@ Load the packages needed. Install 15 packages: You can either do this manually v
 
 *Here is a trick to use a list of packages combined with a function that will check if the package is installed, if not install it and then load it.*
 
-```{r,warning=F,message=F,eval=T,results="hide"}
+```{r,warning=F,message=F,eval=F,results="hide"}
 check.packages <- function(pkg){
   new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
   if (length(new.pkg)) 
