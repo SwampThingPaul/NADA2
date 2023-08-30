@@ -14,6 +14,7 @@
 #' }
 #'
 #' @usage data(Pollen_Thia)
+#' @aliases Pollen_Thia
 #'
 #' @docType data
 #' @keywords dataset

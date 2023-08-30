@@ -50,7 +50,7 @@ pkgdown::build_site()
 
 ## Builds package
 # devtools::build(vignettes=F)
-devtools::build()
+# devtools::build()
 
 # -------------------------------------------------------------------------
 

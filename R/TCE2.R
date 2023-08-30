@@ -8,6 +8,7 @@
 #'There are four detection limits, at 1,2,4 and 5 ug/L.
 #'
 #' @usage data(TCE2)
+#' @aliases TCE2
 #'
 #' @docType data
 #' @keywords dataset

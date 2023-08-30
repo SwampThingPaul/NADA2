@@ -7,6 +7,7 @@
 #' 10 microgram per liter health standard.
 #'
 #' @usage data(Example1)
+#' @aliases Example1
 #'
 #' @docType data
 #' @keywords dataset

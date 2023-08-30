@@ -8,6 +8,7 @@
 #' to seven environmental variables.
 #'
 #' @usage data(ReconLogistic)
+#' @aliases ReconLogistic
 #'
 #' @docType data
 #' @keywords dataset

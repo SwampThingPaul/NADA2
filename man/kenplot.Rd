@@ -38,6 +38,20 @@ kenplot(
 \item{ynam}{Custom label for the y axis of plots.  Default is y variable column name.}
 
 \item{Title}{Custom title for plots.  Default is "Akritas - Theil - Sen line".}
+
+\item{ylim}{argument consistent with \code{base} plotting to adjust y-axis limits; see \code{par} for more details}
+
+\item{xlim}{argument consistent with \code{base} plotting to adjust x-axis limits; see \code{par} for more details}
+
+\item{pch}{argument consistent with \code{base} plotting to adjust point type, see \code{par} for more details}
+
+\item{cex}{argument consistent with \code{base} plotting to adjust point size; see \code{par} for more details}
+
+\item{xaxs}{argument consistent with \code{base} plotting to adjust x-axis type; see \code{par} for more details}
+
+\item{yaxs}{argument consistent with \code{base} plotting to adjust y-axis type; see \code{par} for more details}
+
+\item{...}{argument to adjust other base plotting functions; see \code{par} for more details}
 }
 \value{
 Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.

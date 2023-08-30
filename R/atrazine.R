@@ -8,6 +8,7 @@
 #' Objective is to determine if concentrations increase from June to September. There is one detection limit, at 0.01 ug/L. Used in Chapters 4, 5, and 9 of the Helsel (2011) book.
 #'
 #' @usage data(atrazine)
+#' @aliases atrazine
 #'
 #' @docType data
 #' @keywords dataset

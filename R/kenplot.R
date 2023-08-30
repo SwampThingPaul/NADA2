@@ -10,6 +10,13 @@
 #' @param xnam Custom label for the x axis of plots.  Default is x variable column name.
 #' @param ynam Custom label for the y axis of plots.  Default is y variable column name.
 #' @param Title Custom title for plots.  Default is "Akritas - Theil - Sen line".
+#' @param ylim argument consistent with `base` plotting to adjust y-axis limits; see `par` for more details
+#' @param xlim argument consistent with `base` plotting to adjust x-axis limits; see `par` for more details
+#' @param pch argument consistent with `base` plotting to adjust point type, see `par` for more details
+#' @param cex argument consistent with `base` plotting to adjust point size; see `par` for more details
+#' @param xaxs argument consistent with `base` plotting to adjust x-axis type; see `par` for more details
+#' @param yaxs argument consistent with `base` plotting to adjust y-axis type; see `par` for more details
+#' @param ... argument to adjust other base plotting functions; see `par` for more details
 #' @importFrom NADA cenken
 #' @export
 #' @return

@@ -8,6 +8,7 @@
 #' dataset without detected observations.
 #'
 #' @usage data(Example3)
+#' @aliases Example3
 #'
 #' @docType data
 #' @keywords dataset

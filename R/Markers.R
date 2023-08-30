@@ -10,6 +10,7 @@
 #' pattern of markers plus Entero1A indicator differs among five coastal water sites using ANOSIM.
 #'
 #' @usage data(Markers)
+#' @aliases Markers
 #'
 #' @docType data
 #' @keywords dataset

@@ -10,6 +10,7 @@
 #' There are three detection limits, at 0.03, 0.05, and 0.10 ug/g wet weight. Used in Chapters 10, 11 and 12 of the Helsel (2011) book.
 #'
 #' @usage data(Brumbaugh)
+#' @aliases Brumbaugh
 #'
 #' @docType data
 #' @keywords dataset

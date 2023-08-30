@@ -8,6 +8,7 @@
 #' Objective is to determine the relationships between lead concentrations in the blood and various organs. Do concentrations reflect environmental lead concentrations, as represented by dosing groups? There is one detection limit, at 0.02 ug/g. Used in Chapters 10 and 11 of the Helsel (2011).
 #'
 #' @usage data(PbHeron)
+#' @aliases PbHeron
 #'
 #' @docType data
 #' @keywords dataset

@@ -8,6 +8,7 @@
 #' of the reporting limit(s).
 #'
 #' @usage data(Example2)
+#' @aliases Example2
 #'
 #' @docType data
 #' @keywords dataset
