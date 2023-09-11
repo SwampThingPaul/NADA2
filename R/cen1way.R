@@ -44,6 +44,7 @@
 #' # More than two groups
 #' cen1way(PbHeron$Liver,PbHeron$LiverCen,PbHeron$Group)
 
+
 cen1way <- function(x1, x2, group, mcomp.method = "BH", printstat=TRUE) {
   yname <- deparse(substitute(x1))
   gname <- deparse(substitute(group))
@@ -74,8 +75,7 @@ cen1way <- function(x1, x2, group, mcomp.method = "BH", printstat=TRUE) {
     Cstats <- data.frame(Cstats)
     Cstats$grp <-  groupnames[i] # added to include group in summary data frame.
     rownames(Cstats) <-NULL # added to clean up row names.
-    if (i ==1) {Cen.stats <- Cstats
-    cnames <- colnames(Cstats)}else {Cen.stats <- suppressWarnings(rbind(Cen.stats, Cstats))}
+    if (i ==1) {Cen.stats <- Cstats;cnames <- colnames(Cstats)}else {colnames(Cstats)=cnames;Cen.stats <- suppressWarnings(rbind(Cen.stats, Cstats))}
     # added for custom warning.
     if(sum(as.logical(y2gp))==0){warning("One or more group(s) do not have censored data.",call.=F)}
   }

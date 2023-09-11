@@ -4,6 +4,9 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/Censored_Data_Analysis.html</loc>
+  </url>
+  <url>
     <loc>/articles/DataAnalysis.html</loc>
   </url>
   <url>
@@ -59,6 +62,9 @@
   </url>
   <url>
     <loc>/reference/cen2means.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cen2way.html</loc>
   </url>
   <url>
     <loc>/reference/cenanova.html</loc>

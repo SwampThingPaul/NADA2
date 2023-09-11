@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
       </span>
     </div>
 
@@ -32,7 +32,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/DataAnalysis.html">Censored Data Analysis</a>
+      <a href="../articles/Censored_Data_Analysis.html">Censored Data Analysis</a>
     </li>
   </ul></li>
 <li>
@@ -63,7 +63,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">y.var</span>, <span class="va">cen.var</span>, <span class="va">x.vars</span>, LOG <span class="op">=</span> <span class="cn">TRUE</span>, verbose <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cencorreg</span><span class="op">(</span></span>
+<span>  <span class="va">y.var</span>,</span>
+<span>  <span class="va">cen.var</span>,</span>
+<span>  <span class="va">x.vars</span>,</span>
+<span>  LOG <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  pred.plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  pred.col <span class="op">=</span> <span class="st">"purple"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,6 +95,14 @@
 <dt>verbose</dt>
 <dd><p>default <code>verbose=2</code>, see details.</p></dd>
 
+
+<dt>pred.plot</dt>
+<dd><p>default is FALSE. Produces a plot of data and regression model predictions.  To do this the first (or only) x variable in the X dataframe must be a continuous (not factor) variable, and it becomes the x variable in the plot.</p></dd>
+
+
+<dt>pred.col</dt>
+<dd><p>default is "purple".  Changes the color of the predicted lines in the prediction plot.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -103,10 +119,11 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p><code>x.vars</code>: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as <code>X</code> variables in the regression are allowed. Create this by <code>x.frame &lt;- data.frame (Temp, Flow, Time)</code> for 3 variables (temperature, flow and time) used as the <code>X</code> variables in the regression.</p>
-<p>AIC and BIC are printed to help evaluate the ‘best’ regression model.</p>
-<p>The default is that the Y variable will be log transformed.</p>
-<p><code>verbose</code> option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no qqplots. A value of 0 provides no output; the returning computations will be stored in the specified object.</p>
+    <p><code>x.vars</code>: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as <code>X</code> variables in the regression are allowed. Create this by <code>x.frame &lt;- data.frame (Temp, Flow, Time)</code> for 3 variables (temperature, flow and time) used as the <code>X</code> variables in the regression.  To produce a pred.plot plot of predicted values the first variable in the array must be a continuous (not a factor) variable.</p>
+<p>AIC and BIC are printed to help evaluate the ‘best’ regression model.  Lower values are better when comparing models with the same Y units and same data.Cannot be used to compare models with differing Y units (such as Y~X versus logY~X). Can be used to compare models with differing X units such as Y~X vs Y~logX.</p>
+<p>The default Y units are that the Y variable will be log transformed.  Change this with the LOG = option, setting LOG = FALSE.</p>
+<p><code>verbose</code> option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no plots. A value of 0 provides no output; the returning computations will be stored in the specified object.</p>
+<p>The Y parameter in the model output (modelname$y) is -1 times the data that were input. This is due to the shift from left censored data to the required right censored data of the survreg function.  The original data are not changed and are used to draw the pred.plot.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -125,10 +142,9 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One variable</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R = 0.2765                     AIC = 366.2191 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rescaled Likelihood R = 0.2855            BIC = 373.9126 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R = 0.1691 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> survreg(formula = "log(Brumbaugh$Hg)", data = "Brumbaugh$SedMeHg", </span>
@@ -144,11 +160,33 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Chisq= 10.58 on 1 degrees of freedom, p= 0.00114 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n= 133 </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># More than one variable for demonstration purposes</span></span></span>
-<span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SedMeHg"</span>,<span class="st">"PctWetland"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># One variable with pred.plot=T</span></span></span>
+<span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span>,pred.plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-plt img"><img src="cencorreg-2.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> survreg(formula = "log(Brumbaugh$Hg)", data = "Brumbaugh$SedMeHg", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     dist = "gaussian")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (Intercept) `Brumbaugh$SedMeHg` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          -1.7594846           0.1238447 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Scale= 0.960393 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loglik(model)= -179.6   Loglik(intercept only)= -184.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Chisq= 10.58 on 1 degrees of freedom, p= 0.00114 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> n= 133 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># More than one variable for demostration purposes</span></span></span>
+<span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SedMeHg"</span>,<span class="st">"PctWetland"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="cencorreg-3.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.1371                     AIC = 359.1937 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.1461            BIC = 369.7851 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.1461             BIC = 369.7851 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.05301555 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
@@ -164,6 +202,7 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-out co"><span class="r-pr">#&gt;</span> Loglik(model)= -175.1   Loglik(intercept only)= -184.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Chisq= 19.61 on 2 degrees of freedom, p= 5.53e-05 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> n= 133 </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>

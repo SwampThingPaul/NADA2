@@ -4,7 +4,15 @@
 \alias{cencorreg}
 \title{Correlation and Regression with censored data}
 \usage{
-cencorreg(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
+cencorreg(
+  y.var,
+  cen.var,
+  x.vars,
+  LOG = TRUE,
+  verbose = 2,
+  pred.plot = FALSE,
+  pred.col = "purple"
+)
 }
 \arguments{
 \item{y.var}{The column of y (response variable) values plus detection limits.}
@@ -16,6 +24,10 @@ cencorreg(y.var, cen.var, x.vars, LOG = TRUE, verbose = 2)
 \item{LOG}{Indicator of whether to compute the regression in the original y units, or on their logarithms.  The default is to use the logarithms (\code{LOG = TRUE}).  To compute in original units, specify the option \code{LOG = FALSE} (or \code{LOG = 0}).}
 
 \item{verbose}{default \code{verbose=2}, see details.}
+
+\item{pred.plot}{default is FALSE. Produces a plot of data and regression model predictions.  To do this the first (or only) x variable in the X dataframe must be a continuous (not factor) variable, and it becomes the x variable in the plot.}
+
+\item{pred.col}{default is "purple".  Changes the color of the predicted lines in the prediction plot.}
 }
 \value{
 When \code{x.vars} is one variable, likelihood, rescaled likelihood and McFaddens correlation coefficient (\code{R}) are printed.
@@ -29,13 +41,15 @@ A Q-Q plot of model residuals with corresponding Shapiro-Francia W and p-value a
 Computes three parametric correlation coefficients for one X variable and the corresponding R squared for multiple X variables, and a regression equation for censored data.
 }
 \details{
-\code{x.vars}: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as \code{X} variables in the regression are allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time) used as the \code{X} variables in the regression.
+\code{x.vars}: If one x variable only, enter its name.  If multiple x variables, enter the name of a data frame of columns of the x variables. Only columns used as \code{X} variables in the regression are allowed. Create this by \code{x.frame <- data.frame (Temp, Flow, Time)} for 3 variables (temperature, flow and time) used as the \code{X} variables in the regression.  To produce a pred.plot plot of predicted values the first variable in the array must be a continuous (not a factor) variable.
 
-AIC and BIC are printed to help evaluate the ‘best’ regression model.
+AIC and BIC are printed to help evaluate the ‘best’ regression model.  Lower values are better when comparing models with the same Y units and same data.Cannot be used to compare models with differing Y units (such as Y~X versus logY~X). Can be used to compare models with differing X units such as Y~X vs Y~logX.
 
-The default is that the Y variable will be log transformed.
+The default Y units are that the Y variable will be log transformed.  Change this with the LOG = option, setting LOG = FALSE.
 
-\code{verbose} option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no qqplots. A value of 0 provides no output; the returning computations will be stored in the specified object.
+\code{verbose} option. Default is 2 which provides full output in the console and qqplots in a graphics window. A value of 1 only provides partial results in the console and no plots. A value of 0 provides no output; the returning computations will be stored in the specified object.
+
+The Y parameter in the model output (modelname$y) is -1 times the data that were input. This is due to the shift from left censored data to the required right censored data of the survreg function.  The original data are not changed and are used to draw the pred.plot.
 }
 \examples{
 
@@ -44,8 +58,12 @@ data(Brumbaugh)
 # One variable
 cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg)
 
-# More than one variable for demonstration purposes
+# One variable with pred.plot=T
+cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh$SedMeHg,pred.plot=TRUE)
+
+# More than one variable for demostration purposes
 cencorreg(Brumbaugh$Hg,Brumbaugh$HgCen,Brumbaugh[,c("SedMeHg","PctWetland")])
+
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

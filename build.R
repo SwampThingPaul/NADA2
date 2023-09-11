@@ -36,7 +36,7 @@ devtools::document()
 
 #devtools::test(); # makes testthat directory and runs tests
 
-devtools::check()
+devtools::check(vignettes=F)
 
 
 ##

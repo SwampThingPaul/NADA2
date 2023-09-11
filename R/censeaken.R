@@ -63,13 +63,13 @@ censeaken <- function(time, y, y.cen, group, LOG = FALSE, R = 4999, nmin = 4, se
   s_all <- 0;
 
   # compute median of uncensored time (all data)
-  xmedian<-median(xxx)
+  #  xmedian<-median(xxx)
   #  compute KM median of censored y.  Assumes all <ND go to 0 at lower end.
-  y.dist <- cfit(yyy, ccc, Cdf = FALSE, printstat = FALSE, Ylab = yname)
-  ymedian <- y.dist$KMmedian
+  #  y.dist <- cfit(yyy, ccc, Cdf = FALSE, printstat = FALSE, Ylab = yname)
+  #  ymedian <- y.dist$KMmedian
 
   # compute the Kaplan-Meier mean (all data)
-  ymean <- y.dist$KMmean
+  #  ymean <- y.dist$KMmean
 
   yc<-split(nonas[,2],nonas[,4])
   xc<-split (nonas[,1],nonas[,4])

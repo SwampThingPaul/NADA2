@@ -29,7 +29,7 @@ ATSmini <- function(y.var, y.cen, x.var) {
   tau <- Noshift$tau
   S <- tau*nobs*(nobs-1)*0.5
 
-  if (min(y.var < 0)) {
+  if (min(y.var) < 0) {
     # y goes negative. Intercept is NA.
     shift.amt <- abs(min(y.var)) + 0.0001
     y.shift <- y.var + shift.amt

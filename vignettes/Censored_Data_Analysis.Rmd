@@ -762,6 +762,22 @@ with(Golden,cenanova(Liver,LiverCen,Dosage,LOG=FALSE))
 
 The p-value of 0.0755 is too small because the group differences are exaggerated by pushing data down below 0.  Given that the actual data cannot go below zero, the cenpermanova p-value of 0.14 is a much more realistic test result.
 
+### Two-factor "ANOVA" by MLE
+The above commands cenpermanova, cenanova and cen1way are all "one way" or one factor tests.  They test for the effect of one and only one factor (group rather than continuous) explanatory variable. A two factor test is also available with the `cen2way` command in NADA2.  It can test for the effect of each of the two factors and the interaction between the two factors, incorporating censored data by maximum likelihood.  The function may also be used on data without nondetects, resulting in tests that are similar to but not necessarily identical with the more common least-squares analysis of variance software.  A normal distribution of residuals is assumed by cen2way and so the default is to log-transform the Y variable.  If you decide that other transformations are better than the log, transform (say using the square root of Y) and then set the `LOG=` option to `FALSE.`  Here I use chromium concentrations in a stream and test for the effect of a trend with the year (Yr) variable and a seasonal effect with the (Season) variable.  A better trend analysis procedure will be performed in the Trend Analysis section later. Note that Season is a text variable and Yr is numeric, so Yr will first be set to a factor using the as.factor command.  
+
+```{r}
+# Load data
+data(Gales_Creek)
+Gales_Creek <- as.data.frame(Gales_Creek)
+
+# set Year to factor by making a new variable.
+Gales_Creek$Yr.f <- as.factor(Gales_Creek$Yr)
+
+with(Gales_Creek,cen2way(TCr, CrND, Yr.f, Season))
+```
+
+The residuals plot and Shapiro-Francia test show that the log(Y) are reasonable units. Both Yr and Season are significant with small p-values.  Their interaction is also significant with a p-value of 0.011. The best model, judged by its lowest AIC of 145.54, is that all three effects including the interaction, are significant. As mentioned in the next section on regression, the BIC statistic tends to not find variables significant that should be, based on simulation studies.  Here BIC would toss out the interaction tern and state that only the two main effects are to be kept. BIC 'best models' tend to be too small and I generally recommend using AIC instead.  As with regression, models should not be compared using AIC or R2 unless the Y scales are identical.  Here we have used only log(Y) so numerical measures of quality are appropriate.
+
 ## Correlation and Regression
 
 ```{r}
@@ -893,6 +909,29 @@ The Dyplant (days since planting) variable has the lowest AIC.  Its residuals pl
 ```{r}
 summary(reg.recon.Dyplant)
 ```
+
+
+### Plots in Multiple Regression
+To plot the predicted line from a regression model, set `cencorreg`'s `pred.plot` option = `TRUE`. 
+
+```{r}
+with(Recon,cencorreg(AtraConc, AtraCen, Dyplant,pred.plot=TRUE))
+```
+
+For the Dyplant only model the plot shows the relationship between Y and Dyplant, but ignores the influence of all the other variables that should be significant and in the model.  It is too simple given that we know there are 4 more variables in the 'best' model that affect predictions which are not shown here. This isn't much help when a multiple regression model is the best model.
+
+Plotting the partial plot of a multiple regression model provides a better picture of the effect of one explanatory variable on Y after 'subtracting off' the effect of all the other variables in the model.  The partial plots of five pages earlier are an example. They are the best way to picture the effect of one X variable within the context of the multiple regression model.  However they do not show what is actually predicted for the Y variable from the model.
+
+A prediction plot shows predicted values for Y for the full multiple regression model using one X variable as the horizontal scale.  The predictions will not look like a nice straight line or smooth curve unless there is only one variable in the model, as effects of the other explanatory variables will cause the predictions to move up or down in relation to the effect of the X variable chosen for the horizontal scale. The cencorreg function uses the first variable in the X data.frame as the one chosen for the horizontal axis on the plot. If Dyplant as the 'best' X variable is to be used for the horizontal axis, a new data frame with Dyplant as the first in the list must be created:
+
+```{r}
+recon.5.alt <- Recon[,c("Dyplant","Applic", "cbrtPctCorn", "Temp", "Pctl")]
+
+plot.reg.recon.5 <- with(Recon,cencorreg(AtraConc, AtraCen, recon.5.alt,pred.plot = TRUE))
+
+```
+
+The pattern of predictions is much more jagged than the partial plot of `Dyplant`.  But the predicted values also show the effects of nondetects and the other 4 variables in the model in addition to the effect of the one X variable used in the plot.
 
 **The Nonparametric ATS line:**
 Using Dyplant as the X variable, 

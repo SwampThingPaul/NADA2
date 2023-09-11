@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
       </span>
     </div>
 
@@ -32,7 +32,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/DataAnalysis.html">Censored Data Analysis</a>
+      <a href="../articles/Censored_Data_Analysis.html">Censored Data Analysis</a>
     </li>
   </ul></li>
 <li>
@@ -64,13 +64,15 @@
 
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cfit</span><span class="op">(</span></span>
-<span>  <span class="va">y1</span>,</span>
-<span>  <span class="va">y2</span>,</span>
+<span>  <span class="va">y</span>,</span>
+<span>  <span class="va">cens</span>,</span>
 <span>  conf <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  qtls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.9</span><span class="op">)</span>,</span>
 <span>  plot.pos <span class="op">=</span> <span class="fl">0.375</span>,</span>
 <span>  q.type <span class="op">=</span> <span class="fl">7</span>,</span>
 <span>  Cdf <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  ecdf.col <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  km.orig <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  printstat <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  Ylab <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -78,11 +80,11 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>y1</dt>
+    <dl><dt>y</dt>
 <dd><p>Concentrations plus detection limits for indicator formatted data.</p></dd>
 
 
-<dt>y2</dt>
+<dt>cens</dt>
 <dd><p>Censoring indicators (logical. 1 or <code>TRUE</code> = censored, 0 or FALSE = detected) for indicator formatted data.</p></dd>
 
 
@@ -106,6 +108,14 @@
 <dd><p>Logical <code>TRUE</code>/<code>FALSE</code> indicator of whether to plot the empirical cumulative distribution function (cdf).</p></dd>
 
 
+<dt>ecdf.col</dt>
+<dd><p>Color for the ecdf plotted step function line.  Default is black.</p></dd>
+
+
+<dt>km.orig</dt>
+<dd><p>If <code>TRUE</code>, Kaplan-Meier results in the realm below detection limits reported as "NA".  If <code>FALSE</code> (default), information in the detection limits is used and results in the realm of detections limits reported as "&lt; DL", where DL is the appropriate detection limit.</p></dd>
+
+
 <dt>printstat</dt>
 <dd><p>Logical <code>TRUE</code>/<code>FALSE</code> option of whether to print the resulting statistics in the console window, or not.  Default is <code>TRUE.</code></p></dd>
 
@@ -125,8 +135,9 @@
     </div>
     <div id="details">
     <h2>Details</h2>
-    <p>Quantiles and parameters are estimated using the enparCensored and ecdfPlotCensored functions of the EnvStats package. This avoids a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al. for more discussion on the bias.</p>
-<p>All printed values will also be output to an object if saved.  Values are character because of the possibility of a <code>&lt;1</code>, but if no <code>&lt;</code> symbol can be converted to numeric using the <code>as.numeric(...)</code> command.  For data without censoring cfit will also return values.  In that case the values labeled "KM" are not both Kaplan-Meier results and standard arithmetic mean, t-interval CIs on the mean, and quantiles.  See ?quantiles for choosing the q.type; default q.type = 7.</p>
+    <p>Moment statistics are estimated using the enparCensored function of the EnvStats package. This avoids a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al. for more discussion on the bias of the estimate of the mean.</p>
+<p>Quantiles and confidence limits on the median are estimated using the quantile function of the survfit command. See ?quantiles for choosing the q.type; default q.type = 7.</p>
+<p>All printed values will also be output to an object if saved.  Values are character because of the possibility of a <code>&lt;1</code>, but if no <code>&lt;</code> symbol can be converted to numeric using the <code>as.numeric(...)</code> command.  For data without censoring cfit will also return values.  For data without censoring cfit will also return values.  In that case it returns standard arithmetic mean, standard deviation and quantiles instead of K-M versions.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -150,11 +161,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Output for Brumbaugh$Hg              95% Confidence Intervals </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Statistics: </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     N PctND Conf KMmean   KMsd KMmedian LCLmean UCLmean LCLmedian UCLmedian</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   133 11.28   95 0.3554 0.5234    0.241  0.2678  0.4431     0.163     0.262</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     N PctND Conf KMmean   KMsd LCLmean UCLmean KMmedian LCLmedian UCLmedian</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   133 11.28   95 0.3554 0.5234  0.2678  0.4431    0.236     0.163     0.262</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Quantiles:	Q10	Q25	Q50	Q75	Q90	</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         	0.06	0.117	0.241	0.39	0.666	</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         	0.06	0.117	0.236	0.373	0.66	</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
