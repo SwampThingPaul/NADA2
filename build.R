@@ -40,7 +40,7 @@ devtools::check(vignettes=F)
 
 
 ##
-devtools::check_rhub()
+# devtools::check_rhub()
 
 # NEWs file
 # usethis::use_news_md()

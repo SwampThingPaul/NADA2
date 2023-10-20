@@ -3,10 +3,10 @@
 #' @description
 #' Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network.
 #'
-#' @seealso <https://data.ontario.ca/en/dataset/pollen-monitoring-network-study>
+#' @seealso [Pollen Monitoring Network Study](https://data.ontario.ca/en/dataset/pollen-monitoring-network-study)
 #'
 #' Variables are:
-#' \itemize{
+#' \describe{
 #' \item{Thiamethoxam: }{Thiamethoxam concentration in Concentrations in microgram per gram.}
 #' \item{ThiaCens: }{Censoring indicator.  1 denotes that the value in column 1 is a reporting limit not a specific concentration.}
 #' \item{SamplingEvent: }{A grouping variable from the sample design.  A concentration is from 1 of 4 events in time.}
