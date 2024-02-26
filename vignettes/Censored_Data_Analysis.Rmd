@@ -4,8 +4,8 @@ author: "Dennis Helsel and Paul Julian"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{DataAnalysis}
-  %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 editor_options: 
   chunk_output_type: console
 ---

@@ -14,10 +14,7 @@ Ontario Ministry of Agriculture, Food and Rural Affairs (Pollen Monitoring Netwo
 data(Pollen_Thia)
 }
 \description{
-Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network.
-}
-\seealso{
-\href{https://data.ontario.ca/en/dataset/pollen-monitoring-network-study}{Pollen Monitoring Network Study}
+Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network (\url{https://data.ontario.ca/en/dataset/pollen-monitoring-network-study}).
 
 Variables are:
 \describe{

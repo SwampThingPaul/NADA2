@@ -1,9 +1,7 @@
 #' Thiamethoxam concentrations in pollen
 #'
 #' @description
-#' Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network.
-#'
-#' @seealso [Pollen Monitoring Network Study](https://data.ontario.ca/en/dataset/pollen-monitoring-network-study)
+#' Thiamethoxam concentrations in pollen from the Ontario Pollen Monitoring Network ([https://data.ontario.ca/en/dataset/pollen-monitoring-network-study](https://data.ontario.ca/en/dataset/pollen-monitoring-network-study)).
 #'
 #' Variables are:
 #' \describe{
