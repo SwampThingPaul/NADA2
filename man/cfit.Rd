@@ -9,11 +9,10 @@ cfit(
   cens,
   conf = 0.95,
   qtls = c(0.1, 0.25, 0.5, 0.75, 0.9),
-  plot.pos = 0.375,
-  q.type = 7,
+  q.type = 6,
   Cdf = TRUE,
   ecdf.col = 1,
-  km.orig = FALSE,
+  km.orig = TRUE,
   printstat = TRUE,
   Ylab = NULL
 )
@@ -27,15 +26,13 @@ cfit(
 
 \item{qtls}{Probabilities for the quantiles to be estimated.  Defaults are (0.10, 0.25, 0.50, 0.75, 0.90).  You may add and/or substitute probabilities -- all must be between and not including 0 to 1.}
 
-\item{plot.pos}{numeric scalar between 0 and 1 containing the value of the plotting position constant. The default value is \code{plot.pos=0.375}, the Blom plotting position}
-
-\item{q.type}{an integer between 1 and 9 selecting one of the nine quantile algorithms detailed below to be used. See \code{stats::quantile} for more detail, default is set to 7.}
+\item{q.type}{an integer between 1 and 9 selecting one of the nine quantile algorithms used only when km.orig = FALSE. See \code{stats::quantile} and Details below for more detail, default when km.orig = FLASE is set to 6.}
 
 \item{Cdf}{Logical \code{TRUE}/\code{FALSE} indicator of whether to plot the empirical cumulative distribution function (cdf).}
 
 \item{ecdf.col}{Color for the ecdf plotted step function line.  Default is black.}
 
-\item{km.orig}{If \code{TRUE}, Kaplan-Meier results in the realm below detection limits reported as "NA".  If \code{FALSE} (default), information in the detection limits is used and results in the realm of detections limits reported as "< DL", where DL is the appropriate detection limit.}
+\item{km.orig}{If \code{TRUE} (default), Kaplan-Meier results in the realm below detection limits reported as "NA".  If \code{FALSE}, information in the detection limits is used and results in the realm of detection limits reported as "< DL", where DL is the appropriate detection limit.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 
@@ -50,11 +47,11 @@ If \code{Cdf=TRUE}: The ecdf of censored data is plotted.
 Computes the empirical cumulative distribution function (ECDF) for censored data. Estimates parameters of the distribution, including the mean and quantiles.
 }
 \details{
-Moment statistics are estimated using the enparCensored function of the EnvStats package. This avoids a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al. for more discussion on the bias of the estimate of the mean.
+Moment statistics are estimated using the enparCensored function of the EnvStats package. This avoids a small bias in the mean produced by the NADA package's cenfit function, which uses the reverse Kaplan-Meier procedure, converting left-censored to right-censored data prior to computing the ecdf and mean. See Gillespie et al.(2010) for more discussion on the bias of the estimate of the mean.
 
-Quantiles and confidence limits on the median are estimated using the quantile function of the survfit command. See ?quantiles for choosing the q.type; default q.type = 7.
+Quantiles and their two-sided confidence limits are estimated using the quantile function of the survfit command. See ?quantiles or Helsel et al. (2020) for choosing the q.type; default q.type = 4 (Kaplan-Meier; prob = i/n) when km.orig = TRUE. This is standard procedure in the survival analysis discipline and in the survival package of R, and is also used by the cenfit function in the NADA package. While this is 'industry standard' in medical applications it is a poor choice for observed sample (rather than census) data because it means that the largest observation is assigned a probability equal to 1, the 100th percentile. This implies that this value is never expected to be exceeded when more sample data are collected. It also means the largest observation is not plotted on the ecdf in most software because it is "off the chart". For small datasets in particular it is unlikely that the current largest observation is the largest value in the population and so the resulting ecdf quantiles are likely not opotimal. The default q.type = 6 (Weibull; prob = i/(n+1)) when km.orig = FALSE, though that may be changed by the user. the largest observation plots at a probability less than 1 on the ecdf.  Differences in results when differing q.types are used will decrease as sample size increases.
 
-All printed values will also be output to an object if saved.  Values are character because of the possibility of a \verb{<1}, but if no \code{<} symbol can be converted to numeric using the \code{as.numeric(...)} command.  For data without censoring cfit will also return values.  For data without censoring cfit will also return values.  In that case it returns standard arithmetic mean, standard deviation and quantiles instead of K-M versions.
+All printed values will also be output to an object if saved. Confidence intervals on the quantiles are also output when data include nondetects. Values are character because of the possibility of a \verb{<1}, but if no \code{<} symbol can be converted to numeric using the \code{as.numeric(...)} command.  For data without censoring cfit will return numeric values. In that case it returns standard arithmetic mean, standard deviation and quantiles instead of K-M versions.
 }
 \examples{
 
@@ -67,6 +64,8 @@ cfit(Brumbaugh$Hg,Brumbaugh$HgCen)
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Gillespie, B.W., et al., 2010.  Estimating Population Distributions When Some Data Are Below a Limit of Detection by Using a Reverse Kaplan-Meier Estimator. Epidemiology 21, 564-570.
+
+Helsel, D.R., Hirsch, R.M., Ryberg, K.R., Archfield, S.A., and Gilroy, E.J., 2020, Statistical Methods in Water Resources: U.S. Geological Survey Techniques and Methods, book 4, chapter A3, 458 p., https://doi.org/10.3133/tm4a3.
 
 Millard, S.P, 2013. EnvStats: An R Package for Environmental Statistics, 2nd ed. Springer Science+Business Media, USA, N.Y.  DOI 10.1007/978-1-4614-8456-1© Springer Science+Business Media New York 2013”
 

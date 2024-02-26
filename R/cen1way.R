@@ -70,8 +70,8 @@ cen1way <- function(x1, x2, group, mcomp.method = "BH", printstat=TRUE) {
     y1gp <- y1[Factor==groupnames[i]]
     y2gp <- y2[Factor==groupnames[i]]
     Cstats <- suppressWarnings(cfit(y1gp, as.logical(y2gp), printstat=FALSE, Cdf = FALSE))
-    Cstats <- Cstats[c(1:6)]
-    Cstats <- Cstats[-3]
+    Cstats <- Cstats[[1]][c(1:6)] ## summary stats
+    Cstats <- Cstats[-3] ## N, PcfND, Mean, SD and LCLmean only
     Cstats <- data.frame(Cstats)
     Cstats$grp <-  groupnames[i] # added to include group in summary data frame.
     rownames(Cstats) <-NULL # added to clean up row names.

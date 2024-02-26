@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.6</span>
       </span>
     </div>
 
@@ -118,7 +118,25 @@ Millard, S.P., 2013. EnvStats: An R Package for Environmental Statistics. Spring
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Gales_Creek</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">Gales_Creek</span><span class="op">$</span><span class="va">Period</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"early"</span>, <span class="fl">35</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"middle"</span>, <span class="fl">12</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"late"</span>, <span class="fl">16</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu">cen2way</span><span class="op">(</span><span class="va">TCr</span>, <span class="va">CrND</span>, <span class="va">Season</span>, <span class="va">Period</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cen2way(TCr, CrND, Season, Period):</span> could not find function "cen2way"</span>
+<span class="r-plt img"><img src="cen2way-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Two-way Fixed Effects ANOVA by MLE Likelihood Ratio Tests for Censored Data </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ln(TCr) modeled by Factor 1: Season  and Factor 2: Period</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ANOVA Table with interaction </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        FACTORS   chisquare   df        pval</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Season     21.5100    1   3.520e-06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Period      5.5840    2   6.130e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    interaction      0.8491    2   6.541e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                MODELS   loglikelihood   delta.lr0x2        AIC        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Season only       -68.20914        24.700   147.4183   157.2127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Period only       -76.16994         8.783   165.3399   177.2932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          both factors       -65.84173        29.440   142.6835   152.4779</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    both + interaction       -65.41720        30.290   145.8344   159.9466</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Rescaled_Loglik_R2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.3516</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.1411</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.4047</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                0.4138</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

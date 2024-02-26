@@ -49,8 +49,18 @@
 
 * Minor bug fix for `cencorreg.R` function (2023-01-31)
 
-# NADA2 1.2.0
+# NADA2 1.1.4
 
 * Minor change to `censeaken.R` and `kenplot.R` to allow for some customization of plot using ... in the function (2023-04-13)
 
 * Minor change to `cboxplot.R` to fix factor grouping, added detection limit lty and col arguments (2023-04-13) 
+
+# NADA2 1.1.5
+
+* Minor update due to changes to `EnvStats` (2023-10-20)
+
+# NADA2 1.1.6
+
+* Fixed bug in `cfit.R` regarding reporting of quantiles (2024-02-23)
+
+* adjusted functions that depend on `cfit(...)` like `cen1way(...)` 

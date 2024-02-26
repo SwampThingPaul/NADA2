@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.6</span>
       </span>
     </div>
 
@@ -142,10 +142,9 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One variable</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R = 0.2765                     AIC = 366.2191 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Rescaled Likelihood R = 0.2855            BIC = 373.9126 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R = 0.1691 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> survreg(formula = "log(Brumbaugh$Hg)", data = "Brumbaugh$SedMeHg", </span>
@@ -163,13 +162,31 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One variable with pred.plot=T</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span>,pred.plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in cencorreg(Brumbaugh$Hg, Brumbaugh$HgCen, Brumbaugh$SedMeHg, pred.plot = TRUE):</span> unused argument (pred.plot = TRUE)</span>
+<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
+<span class="r-plt img"><img src="cencorreg-2.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> survreg(formula = "log(Brumbaugh$Hg)", data = "Brumbaugh$SedMeHg", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     dist = "gaussian")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Coefficients:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         (Intercept) `Brumbaugh$SedMeHg` </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          -1.7594846           0.1238447 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Scale= 0.960393 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Loglik(model)= -179.6   Loglik(intercept only)= -184.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Chisq= 10.58 on 1 degrees of freedom, p= 0.00114 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> n= 133 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># More than one variable for demostration purposes</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SedMeHg"</span>,<span class="st">"PctWetland"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="cencorreg-2.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="cencorreg-3.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.1371                     AIC = 359.1937 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.1461            BIC = 369.7851 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.1461             BIC = 369.7851 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.05301555 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
