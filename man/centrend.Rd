@@ -12,7 +12,8 @@ centrend(
   link = "identity",
   Smooth = "cs",
   printstat = TRUE,
-  stackplots = FALSE
+  stackplots = FALSE,
+  drawplot = TRUE
 )
 }
 \arguments{
@@ -30,7 +31,9 @@ centrend(
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 
-\item{stackplots}{logical 'TRUE'/'FALSE' option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.}
+\item{stackplots}{logical \code{TRUE}/\code{FALSE} option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.}
+
+\item{drawplot}{Logical \code{TRUE}/\code{FALSE} option of whether to draw plots or not. Default is \code{TRUE}}
 }
 \value{
 Prints three plots: Y data vs time with GAM Smooth, Residuals from GAM Smooth vs time, and ATS trend line of residuals vs time.
@@ -51,7 +54,7 @@ data(Brumbaugh)
 
 Brumbaugh$time=1:nrow(Brumbaugh)
 
-with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
+with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=T))
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

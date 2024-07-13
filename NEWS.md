@@ -64,3 +64,7 @@
 * Fixed bug in `cfit.R` regarding reporting of quantiles (2024-02-23)
 
 * adjusted functions that depend on `cfit(...)` like `cen1way(...)` 
+
+# NADA2 1.1.7
+
+* added the argument `drawplot` to `ATS` and `centrend` to make plot drawing optional. 

@@ -8,7 +8,8 @@
 #' @param link Default = `“identity”` which means it uses data in the original units. See details.
 #' @param Smooth Type of smoother used in the GAM. Default is `“cs”`, shrinkage cubic regression splines. See details for other options.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
-#' @param stackplots logical 'TRUE'/'FALSE' option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.
+#' @param stackplots logical `TRUE`/`FALSE` option to stack three plots that are output onto the same page instead of each on separate page.  Default is 'FALSE', each separate.
+#' @param drawplot Logical `TRUE`/`FALSE` option of whether to draw plots or not. Default is `TRUE`
 #' @keywords trend analysis GAM spline
 #' @export
 #'
@@ -39,9 +40,11 @@
 #'
 #' Brumbaugh$time=1:nrow(Brumbaugh)
 #'
-#' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time))
+#' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=T))
 
-centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth = "cs", printstat=TRUE, stackplots = FALSE) {
+centrend <- function(y.var, y.cens, x.var, time.var, link = "identity",
+                     Smooth = "cs", printstat=TRUE, stackplots = FALSE,
+                     drawplot = TRUE) {
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   tname <- deparse(substitute(time.var))
@@ -62,6 +65,8 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   o <- order(dat.nonas[,2] , dat.nonas [,1])
   #plot(dat.nonas[,1] ~ dat.nonas[,2], main = "1. Data and GAM Smooth", ylab = yname, xlab = xname)
 
+
+
   if (stackplots) {
     oldpar<- par(no.readonly = TRUE)
     on.exit(par(oldpar))
@@ -69,6 +74,7 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   }
   # plot 1.  Y data vs covariate, with smooth
   x.cens = rep(0, times=length(dat.nonas[,3]) )
+  if(drawplot == TRUE){
   cenxyplot(dat.nonas[,2], as.logical(x.cens), dat.nonas[,1], as.logical(dat.nonas[,5]), main = "1. Data and GAM Smooth", ylab = yname, xlab = xname, pch = 19, cex = 0.7)
   # draw the smooth
   lines (dat.nonas[o,2], gam.y$fitted.values[o], col = 'red')
@@ -76,11 +82,12 @@ centrend <- function(y.var, y.cens, x.var, time.var, link = "identity", Smooth =
   # plot 2. Y residuals from smooth vs. covariate
   plot(gam.y$residuals ~ dat.nonas[,2], main = "2. Residuals from GAM Smooth", xlab = xname, ylab = y.txt)
   abline (h=0, col = "blue")
+  }
 
   if(printstat==TRUE){cat("Trend analysis of", yname, "adjusted for", xname, "\n")}
 
   # plot 3.  Y residuals vs time with ATS line
-  ats.out <- ATS(gam.y$residuals, dat.nonas[,5], dat.nonas[,3], x.cens, LOG = FALSE, xlabel = tname, ylabel = y.txt,printstat = printstat)
+  ats.out <- ATS(gam.y$residuals, dat.nonas[,5], dat.nonas[,3], x.cens, LOG = FALSE, xlabel = tname, ylabel = y.txt,printstat = printstat,drawplot=drawplot)
   dat.out <- data.frame(gam.y$residuals, dat.nonas[,2])
   colnames(dat.out) <- c("GAMresidual", xname)
   dat.out <- list(dat.out, ats.out)

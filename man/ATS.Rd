@@ -13,7 +13,8 @@ ATS(
   retrans = FALSE,
   xlabel = NULL,
   ylabel = NULL,
-  printstat = TRUE
+  printstat = TRUE,
+  drawplot = TRUE
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ ATS(
 \item{ylabel}{Custom label for the y axis of plots.  Default is y variable column name.}
 
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
+
+\item{drawplot}{Logical \code{TRUE}/\code{FALSE} option of whether to draw plots or not. Default is \code{TRUE}}
 }
 \value{
 Coefficients (intercept and slope) for the ATS line are printed, along with Kendall's tau correlation coefficient, test statistic S, and the (single) p-value for the test that tau and slope both equal zero. A scatterplot with the fitted trend-line superimposed is also drawn.

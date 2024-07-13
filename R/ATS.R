@@ -11,6 +11,7 @@
 #' @param xlabel Custom label for the x axis of plots.  Default is x variable column name.
 #' @param ylabel Custom label for the y axis of plots.  Default is y variable column name.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
+#' @param drawplot Logical `TRUE`/`FALSE` option of whether to draw plots or not. Default is `TRUE`
 #'
 #' @keywords trend censored
 #' @export
@@ -36,7 +37,9 @@
 #' with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
 
 
-ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL,printstat = TRUE){
+ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)),
+                LOG = TRUE, retrans = FALSE, xlabel = NULL, ylabel = NULL,
+                printstat = TRUE,drawplot = TRUE){
   yname <- deparse(substitute(y.var))
   xname <- deparse(substitute(x.var))
   y.cen <- as.logical(y.cen)
@@ -79,12 +82,13 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
       subtitle
       short.t <- paste(round(intercept,4), "+", round(slope,4), "*", xname)
     }
-    else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xname, "\n")  # neg slope
+    else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xnliame, "\n")  # neg slope
       subtitle
       short.t <- paste(round(intercept,4), round(slope,4), "*", xname)
     }
     cat("Kendall's tau =", round(tau,4), "  p-value =", round(pval, 5), "\n", "\n")
     }
+    if(drawplot == TRUE){
     # draw a scatterplot
     x <- c(min(alldat[,3]), max(alldat[,3]))
     y <- x*slope+intercept
@@ -94,6 +98,7 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
  #   lines(z, col = "purple")
     mtext(subtitle)
     #
+    }
     if (retrans == TRUE)
     { # draw a 2nd scatterplot in original units
       subtitle <- paste (yname, " = e^(", round(intercept,4), ")",  " * ", "e^(", round(slope,4), " * ", xname,")", sep="" )
@@ -102,9 +107,11 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
       xo = delta *diff/100 + min(alldat[,3])
       yo = exp(xo*slope)*exp(intercept)
       z <- data.frame(xo,yo)
+      if(drawplot == TRUE){
       kenplot(alldat[,1], alldat[,2], alldat[,3], alldat[,4], atsline = FALSE, xnam=xname, ynam=yname)
       lines(xo, yo, col = "purple")
       mtext(subtitle)
+      }
       #
     }
     out <- data.frame(intercept, slope, S, tau, pval)
@@ -145,9 +152,11 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)), LOG = 
     x <- c(min(alldat[,3]),max(alldat[,3]))
     y <- x*slope+intercept
     z=data.frame(x,y)
+    if(drawplot == TRUE){
     kenplot(alldat[,1], alldat[,2], alldat[,3], alldat[,4], xnam=xname, ynam=yname)
     lines(z, col = "purple")
     mtext(subtitle)
+    }
     #
     out <- data.frame(intercept, slope, S, tau, pval)
   }
