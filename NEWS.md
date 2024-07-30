@@ -68,3 +68,7 @@
 # NADA2 1.1.7
 
 * added the argument `drawplot` to `ATS` and `centrend` to make plot drawing optional. 
+
+# NADA2 1.1.8
+
+* revised `cfit` due to changes to `enparCensored` function in the EnvStats pacakge.
