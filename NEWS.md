@@ -71,4 +71,7 @@
 
 # NADA2 1.1.8
 
-* revised `cfit` due to changes to `enparCensored` function in the EnvStats pacakge.
+* revised `cfit` due to changes to `enparCensored` function in the EnvStats package. (2024-07-30)
+* added and `if` statement in the `cfit` function to check if the censored variable is a logical type and convert to logical if needed (2024-08-25) 
+
+

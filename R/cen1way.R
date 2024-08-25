@@ -46,6 +46,7 @@
 
 
 cen1way <- function(x1, x2, group, mcomp.method = "BH", printstat=TRUE) {
+
   yname <- deparse(substitute(x1))
   gname <- deparse(substitute(group))
 

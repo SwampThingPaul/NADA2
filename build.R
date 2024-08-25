@@ -18,6 +18,8 @@ library(cenGAM)
 library(vegan)
 library(coin)
 
+# update.packages(oldPkgs = "EnvStats")
+
 # -------------------------------------------------------------------------
 # https://johnmuschelli.com/smi_2019/index.html#78
 ## To build the package

@@ -46,6 +46,7 @@
 cfit <- function(y, cens, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90),
                  q.type = 6, Cdf = TRUE, ecdf.col = 1, km.orig = TRUE,
                  printstat = TRUE, Ylab = NULL){
+
   if (is.null(Ylab)) {Ylab <- deparse(substitute(y))}
   Conf <- 100*conf
   if (isFALSE(0.50 %in% qtls)) {qtls <- append(0.50, qtls)}     # median always needed
@@ -84,7 +85,8 @@ cfit <- function(y, cens, conf=0.95, qtls = c(0.10, 0.25, 0.50, 0.75, 0.90),
   y.out<- survfit(y.surv ~ 1, conf.int = conf, conf.type = "plain")
 
   # left.censored.min="DL" is the Efron bias correction, generally standard for Kaplan-Meier
-  npar.out <- enparCensored(y1, y2, ci = TRUE, pivot.statistic = "t", ci.sample.size = "Total", left.censored.min="DL")
+  if(is.logical(y2)==F){y2 <- as.logical(y2)}
+  npar.out <- enparCensored(x=y1, censored = y2, ci = TRUE, pivot.statistic = "t", ci.sample.size = "Total", left.censored.min="DL")
   KMmean <- npar.out$parameters[1]
   std.err <- npar.out$parameters[3]
   KMsd <- signif(npar.out$parameters[2], 4)

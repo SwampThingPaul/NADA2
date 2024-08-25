@@ -82,7 +82,7 @@ ATS <- function(y.var, y.cen, x.var, x.cen = rep(0, times=length(x.var)),
       subtitle
       short.t <- paste(round(intercept,4), "+", round(slope,4), "*", xname)
     }
-    else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xnliame, "\n")  # neg slope
+    else {cat (ylogname, "=", round(intercept,4), round(slope,4), "*", xname, "\n")  # neg slope
       subtitle
       short.t <- paste(round(intercept,4), round(slope,4), "*", xname)
     }

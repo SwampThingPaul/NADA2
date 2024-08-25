@@ -404,7 +404,7 @@ mean are specified, which we’ll discuss in the next section of the
 vignette.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Pyr.mle</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
+<span>                <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
 <span>                             ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span><span class="st">"bootstrap"</span>,</span>
 <span>                             n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">Pyr.mle</span><span class="op">)</span></span>
@@ -449,10 +449,10 @@ vignette.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.66395</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 203.67498</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  93.05010</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 196.86313</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.03212</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 201.32670</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  93.41384</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 196.94959</span></span></code></pre></div>
 <p>Using the print statement after storing the output in an object
 (<code>Pyr.mle</code> was used here) produces the table type output
 shown above. Without the print statement, just typing the object name,
@@ -479,7 +479,7 @@ command uses “npar” for nonparametric to produce the Kaplan-Meier
 estimates.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Pyr.km</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
+<span>                <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
 <span>                             ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span><span class="st">"bootstrap"</span>,</span>
 <span>                             n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">Pyr.km</span><span class="op">)</span></span>
@@ -494,11 +494,12 @@ estimates.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Censoring Level(s):               28  35  58  86 117 122 163 174 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.09450</span></span>
-<span><span class="co">#&gt;                                  sd      = 389.41379</span></span>
-<span><span class="co">#&gt;                                  se.mean =  49.75292</span></span>
+<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.2036</span></span>
+<span><span class="co">#&gt;                                  sd      = 389.3761</span></span>
+<span><span class="co">#&gt;                                  se.mean =  52.6439</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimation Method:               Kaplan-Meier</span></span>
+<span><span class="co">#&gt;                                  (Bias-corrected se.mean)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Data:                            Pyrene</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -527,12 +528,12 @@ estimates.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.24281</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 277.73289</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  92.05184</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 270.13591</span></span>
-<span><span class="co">#&gt;                                  t.LCL   =  95.12488</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 679.93343</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.17883</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 281.78082</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  92.25090</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 270.46203</span></span>
+<span><span class="co">#&gt;                                  t.LCL   =  93.94408</span></span>
+<span><span class="co">#&gt;                                  t.UCL   = 566.77523</span></span></code></pre></div>
 <p>Note that as with all bootstrap estimates the confidence intervals
 above will differ slightly from your results.</p>
 </div>
@@ -571,7 +572,7 @@ the nondetect data. It also produces confidence intervals for the ROS
 mean by bootstrapping, making it very useful.</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Pyr.ROS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>                <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, method<span class="op">=</span><span class="st">"rROS"</span>,</span>
+<span>                <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, method<span class="op">=</span><span class="st">"rROS"</span>,</span>
 <span>                             ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span><span class="st">"bootstrap"</span>,</span>
 <span>                             n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -617,10 +618,10 @@ mean by bootstrapping, making it very useful.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.21445</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 279.75420</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  91.34877</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 267.65532</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.06017</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 279.93006</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  90.37032</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 268.69507</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="all-at-once">All at once<a class="anchor" aria-label="anchor" href="#all-at-once"></a>
@@ -681,11 +682,12 @@ First the bootstrap:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Censoring Level(s):               28  35  58  86 117 122 163 174 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.09450</span></span>
-<span><span class="co">#&gt;                                  sd      = 389.41379</span></span>
-<span><span class="co">#&gt;                                  se.mean =  49.75292</span></span>
+<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.2036</span></span>
+<span><span class="co">#&gt;                                  sd      = 389.3761</span></span>
+<span><span class="co">#&gt;                                  se.mean =  52.6439</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimation Method:               Kaplan-Meier</span></span>
+<span><span class="co">#&gt;                                  (Bias-corrected se.mean)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Data:                            Pyrene</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -714,16 +716,16 @@ First the bootstrap:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.24281</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 277.73289</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  92.05184</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 270.13591</span></span>
-<span><span class="co">#&gt;                                  t.LCL   =  95.12488</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 679.93343</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.17883</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 281.78082</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  92.25090</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 270.46203</span></span>
+<span><span class="co">#&gt;                                  t.LCL   =  93.94408</span></span>
+<span><span class="co">#&gt;                                  t.UCL   = 566.77523</span></span></code></pre></div>
 <p>Then the default normal assumption (basically, a t-interval using the
 K-M estimates of mean and standard deviation):</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Pyr.km2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>,<span class="va">PyreneCen</span>, ci<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">Pyr.km2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>,<span class="va">PyreneCen</span>, ci<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">Pyr.km2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -737,11 +739,12 @@ K-M estimates of mean and standard deviation):</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Censoring Level(s):               28  35  58  86 117 122 163 174 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.09450</span></span>
-<span><span class="co">#&gt;                                  sd      = 389.41379</span></span>
-<span><span class="co">#&gt;                                  se.mean =  49.75292</span></span>
+<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 164.2036</span></span>
+<span><span class="co">#&gt;                                  sd      = 389.3761</span></span>
+<span><span class="co">#&gt;                                  se.mean =  52.6439</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimation Method:               Kaplan-Meier</span></span>
+<span><span class="co">#&gt;                                  (Bias-corrected se.mean)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Data:                            Pyrene</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -753,14 +756,17 @@ K-M estimates of mean and standard deviation):</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval for:         mean</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Assumed Sample Size:             56</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval Method:      Normal Approximation</span></span>
+<span><span class="co">#&gt;                                  (t Distribution)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval Type:        two-sided</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             LCL =  66.58057</span></span>
-<span><span class="co">#&gt;                                  UCL = 261.60844</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             LCL =  58.70286</span></span>
+<span><span class="co">#&gt;                                  UCL = 269.70433</span></span></code></pre></div>
 <p>This t-interval (Normal Approximation) LCL goes down considerably
 lower (66.5) than the BCa bootstrap interval (98.3) because the
 t-interval must be symmetric, and the upper end is approx. 100 ug/L
@@ -796,7 +802,7 @@ Descriptive Statistics exercise above. For the <em>lognormal</em> MLE
 method:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pyr.lnorm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>                  <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
+<span>                  <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, </span>
 <span>                                    ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span><span class="st">"bootstrap"</span>, </span>
 <span>                                    n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -842,10 +848,10 @@ method:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.32652</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 204.95992</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  94.36912</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 197.69195</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.46183</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 208.62208</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  93.69788</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 202.66074</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="ros">ROS<a class="anchor" aria-label="anchor" href="#ros"></a>
@@ -899,10 +905,10 @@ method.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.21445</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 279.75420</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  91.34877</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 267.65532</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.06017</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 279.93006</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  90.37032</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 268.69507</span></span></code></pre></div>
 <p>Generally, I recommend using a bootstrap estimate when there is
 sufficient data, which there are here, as theoretical methods such as
 Cox are strongly dependent on the <em>lognormal</em> shape that often
@@ -965,7 +971,7 @@ this function uses, its below. If that’s not your thing, just use the
 function! Here’s how you would get the lognormal tolerance interval:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>            <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/eqlnormCensored.html" class="external-link">eqlnormCensored</a></span> <span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, p<span class="op">=</span><span class="fl">0.9</span>, </span>
+<span>            <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/eqlnormCensored.html" class="external-link">eqlnormCensored</a></span> <span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span>, p<span class="op">=</span><span class="fl">0.9</span>, </span>
 <span>                             ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type <span class="op">=</span><span class="st">"upper"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">example</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1018,7 +1024,7 @@ original data scale by cubing the result:</p>
 <code class="sourceCode R"><span></span>
 <span><span class="va">dat.gamma</span> <span class="op">&lt;-</span> <span class="va">ShePyrene</span><span class="op">$</span><span class="va">Pyrene</span><span class="op">^</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">obj.gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/eqnormCensored.html" class="external-link">eqnormCensored</a></span><span class="op">(</span><span class="va">dat.gamma</span>, <span class="va">ShePyrene</span><span class="op">$</span><span class="va">PyreneCen</span>, p<span class="op">=</span><span class="fl">0.9</span>, </span>
+<span><span class="va">obj.gamma</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/eqnormCensored.html" class="external-link">eqnormCensored</a></span><span class="op">(</span><span class="va">dat.gamma</span>, <span class="va">ShePyrene</span><span class="op">$</span><span class="va">PyreneCen</span>, p<span class="op">=</span><span class="fl">0.9</span>, </span>
 <span>                            ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type <span class="op">=</span><span class="st">"upper"</span><span class="op">)</span></span>
 <span><span class="va">pct.gamma</span> <span class="op">&lt;-</span> <span class="va">obj.gamma</span><span class="op">$</span><span class="va">quantiles</span><span class="op">^</span><span class="fl">3</span> <span class="co"># the 90th percentile in orig units</span></span>
 <span><span class="va">pct.gamma</span></span>
@@ -1151,7 +1157,7 @@ in a higher BIC statistic.</p>
 UCL95.</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">egam</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Example1</span>,</span>
-<span>             <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/egammaAltCensored.html" class="external-link">egammaAltCensored</a></span><span class="op">(</span><span class="va">Arsenic</span>, <span class="va">NDisTRUE</span>, </span>
+<span>             <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/egammaAltCensored.html" class="external-link">egammaAltCensored</a></span><span class="op">(</span><span class="va">Arsenic</span>, <span class="va">NDisTRUE</span>, </span>
 <span>                               ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type <span class="op">=</span> <span class="st">"upper"</span>,</span>
 <span>                               ci.method <span class="op">=</span> <span class="st">"normal.approx"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">egam</span><span class="op">)</span></span>
@@ -1202,7 +1208,7 @@ the latter because of the high percent of nondetects (66.67%) in the
 data.</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arsenic.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Example1</span>,</span>
-<span>                    <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Arsenic</span>, <span class="va">NDisTRUE</span>, </span>
+<span>                    <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Arsenic</span>, <span class="va">NDisTRUE</span>, </span>
 <span>                                  ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>,</span>
 <span>                                  n.bootstraps<span class="op">=</span><span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">arsenic.out</span><span class="op">)</span></span>
@@ -1217,11 +1223,12 @@ data.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Censoring Level(s):              0.5 2.0 3.0 4.0 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 1.7169702</span></span>
-<span><span class="co">#&gt;                                  sd      = 1.5928374</span></span>
-<span><span class="co">#&gt;                                  se.mean = 0.1159666</span></span>
+<span><span class="co">#&gt; Estimated Parameter(s):          mean    = 1.7382873</span></span>
+<span><span class="co">#&gt;                                  sd      = 1.5771069</span></span>
+<span><span class="co">#&gt;                                  se.mean = 0.4630195</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Estimation Method:               Kaplan-Meier</span></span>
+<span><span class="co">#&gt;                                  (Bias-corrected se.mean)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Data:                            Arsenic</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1244,18 +1251,18 @@ data.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of Times Bootstrap</span></span>
 <span><span class="co">#&gt; Repeated Because Too Few</span></span>
-<span><span class="co">#&gt; Uncensored Observations:         15</span></span>
+<span><span class="co">#&gt; Uncensored Observations:         21</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval Type:        upper</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 2.519647</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 2.748266</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 2.528452</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 2.577663</span></span>
 <span><span class="co">#&gt;                                  t.LCL   = 0.000000</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 3.705437</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  t.UCL   = 2.786428</span></span></code></pre></div>
 <p>The percentile bootstrap estimate of the UCL95 will be near to 2.53,
 with the output varying slightly each time a bootstrap estimate is run.
 This is essentially the same estimate as that for the gamma
@@ -1278,7 +1285,7 @@ Kaplan-Meier estimate will be biased a bit high. Instead, use the robust
 ROS method with bootstrapping:</p>
 <div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mibk.ucl95</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Example2</span>, </span>
-<span>                   <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span> <span class="op">(</span><span class="va">MIBK</span>, <span class="va">MIBKcen</span>, method <span class="op">=</span> <span class="st">"rROS"</span>, </span>
+<span>                   <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span> <span class="op">(</span><span class="va">MIBK</span>, <span class="va">MIBKcen</span>, method <span class="op">=</span> <span class="st">"rROS"</span>, </span>
 <span>                                      ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span> <span class="st">"bootstrap"</span>, </span>
 <span>                                      ci.type <span class="op">=</span> <span class="st">"upper"</span>, n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mibk.ucl95</span><span class="op">)</span></span>
@@ -1325,9 +1332,9 @@ ROS method with bootstrapping:</p>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 0.2897180</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 0.2887076</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 0.2655082</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  BCa.UCL = 0.2664332</span></span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean equals
 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled
 0.293). Remember that your bootstrap result will slightly differ from
@@ -1339,7 +1346,7 @@ the data would be as given in the MIBK2 and MIBK2cen columns. Using the
 same procedure gives slightly lower results for both mean and UCL95:</p>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mibk2.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Example2</span>, </span>
-<span>                  <span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span> <span class="op">(</span><span class="va">MIBK2</span>, <span class="va">MIBK2cen</span>, method <span class="op">=</span> <span class="st">"rROS"</span>, </span>
+<span>                  <span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span> <span class="op">(</span><span class="va">MIBK2</span>, <span class="va">MIBK2cen</span>, method <span class="op">=</span> <span class="st">"rROS"</span>, </span>
 <span>                                     ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method <span class="op">=</span> <span class="st">"bootstrap"</span>, </span>
 <span>                                     ci.type <span class="op">=</span> <span class="st">"upper"</span>, n.bootstraps <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mibk2.out</span><span class="op">)</span></span>
@@ -1386,9 +1393,9 @@ same procedure gives slightly lower results for both mean and UCL95:</p>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 0.2847173</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 0.2839965</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 0.2758230</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  BCa.UCL = 0.2731916</span></span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean will be
 near to 0.290 with this known detection limit. It is always better to
 use the laboratory documented limit, but not having one should not stop
@@ -1474,7 +1481,7 @@ differences in means:</p>
 <span><span class="co">#&gt;  Permutation test of mean CensData: Zn   by Factor: Zone </span></span>
 <span><span class="co">#&gt;      9999 Permutations     alternative = two.sided </span></span>
 <span><span class="co">#&gt;   mean of AlluvialFan = 21.22 to 23.51     mean of BasinTrough = 21.28 to 21.94 </span></span>
-<span><span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 1 to 0.9988 </span></span>
+<span><span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 1 to 0.9987 </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>The two groups do not have significantly different means. These are
 p-values that you can believe, as they do not depend on the normal
@@ -1504,8 +1511,8 @@ medians in each of the groups:</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">CuZn</span>,<span class="fu"><a href="../reference/cen1way.html">cen1way</a></span><span class="op">(</span><span class="va">Zn</span>,<span class="va">ZnCen</span>,<span class="va">Zone</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;             grp    N   PctND   KMmean    KMsd   LCLmean</span></span>
-<span><span class="co">#&gt; 1   AlluvialFan   67   23.88    22.70   74.03     4.796</span></span>
-<span><span class="co">#&gt; 2   BasinTrough   50    8.00    21.61   18.77    16.490</span></span>
+<span><span class="co">#&gt; 1   AlluvialFan   67   23.88    22.82   74.00     4.587</span></span>
+<span><span class="co">#&gt; 2   BasinTrough   50    8.00    21.61   18.77    16.220</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Oneway Peto-Peto test of CensData: Zn   by Factor: Zone </span></span>
 <span><span class="co">#&gt;       Chisq = 5.183   on 1 degrees of freedom     p = 0.0228</span></span></code></pre></div>
@@ -1673,8 +1680,8 @@ computed using the <code>cen1way(...)</code> command:</p>
 <span></span>
 <span><span class="co">#&gt; Warning: One or more group(s) do not have censored data.</span></span>
 <span><span class="co">#&gt;      grp   N   PctND    KMmean       KMsd    LCLmean</span></span>
-<span><span class="co">#&gt; 1      0   7   28.57    0.1020    0.08834    0.03338</span></span>
-<span><span class="co">#&gt; 2   0.01   7   28.57    0.1384    0.10590    0.07153</span></span>
+<span><span class="co">#&gt; 1      0   7   28.57    0.1020    0.08834    0.01068</span></span>
+<span><span class="co">#&gt; 2   0.01   7   28.57    0.1384    0.10590    0.02897</span></span>
 <span><span class="co">#&gt; 3   0.05   6    0.00   12.1100   16.16000   -4.84900</span></span>
 <span><span class="co">#&gt; 4   0.25   7    0.00    6.8660   17.46000   -9.28600</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1738,9 +1745,9 @@ normal distribution.</p>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
 <span><span class="co">#&gt; 0.01 - 0 == 0      0.2877     1.0841   0.265   0.9935  </span></span>
-<span><span class="co">#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0152 *</span></span>
-<span><span class="co">#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1448  </span></span>
-<span><span class="co">#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0325 *</span></span>
+<span><span class="co">#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0149 *</span></span>
+<span><span class="co">#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1449  </span></span>
+<span><span class="co">#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0321 *</span></span>
 <span><span class="co">#&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2456  </span></span>
 <span><span class="co">#&gt; 0.25 - 0.05 == 0  -1.0336     1.0749  -0.962   0.7712  </span></span>
 <span><span class="co">#&gt; ---</span></span>
@@ -1761,7 +1768,7 @@ these data very well.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenpermanova.html">cenpermanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  Permutation test of mean CensData: Liver   by Factor: Dosage </span></span>
 <span><span class="co">#&gt;      9999 Permutations </span></span>
-<span><span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1383 to 0.1395 </span></span>
+<span><span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1325 to 0.1343 </span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt;    mean(0)   mean(0.01)   mean(0.05)   mean(0.25)   </span></span>
 <span><span class="co">#&gt;     0.1000       0.1395      12.1100       6.8660</span></span></code></pre></div>
@@ -2525,8 +2532,8 @@ attention to the individual season results by plotting them using the
 <span><span class="co">#&gt; ---------- </span></span>
 <span><span class="co">#&gt; Seasonal Kendall test and Theil-Sen line</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-3.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">#&gt;   reps_R  N S_SK tau_SK  pval intercept    slope</span></span>
-<span><span class="co">#&gt; 1   4999 63 -203  -0.21 0.012    181.26 -0.08965</span></span>
+<pre><code><span><span class="co">#&gt;   reps_R  N S_SK tau_SK   pval intercept    slope</span></span>
+<span><span class="co">#&gt; 1   4999 63 -203  -0.21 0.0126    181.26 -0.08965</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-4.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is an overall trend once the Seasonal Kendall test has removed
@@ -2564,7 +2571,7 @@ the time variable, and the season category variable.</p>
 <span><span class="co">#&gt; Seasonal Kendall test and Akritas-Theil-Sen line on residuals</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-5.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">#&gt;   reps_R  N S_SK  tau_SK   pval intercept    slope</span></span>
-<span><span class="co">#&gt; 1   4999 63  -66 -0.0683 0.4274    59.654 -0.02967</span></span>
+<span><span class="co">#&gt; 1   4999 63  -66 -0.0683 0.4398    59.654 -0.02967</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-6.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is no trend in flow-adjusted chromium found for this site and
@@ -3019,7 +3026,7 @@ entero1A.</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Upper quantiles of permutations (null model):</span></span>
 <span><span class="co">#&gt;    90%    95%  97.5%    99% </span></span>
-<span><span class="co">#&gt; 0.0456 0.0655 0.0839 0.1098 </span></span>
+<span><span class="co">#&gt; 0.0469 0.0668 0.0870 0.1082 </span></span>
 <span><span class="co">#&gt; Permutation: free</span></span>
 <span><span class="co">#&gt; Number of permutations: 9999</span></span></code></pre></div>
 <p>There is a significant positive correlation between the MST marker
@@ -3156,9 +3163,9 @@ distribution.</li>
 three commands, one for each of the three distributions, are:</p></li>
 </ol>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enormCensored.html" class="external-link">enormCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>,ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"normal.approx"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/egammaAltCensored.html" class="external-link">egammaAltCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/enormCensored.html" class="external-link">enormCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>,ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"normal.approx"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/elnormAltCensored.html" class="external-link">elnormAltCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/egammaAltCensored.html" class="external-link">egammaAltCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span><span class="op">)</span></span></code></pre></div>
 <p>In each of these commands, the input column of concentrations plus
 detection limits is shown as “Data”, and the censoring indicator column
 (0/1 or FALSE/TRUE) as “Cen”. Use the appropriate variable names in your
@@ -3175,7 +3182,7 @@ Use 5000 bootstrap repetitions so that the estimate is stable from one
 time to the next.</li>
 </ol>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/EnvStats/man/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, n.bootstraps<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://alexkowa.github.io/EnvStats/reference/enparCensored.html" class="external-link">enparCensored</a></span><span class="op">(</span><span class="va">Data</span>, <span class="va">Cen</span>, ci<span class="op">=</span><span class="cn">TRUE</span>, ci.method<span class="op">=</span><span class="st">"bootstrap"</span>, ci.type<span class="op">=</span><span class="st">"upper"</span>, n.bootstraps<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>
 <p>If there is only one detection limit the KM method in essence
