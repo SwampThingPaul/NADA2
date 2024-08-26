@@ -2,7 +2,7 @@ Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
 Version: 1.1.8
-Date: 2024-08-25
+Date: 2024-08-26
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),

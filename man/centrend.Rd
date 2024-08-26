@@ -54,7 +54,7 @@ data(Brumbaugh)
 
 Brumbaugh$time=1:nrow(Brumbaugh)
 
-with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=T))
+with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=TRUE))
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

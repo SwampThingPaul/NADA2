@@ -40,7 +40,7 @@
 #'
 #' Brumbaugh$time=1:nrow(Brumbaugh)
 #'
-#' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=T))
+#' with(Brumbaugh,centrend(Hg,HgCen,SedTotHg,time.var=time,drawplot=TRUE))
 
 centrend <- function(y.var, y.cens, x.var, time.var, link = "identity",
                      Smooth = "cs", printstat=TRUE, stackplots = FALSE,
