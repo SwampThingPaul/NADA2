@@ -51,8 +51,11 @@ devtools::check(vignettes=F)
 ## Builds package down webpage
 pkgdown::build_site()
 
+devtools::build_vignettes()
+devtools::clean_vignettes()
+
 ## Builds package
-devtools::build(vignettes=F)
+# devtools::build(vignettes=F)
 # devtools::build()
 
 # -------------------------------------------------------------------------

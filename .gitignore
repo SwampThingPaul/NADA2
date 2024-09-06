@@ -51,3 +51,5 @@ vignettes/*.pdf
 *NADA2_*.pdf
 *NADA Solutions to Exercises online 3_3*.docx
 inst/doc
+/doc/
+/Meta/
