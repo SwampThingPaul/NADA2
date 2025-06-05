@@ -53,3 +53,5 @@ vignettes/*.pdf
 inst/doc
 /doc/
 /Meta/
+
+/working_dev/
