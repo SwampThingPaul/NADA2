@@ -74,4 +74,9 @@
 * revised `cfit` due to changes to `enparCensored` function in the EnvStats package. (2024-07-30)
 * added and `if` statement in the `cfit` function to check if the censored variable is a logical type and convert to logical if needed (2024-08-25) 
 
+# NADA2 2.0.0
+
+* Currently in development stage, removed dependencies of NADA functions (2024-07-31). Expect push to CRAN imminently (~1 week)
+
+
 
