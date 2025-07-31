@@ -9,7 +9,6 @@
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
-#' library(NADA) #For example data
 #' data(PbHeron)
 #'
 #' ordranks(PbHeron[,4:15])

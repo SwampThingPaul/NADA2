@@ -1,13 +1,12 @@
-#' Computes confidence intervals on regression on order statistics (ROS) mean
+#' @title Computes confidence intervals on regression on order statistics (ROS) mean
 #'
-#' @description Uses ROS model output from the `NADA` package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
+#' @description Uses ROS model output, computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
 #' @param cenros.out an ROS model output object (see details)
 #' @param conf Confidence coefficient of the interval (Default is 0.95)
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @return Prints a lower (LCL) and upper (UCL) confidence interval based on the `conf` provided (Default is 95%)
 #' @details
-#' This function uses an ROS model output based on the `ros` function in the `NADA` package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
-#' For more detail on ROS modeling see the `ros` help file (`?NADA::ros`).
+#' This function uses an ROS model output based on the `ros` function, prevuously in the `NADA` package, now in this package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
 #'
 #' For implementation of `ROSci(...)` see the examples below.
 #' @importFrom stats qt sd
@@ -20,11 +19,9 @@
 #'
 #' Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. \doi{https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2}
 #'
-#' @seealso [NADA::ros]
-#'
 #' @examples
 #' data(Brumbaugh)
-#' myros <- NADA::ros(Brumbaugh$Hg,Brumbaugh$HgCen)
+#' myros <- ros(Brumbaugh$Hg,Brumbaugh$HgCen)
 #'
 #' summary(myros)
 #'

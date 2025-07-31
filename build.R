@@ -10,7 +10,7 @@ library(EnvStats)
 library(fitdistrplus)
 library(Kendall)
 library(multcomp)
-library(NADA)
+# library(NADA)
 library(perm)
 library(survminer)
 library(mgcv)
@@ -36,7 +36,7 @@ roxygen2md::roxygen2md()
 
 devtools::document()
 
-#devtools::test(); # makes testthat directory and runs tests
+# devtools::test(); # makes testthat directory and runs tests
 
 devtools::check(vignettes=F)
 # devtools::check()

@@ -17,7 +17,6 @@
 #' @param xaxs argument consistent with `base` plotting to adjust x-axis type; see `par` for more details
 #' @param yaxs argument consistent with `base` plotting to adjust y-axis type; see `par` for more details
 #' @param ... argument to adjust other base plotting functions; see `par` for more details
-#' @importFrom NADA cenken
 #' @export
 #' @return
 #' Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y variables as dashed lines up to the detection limits.
@@ -25,10 +24,8 @@
 #' @references
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
-#' @seealso [NADA::cenken]
-#'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Both y and x are censored
 #' data(PbHeron)
 #' with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))
@@ -38,71 +35,70 @@
 #' with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 #' }
 
-kenplot <- function(y1, ycen, x1, xcen, atsline = FALSE, xnam=NULL, ynam=NULL, Title="Akritas - Theil - Sen line",
-                    ylim=NULL,xlim=NULL,pch=NULL,cex=NULL,xaxs="r", yaxs="r",...)  {
-  alldat <- data.frame(y1, ycen, x1, xcen)
+kenplot <- function(y1, ycen, x1, xcen,
+                    atsline = FALSE,
+                    xnam = NULL, ynam = NULL, Title = "Akritas - Theil - Sen line",
+                    ylim = NULL, xlim = NULL, pch = 19, cex = 0.7,
+                    xaxs = "r", yaxs = "r", ...) {
 
-  if (!is.null(xnam)) {xnam = xnam}else(xnam=deparse(substitute(x1)))
-  if (!is.null(ynam)) {ynam = ynam}else(ynam=deparse(substitute(y1)))
+  # Assemble data and check for consistency
+  alldat <- data.frame(y1 = y1, ycen = ycen, x1 = x1, xcen = xcen)
+  if (anyNA(alldat)) stop("Missing values are not supported in kenplot()")
 
-  xmin <- min(alldat[,3])
-  xmax <- max(alldat[,3])
-  ymin <- min(alldat[,1])
-  ymax <- max(alldat[,1])
+  # Derive names for axes if not provided
+  xlab <- if (!is.null(xnam)) xnam else deparse(substitute(x1))
+  ylab <- if (!is.null(ynam)) ynam else deparse(substitute(y1))
 
-  if (ymin <= 0) {
-    y1a <- y1+abs(min(y1))+1
-    cka<- cenken(y1a, as.logical(ycen), x1, as.logical(xcen))
-    int <- cka$intercept - (abs(min(y1))+1)
-    slp <- cka$slope
-    tau <- cka$tau
-    pval <- cka$p
+  # Calculate plot limits
+  xlim.val <- if (!is.null(xlim)) xlim else range(x1, na.rm = TRUE)
+  ylim.val <- if (!is.null(ylim)) ylim else range(y1, na.rm = TRUE)
+
+  # Fit censored Kendall model
+  if (min(y1, na.rm = TRUE) <= 0) {
+    offset <- abs(min(y1)) + 1
+    y1a <- y1 + offset
+    fit <- cenken(y1a, as.logical(ycen), x1, as.logical(xcen))
+    int <- fit$intercept - offset
+  } else {
+    fit <- cenken(y1, as.logical(ycen), x1, as.logical(xcen))
+    int <- fit$intercept
   }
-  else { ck<- cenken(y1, as.logical(ycen), x1, as.logical(xcen))
-  int <- ck$intercept;  slp <- ck$slope
-  tau <-ck$tau;  pval<- ck$p
-  }
+  slope <- fit$slope
 
-  bothdetect <- as.integer(ycen)+as.integer(xcen)
-  detected <- alldat[bothdetect == 0,]
-  ynd <- alldat[as.integer(ycen) ==1 ,]  # set of censored y values
-  nyc <- length(as.integer(ynd$ycen))    # number of censored y values
-  xnd <- alldat[as.integer(xcen) ==1 ,]  # set of censored x values
-  nxc <- length(as.integer(xnd$xcen))    # number of censored x values
+  # Separate subsets
+  bothdetect <- !(as.logical(ycen) | as.logical(xcen))
+  detected <- alldat[bothdetect, ]
+  ycen_only <- alldat[as.logical(ycen), ]
+  xcen_only <- alldat[as.logical(xcen), ]
 
-#  oldpar <- par(no.readonly = TRUE)
-#  on.exit(par(oldpar))
+  # Start plotting
+  plot(detected$x1, detected$y1,
+       xlim = xlim.val, ylim = ylim.val,
+       xlab = xlab, ylab = ylab,
+       main = Title, pch = pch, cex = cex,
+       xaxs = xaxs, yaxs = yaxs, ...)
 
-  if(is.null(ylim)){ylim.val = c(ymin, ymax)}else{ylim.val=ylim}
-  if(is.null(xlim)){xlim.val = c(xmin, xmax)}else{xlim.val=xlim}
-  if(is.null(pch)){pch.val=19}else{pch.val=pch}
-  if(is.null(cex)){cex.val=0.7}else{cex.val=cex}
+  # Optional regression line
+  if (atsline) abline(int, slope, col = "purple")
 
-  plot(detected$x1, detected$y1, ylim =ylim.val, xlim = xlim.val, ylab = ynam, xlab = xnam, pch=pch.val, cex=cex.val, main=Title,...)
-  if (atsline == TRUE) {
-    abline(int, slp, col = "purple")}
-
-  # vertial dashed lines for y censored
-  if (nyc != 0) {
-      for (i in 1:nyc ){
-        dashy <- min(0-0.5, ymin)
-        dashx <- ynd[i,3]
-        dash <- data.frame (dashx, dashy)
-        dash[2,1] <- ynd[i,3]
-        dash[2,2] <- ynd[i,1]
-        lines(dash, lty="dashed", col = "red")
-      }
-    }
-    # horizontal dashed lines for x censored
-    if (nxc != 0) {
-      for (i in 1:nxc ){
-        dashy <- xnd[i,1]
-        dashx <- min(0, xmin-0.5)
-        dash <- data.frame (dashx, dashy)
-        dash[2,1] <- xnd[i,3]
-        dash[2,2] <- xnd[i,1]
-        lines(dash, lty="dashed", col = "red")
-      }
+  # Add vertical lines for censored y-values
+  if (nrow(ycen_only) > 0) {
+    for (i in seq_len(nrow(ycen_only))) {
+      lines(c(ycen_only$x1[i], ycen_only$x1[i]),
+            c(min(ylim.val[1] - 0.5, 0), ycen_only$y1[i]),
+            lty = "dashed", col = "red")
     }
   }
+
+  # Add horizontal lines for censored x-values
+  if (nrow(xcen_only) > 0) {
+    for (i in seq_len(nrow(xcen_only))) {
+      lines(c(min(xlim.val[1] - 0.5, 0), xcen_only$x1[i]),
+            c(xcen_only$y1[i], xcen_only$y1[i]),
+            lty = "dashed", col = "red")
+    }
+  }
+
+  invisible(list(slope = slope, intercept = int, tau = fit$tau, p = fit$p))
+}
 

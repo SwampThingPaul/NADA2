@@ -7,7 +7,6 @@
 #' @param R The number of permutations used. Default is 9999.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #'
-#' @importFrom NADA ros cenros
 #' @export
 #' @return Permutation test results with the number of permutations, range in test statistics and `p-value` values through the various permutations. Group means are also listed.
 #' @details Because this is a permutation test it avoids the problem with MLE tests (see `cenanova`) that assume a normal distribution.  No values are modeled as below zero and group means and `p-values` are trustworthy.

@@ -8,7 +8,7 @@ ATS(
   y.var,
   y.cen,
   x.var,
-  x.cen = rep(0, times = length(x.var)),
+  x.cen = rep(0, length(x.var)),
   LOG = TRUE,
   retrans = FALSE,
   xlabel = NULL,
@@ -45,6 +45,7 @@ Coefficients (intercept and slope) for the ATS line are printed, along with Kend
 Computes Kendall's tau and the Akritas-Theil-Sen (ATS) line for censored data, along with the test that the slope (and Kendall's tau) equal zero.  For one x variable regression.
 }
 \examples{
+\dontrun{
 # Both y and x are censored
 data(PbHeron)
 with(PbHeron, ATS(Blood, BloodCen, Kidney, KidneyCen))
@@ -52,6 +53,7 @@ with(PbHeron, ATS(Blood, BloodCen, Kidney, KidneyCen))
 # x is not censored
 data(Brumbaugh)
 with(Brumbaugh,ATS(Hg, HgCen, PctWetland))
+}
 }
 \references{
 Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140

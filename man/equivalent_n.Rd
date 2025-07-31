@@ -56,9 +56,6 @@ Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and
 
 Gillespie, B.W., Dominguez, A., Li, Y., 2019. Quantifying the information in values below the detection limit (left-censored data).  Presented at the 2019 Joint Statistical Meetings of the Amer. Stat. Assoc., Denver, CO., July 31, 2019.
 }
-\seealso{
-\link[NADA:censummary]{NADA::censummary}
-}
 \keyword{Sample}
 \keyword{Size}
 \keyword{censored}

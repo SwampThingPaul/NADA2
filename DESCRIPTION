@@ -1,20 +1,22 @@
 Package: NADA2
 Type: Package
 Title: Data Analysis for Censored Environmental Data
-Version: 1.1.8
-Date: 2024-09-05
+Version: 2.0.0
+Date: 2025-07-29
 Authors@R: c(person("Paul", "Julian",role=c("aut","cre"),
             email="pauljulianphd@gmail.com"),
             person("Dennis", "Helsel",role=c("aut","cph"),
-            email="dhelsel@practicalstats.com"))
+            email="dhelsel@practicalstats.com"),
+            person("Lopaka", "Lee",role=c("aut","cph"),
+            email="rclee@usgs.gov"))
 Maintainer: Paul Julian <pauljulianphd@gmail.com>
 URL: https://github.com/SwampThingPaul/NADA2
 BugReports: https://github.com/SwampThingPaul/NADA2/issues
 Description: Contains methods described by Dennis Helsel in 
              his book "Statistics for Censored Environmental Data
              using Minitab and R" (2011) and courses and videos at 
-             <https://practicalstats.com>. This package adds new functions to 
-             the `NADA` Package.
+             <https://practicalstats.com>. This package incorporates functions 
+             of NADA and adds new functionality.
 License: MIT + file LICENSE
 Depends: R (>= 3.6),
         EnvStats (>= 2.4)
@@ -22,17 +24,18 @@ Imports: grDevices,
         graphics,
         stats,
         utils,
+        methods,
         fitdistrplus,
         Kendall,
         multcomp,
-        NADA,
         perm,
         survminer,
         mgcv,
         cenGAM,
         vegan,
         coin,
-        survival
+        survival,
+        NbClust
 Suggests: knitr,
           rmarkdown,
           bestglm,

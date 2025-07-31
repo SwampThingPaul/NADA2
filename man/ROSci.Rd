@@ -17,17 +17,16 @@ ROSci(cenros.out, conf = 0.95, printstat = TRUE)
 Prints a lower (LCL) and upper (UCL) confidence interval based on the \code{conf} provided (Default is 95\%)
 }
 \description{
-Uses ROS model output from the \code{NADA} package and computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
+Uses ROS model output, computes the Zhou and Gao 1997 modified Cox’s method two-sided confidence interval around the mean for a lognormal distribution.  Computes a t-interval for a gaussian ROS model output.
 }
 \details{
-This function uses an ROS model output based on the \code{ros} function in the \code{NADA} package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
-For more detail on ROS modeling see the \code{ros} help file (\code{?NADA::ros}).
+This function uses an ROS model output based on the \code{ros} function, prevuously in the \code{NADA} package, now in this package.  The lognormal distribution is the default for the NADA package but a gaussian distribution is optional here.
 
 For implementation of \code{ROSci(...)} see the examples below.
 }
 \examples{
 data(Brumbaugh)
-myros <- NADA::ros(Brumbaugh$Hg,Brumbaugh$HgCen)
+myros <- ros(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 summary(myros)
 
@@ -43,7 +42,4 @@ Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and
 Lee, L., Helsel, D., 2005. Statistical analysis of water-quality data containing multiple detection limits: S-language software for regression on order statistics. Computers & Geosciences 31, 1241–1248. \doi{https://doi.org/10.1016/j.cageo.2005.03.012}
 
 Zhou, X.-H., Gao, S., 1997. Confidence Intervals for the Log-Normal Mean. Statistics in Medicine 16, 783–790. \doi{https://doi.org/10.1002/(SICI)1097-0258(19970415)16:7<783::AID-SIM488>3.0.CO;2-2}
-}
-\seealso{
-\link[NADA:ros]{NADA::ros}
 }

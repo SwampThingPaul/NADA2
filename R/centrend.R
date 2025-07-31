@@ -14,7 +14,6 @@
 #' @export
 #'
 #' @importFrom mgcv gam
-#' @importFrom NADA cenxyplot
 #' @importFrom cenGAM tobit1
 #' @return
 #'

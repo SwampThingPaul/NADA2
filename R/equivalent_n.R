@@ -6,7 +6,6 @@
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @keywords Sample Size censored
 #' @export
-#' @importFrom NADA censummary
 #' @details
 #' Based on "Method 2" of Dr. Brenda Gillespie's talk at ASA National Meeting 2019.  This method differs from hers in how the percentile probabilities for the detection limits are computed.  Probabilities here are computed using Regression on Order Statistics (ROS).
 #'
@@ -39,9 +38,6 @@
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' Gillespie, B.W., Dominguez, A., Li, Y., 2019. Quantifying the information in values below the detection limit (left-censored data).  Presented at the 2019 Joint Statistical Meetings of the Amer. Stat. Assoc., Denver, CO., July 31, 2019.
-#'
-#' @seealso [NADA::censummary]
-#'
 #' @examples
 #' data(Brumbaugh)
 #'

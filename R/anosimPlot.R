@@ -18,11 +18,11 @@
 #' data(PbHeron)
 #'
 #' # ROS model for each group
-#' PbHeron.high <- with(subset(PbHeron,DosageGroup=="High"),NADA::ros(Blood,BloodCen))
+#' PbHeron.high <- with(subset(PbHeron,DosageGroup=="High"),ros(Blood,BloodCen))
 #' PbHeron.high <- data.frame(PbHeron.high)
 #' PbHeron.high$DosageGroup <- "High"
 #'
-#' PbHeron.low <- with(subset(PbHeron,DosageGroup=="Low"),NADA::ros(Blood,BloodCen))
+#' PbHeron.low <- with(subset(PbHeron,DosageGroup=="Low"),ros(Blood,BloodCen))
 #' PbHeron.low <- data.frame(PbHeron.low)
 #' PbHeron.low$DosageGroup <- "Low"
 #'

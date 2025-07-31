@@ -25,7 +25,7 @@ Plots an NMDS of a matrix of 0s and 1s, the censoring indicator columns for mult
 Binary data may not provide sufficient information to discern differences in location on the plot if sample size is small.  Prior to running this analysis it is suggested to consult best analysis practice when performing NMDS. As a rule of thumb, an NMDS ordination with a stress value around or above 0.2 is deemed suspect and a stress value approaching 0.3 indicates that the ordination is arbitrary. Stress values equal to or below 0.1 are considered fair, while values equal to or below 0.05 indicate good fit.
 }
 \examples{
-\donttest{
+\dontrun{
 data(PbHeron)
 
 # without group specified

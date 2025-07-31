@@ -31,11 +31,12 @@ AIC of each model is printed from lowest to highest AIC to help evaluate the ‘
 LOG: The default is that the Y variable will be log transformed (LOG = TRUE).
 }
 \examples{
-
+\dontrun{
 data(Brumbaugh)
 
 # Multiple regression
 bestaic(Brumbaugh$Hg, Brumbaugh$HgCen, Brumbaugh[, c("SedMeHg","PctWetland", "SedAVS")])
+}
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.

@@ -4,19 +4,20 @@
 #' @param y.var The column of y (response variable) values plus detection limits.
 #' @param y.cen The y-variable indicators, where 1 (or `TRUE`) indicates a detection limit in the `y.var` column, and 0 (or `FALSE`) indicates a detected value in `y.var`.
 #' @param x.var The column of x (time for a trend test) values.
-#' @importFrom NADA cenken
+#'
 #' @return Returns the intercept and slope (ATS line), tau (Kendall's tau), p-value and S-value (test statistic).
 #' @export
 #' @references
 #' Akritas, M.G., Murphy, S.A., LaValley, M.P., 1995. The Theil-Sen Estimator With Doubly Censored Data and Applications to Astronomy. Journal of the American Statistical Association 90, 170–177. https://doi.org/10.2307/2291140
 #'
 #' Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-#' @seealso [NADA::cenken]
 #' @examples
+#' \dontrun{
 #' # x may not be censored.  Use the ATS function when x is censored.
 #' data(Brumbaugh)
 #'
 #' with(Brumbaugh, ATSmini(Hg, HgCen, SedLOI))
+#' }
 
 ATSmini <- function(y.var, y.cen, x.var) {
   y.cen <- as.logical(y.cen)

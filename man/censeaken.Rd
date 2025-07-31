@@ -9,6 +9,7 @@ censeaken(
   y,
   y.cen,
   group,
+  data = NULL,
   LOG = FALSE,
   R = 4999,
   nmin = 4,
@@ -25,6 +26,8 @@ censeaken(
 \item{y.cen}{The y-variable indicators, where 1 (or \code{TRUE}) indicates a detection limit in the \code{y.var} column, and 0 (or \code{FALSE}) indicates a detected value in \code{y.var}.}
 
 \item{group}{Column of the season classifications. A factor in R, so usually though not necessarily a text variable.  If numeric, define as a factor before running the script.}
+
+\item{data}{an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model.}
 
 \item{LOG}{Indicator of whether to compute the trend analysis in the original y units, or on their logarithms.  The default is to use the logarithms (LOG = \code{TRUE}).  To compute in original units, specify the option LOG = \code{FALSE} (or LOG = 0).}
 
@@ -61,13 +64,12 @@ Brumbaugh$time=1:nrow(Brumbaugh)
 Brumbaugh$sea=as.factor(round(runif(nrow(Brumbaugh),1,4),0))
 
 with(Brumbaugh,censeaken(time,Hg,HgCen,sea,seaplots = TRUE))
+
+censeaken(time,Hg,HgCen,sea,Brumbaugh,seaplots = TRUE)
 }
 }
 \references{
 Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 
 Hirsch, R.M., Slack, J.R., Smith, R.A., 1982. Techniques of Trend Analysis for Monthly Water Quality Data, Water Res. Reseach 18, 107-121.
-}
-\seealso{
-\link[NADA:cenken]{NADA::cenken}
 }

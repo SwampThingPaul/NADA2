@@ -26,11 +26,12 @@
 #' Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
 #'
 #' @examples
-#'
+#'\dontrun{
 #' data(Brumbaugh)
 #'
 #' # Multiple regression
 #' bestaic(Brumbaugh$Hg, Brumbaugh$HgCen, Brumbaugh[, c("SedMeHg","PctWetland", "SedAVS")])
+#' }
 
 bestaic <- function (y.var, cen.var, x.vars, LOG = TRUE, n.models = 10)
   {

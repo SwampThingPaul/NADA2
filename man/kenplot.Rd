@@ -15,8 +15,8 @@ kenplot(
   Title = "Akritas - Theil - Sen line",
   ylim = NULL,
   xlim = NULL,
-  pch = NULL,
-  cex = NULL,
+  pch = 19,
+  cex = 0.7,
   xaxs = "r",
   yaxs = "r",
   ...
@@ -60,7 +60,7 @@ Scatterplot of data plus ATS line.  Censored values are drawn for both X and Y v
 Function used by other functions to plot the Akritas-Theil-Sen (ATS) line for censored data.  Only one x variable allowed. Both Y and X variables may be censored.
 }
 \examples{
-\donttest{
+\dontrun{
 # Both y and x are censored
 data(PbHeron)
 with(PbHeron, kenplot(Blood, BloodCen, Kidney, KidneyCen))
@@ -72,7 +72,4 @@ with(Brumbaugh, kenplot(Hg, HgCen, PctWetland,rep(0, times=length(PctWetland))))
 }
 \references{
 Helsel, D.R., 2011. Statistics for Censored Environmental Data using Minitab and R, 2nd ed. John Wiley & Sons, USA, N.J.
-}
-\seealso{
-\link[NADA:cenken]{NADA::cenken}
 }

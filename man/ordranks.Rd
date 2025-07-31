@@ -18,7 +18,6 @@ Returns columns of ranks of censored data in the same order as the paired column
 Computes the within-column ranks of data having one or more detection limits. If multiple limits are present in a column, data are first re-censored at the highest detection limit.
 }
 \examples{
-library(NADA) #For example data
 data(PbHeron)
 
 ordranks(PbHeron[,4:15])

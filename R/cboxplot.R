@@ -26,7 +26,6 @@
 #' @export
 #' @importFrom graphics boxplot lines plot polygon
 #' @importFrom grDevices adjustcolor
-#' @importFrom NADA ros
 #' @import utils
 #'
 #' @return Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.
@@ -89,10 +88,10 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
       if (is.null(Ymax) == FALSE) { Ylim = c(y.min, log(Ymax))}
       if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-        boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
       else {
         #  boxplot drawn to max and min.  minmax = TRUE
-        boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
 
       polygon (xx, yy, col = bdl.col, border=bdl.col)
       abline (h=y.min, col=bdl.col, lwd=8)
