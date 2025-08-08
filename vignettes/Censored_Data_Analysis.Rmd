@@ -33,7 +33,7 @@ or
 setwd(".../NADA2")
 ```
 
-if you are using `setwd()`, for reproducibility it is recommend to use the code above.
+if you are using `setwd()`, for reproducibility it is recommend to use the code above where the path to the working directory is relative.
 
 ### Load Packages
 
@@ -65,7 +65,6 @@ library(fitdistrplus)
 library(Kendall)
 library(mgcv)
 library(multcomp)
-library(NADA)
 library(perm)
 library(rms)
 library(survminer)
@@ -76,16 +75,20 @@ library(car)
 library(nlme)
 library(rms)
 
+library(NADA)
+
 ```
+
+Currently the `NADA` package is no longer CRAN, but is still available on [GitHub](https://github.com/SwampThingPaul/NADA)
 
 ## Loading R Format Databases From Packages
 
 Some packages have datasets contained within them. When you load the packages you have access to those datasets. You can type data() to list all datasets available within the R base packages and in the packages you've loaded. Once you know the names of the datasets you want to load, use the data (datasetname) command to load the dataset.
 
 ```{r load data example}
-data(Golden); # From NADA package
+data(PbHeron); # From NADA package
 
-head(Golden,5L)
+head(PbHeron,5L)
 ```
 
 ## Loading External Datasets of Various Formats
@@ -150,7 +153,7 @@ For other data with specific delimiters (i.e. tab delimited) run `?read.table` o
 *Data: Zinc dataset*
 
 ```{r bxplot1,fig.width=6.5,fig.height=4,fig.align='center'}
-data(CuZn); # Data from the NADA package
+data(CuZn); 
 
 cboxplot(CuZn$Zn,CuZn$ZnCen,CuZn$Zone,minmax = TRUE,Xlab="Zone",Ylab="Zn")
 ```
@@ -175,7 +178,7 @@ The show=TRUE option models the portion of each group's data below the highest d
 *Data: TCE concentrations in ground water*
 
 ```{r scatplot1,fig.width=6.5,fig.height=4,fig.align='center'}
-data(TCEReg); # Data from the NADA package
+data(TCEReg);
 
 cenxyplot(TCEReg$PopDensity, 1-TCEReg$PopAbv1, TCEReg$TCEConc, TCEReg$TCECen)
 ```
@@ -209,7 +212,7 @@ cen_ecdf(CuZn$Zn, CuZn$ZnCen,CuZn$Zone,
 #### Compare CDFs
 
 ```{r cdf comp1,fig.width=6.5,fig.height=4,fig.align='center'}
-data(ShePyrene); # From the NADA package
+data(ShePyrene); 
 
 cenCompareCdfs(ShePyrene$Pyrene,ShePyrene$PyreneCen)
 ```
@@ -234,9 +237,7 @@ cenCompareQQ(ShePyrene$Pyrene,ShePyrene$PyreneCen,Yname="Pyrene",cex=0.75)
 ## Estimate Descriptive Statistics
 
 ### Exploring the data
-In R, the summary command is used to briefly describe the characteristics of the data. In
-the NADA for R package, the censummary command fulfills the same role for censored
-data:
+In R, the summary command is used to briefly describe the characteristics of the data.
 ```{r sum}
 censummary(ShePyrene$Pyrene,ShePyrene$PyreneCen)
 ```
@@ -677,12 +678,12 @@ No significant difference found.  The arbitrariness of the substitution process,
 
 ## Three or more groups
 
-The `Golden` data present lead concentrations in organs of herons after exposing them to lead.  There are four dosage groups (“Dosage” or “Group” columns), zero plus three amounts of lead.  The objective was to determine if feathers or another non-destructive part of the birds could be used as an environmental indicator, so it would not be necessary to sacrifice a bird in order to measure their lead concentrations.  A censored boxplot of the Golden liver lead data shows that the third and fourth groups have generally higher values.
+The `PbHeron` data present lead concentrations in organs of herons after exposing them to lead.  There are four dosage groups (“Dosage” or “Group” columns), zero plus three amounts of lead.  The objective was to determine if feathers or another non-destructive part of the birds could be used as an environmental indicator, so it would not be necessary to sacrifice a bird in order to measure their lead concentrations.  A censored boxplot of the PbHeron liver lead data shows that the third and fourth groups have generally higher values.
 
 ```{r,fig.width=6.5,fig.height=4,fig.align='center'}
-data(Golden)
+data(PbHeron)
 
-with(Golden,cboxplot(Liver, LiverCen, Dosage,
+with(PbHeron,cboxplot(Liver, LiverCen, Dosage,
                      Ylab = "Lead concentrations in liver, in ppb"))
 ```
 
@@ -695,9 +696,9 @@ First the groups can be compared using a Kruskal-Wallis test, setting all values
 **Step 1** - Create a variable -- call it Below04 -- with zeros (or -1, or any value below the highest DL) for all data below the highest DL of 0.04.  Be careful not just to assign all 0.04s as nondetects, as some of these could be detected 0.04s.  Instead, use two steps, the first to set all values BELOW 0.04 as a 0 (or -1), and the second to set all data marked as nondetects (which will include the <0.04 values) as a 0 (or -1).  The result is a variable with an indicator (-1 recommended) for all data below the highest reporting limit, and original values for all detected data at and above the highest reporting limit.  The logical operators < (less-than) and == (equal to) are used here.
 
 ```{r}
-Golden$Below04 <- Golden$Liver
-Golden$Below04[Golden$Liver<0.04] <- -1
-Golden$Below04[Golden$LiverCen==TRUE] <- -1
+PbHeron$Below04 <- PbHeron$Liver
+PbHeron$Below04[PbHeron$Liver<0.04] <- -1
+PbHeron$Below04[PbHeron$LiverCen==TRUE] <- -1
 
 ```
 
@@ -705,7 +706,7 @@ Golden$Below04[Golden$LiverCen==TRUE] <- -1
 **Step 2** - run the Kruskal-Wallis test
 
 ```{r}
-kruskal.test(Below04~Dosage,Golden)
+kruskal.test(Below04~Dosage,PbHeron)
 ```
 
 The result shows that there is a difference (p = 0.049) between group medians using this simple nonparametric test.  An ANOVA on data after substituting one-half DL will not find a difference (trust me on this).
@@ -714,22 +715,22 @@ The result shows that there is a difference (p = 0.049) between group medians us
 
 The nonparametric Peto-Peto test, the multi-DL nonparametric test, is computed using the `cen1way(...)` command:
 ```{r}
-with(Golden,cen1way(Liver,LiverCen,Dosage))
+with(PbHeron,cen1way(Liver,LiverCen,Dosage))
 ```
 
 
 The cdfs show that the higher two groups appear to differ in their percentiles as compared to the lower two groups. 
 
 ```{r,fig.width=6.5,fig.height=4,fig.align='center'}
-with(Golden,cen_ecdf(Liver,LiverCen,Dosage))
+with(PbHeron,cen_ecdf(Liver,LiverCen,Dosage))
 ```
 
 This is more easily seen by plotting the empirical cdfs in log units: 
 
 ```{r,fig.width=6.5,fig.height=4,fig.align='center'}
-Golden$lnLiver=log(Golden$Liver)
+PbHeron$lnLiver=log(PbHeron$Liver)
 
-with(Golden,cen_ecdf(lnLiver,LiverCen,Dosage,
+with(PbHeron,cen_ecdf(lnLiver,LiverCen,Dosage,
                      xlim = c(min(lnLiver), max(lnLiver)), 
                      Ylab = "Natural Logs of Lead Concentrations in Liver"))
 ```
@@ -741,7 +742,7 @@ The 0.05 and 0.025 groups appear to have the higher liver lead concentrations (a
 For the parametric approach, use the `cenanova(...)` command to run a censored regression with the groups as ‘factor’ explanatory variables.  By default, `cenanova` assumes the residuals follow a lognormal distribution, so use the associated Q-Q plot to see if the residuals in log units appear approximately like a normal distribution.
 
 ```{r}
-with(Golden,cenanova(Liver,LiverCen,Dosage))
+with(PbHeron,cenanova(Liver,LiverCen,Dosage))
 ```
 
 The overall test has a p-value of 0.014.  Therefore the four group mean logarithms (geometric means) differ.  p-values for the individual pairwise tests of differences show differences in two pairs of groups.  The p-values of 0.0150 (0.05 versus 0 groups) and 0.0323 (0.05 versus 0.01 groups) show that the 0.05 group differs from the lowest two groups, but not from the 0.25 group.  The residuals plot shows that log are a very good set of units to use, as their residuals are close to a normal distribution:
@@ -749,7 +750,7 @@ The overall test has a p-value of 0.014.  Therefore the four group mean logarith
 If instead you had wanted to test differences in the arithmetic means, use a permutation test as a normal distribution will not fit these data very well.
 
 ```{r}
-with(Golden,cenpermanova(Liver,LiverCen,Dosage))
+with(PbHeron,cenpermanova(Liver,LiverCen,Dosage))
 ```
 
 No significant difference in the means was found.  This test did not assume a normal distribution, though it is still influenced by outliers because it evaluates means, which are influenced by outliers.  The permutation test will not extrapolate data to values below zero as would MLE.    
@@ -757,7 +758,7 @@ No significant difference in the means was found.  This test did not assume a no
 Note that the means of two groups, and so much of the data in the two groups, falls below zero when estimated by MLE assuming a normal distribution:
 
 ```{r}
-with(Golden,cenanova(Liver,LiverCen,Dosage,LOG=FALSE))
+with(PbHeron,cenanova(Liver,LiverCen,Dosage,LOG=FALSE))
 ```
 
 The p-value of 0.0755 is too small because the group differences are exaggerated by pushing data down below 0.  Given that the actual data cannot go below zero, the cenpermanova p-value of 0.14 is a much more realistic test result.

@@ -2,6 +2,7 @@
 % Please edit documentation in R/NADA_ros.R
 \name{ros}
 \alias{ros}
+\alias{cenros}
 \alias{plot.ros}
 \title{Regression on Order Statistics (ROS)}
 \usage{
@@ -13,6 +14,8 @@ ros(
   reverseT = "exp",
   na.action = getOption("na.action")
 )
+
+cenros(x, ...)
 
 \method{plot}{ros}(
   x,
@@ -39,6 +42,8 @@ ros(
 
 \item{x}{ros2 model object}
 
+\item{...}{arguments passed to plot function}
+
 \item{plot.censored}{default = FALSE, if set to true it will also plot censored data}
 
 \item{lm.line}{will plot linear model line}
@@ -48,8 +53,6 @@ ros(
 \item{ylab}{default is "Value" but custom text can be added}
 
 \item{pch}{default set to 16, codes consistent with \code{points} and \code{plot} functions}
-
-\item{...}{arguments passed to plot function}
 }
 \value{
 A list with:
@@ -81,6 +84,11 @@ are combined with modeled censored values to corporately estimate summary statis
 population. By combining the uncensored values with modeled censored values, this method is more
 resistant of any non-normality of errors, and reduces any transformation errors that may be incurred.
 }
+\section{Functions}{
+\itemize{
+\item \code{cenros()}: A wrapper for \code{ros()} with simplified argument handling.
+
+}}
 \examples{
 df <- data.frame(
   conc = c(0.2, 0.5, 1.0, 0.4, 2.0, 0.3),
