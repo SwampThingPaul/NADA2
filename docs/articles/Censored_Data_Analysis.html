@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -117,7 +117,8 @@ pull-down menu:
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd</a></span><span class="op">(</span><span class="st">".../NADA2"</span><span class="op">)</span></span></code></pre></div>
 <p>if you are using <code><a href="https://rdrr.io/r/base/getwd.html" class="external-link">setwd()</a></code>, for reproducibility it is
-recommend to use the code above.</p>
+recommend to use the code above where the path to the working directory
+is relative.</p>
 </div>
 <div class="section level3">
 <h3 id="load-packages">Load Packages<a class="anchor" aria-label="anchor" href="#load-packages"></a>
@@ -150,7 +151,6 @@ and then load it.</em></p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.uwo.ca/faculty/aim" class="external-link">Kendall</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">mgcv</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://multcomp.R-forge.R-project.org" class="external-link">multcomp</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">NADA</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">perm</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/rms/" class="external-link">rms</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rpkgs.datanovia.com/survminer/index.html" class="external-link">survminer</a></span><span class="op">)</span></span>
@@ -159,7 +159,11 @@ and then load it.</em></p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">bestglm</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-forge.r-project.org/projects/car/" class="external-link">car</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://svn.r-project.org/R-packages/trunk/nlme/" class="external-link">nlme</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/rms/" class="external-link">rms</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://hbiostat.org/R/rms/" class="external-link">rms</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">NADA</span><span class="op">)</span></span></code></pre></div>
+<p>Currently the <code>NADA</code> package is no longer CRAN, but is
+still available on <a href="https://github.com/SwampThingPaul/NADA" class="external-link">GitHub</a></p>
 </div>
 </div>
 <div class="section level2">
@@ -171,9 +175,9 @@ all datasets available within the R base packages and in the packages
 you’ve loaded. Once you know the names of the datasets you want to load,
 use the data (datasetname) command to load the dataset.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Golden</span><span class="op">)</span>; <span class="co"># From NADA package</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PbHeron</span><span class="op">)</span>; <span class="co"># From NADA package</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fl">5L</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fl">5L</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Group Dosage DosageGroup      Liver LiverCen       Bone BoneCen     Brain</span></span>
 <span><span class="co">#&gt; 1     1      0         Low 0.30164120    FALSE 0.19642727   FALSE 0.3462295</span></span>
 <span><span class="co">#&gt; 2     1      0         Low 0.13614973    FALSE 0.02902514   FALSE 0.3920635</span></span>
@@ -262,7 +266,7 @@ button.</p>
 </h3>
 <p><em>Data: Zinc dataset</em></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">CuZn</span><span class="op">)</span>; <span class="co"># Data from the NADA package</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">CuZn</span><span class="op">)</span>; </span>
 <span></span>
 <span><span class="fu"><a href="../reference/cboxplot.html">cboxplot</a></span><span class="op">(</span><span class="va">CuZn</span><span class="op">$</span><span class="va">Zn</span>,<span class="va">CuZn</span><span class="op">$</span><span class="va">ZnCen</span>,<span class="va">CuZn</span><span class="op">$</span><span class="va">Zone</span>,minmax <span class="op">=</span> <span class="cn">TRUE</span>,Xlab<span class="op">=</span><span class="st">"Zone"</span>,Ylab<span class="op">=</span><span class="st">"Zn"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/bxplot1-1.png" width="624" style="display: block; margin: auto;"></p>
@@ -285,16 +289,16 @@ the highest detection limit (the lines in gray) using ROS.</p>
 </h3>
 <p><em>Data: TCE concentrations in ground water</em></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">)</span>; <span class="co"># Data from the NADA package</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">)</span>;</span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/NADA/man/cenxyplot.html" class="external-link">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/cenxyplot.html">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/scatplot1-1.png" width="624" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/NADA/man/cenxyplot.html" class="external-link">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cenxyplot.html">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span>,</span>
 <span>          xlab<span class="op">=</span><span class="st">"Population Denisty"</span>,ylab<span class="op">=</span><span class="st">"TCE Concentration, in ug/L"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/scatplot2-1.png" width="624" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/NADA/man/cenxyplot.html" class="external-link">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span>,</span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/cenxyplot.html">cenxyplot</a></span><span class="op">(</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopDensity</span>, <span class="fl">1</span><span class="op">-</span><span class="va">TCEReg</span><span class="op">$</span><span class="va">PopAbv1</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCEConc</span>, <span class="va">TCEReg</span><span class="op">$</span><span class="va">TCECen</span>,</span>
 <span>          xlab<span class="op">=</span><span class="st">"Population Denisty"</span>,ylab<span class="op">=</span><span class="st">"TCE Concentration, in ug/L"</span>, </span>
 <span>          main <span class="op">=</span> <span class="st">"Your Title Here"</span>, log <span class="op">=</span><span class="st">"y"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/scatplot3-1.png" width="624" style="display: block; margin: auto;"></p>
@@ -316,7 +320,7 @@ the highest detection limit (the lines in gray) using ROS.</p>
 <h4 id="compare-cdfs">Compare CDFs<a class="anchor" aria-label="anchor" href="#compare-cdfs"></a>
 </h4>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ShePyrene</span><span class="op">)</span>; <span class="co"># From the NADA package</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ShePyrene</span><span class="op">)</span>; </span>
 <span></span>
 <span><span class="fu"><a href="../reference/cenCompareCdfs.html">cenCompareCdfs</a></span><span class="op">(</span><span class="va">ShePyrene</span><span class="op">$</span><span class="va">Pyrene</span>,<span class="va">ShePyrene</span><span class="op">$</span><span class="va">PyreneCen</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/cdf%20comp1-1.png" width="624" style="display: block; margin: auto;"></p>
@@ -349,10 +353,9 @@ the highest detection limit (the lines in gray) using ROS.</p>
 <h3 id="exploring-the-data">Exploring the data<a class="anchor" aria-label="anchor" href="#exploring-the-data"></a>
 </h3>
 <p>In R, the summary command is used to briefly describe the
-characteristics of the data. In the NADA for R package, the censummary
-command fulfills the same role for censored data:</p>
+characteristics of the data.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/NADA/man/censummary.html" class="external-link">censummary</a></span><span class="op">(</span><span class="va">ShePyrene</span><span class="op">$</span><span class="va">Pyrene</span>,<span class="va">ShePyrene</span><span class="op">$</span><span class="va">PyreneCen</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/censummary.html">censummary</a></span><span class="op">(</span><span class="va">ShePyrene</span><span class="op">$</span><span class="va">Pyrene</span>,<span class="va">ShePyrene</span><span class="op">$</span><span class="va">PyreneCen</span><span class="op">)</span></span>
 <span><span class="co">#&gt; all:</span></span>
 <span><span class="co">#&gt;          n      n.cen    pct.cen        min        max </span></span>
 <span><span class="co">#&gt;   56.00000   11.00000   19.64286   28.00000 2982.00000 </span></span>
@@ -449,10 +452,10 @@ vignette.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.04992</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 205.37515</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  94.24376</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 199.25005</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.32606</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 204.98764</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  93.36345</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 199.32674</span></span></code></pre></div>
 <p>Using the print statement after storing the output in an object
 (<code>Pyr.mle</code> was used here) produces the table type output
 shown above. Without the print statement, just typing the object name,
@@ -528,12 +531,12 @@ estimates.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.47787</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 278.14978</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  92.35525</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 269.09785</span></span>
-<span><span class="co">#&gt;                                  t.LCL   =  95.88228</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 562.56810</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.51025</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 282.09993</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  91.90865</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 270.46999</span></span>
+<span><span class="co">#&gt;                                  t.LCL   =  94.24254</span></span>
+<span><span class="co">#&gt;                                  t.UCL   = 560.75684</span></span></code></pre></div>
 <p>Note that as with all bootstrap estimates the confidence intervals
 above will differ slightly from your results.</p>
 </div>
@@ -548,7 +551,7 @@ embedded NA values – manually delete them first or use the
 <code>elnormAltCensored</code> function as in the next section.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Pyr.ROS.nada</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,</span>
-<span>                     <span class="fu"><a href="https://rdrr.io/pkg/NADA/man/ros.html" class="external-link">cenros</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span><span class="op">)</span><span class="op">)</span></span>
+<span>                     <span class="fu"><a href="../reference/ros-class.html">cenros</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Pyr.ROS.nada</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 163.2494</span></span>
 <span></span>
@@ -618,10 +621,10 @@ mean by bootstrapping, making it very useful.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.20707</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 279.00626</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  90.96885</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 266.78236</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.41924</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 277.83196</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  91.69880</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 269.16711</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="all-at-once">All at once<a class="anchor" aria-label="anchor" href="#all-at-once"></a>
@@ -632,7 +635,7 @@ command of the NADA package: Unfortunately this <code>NADA</code>
 package command also cannot currently incorporate <code>NA</code>
 values, so remove them prior to running the command.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="https://rdrr.io/pkg/NADA/man/censtats.html" class="external-link">censtats</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">ShePyrene</span>,<span class="fu"><a href="../reference/censtats.html">censtats</a></span><span class="op">(</span><span class="va">Pyrene</span>, <span class="va">PyreneCen</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        n    n.cen  pct.cen </span></span>
 <span><span class="co">#&gt; 56.00000 11.00000 19.64286</span></span>
 <span><span class="co">#&gt;       median     mean       sd</span></span>
@@ -716,12 +719,12 @@ First the bootstrap:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.47787</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 278.14978</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  92.35525</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 269.09785</span></span>
-<span><span class="co">#&gt;                                  t.LCL   =  95.88228</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 562.56810</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.51025</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 282.09993</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  91.90865</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 270.46999</span></span>
+<span><span class="co">#&gt;                                  t.LCL   =  94.24254</span></span>
+<span><span class="co">#&gt;                                  t.UCL   = 560.75684</span></span></code></pre></div>
 <p>Then the default normal assumption (basically, a t-interval using the
 K-M estimates of mean and standard deviation):</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
@@ -848,10 +851,10 @@ method:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.95162</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 206.12073</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  93.47173</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 199.18882</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.24803</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 204.62442</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  93.41287</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 195.42604</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="ros">ROS<a class="anchor" aria-label="anchor" href="#ros"></a>
@@ -905,10 +908,10 @@ method.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  96.20707</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 279.00626</span></span>
-<span><span class="co">#&gt;                                  BCa.LCL =  90.96885</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 266.78236</span></span></code></pre></div>
+<span><span class="co">#&gt; Confidence Interval:             Pct.LCL =  95.41924</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 277.83196</span></span>
+<span><span class="co">#&gt;                                  BCa.LCL =  91.69880</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 269.16711</span></span></code></pre></div>
 <p>Generally, I recommend using a bootstrap estimate when there is
 sufficient data, which there are here, as theoretical methods such as
 Cox are strongly dependent on the <em>lognormal</em> shape that often
@@ -1251,18 +1254,18 @@ data.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of Times Bootstrap</span></span>
 <span><span class="co">#&gt; Repeated Because Too Few</span></span>
-<span><span class="co">#&gt; Uncensored Observations:         20</span></span>
+<span><span class="co">#&gt; Uncensored Observations:         24</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval Type:        upper</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 2.788507</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 2.778524</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 2.689348</span></span>
+<span><span class="co">#&gt;                                  BCa.UCL = 2.572053</span></span>
 <span><span class="co">#&gt;                                  t.LCL   = 0.000000</span></span>
-<span><span class="co">#&gt;                                  t.UCL   = 2.853361</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  t.UCL   = 2.780113</span></span></code></pre></div>
 <p>The percentile bootstrap estimate of the UCL95 will be near to 2.53,
 with the output varying slightly each time a bootstrap estimate is run.
 This is essentially the same estimate as that for the gamma
@@ -1332,9 +1335,9 @@ ROS method with bootstrapping:</p>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 0.2886853</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 0.2895254</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 0.2645440</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  BCa.UCL = 0.2634052</span></span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean equals
 0.290 (the Kaplan-Meier estimate with the slight bias would have equaled
 0.293). Remember that your bootstrap result will slightly differ from
@@ -1393,9 +1396,9 @@ same procedure gives slightly lower results for both mean and UCL95:</p>
 <span><span class="co">#&gt; Confidence Level:                95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Confidence Interval:             Pct.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  Pct.UCL = 0.2819454</span></span>
+<span><span class="co">#&gt;                                  Pct.UCL = 0.2842761</span></span>
 <span><span class="co">#&gt;                                  BCa.LCL = 0.0000000</span></span>
-<span><span class="co">#&gt;                                  BCa.UCL = 0.2773083</span></span></code></pre></div>
+<span><span class="co">#&gt;                                  BCa.UCL = 0.2749523</span></span></code></pre></div>
 <p>The percentile bootstrap UCL95 based on the robust ROS mean will be
 near to 0.290 with this known detection limit. It is always better to
 use the laboratory documented limit, but not having one should not stop
@@ -1481,7 +1484,7 @@ differences in means:</p>
 <span><span class="co">#&gt;  Permutation test of mean CensData: Zn   by Factor: Zone </span></span>
 <span><span class="co">#&gt;      9999 Permutations     alternative = two.sided </span></span>
 <span><span class="co">#&gt;   mean of AlluvialFan = 21.22 to 23.51     mean of BasinTrough = 21.28 to 21.94 </span></span>
-<span><span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 0.9999 to 0.9983 </span></span>
+<span><span class="co">#&gt;      Mean (AlluvialFan - BasinTrough) =  -0.05612 to 1.567       p = 0.9999 to 0.9992 </span></span>
 <span><span class="co">#&gt; </span></span></code></pre></div>
 <p>The two groups do not have significantly different means. These are
 p-values that you can believe, as they do not depend on the normal
@@ -1614,18 +1617,18 @@ should get you to quickly use a nonparametric test instead.</p>
 <div class="section level2">
 <h2 id="three-or-more-groups">Three or more groups<a class="anchor" aria-label="anchor" href="#three-or-more-groups"></a>
 </h2>
-<p>The <code>Golden</code> data present lead concentrations in organs of
-herons after exposing them to lead. There are four dosage groups
+<p>The <code>PbHeron</code> data present lead concentrations in organs
+of herons after exposing them to lead. There are four dosage groups
 (“Dosage” or “Group” columns), zero plus three amounts of lead. The
 objective was to determine if feathers or another non-destructive part
 of the birds could be used as an environmental indicator, so it would
 not be necessary to sacrifice a bird in order to measure their lead
-concentrations. A censored boxplot of the Golden liver lead data shows
+concentrations. A censored boxplot of the PbHeron liver lead data shows
 that the third and fourth groups have generally higher values.</p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Golden</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PbHeron</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cboxplot.html">cboxplot</a></span><span class="op">(</span><span class="va">Liver</span>, <span class="va">LiverCen</span>, <span class="va">Dosage</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cboxplot.html">cboxplot</a></span><span class="op">(</span><span class="va">Liver</span>, <span class="va">LiverCen</span>, <span class="va">Dosage</span>,</span>
 <span>                     Ylab <span class="op">=</span> <span class="st">"Lead concentrations in liver, in ppb"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-48-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>The skewness of the 0.05 group and the outlier of the 0.25 group
@@ -1653,12 +1656,12 @@ limit, and original values for all detected data at and above the
 highest reporting limit. The logical operators &lt; (less-than) and ==
 (equal to) are used here.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Golden</span><span class="op">$</span><span class="va">Below04</span> <span class="op">&lt;-</span> <span class="va">Golden</span><span class="op">$</span><span class="va">Liver</span></span>
-<span><span class="va">Golden</span><span class="op">$</span><span class="va">Below04</span><span class="op">[</span><span class="va">Golden</span><span class="op">$</span><span class="va">Liver</span><span class="op">&lt;</span><span class="fl">0.04</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
-<span><span class="va">Golden</span><span class="op">$</span><span class="va">Below04</span><span class="op">[</span><span class="va">Golden</span><span class="op">$</span><span class="va">LiverCen</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">PbHeron</span><span class="op">$</span><span class="va">Below04</span> <span class="op">&lt;-</span> <span class="va">PbHeron</span><span class="op">$</span><span class="va">Liver</span></span>
+<span><span class="va">PbHeron</span><span class="op">$</span><span class="va">Below04</span><span class="op">[</span><span class="va">PbHeron</span><span class="op">$</span><span class="va">Liver</span><span class="op">&lt;</span><span class="fl">0.04</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span>
+<span><span class="va">PbHeron</span><span class="op">$</span><span class="va">Below04</span><span class="op">[</span><span class="va">PbHeron</span><span class="op">$</span><span class="va">LiverCen</span><span class="op">==</span><span class="cn">TRUE</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">1</span></span></code></pre></div>
 <p><strong>Step 2</strong> - run the Kruskal-Wallis test</p>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html" class="external-link">kruskal.test</a></span><span class="op">(</span><span class="va">Below04</span><span class="op">~</span><span class="va">Dosage</span>,<span class="va">Golden</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/kruskal.test.html" class="external-link">kruskal.test</a></span><span class="op">(</span><span class="va">Below04</span><span class="op">~</span><span class="va">Dosage</span>,<span class="va">PbHeron</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Kruskal-Wallis rank sum test</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1675,7 +1678,7 @@ this).</p>
 <p>The nonparametric Peto-Peto test, the multi-DL nonparametric test, is
 computed using the <code>cen1way(...)</code> command:</p>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cen1way.html">cen1way</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cen1way.html">cen1way</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning: One or more group(s) do not have censored data.</span></span>
 <span></span>
 <span><span class="co">#&gt; Warning: One or more group(s) do not have censored data.</span></span>
@@ -1701,14 +1704,14 @@ computed using the <code>cen1way(...)</code> command:</p>
 <p>The cdfs show that the higher two groups appear to differ in their
 percentiles as compared to the lower two groups.</p>
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cen_ecdf.html">cen_ecdf</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cen_ecdf.html">cen_ecdf</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-52-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>This is more easily seen by plotting the empirical cdfs in log
 units:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Golden</span><span class="op">$</span><span class="va">lnLiver</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">Golden</span><span class="op">$</span><span class="va">Liver</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">PbHeron</span><span class="op">$</span><span class="va">lnLiver</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">PbHeron</span><span class="op">$</span><span class="va">Liver</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cen_ecdf.html">cen_ecdf</a></span><span class="op">(</span><span class="va">lnLiver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span>,</span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cen_ecdf.html">cen_ecdf</a></span><span class="op">(</span><span class="va">lnLiver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span>,</span>
 <span>                     xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">lnLiver</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">lnLiver</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>                     Ylab <span class="op">=</span> <span class="st">"Natural Logs of Lead Concentrations in Liver"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-53-1.png" width="624" style="display: block; margin: auto;"></p>
@@ -1725,7 +1728,7 @@ residuals follow a lognormal distribution, so use the associated Q-Q
 plot to see if the residuals in log units appear approximately like a
 normal distribution.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenanova.html">cenanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cenanova.html">cenanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       MLE test of mean natural logs of CensData: Liver by Factor: Dosage </span></span>
 <span><span class="co">#&gt;       Assuming lognormal distribution of CensData </span></span>
@@ -1745,10 +1748,10 @@ normal distribution.</p>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
 <span><span class="co">#&gt; 0.01 - 0 == 0      0.2877     1.0841   0.265   0.9935  </span></span>
-<span><span class="co">#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0151 *</span></span>
-<span><span class="co">#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1449  </span></span>
-<span><span class="co">#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0320 *</span></span>
-<span><span class="co">#&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2456  </span></span>
+<span><span class="co">#&gt; 0.05 - 0 == 0      3.2922     1.1036   2.983   0.0152 *</span></span>
+<span><span class="co">#&gt; 0.25 - 0 == 0      2.2586     1.0625   2.126   0.1448  </span></span>
+<span><span class="co">#&gt; 0.05 - 0.01 == 0   3.0045     1.1010   2.729   0.0324 *</span></span>
+<span><span class="co">#&gt; 0.25 - 0.01 == 0   1.9709     1.0599   1.860   0.2457  </span></span>
 <span><span class="co">#&gt; 0.25 - 0.05 == 0  -1.0336     1.0749  -0.962   0.7712  </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
@@ -1765,10 +1768,10 @@ normal distribution:</p>
 means, use a permutation test as a normal distribution will not fit
 these data very well.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenpermanova.html">cenpermanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cenpermanova.html">cenpermanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;  Permutation test of mean CensData: Liver   by Factor: Dosage </span></span>
 <span><span class="co">#&gt;      9999 Permutations </span></span>
-<span><span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1408 to 0.1428 </span></span>
+<span><span class="co">#&gt; Test Statistic = 1211 to 1211       p = 0.1439 to 0.1456 </span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt;    mean(0)   mean(0.01)   mean(0.05)   mean(0.25)   </span></span>
 <span><span class="co">#&gt;     0.1000       0.1395      12.1100       6.8660</span></span></code></pre></div>
@@ -1781,7 +1784,7 @@ MLE.</p>
 groups, falls below zero when estimated by MLE assuming a normal
 distribution:</p>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Golden</span>,<span class="fu"><a href="../reference/cenanova.html">cenanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span>,LOG<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>,<span class="fu"><a href="../reference/cenanova.html">cenanova</a></span><span class="op">(</span><span class="va">Liver</span>,<span class="va">LiverCen</span>,<span class="va">Dosage</span>,LOG<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       MLE test of mean CensData: Liver   by Factor: Dosage </span></span>
 <span><span class="co">#&gt;       Assuming normal distribution of CensData </span></span>
@@ -2431,22 +2434,20 @@ effect of the one X variable used in the plot.</p>
 variable,</p>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">AtraConc</span>, <span class="va">AtraCen</span>, <span class="va">Dyplant</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data </span></span>
-<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ln(AtraConc) = 3.3637 -0.0364 * Dyplant </span></span>
-<span><span class="co">#&gt; Kendall's tau = -0.3995   p-value = 0 </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt; Kendall's tau = -0.3995   p-value = 0</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-77-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>Seeing this transformed back into the original units will look much
 better.</p>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">AtraConc</span>, <span class="va">AtraCen</span>, <span class="va">Dyplant</span>,retrans<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data </span></span>
-<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ln(AtraConc) = 3.3637 -0.0364 * Dyplant </span></span>
-<span><span class="co">#&gt; Kendall's tau = -0.3995   p-value = 0 </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
-<p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-78-1.png" width="624" style="display: block; margin: auto;"><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-78-2.png" width="624" style="display: block; margin: auto;"></p>
+<span><span class="co">#&gt; Kendall's tau = -0.3995   p-value = 0</span></span></code></pre></div>
+<p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-78-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>For this dataset, the maximum likelihood and ATS slopes for Dyplant
 are very similar (different by 0.006). The intercepts are similar as
 well when you realize that a difference of 2.0 is small when
@@ -2455,12 +2456,11 @@ concentrations go up to 100.</p>
 shows a clear washoff effect at higher flows:</p>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Recon</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">AtraConc</span>,<span class="va">AtraCen</span>, <span class="va">Pctl</span>,retrans<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data </span></span>
-<span><span class="co">#&gt;  </span></span>
-<span><span class="co">#&gt; ln(AtraConc) = -5.4878 + 0.0889 * Pctl </span></span>
-<span><span class="co">#&gt; Kendall's tau = 0.3465   p-value = 0 </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
-<p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-79-1.png" width="624" style="display: block; margin: auto;"><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-79-2.png" width="624" style="display: block; margin: auto;"></p>
+<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ln(AtraConc) = -5.4878 + 0.089 * Pctl </span></span>
+<span><span class="co">#&gt; Kendall's tau = 0.3465   p-value = 0</span></span></code></pre></div>
+<p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-79-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is not yet (June 2022) a good nonparametric “multiple
 regression” method for censored data. There are ‘robust regression’
 methods that perform nonparametric regression but I’ve never seen them
@@ -2484,11 +2484,10 @@ concentration versus decimal time, we find strong evidence for a
 downtrend (p = 0.006):</p>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="../reference/ATS.html">ATS</a></span><span class="op">(</span><span class="va">TCr</span>,<span class="va">CrND</span>,<span class="va">dectime</span>,LOG<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data </span></span>
-<span><span class="co">#&gt;  </span></span>
-<span><span class="co">#&gt; TCr = 181.2617 -0.0896 * dectime </span></span>
-<span><span class="co">#&gt; Kendall's tau = -0.234   p-value = 0.00648 </span></span>
-<span><span class="co">#&gt; </span></span></code></pre></div>
+<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; TCr = 181.2616 -0.0896 * dectime </span></span>
+<span><span class="co">#&gt; Kendall's tau = -0.234   p-value = 0.00648</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-81-1.png" width="624" style="display: block; margin: auto;"></p>
 <p>It isn’t easy to see on the plot, but the detection limits shown as
 dashed lines are higher before 2012 as opposed to after 2012. The
@@ -2501,11 +2500,10 @@ relationship, and then test the residuals for trend:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="../reference/centrend.html">centrend</a></span><span class="op">(</span><span class="va">TCr</span>,<span class="va">CrND</span>,<span class="va">discharge</span>,<span class="va">dectime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-82-1.png" width="624" style="display: block; margin: auto;"><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-82-2.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">#&gt; Trend analysis of TCr adjusted for discharge </span></span>
-<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data </span></span>
-<span><span class="co">#&gt;  </span></span>
-<span><span class="co">#&gt; TCr residuals = 60.117 -0.0301 * dectime </span></span>
-<span><span class="co">#&gt; Kendall's tau = -0.0579   p-value = 0.5051 </span></span>
-<span><span class="co">#&gt; </span></span></code></pre>
+<span><span class="co">#&gt; Akritas-Theil-Sen line for censored data</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; TCr residuals = 60.1729 -0.0299 * dectime </span></span>
+<span><span class="co">#&gt; Kendall's tau = -0.0579   p-value = 0.5051</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-82-3.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is no trend in chromium concentration once the effect of
 streamflow has been subtracted out. It appears that the evidence for a
@@ -2520,20 +2518,19 @@ attention to the individual season results by plotting them using the
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Gales_Creek</span>,<span class="fu"><a href="../reference/censeaken.html">censeaken</a></span><span class="op">(</span><span class="va">dectime</span>,<span class="va">TCr</span>,<span class="va">CrND</span>,<span class="va">Season</span>,seaplots<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  DATA ANALYZED: TCr vs dectime by Season </span></span>
+<span><span class="co">#&gt; DATA ANALYZED: TCr vs dectime by Season </span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre></div>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-1.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">#&gt;   Season  N    S    tau     pval Intercept    slope</span></span>
+<pre><code><span><span class="co">#&gt;   Season  N    S    tau     pval intercept    slope</span></span>
 <span><span class="co">#&gt; 1    Dry 34 -120 -0.214 0.069046    101.24 -0.05001</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-2.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">#&gt;   Season  N   S    tau    pval Intercept   slope</span></span>
-<span><span class="co">#&gt; 1    Wet 29 -83 -0.204 0.12381    233.15 -0.1151</span></span>
-<span><span class="co">#&gt; ---------- </span></span>
-<span><span class="co">#&gt; Seasonal Kendall test and Theil-Sen line</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;   Season  N   S    tau    pval intercept  slope</span></span>
+<span><span class="co">#&gt; 1    Wet 29 -83 -0.204 0.12381    232.93 -0.115</span></span>
+<span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-3.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">#&gt;   reps_R  N S_SK tau_SK   pval intercept    slope</span></span>
-<span><span class="co">#&gt; 1   4999 63 -203  -0.21 0.0112    181.26 -0.08965</span></span>
+<span><span class="co">#&gt; 1   4999 63 -203  -0.21 0.0154    181.26 -0.08965</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-83-4.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is an overall trend once the Seasonal Kendall test has removed
@@ -2561,8 +2558,8 @@ the time variable, and the season category variable.</p>
 <span><span class="co">#&gt;  Trend analysis by Season of: TCr adjusted for discharge </span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-3.png" width="624" style="display: block; margin: auto;"></p>
-<pre><code><span><span class="co">#&gt;   Season  N  S     tau    pval Intercept   slope</span></span>
-<span><span class="co">#&gt; 1    Dry 34 -8 -0.0143 0.91638     34.52 -0.0172</span></span>
+<pre><code><span><span class="co">#&gt;   Season  N  S     tau    pval Intercept    slope</span></span>
+<span><span class="co">#&gt; 1    Dry 34 -8 -0.0143 0.91638    35.853 -0.01786</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-4.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">#&gt;   Season  N   S    tau    pval Intercept    slope</span></span>
@@ -2571,7 +2568,7 @@ the time variable, and the season category variable.</p>
 <span><span class="co">#&gt; Seasonal Kendall test and Akritas-Theil-Sen line on residuals</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-5.png" width="624" style="display: block; margin: auto;"></p>
 <pre><code><span><span class="co">#&gt;   reps_R  N S_SK  tau_SK   pval intercept    slope</span></span>
-<span><span class="co">#&gt; 1   4999 63  -66 -0.0683 0.4284    59.654 -0.02967</span></span>
+<span><span class="co">#&gt; 1   4999 63  -66 -0.0683 0.4448    59.654 -0.02967</span></span>
 <span><span class="co">#&gt; ----------</span></span></code></pre>
 <p><img src="Censored_Data_Analysis_files/figure-html/unnamed-chunk-84-6.png" width="624" style="display: block; margin: auto;"></p>
 <p>There is no trend in flow-adjusted chromium found for this site and
@@ -3026,7 +3023,7 @@ entero1A.</li>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Upper quantiles of permutations (null model):</span></span>
 <span><span class="co">#&gt;    90%    95%  97.5%    99% </span></span>
-<span><span class="co">#&gt; 0.0473 0.0665 0.0868 0.1129 </span></span>
+<span><span class="co">#&gt; 0.0478 0.0680 0.0891 0.1169 </span></span>
 <span><span class="co">#&gt; Permutation: free</span></span>
 <span><span class="co">#&gt; Number of permutations: 9999</span></span></code></pre></div>
 <p>There is a significant positive correlation between the MST marker
@@ -3215,7 +3212,7 @@ KM is always better. Statisticians disagree.</p>
 
       <footer><div class="copyright">
   <p></p>
-<p>Developed by Paul Julian, Dennis Helsel.</p>
+<p>Developed by Paul Julian, Dennis Helsel, Lopaka Lee.</p>
 </div>
 
 <div class="pkgdown">

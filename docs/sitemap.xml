@@ -55,6 +55,9 @@
     <loc>/reference/Brumbaugh.html</loc>
   </url>
   <url>
+    <loc>/reference/Cadmium.html</loc>
+  </url>
+  <url>
     <loc>/reference/cboxplot.html</loc>
   </url>
   <url>
@@ -70,6 +73,9 @@
     <loc>/reference/cenanova.html</loc>
   </url>
   <url>
+    <loc>/reference/cenboxplot.html</loc>
+  </url>
+  <url>
     <loc>/reference/cenCompareCdfs.html</loc>
   </url>
   <url>
@@ -77,6 +83,12 @@
   </url>
   <url>
     <loc>/reference/cencorreg.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cenken.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cenpar.usr.html</loc>
   </url>
   <url>
     <loc>/reference/cenperm2.html</loc>
@@ -97,6 +109,12 @@
     <loc>/reference/censeaken.html</loc>
   </url>
   <url>
+    <loc>/reference/censtats.html</loc>
+  </url>
+  <url>
+    <loc>/reference/censummary.html</loc>
+  </url>
+  <url>
     <loc>/reference/cenTolInt.html</loc>
   </url>
   <url>
@@ -104,6 +122,9 @@
   </url>
   <url>
     <loc>/reference/centrendsea.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cenxyplot.html</loc>
   </url>
   <url>
     <loc>/reference/cen_ecdf.html</loc>
@@ -121,7 +142,16 @@
     <loc>/reference/cfit.html</loc>
   </url>
   <url>
+    <loc>/reference/cohn.html</loc>
+  </url>
+  <url>
     <loc>/reference/computeS.html</loc>
+  </url>
+  <url>
+    <loc>/reference/CuZn.html</loc>
+  </url>
+  <url>
+    <loc>/reference/EM.html</loc>
   </url>
   <url>
     <loc>/reference/equivalent_n.html</loc>
@@ -139,19 +169,43 @@
     <loc>/reference/Gales_Creek.html</loc>
   </url>
   <url>
+    <loc>/reference/hc_ppoints.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hc_ppoints_cen.html</loc>
+  </url>
+  <url>
+    <loc>/reference/hc_ppoints_uncen.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
     <loc>/reference/kenplot.html</loc>
   </url>
   <url>
+    <loc>/reference/Maclist.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Macmat.html</loc>
+  </url>
+  <url>
     <loc>/reference/markers.html</loc>
+  </url>
+  <url>
+    <loc>/reference/MLEintvl.html</loc>
   </url>
   <url>
     <loc>/reference/NADA2.survmean.html</loc>
   </url>
   <url>
     <loc>/reference/NADA2_survmean.html</loc>
+  </url>
+  <url>
+    <loc>/reference/NADAList.html</loc>
+  </url>
+  <url>
+    <loc>/reference/NADAprobs.html</loc>
   </url>
   <url>
     <loc>/reference/ordranks.html</loc>
@@ -163,6 +217,9 @@
     <loc>/reference/PbHeron.html</loc>
   </url>
   <url>
+    <loc>/reference/pctCen.html</loc>
+  </url>
+  <url>
     <loc>/reference/PollenThia.html</loc>
   </url>
   <url>
@@ -172,16 +229,37 @@
     <loc>/reference/ppw.test.html</loc>
   </url>
   <url>
+    <loc>/reference/print.NADAList.html</loc>
+  </url>
+  <url>
     <loc>/reference/quantile_CI.html</loc>
   </url>
   <url>
     <loc>/reference/ReconLogistic.html</loc>
   </url>
   <url>
+    <loc>/reference/rescaleP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ros-class.html</loc>
+  </url>
+  <url>
+    <loc>/reference/ros.html</loc>
+  </url>
+  <url>
     <loc>/reference/ROSci.html</loc>
   </url>
   <url>
+    <loc>/reference/ShePyrene.html</loc>
+  </url>
+  <url>
+    <loc>/reference/splitQual.html</loc>
+  </url>
+  <url>
     <loc>/reference/TCE2.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TCEReg.html</loc>
   </url>
   <url>
     <loc>/reference/uMDS.html</loc>

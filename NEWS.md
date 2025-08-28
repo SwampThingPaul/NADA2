@@ -78,5 +78,7 @@
 
 * Currently in development stage, removed dependencies of NADA functions (2024-07-31). Expect push to CRAN imminently (~1 week)
 
+* Submitted to CRAN for review and posting (2025-08-28)
+
 
 

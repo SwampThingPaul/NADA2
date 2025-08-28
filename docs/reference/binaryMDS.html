@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -105,100 +105,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PbHeron</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># without group specified</span></span></span>
 <span class="r-in"><span><span class="fu">binaryMDS</span><span class="op">(</span><span class="va">PbHeron</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 0 stress 9.202781e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 1 stress 8.454041e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.08339629  max resid 0.2406127 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 2 stress 3.291748e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.06119226  max resid 0.1413517 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 3 stress 0.002383588 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 4 stress 0.001365952 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 5 stress 0.003457604 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 6 stress 7.255049e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.05516073  max resid 0.1398394 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 7 stress 0.0557419 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 8 stress 0.05574194 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 9 stress 0.0005622559 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 10 stress 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.01665327  max resid 0.05131048 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 11 stress 9.166887e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.05112416  max resid 0.1505606 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 12 stress 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.03985622  max resid 0.1387232 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 13 stress 0.05797323 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 14 stress 6.436378e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.01130367  max resid 0.02073597 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 15 stress 0.0006326231 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 16 stress 0.0700209 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 17 stress 9.788295e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1308235  max resid 0.303749 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 18 stress 0.0004467786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1201635  max resid 0.3022219 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 19 stress 7.763769e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1111397  max resid 0.3169961 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 20 stress 0.002357685 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *** Best solution was not repeated -- monoMDS stopping criteria:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      7: no. of iterations &gt;= maxit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      9: stress &lt; smin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      4: stress ratio &gt; sratmax</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stress is (nearly) zero: you may have insufficient data</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> species scores not available</span>
-<span class="r-plt img"><img src="binaryMDS-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># With Group argument</span></span></span>
 <span class="r-in"><span><span class="fu">binaryMDS</span><span class="op">(</span><span class="va">PbHeron</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span>,group<span class="op">=</span><span class="va">PbHeron</span><span class="op">$</span><span class="va">DosageGroup</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 0 stress 9.202781e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 1 stress 5.729706e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.08158103  max resid 0.2212565 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 2 stress 9.151599e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1340991  max resid 0.3593923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 3 stress 5.589054e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1409506  max resid 0.3694032 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 4 stress 7.802855e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.06486893  max resid 0.1592637 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 5 stress 0.06925871 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 6 stress 0.04183233 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 7 stress 0.0006688247 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 8 stress 0.07573106 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 9 stress 0.0003572154 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1099225  max resid 0.2836685 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 10 stress 9.581388e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.06334156  max resid 0.2194986 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 11 stress 0.0001673226 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.06885748  max resid 0.1724581 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 12 stress 0.0007166791 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 13 stress 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... New best solution</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.04452555  max resid 0.1266959 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 14 stress 2.452023e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1435376  max resid 0.3727563 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 15 stress 9.05722e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.1176455  max resid 0.3508205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 16 stress 0.0009799021 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 17 stress 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.03775872  max resid 0.08106535 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 18 stress 0 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.02430448  max resid 0.04657197 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 19 stress 7.822003e-05 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ... Procrustes: rmse 0.03858797  max resid 0.1147788 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Run 20 stress 0.08417885 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> *** Best solution was not repeated -- monoMDS stopping criteria:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      6: no. of iterations &gt;= maxit</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     11: stress &lt; smin</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      3: stress ratio &gt; sratmax</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>stress is (nearly) zero: you may have insufficient data</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> species scores not available</span>
-<span class="r-plt img"><img src="binaryMDS-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -209,7 +124,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Paul Julian, Dennis Helsel.</p>
+  <p></p><p>Developed by Paul Julian, Dennis Helsel, Lopaka Lee.</p>
 </div>
 
 <div class="pkgdown">

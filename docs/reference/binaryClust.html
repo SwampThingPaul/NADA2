@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -63,12 +63,19 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">binaryClust</span><span class="op">(</span><span class="va">dat.frame</span>, method <span class="op">=</span> <span class="st">"ward.D2"</span>, group <span class="op">=</span> <span class="cn">NULL</span>, ncluster <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">binaryClust</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"ward.D2"</span>,</span>
+<span>  group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ncluster <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plotncluster <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  clustIndex <span class="op">=</span> <span class="st">"all"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>dat.frame</dt>
+    <dl><dt>data</dt>
 <dd><p>A data frame containing only the 0/1 columns, one column per chemical parameter.</p></dd>
 
 
@@ -83,12 +90,24 @@
 <dt>ncluster</dt>
 <dd><p>Optional number of clusters to be differentiated on the graph. Clusters are fenced off with rectangles.</p></dd>
 
+
+<dt>plotncluster</dt>
+<dd><p>default is <code>TRUE</code> logical flags to add identification of clusters on dendrogram</p></dd>
+
+
+<dt>clustIndex</dt>
+<dd><p>Optional, if not specified, potential number of clusters will be determined based on the mean best number of clusters across all indicies. For a specific index, see details</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     
 
-<p>Prints a cluster dendrogram based on clustering method</p>
+<p>Prints a cluster dendrogram based on clustering method and outputs a list of clusters and hierarchical cluster analysis results</p>
+    </div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>If a specific index is desired to determine the best number of clusters see <code><a href="https://rdrr.io/pkg/NbClust/man/NbClust.html" class="external-link">NbClust::NbClust</a></code> for index values.</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -101,11 +120,39 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># without group specified</span></span></span>
 <span class="r-in"><span><span class="fu">binaryClust</span><span class="op">(</span><span class="va">PbHeron</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NaNs produced</span>
 <span class="r-plt img"><img src="binaryClust-1.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $hclust</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hclust(d = simple_matching_coeff, method = method)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster method   : ward.D2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distance         : simplematch </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Number of objects: 27 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $clusters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 2 1 2 3 4 1 1 3 1 1 2 2 3 3 1 3 3 3 3 3 1 3 1 3 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># With Group argument</span></span></span>
 <span class="r-in"><span><span class="fu">binaryClust</span><span class="op">(</span><span class="va">PbHeron</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">15</span><span class="op">]</span>,group<span class="op">=</span><span class="va">PbHeron</span><span class="op">$</span><span class="va">DosageGroup</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NaNs produced</span>
 <span class="r-plt img"><img src="binaryClust-2.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $hclust</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> hclust(d = simple_matching_coeff, method = method)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Cluster method   : ward.D2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Distance         : simplematch </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Number of objects: 27 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $clusters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] 1 1 2 1 2 3 4 1 1 3 1 1 2 2 3 3 1 3 3 3 3 3 1 3 1 3 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </div>
@@ -116,7 +163,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Paul Julian, Dennis Helsel.</p>
+  <p></p><p>Developed by Paul Julian, Dennis Helsel, Lopaka Lee.</p>
 </div>
 
 <div class="pkgdown">

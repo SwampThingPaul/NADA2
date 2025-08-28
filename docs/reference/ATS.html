@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
 <span>  <span class="va">y.var</span>,</span>
 <span>  <span class="va">y.cen</span>,</span>
 <span>  <span class="va">x.var</span>,</span>
-<span>  x.cen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x.var</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  x.cen <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x.var</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  LOG <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  retrans <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  xlabel <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -133,25 +133,15 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Both y and x are censored</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Both y and x are censored</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">PbHeron</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">PbHeron</span>, <span class="fu">ATS</span><span class="op">(</span><span class="va">Blood</span>, <span class="va">BloodCen</span>, <span class="va">Kidney</span>, <span class="va">KidneyCen</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Akritas-Theil-Sen line for censored data </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ln(Blood) = -4.1556 + 0.2926 * Kidney </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kendall's tau = 0.4217   p-value = 0.00043 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-plt img"><img src="ATS-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># x is not censored</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Brumbaugh</span>,<span class="fu">ATS</span><span class="op">(</span><span class="va">Hg</span>, <span class="va">HgCen</span>, <span class="va">PctWetland</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Akritas-Theil-Sen line for censored data </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ln(Hg) = -1.7779 + 0.0214 * PctWetland </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Kendall's tau = 0.192   p-value = 0.00063 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-plt img"><img src="ATS-2.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -162,7 +152,7 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Paul Julian, Dennis Helsel.</p>
+  <p></p><p>Developed by Paul Julian, Dennis Helsel, Lopaka Lee.</p>
 </div>
 
 <div class="pkgdown">

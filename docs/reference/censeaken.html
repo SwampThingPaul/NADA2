@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
       </span>
     </div>
 
@@ -68,6 +68,7 @@
 <span>  <span class="va">y</span>,</span>
 <span>  <span class="va">y.cen</span>,</span>
 <span>  <span class="va">group</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  LOG <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  R <span class="op">=</span> <span class="fl">4999</span>,</span>
 <span>  nmin <span class="op">=</span> <span class="fl">4</span>,</span>
@@ -93,6 +94,10 @@
 
 <dt>group</dt>
 <dd><p>Column of the season classifications. A factor in R, so usually though not necessarily a text variable.  If numeric, define as a factor before running the script.</p></dd>
+
+
+<dt>data</dt>
+<dd><p>an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model.</p></dd>
 
 
 <dt>LOG</dt>
@@ -137,10 +142,6 @@ If <code>seaplots=FALSE</code> only the overall Seasonal Kendall (Akritas-Theil-
     <p>Helsel, D.R., 2011. Statistics for censored environmental data using Minitab and R, 2nd ed. John Wiley &amp; Sons, USA, N.J.</p>
 <p>Hirsch, R.M., Slack, J.R., Smith, R.A., 1982. Techniques of Trend Analysis for Monthly Water Quality Data, Water Res. Reseach 18, 107-121.</p>
     </div>
-    <div id="see-also">
-    <h2>See also</h2>
-    <div class="dont-index"><p><a href="https://rdrr.io/pkg/NADA/man/cenken.html" class="external-link">NADA::cenken</a></p></div>
-    </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
@@ -153,30 +154,55 @@ If <code>seaplots=FALSE</code> only the overall Seasonal Kendall (Akritas-Theil-
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">Brumbaugh</span>,<span class="fu">censeaken</span><span class="op">(</span><span class="va">time</span>,<span class="va">Hg</span>,<span class="va">HgCen</span>,<span class="va">sea</span>,seaplots <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  DATA ANALYZED: Hg vs time by sea </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DATA ANALYZED: Hg vs time by sea </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-1.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N S    tau    pval Intercept     slope</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1 14 6 0.0659 0.78398    0.1279 0.0003922</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N  S   tau   pval intercept    slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1 25 47 0.157 0.2807  0.095989 0.001222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-2.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N   S     tau    pval Intercept      slope</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      2 52 -29 -0.0219 0.82508   0.25863 -0.0001143</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N    S    tau    pval intercept     slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      2 50 -125 -0.102 0.29905   0.30737 -0.001238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-3.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N    S   tau    pval Intercept     slope</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      3 37 -100 -0.15 0.19314   0.26919 -0.001243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N    S    tau    pval intercept     slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      3 44 -120 -0.127 0.22851   0.26726 -0.001029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-4.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N   S    tau    pval Intercept      slope</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1      4 30 -57 -0.131 0.31716   0.26798 -0.0008172</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Seasonal Kendall test and Theil-Sen line </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N  S   tau    pval intercept    slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      4 14 18 0.198 0.35131   0.10426 0.002871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-5.png" alt="" width="700" height="433"></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   reps_R   N S_SK  tau_SK  pval intercept      slope</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1   4999 133 -180 -0.0715 0.255   0.25022 -0.0004083</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---------- </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   reps_R   N S_SK  tau_SK   pval intercept      slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   4999 133 -180 -0.0703 0.2786   0.25022 -0.0004083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
 <span class="r-plt img"><img src="censeaken-6.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">censeaken</span><span class="op">(</span><span class="va">time</span>,<span class="va">Hg</span>,<span class="va">HgCen</span>,<span class="va">sea</span>,<span class="va">Brumbaugh</span>,seaplots <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DATA ANALYZED: Hg vs time by sea </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-7.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N  S   tau   pval intercept    slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      1 25 47 0.157 0.2807  0.095989 0.001222</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-8.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N    S    tau    pval intercept     slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      2 50 -125 -0.102 0.29905   0.30737 -0.001238</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-9.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N    S    tau    pval intercept     slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      3 44 -120 -0.127 0.22851   0.26726 -0.001029</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-10.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Season  N  S   tau    pval intercept    slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1      4 14 18 0.198 0.35131   0.10426 0.002871</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-11.png" alt="" width="700" height="433"></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   reps_R   N S_SK  tau_SK   pval intercept      slope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   4999 133 -180 -0.0703 0.2648   0.25022 -0.0004083</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-plt img"><img src="censeaken-12.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
@@ -188,7 +214,7 @@ If <code>seaplots=FALSE</code> only the overall Seasonal Kendall (Akritas-Theil-
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Paul Julian, Dennis Helsel.</p>
+  <p></p><p>Developed by Paul Julian, Dennis Helsel, Lopaka Lee.</p>
 </div>
 
 <div class="pkgdown">
