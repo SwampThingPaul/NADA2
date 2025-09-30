@@ -32,3 +32,5 @@
 
 
 ^vignettes\.*$
+
+^NADA2Users_emails2\.txt$
