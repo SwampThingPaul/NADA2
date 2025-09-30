@@ -44,11 +44,18 @@
 #' equivalent_n(Brumbaugh$Hg,Brumbaugh$HgCen)
 
 equivalent_n <- function(y.var, y.cen,printstat=TRUE){
+  # --- STOP IF NO CENSORED DATA ---
+  if (!any(y.cen)) {
+    stop("equivalent_n() requires at least one censored observation. No censored data detected.")
+  }
 
   ycen <- as.logical(y.cen)
   yname <- deparse(substitute(y.var))
 
+  # Summarize censored data
   aa <- censummary(y.var, ycen)
+
+  # Prepare summary tables
   all_df <-data.frame(aa[1])
   all_df$variable <-rownames(all_df)
   rownames(all_df)<- NULL
@@ -57,6 +64,8 @@ equivalent_n <- function(y.var, y.cen,printstat=TRUE){
   colnames(limits_df) <- c("limit","n","uncen","pexceed")
 
   aa <- list(all=all_df,limits=limits_df)
+
+  # Equivalent sample size calculations
   n.equiv <- sum(aa$limits[,2]*aa$limits[,4] + aa$limits[,3])
   n_total <- sum(aa$limits[,2] + aa$limits[,3])
   n_detected <- sum(aa$limits[,3])
@@ -65,13 +74,14 @@ equivalent_n <- function(y.var, y.cen,printstat=TRUE){
   n.detected <- n.equiv - n.cen.equiv
   equiv.out <- data.frame(n.equiv,  n.cen.equiv, n.detected)
 
-
+  # Print results if requested
   if(printstat==TRUE){
   cat("data:",yname,"\n")
   print(aa)
   cat("equivalent sample size:", "\n")
   print(equiv.out, row.names = FALSE, print.gap = 3)
   }
+
   aa[["equivalent"]] <- equiv.out
   return (invisible (aa))
 }

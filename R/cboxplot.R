@@ -42,18 +42,46 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
                      Ylab=yname, Xlab = gname, Title = NULL,
                      dl.loc = "topright", dl.col = "red",dl.lwd = 2,
                      dl.lty = "longdash",bxcol = "white",
-                     Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL) {
+                     Ymax = NULL, minmax = FALSE, printstat = FALSE, Hlines = NULL,...) {
 
-  box.fill <- 0
-  if (is.null(xgroup) == TRUE) { ydat <- na.omit(data.frame(x1, x2))
-  y1 <- ydat[,1];  y2 <- ydat[,2]; group <- xgroup
-  }
-  else {ydat <- na.omit(data.frame(x1, x2, xgroup))
-  y1 <- ydat[,1];  y2 <- ydat[,2]; group <- ydat[,3]
+  ## handle inputs
+  if (is.null(xgroup)) {
+    ydat <- na.omit(data.frame(x1, x2))
+    y1 <- ydat[,1]; y2 <- ydat[,2]; group <- NULL
+  } else {
+    ydat <- na.omit(data.frame(x1, x2, xgroup))
+    y1 <- ydat[,1]; y2 <- ydat[,2]; group <- ydat[,3]
   }
 
-  oldpar<- par(no.readonly = TRUE)
+  oldpar <- par(no.readonly = TRUE)
   on.exit(par(oldpar))
+
+  yname <- deparse(substitute(x1))
+  if (is.null(Ylab))  Ylab <- yname
+  y1 <- as.numeric(y1)
+  y2 <- as.logical(y2)   # TRUE = censored
+
+  ## ----------------------------------
+  ## no censored values at all - default to boxplot
+  ## ----------------------------------
+  if (!any(y2)) {
+    warning("No censored data detected. Passing arguments to standard boxplot().")
+    Ylab <- deparse(substitute(x1))
+    Xlab <- NA
+    if (is.null(xgroup)) {
+      boxplot(y1, na.action = na.omit, ylab = Ylab, xlab = Xlab,
+                        main = Title, col = bxcol, log = ifelse(LOG, "y", ""),...)
+      rslt <- data.frame(MaximumDL="none", Group="all")
+    } else {
+      gname <- deparse(substitute(xgroup))
+      if (!is.null(ordr)) group <- factor(group, levels=ordr)
+      glabs <- levels(factor(group))
+      boxplot(y1 ~ group, na.action = na.omit, ylab = Ylab, xlab = gname,
+                        names = glabs, main = Title, col = bxcol, log = ifelse(LOG, "y", ""),...)
+      rslt <- data.frame(MaximumDL="none", Group=glabs)
+    }
+    return(invisible(rslt))
+  }
 
   box.fill <- adjustcolor( "white", alpha.f = 0.6)
   if (show==TRUE) {bdl.col <- box.fill}

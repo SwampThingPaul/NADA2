@@ -22,7 +22,8 @@ cboxplot(
   Ymax = NULL,
   minmax = FALSE,
   printstat = FALSE,
-  Hlines = NULL
+  Hlines = NULL,
+  ...
 )
 }
 \arguments{
