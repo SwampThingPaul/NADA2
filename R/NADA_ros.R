@@ -274,20 +274,23 @@ as.data.frame.ros <- function(x, ...) {
 hc_ppoints <- function(obs, censored, na.action = getOption("na.action")) {
   if (!is.logical(censored)) stop("censored indicator must be logical vector!\n")
 
-  if (anyNA(obs)||anyNA(censored)) {
-    if (is.null(na.action)) na.action = "na.omit"
-    obs  <-  do.call(na.action, list(obs))
-    censored  <- do.call(na.action, list(censored))
+  if (anyNA(obs) || anyNA(censored)) {
+    if (is.null(na.action)) na.action <- "na.omit"
+    obs <- do.call(na.action, list(obs))
+    censored <- do.call(na.action, list(censored))
   }
 
-  pp <-  numeric(length(obs))
+  n <- length(obs)
+  pp <- numeric(n)
 
-  if (!any(censored)) pp <-  ppoints(obs)
-  else
-  {
-    cn  <-  cohn(obs, censored)
-    pp[!censored] <-  hc_ppoints_uncen(obs, censored, cn, na.action)
-    pp[censored]  <-  hc_ppoints_cen(obs, censored, cn, na.action)
+  if (!any(censored)) {
+    pp <- ppoints(n)
+  } else if (all(censored)) {
+    pp <- seq_len(n) / (n + 1)
+  } else {
+    cn <- cohn(obs, censored)
+    pp[!censored] <- hc_ppoints_uncen(obs, censored, cn, na.action)
+    pp[censored]  <- hc_ppoints_cen(obs, censored, cn, na.action)
   }
 
   return(pp)
@@ -318,17 +321,24 @@ hc_ppoints_uncen <- function(obs, censored, cn = NULL, na.action = getOption("na
 
   if (is.null(cn)) cn <- cohn(obs, censored)
 
-  nonzero <- cn$A != 0
+  nonzero <- cn$A != 0 & !is.na(cn$A)
   A <- cn$A[nonzero]
-  B <- cn$B[nonzero]
   P <- cn$P[nonzero]
   limit <- cn$limit[nonzero]
 
   pp <- numeric()
   for (i in seq_along(limit)) {
-    R <- seq_len(A[i])
-    k <- ifelse(is.na(P[i + 1]), 0, P[i + 1])
-    pp <- c(pp, (1 - P[i]) + ((P[i] - k) * R / (A[i] + 1)))
+    if (!is.na(A[i]) && A[i] > 0) {
+      R <- seq_len(A[i])
+      k <- ifelse(is.na(P[i + 1]), 0, P[i + 1])
+      pp <- c(pp, (1 - P[i]) + ((P[i] - k) * R / (A[i] + 1)))
+    }
+  }
+
+  # fallback: if nothing was produced, use plain ppoints for uncensored
+  if (length(pp) == 0) {
+    n_uncen <- sum(!censored)
+    pp <- ppoints(n_uncen)
   }
 
   return(pp)
@@ -358,22 +368,30 @@ hc_ppoints_cen <- function(obs, censored, cn = NULL, na.action = getOption("na.a
 
   if (is.null(cn)) cn <- cohn(obs, censored)
 
-  C <- cn$C
-  P <- cn$P
-  limit <- cn$limit
-
-  # Remove rows with P == 1
-  if (P[1] == 1) {
-    C <- C[-1]
-    P <- P[-1]
-    limit <- limit[-1]
-  }
+  nonzero <- cn$A != 0 & !is.na(cn$A)
+  A <- cn$A[nonzero]
+  P <- cn$P[nonzero]
+  limit <- cn$limit[nonzero]
 
   pp <- numeric()
-  for (i in seq_along(limit)) {
-    c_i <- C[i]
-    r <- seq_len(c_i)
-    pp <- c(pp, (1 - P[i]) * r / (c_i + 1))
+
+  # Robust guard
+  if (length(P) > 0 && isTRUE(P[1] == 1)) {
+    # all censored below detection
+    pp <- rep(0, sum(censored))
+  } else {
+    for (i in seq_along(limit)) {
+      if (!is.na(A[i]) && A[i] > 0) {
+        R <- seq_len(A[i])
+        k <- ifelse(is.na(P[i + 1]), 0, P[i + 1])
+        pp <- c(pp, (1 - P[i]) + ((P[i] - k) * R / (A[i] + 1)))
+      }
+    }
+  }
+
+  # fallback: if still nothing but censored present
+  if (length(pp) == 0 && any(censored)) {
+    pp <- ppoints(sum(censored))
   }
 
   return(pp)

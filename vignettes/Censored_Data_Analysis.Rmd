@@ -51,10 +51,26 @@ check.packages <- function(pkg){
 
 pkg <- c("bestglm","car","cenGAM","EnvStats","fitdistrplus","Kendall",
          "mgcv","multcomp","nlme","perm","rms","survminer",
-         "vegan","NADA2","bestglm")
+         "vegan","NADA2","NADA","bestglm","remotes")
 check.packages(pkg)
 
-remotes::install_github("SwampThingPaul/NADA")
+```
+
+
+```{r,echo=F,warning=F,message=F,eval=F,results="hide",include = FALSE}
+check.packages <- function(pkg){
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) 
+    install.packages(new.pkg, dependencies = TRUE)
+  sapply(pkg, require, character.only = TRUE)
+}
+
+pkg <- c("bestglm","car","cenGAM","EnvStats","fitdistrplus","Kendall",
+         "mgcv","multcomp","nlme","perm","rms","survminer",
+         "vegan","NADA","bestglm","remotes")
+check.packages(pkg)
+remotes::install_github("SwampThingPaul/NADA2")
+# remotes::install_github("SwampThingPaul/NADA")
 ```
 
 *Loading libraries using console/R-script*
@@ -71,14 +87,13 @@ library(perm)
 library(rms)
 library(survminer)
 library(vegan)
-library(NADA2)
 library(bestglm)
 library(car)
 library(nlme)
 library(rms)
 
-# library(NADA)
-
+library(NADA)
+library(NADA2)
 ```
 
 Currently the `NADA` package is no longer CRAN, but is still available on [GitHub](https://github.com/SwampThingPaul/NADA)
@@ -296,9 +311,8 @@ The `cenros` command in the previously in the `NADA` package and now in the `NAD
 
 ```{r, fig.width=6.5,fig.height=4,fig.align='center',fig.cap="Lognormal probability of pyrene data"}
 Pyr.ROS.nada2 <- with(ShePyrene,
-                     cenros(Pyrene, PyreneCen))
+                     NADA2::cenros(Pyrene, PyreneCen))
 Pyr.ROS.nada2
-plot(Pyr.ROS.nada2)
 ```
 
 
@@ -317,7 +331,7 @@ print(Pyr.ROS)
 Descriptive stats for all three methods, again for the default lognormal distribution, can quickly be produced using the censtats command of the NADA package: Unfortunately this `NADA` package command also cannot currently incorporate `NA` values, so remove them prior to running the command.
 
 ```{r}
-with(ShePyrene,censtats(Pyrene, PyreneCen))
+with(ShePyrene,NADA::censtats(Pyrene, PyreneCen))
 ```
 
 K-M and ROS use the high outlier data value to estimate the mean. MLE uses the lognormal model, whose value at that percentile is lower and therefore the MLE estimate of the mean for this dataset is lower. And again, the K-M mean computed in this `NADA` package function is slightly biased high.

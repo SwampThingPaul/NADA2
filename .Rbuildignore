@@ -29,3 +29,6 @@
 ^working_dev\.*$
 
 ^NADA2Users_emails.txt
+
+
+^vignettes\.*$
