@@ -62,6 +62,8 @@ cboxplot(
 \item{printstat}{Logical \code{TRUE}/\code{FALSE} option of whether to print the resulting statistics in the console window, or not.  Default is \code{TRUE.}}
 
 \item{Hlines}{Data to add horizontal reference lines to the boxplot. Required input is a data frame of 4 columns.  See Details.}
+
+\item{...}{Additional arguments passed to the default boxplot function}
 }
 \value{
 Prints a boxplot with detection limit identified and a concatenated list of the maximum detection limit for each group.

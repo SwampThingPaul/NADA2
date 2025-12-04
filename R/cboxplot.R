@@ -20,6 +20,7 @@
 #' @param Ymax Maximum Y value to be shown on the plot.  Used to cut off high outliers on plot and better show the bulk of the boxplots.
 #' @param printstat Logical `TRUE`/`FALSE` option of whether to print the resulting statistics in the console window, or not.  Default is `TRUE.`
 #' @param Hlines Data to add horizontal reference lines to the boxplot. Required input is a data frame of 4 columns.  See Details.
+#' @param ... Additional arguments passed to the default boxplot function
 
 #' @details If maximum detection limits vary among groups, separate maxDL lines will be drawn for each group's boxplot. If one group has fewer than 3 detected observations its boxplot will not be drawn.  Its detection limits will not count when computing the maximum limit.  However, if only one boxplot is drawn for the entire dataset by not specifying a group variable, the detection limits from the portion that is the mostly ND group will be used when computing the maximum limit.
 #' @details The reuired input to draw additional horizontal lines (Hlines option) is a data frame with 4 columns of input, one row per horizontal line.  More than one line may be drawn.  Column one is the Y axis value for the line.  Column 2 is the line color, column 3 is the line type (lty) and column 4 is the text to be added just above the line.  To add one line at a value of 40, for example, use Hlines = yline, after defining yline = data.frame(c(40, "purple", "dotted", "New Health Std")).  To draw two lines, define yline as yline = data.frame(matrix(c(40, "purple", "dotted", "New Health Std", 70, "blue", "longdash", "Old Health Std"), ncol = 4, byrow=TRUE))) . If no text is wanted use " " for the column 4 entry for that line. See ?par under lty for standard line types.
@@ -116,10 +117,10 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
       if (is.null(Ymax) == FALSE) { Ylim = c(y.min, log(Ymax))}
       if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim,...)}
       else {
         #  boxplot drawn to max and min.  minmax = TRUE
-        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        graphics::boxplot(log(y.ros$modeled), ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim,...)}
 
       polygon (xx, yy, col = bdl.col, border=bdl.col)
       abline (h=y.min, col=bdl.col, lwd=8)
@@ -186,10 +187,10 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
       if (is.null(Ymax) == FALSE) { Ylim = c(log(ymin.all), log(Ymax))}
       if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim,...)}
       else {
         #  boxplot drawn to max and min. minmax = TRUE
-        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(log(y.all)~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim,...)}
 
       multiDL <- ifelse (sd(maxDL) != 0, TRUE, FALSE)
       if (multiDL == FALSE) {     # plot all with same max DL
@@ -224,10 +225,10 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
       if (is.null(Ymax) == FALSE) { Ylim = c(y.min, Ymax)}
       if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-        boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim,...)}
       else {
         #  boxplot drawn to max and min.  minmax = TRUE
-        boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(y.ros$modeled, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim,...)}
 
       # Everything below the max DL is gray, not black
       polygon(xx, yy, col = bdl.col, border=bdl.col)
@@ -291,10 +292,10 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
       if (is.null(Ymax) == FALSE) { Ylim = c(ymin.all, Ymax)}
       if (minmax != TRUE) {
         # boxplot with separate outliers beyond 1.5*IQR
-        boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplecol = "white", outcex = 0.8, main =Title, col=bxcol, ylim = Ylim,...)}
       else {
         #  boxplot drawn to max and min. minmax = TRUE
-        boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim)}
+        boxplot(y.all~grp.all, ylab = Ylab, xlab = Xlab, log="", whisklty = "solid", staplewex = 0.2, range=0,  main =Title, col=bxcol, ylim = Ylim,...)}
 
       multiDL <- ifelse (sd(maxDL) != 0, TRUE, FALSE)
       if (multiDL == FALSE) {      # all groups use same max DL
@@ -322,7 +323,7 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
   else   # when there are no nondetects
   { LOG <- ifelse (LOG, "y", "")
   if (is.null(group) == TRUE)    # no group
-  {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG)
+  {  boxplot(y1, na.action = na.omit, ylab = Ylab, col = bxcol, main = Title, log=LOG,...)
     rslt<-data.frame(MaximumDL="none", Group= "all")
   }
   else        # with groups
@@ -331,7 +332,7 @@ cboxplot <- function(x1, x2, xgroup=NULL, LOG =FALSE, show=FALSE, ordr = NULL,
     group = factor(group, levels = ordr)
     }
   glabs <- levels(group)
-  boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG)
+  boxplot(y1~group, na.action = na.omit, ylab = Ylab, xlab = gname, names = glabs, col = bxcol, main = Title, log=LOG,...)
   rslt[,1] <- "none"
   rslt[,2]= glabs
   }

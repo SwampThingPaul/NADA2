@@ -96,8 +96,6 @@ library(NADA)
 library(NADA2)
 ```
 
-Currently the `NADA` package is no longer CRAN, but is still available on [GitHub](https://github.com/SwampThingPaul/NADA)
-
 ## Loading R Format Databases From Packages
 
 Some packages have datasets contained within them. When you load the packages you have access to those datasets. You can type data() to list all datasets available within the R base packages and in the packages you've loaded. Once you know the names of the datasets you want to load, use the data (datasetname) command to load the dataset.

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">NADA2</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">2.0.1</span>
       </span>
     </div>
 
@@ -142,6 +142,7 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One variable</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span><span class="op">)</span></span></span>
+<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
@@ -162,7 +163,6 @@ When <code>x.vars</code> is a <code>data.frame</code> of more than one variable,
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># One variable with pred.plot=T</span></span></span>
 <span class="r-in"><span><span class="fu">cencorreg</span><span class="op">(</span><span class="va">Brumbaugh</span><span class="op">$</span><span class="va">Hg</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">HgCen</span>,<span class="va">Brumbaugh</span><span class="op">$</span><span class="va">SedMeHg</span>,pred.plot<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="cencorreg-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Likelihood R2 = 0.07647                     AIC = 366.2191 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Rescaled Likelihood R2 = 0.08152             BIC = 373.9126 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  McFaddens R2 = 0.02860934 </span>
