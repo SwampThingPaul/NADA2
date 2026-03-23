@@ -11,7 +11,7 @@ hc_ppoints_uncen(obs, censored, cn = NULL, na.action = getOption("na.action"))
 
 \item{censored}{A logical vector indicating which observations are censored (\code{TRUE} for censored, \code{FALSE} otherwise).}
 
-\item{cn}{An optional list containing Cohn grouping information (usually from \code{\link[=cohn]{cohn()}}); if missing, it will be computed internally.}
+\item{cn}{An optional list containing Cohn grouping information (usually from \code{cohn()}); if missing, it will be computed internally.}
 
 \item{na.action}{A function to handle missing values (default is \code{getOption("na.action")}).}
 }

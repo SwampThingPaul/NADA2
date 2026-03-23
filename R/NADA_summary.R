@@ -154,28 +154,56 @@ censtats <- function(...){
 #'
 #' @export
 cenboxplot <- function(obs, cen, group, log = TRUE, range = 0, ...) {
-  log <- if (log) "y" else ""
+  log <- if (isTRUE(log)) "y" else ""
+
+  # obs: numeric; cen: logical (TRUE = censored)
+  obs <- as.numeric(obs)
+
+  # Accept logical, 0/1 numeric, or factor/character representations of 0/1
+  if (is.factor(cen)) cen <- as.character(cen)
+  if (is.character(cen)) cen <- suppressWarnings(as.numeric(cen))
+  if (is.numeric(cen)) cen <- cen == 1
+  cen <- as.logical(cen)
+
+  # Ensure same length
+  if (length(obs) != length(cen)) {
+    stop("cenboxplot(): 'obs' and 'cen' must have the same length.")
+  }
+
+  # Default return object
+  ret <- NULL
 
   if (missing(group)) {
-    graphics::boxplot(ros(obs, cen), log = log, range = range, ...)
+    mod <- suppressWarnings(ros(obs, cen)$modeled)
+    graphics::boxplot(mod, log = log, range = range, ...)
+    ret <- data.frame(ros.model = as.numeric(mod))
   } else {
+    # Coerce group safely and preserve order of levels
+    group <- as.factor(group)
+
     modeled <- groups <- character()
-    for (i in levels(as.factor(group))) {
-      mod <- suppressWarnings(
-        ros(obs[group == i], cen[group == i])$modeled
-      )
+    for (i in levels(group)) {
+      idx <- group == i
+      mod <- suppressWarnings(ros(obs[idx], cen[idx])$modeled)
       grp <- rep(i, length(mod))
       modeled <- c(modeled, mod)
-      groups <- c(groups, grp)
+      groups  <- c(groups, grp)
     }
+
     graphics::boxplot(as.numeric(modeled) ~ as.factor(groups),
-            log = log, range = range, ...)
+                      log = log, range = range, ...)
     ret <- data.frame(ros.model = as.numeric(modeled), group = groups)
   }
 
-  abline(h = max(obs[cen]), col = "red", lty = 2)
+  # If any censored observations exist, draw red line at max censored value
+  if (any(cen %in% TRUE, na.rm = TRUE)) {
+    h <- suppressWarnings(max(obs[cen], na.rm = TRUE))
+    if (is.finite(h)) graphics::abline(h = h, col = "red", lty = 2)
+  }
+
   invisible(ret)
 }
+
 
 
 

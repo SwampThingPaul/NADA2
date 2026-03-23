@@ -7,7 +7,7 @@
 Macmat(ml)
 }
 \arguments{
-\item{ml}{A list of maximal antichains as returned by \code{\link[=Maclist]{Maclist()}}.}
+\item{ml}{A list of maximal antichains as returned by \code{Maclist()}.}
 }
 \value{
 A list of class \code{petrie} containing:

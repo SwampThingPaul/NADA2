@@ -40,7 +40,7 @@ Maclist <- function(intvls, Lopen = TRUE, Ropen = FALSE) {
 
 #' Create clique matrix and Petrie pairs from maximal antichains
 #'
-#' @param ml A list of maximal antichains as returned by [Maclist()].
+#' @param ml A list of maximal antichains as returned by `Maclist()`.
 #'
 #' @keywords internal
 #' @return A list of class `petrie` containing:
@@ -70,7 +70,7 @@ Macmat <- function(ml) {
 #' Map maximal antichains to real-valued intervals
 #'
 #' @param intvls Matrix of intervals (n x 2).
-#' @param ml Maximal antichain list from [Maclist()]. If missing, it will be computed.
+#' @param ml Maximal antichain list from `Maclist()`. If missing, it will be computed.
 #'
 #' @keywords internal
 #' @return A matrix with mapped interval representations for each antichain.

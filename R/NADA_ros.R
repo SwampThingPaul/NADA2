@@ -302,7 +302,7 @@ hc_ppoints <- function(obs, censored, na.action = getOption("na.action")) {
 #'
 #' @param obs A numeric vector of observed values.
 #' @param censored A logical vector indicating which observations are censored (`TRUE` for censored, `FALSE` otherwise).
-#' @param cn An optional list containing Cohn grouping information (usually from [cohn()]); if missing, it will be computed internally.
+#' @param cn An optional list containing Cohn grouping information (usually from `cohn()`); if missing, it will be computed internally.
 #' @param na.action A function to handle missing values (default is `getOption("na.action")`).
 #'
 #' @return A numeric vector of plotting positions corresponding to the uncensored observations.
@@ -349,7 +349,7 @@ hc_ppoints_uncen <- function(obs, censored, cn = NULL, na.action = getOption("na
 #'
 #' @param obs A numeric vector of observed values.
 #' @param censored A logical vector indicating which observations are censored (`TRUE` for censored, `FALSE` otherwise).
-#' @param cn An optional list containing Cohn grouping information (usually from [cohn()]); if missing, it will be computed internally.
+#' @param cn An optional list containing Cohn grouping information (usually from `cohn()`); if missing, it will be computed internally.
 #' @param na.action A function to handle missing values (default is `getOption("na.action")`).
 #'
 #' @return A numeric vector of plotting positions corresponding to the censored observations.

@@ -9,7 +9,7 @@ MLEintvl(intvls, ml = Maclist(intvls))
 \arguments{
 \item{intvls}{Matrix of intervals (n x 2).}
 
-\item{ml}{Maximal antichain list from \code{\link[=Maclist]{Maclist()}}. If missing, it will be computed.}
+\item{ml}{Maximal antichain list from \code{Maclist()}. If missing, it will be computed.}
 }
 \value{
 A matrix with mapped interval representations for each antichain.
